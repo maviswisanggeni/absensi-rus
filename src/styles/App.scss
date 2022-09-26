@@ -1,0 +1,55 @@
+$primary-color: #3661EB;
+$grey: #9B9B9B;
+
+.body{
+    max-width: 1300px;
+    display: flex;
+}
+
+nav{
+    width: 261px;
+
+    .logo-sidebar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0;
+
+        img{
+            width: 108px;
+            height: 108px;
+        }
+
+        h1{
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+
+    ul{
+        li{
+            list-style: none;
+            margin-bottom: 1.5rem;            
+
+            a{
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                font-weight: 600;
+                color: $grey;
+
+                img{
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+}
+
+
+.active-sidebar{
+    color: $primary-color;
+}

@@ -1,0 +1,43 @@
+.body {
+  max-width: 1300px;
+  display: flex;
+}
+
+nav {
+  width: 261px;
+}
+nav .logo-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+nav .logo-sidebar img {
+  width: 108px;
+  height: 108px;
+}
+nav .logo-sidebar h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+nav ul li {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+nav ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 600;
+  color: #9B9B9B;
+}
+nav ul li a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 1rem;
+}
+
+.active-sidebar {
+  color: #3661EB;
+}/*# sourceMappingURL=App.css.map */
