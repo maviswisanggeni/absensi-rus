@@ -1,9 +1,9 @@
 $primary-color: #3661EB;
+$blue-light: #C2D2FF;
 $background-color: #F9F9F9;
 $secondary-color: #EBF0FE;
 $grey-text: #9B9B9B;
 $bg-button: #F3F3F3;
-
 $grey: #9B9B9B;
 
 .body{
@@ -97,6 +97,8 @@ nav{
 
     .wrapper-circular{
         display: flex;
+        justify-content: space-between;
+        width: 100%;
         gap: 1rem;
 
         .card-circular-statistic{
@@ -105,6 +107,8 @@ nav{
             width: 250px;
             background-color: white;
             padding: 1rem;
+            border: 1px solid $secondary-color;
+            border-radius: 10px;
     
             p{
                 margin: 0;
@@ -118,6 +122,123 @@ nav{
                 font-size: 20px;
                 font-weight: 600;
                 color: $primary-color;
+            }
+        }
+    }
+
+    .statistic-chart{
+        width: 100%;
+        background-color: white;
+        padding: 1rem;
+        border: 1px solid $secondary-color;
+        border-radius: 10px;
+        margin-top: 1rem;
+
+        .div-1{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p{
+                font-weight: 500;
+            }
+
+            .dropdown{
+                cursor: pointer;
+    
+                button{
+                    width: 90px;
+                    height: 25px;
+                    padding-left: 12px;
+                    border: none;
+                    background-color: $background-color;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    color: $grey;
+                    cursor: pointer;
+                }
+    
+                button:hover{
+                    background-color: $bg-button;
+                }
+    
+                .drop-down-content{
+                    height: auto;
+                    position: absolute;
+    
+                    ul{
+                        margin-top: .5rem;
+                        padding-left: 0;
+    
+                        li{
+                            padding-left: 12px;
+                            list-style: none;
+                            font-size: 13px;
+                            background-color: $background-color;
+                            width: 90px;
+                            color: $grey;
+                        }
+    
+                        li:hover{
+                            background-color: $bg-button;
+                        }
+                    }
+                }
+            }
+        }
+
+        .div-2{
+            display: flex;
+
+            .chartInfo{
+                display: flex;
+                flex-direction: column;
+
+                p:nth-child(1){
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                .role{
+                    display: flex;
+                    align-items: center;
+                    height: 30px;
+
+                    div{
+                        width: 20px;
+                        height: 20px;
+                        background-color: $primary-color;
+                        margin-right: 1rem;
+                    }
+                }
+
+                .staff{
+                    div{
+                        background-color: $blue-light;   
+                    }
+                }
+
+                .btn-download{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto;
+                    margin-top: auto;
+                    background-color: $primary-color;
+                    border: none;
+                    padding: .7rem 1rem;
+                    width: 190px;
+                    color: white;
+                    border-radius: 5px;
+                    font-size: 14px;
+
+                    img{
+                        margin-right: 1rem;
+                        width: 15px;
+                        height: 15px;
+                    }
+                }
             }
         }
     }

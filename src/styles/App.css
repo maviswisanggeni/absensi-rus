@@ -83,6 +83,8 @@ nav ul li a img {
 }
 .dashboard .wrapper-circular {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
   gap: 1rem;
 }
 .dashboard .wrapper-circular .card-circular-statistic {
@@ -91,6 +93,8 @@ nav ul li a img {
   width: 250px;
   background-color: white;
   padding: 1rem;
+  border: 1px solid #EBF0FE;
+  border-radius: 10px;
 }
 .dashboard .wrapper-circular .card-circular-statistic p {
   margin: 0;
@@ -103,4 +107,101 @@ nav ul li a img {
   font-size: 20px;
   font-weight: 600;
   color: #3661EB;
+}
+.dashboard .statistic-chart {
+  width: 100%;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #EBF0FE;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+.dashboard .statistic-chart .div-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard .statistic-chart .div-1 p {
+  font-weight: 500;
+}
+.dashboard .statistic-chart .div-1 .dropdown {
+  cursor: pointer;
+}
+.dashboard .statistic-chart .div-1 .dropdown button {
+  width: 90px;
+  height: 25px;
+  padding-left: 12px;
+  border: none;
+  background-color: #F9F9F9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #9B9B9B;
+  cursor: pointer;
+}
+.dashboard .statistic-chart .div-1 .dropdown button:hover {
+  background-color: #F3F3F3;
+}
+.dashboard .statistic-chart .div-1 .dropdown .drop-down-content {
+  height: auto;
+  position: absolute;
+}
+.dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul {
+  margin-top: 0.5rem;
+  padding-left: 0;
+}
+.dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul li {
+  padding-left: 12px;
+  list-style: none;
+  font-size: 13px;
+  background-color: #F9F9F9;
+  width: 90px;
+  color: #9B9B9B;
+}
+.dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul li:hover {
+  background-color: #F3F3F3;
+}
+.dashboard .statistic-chart .div-2 {
+  display: flex;
+}
+.dashboard .statistic-chart .div-2 .chartInfo {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard .statistic-chart .div-2 .chartInfo p:nth-child(1) {
+  font-size: 14px;
+  font-weight: 600;
+}
+.dashboard .statistic-chart .div-2 .chartInfo .role {
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+.dashboard .statistic-chart .div-2 .chartInfo .role div {
+  width: 20px;
+  height: 20px;
+  background-color: #3661EB;
+  margin-right: 1rem;
+}
+.dashboard .statistic-chart .div-2 .chartInfo .staff div {
+  background-color: #C2D2FF;
+}
+.dashboard .statistic-chart .div-2 .chartInfo .btn-download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: auto;
+  background-color: #3661EB;
+  border: none;
+  padding: 0.7rem 1rem;
+  width: 190px;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.dashboard .statistic-chart .div-2 .chartInfo .btn-download img {
+  margin-right: 1rem;
+  width: 15px;
+  height: 15px;
 }/*# sourceMappingURL=App.css.map */

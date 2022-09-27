@@ -5,6 +5,7 @@ import Search from '../components/Search'
 import masukIcon from '../assets/icons/masuk-icon.svg'
 import keluarIcon from '../assets/icons/keluar-icon.svg'
 import absenIcon from '../assets/icons/absen-icon.svg'
+import StatisticChart from '../components/dashboard/StatisticChart'
 
 function Dashboard() {
   return (
@@ -16,8 +17,8 @@ function Dashboard() {
         <CircularStatistic name="Keluar" value="142 / 240" imgSrc={keluarIcon}/>
         <CircularStatistic name="Absen" value="64 Orang" imgSrc={absenIcon}/>
       </div>
+      <StatisticChart/>
     </div>
-
   )
 }
 
