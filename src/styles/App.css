@@ -1,17 +1,20 @@
 .body {
-  max-width: 1300px;
+  max-width: 1440px;
   display: flex;
+  margin: 0 auto;
 }
 
 nav {
   width: 261px;
+  height: 100vh;
+  border-right: 1px solid #EBF0FE;
 }
 nav .logo-sidebar {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
 }
 nav .logo-sidebar img {
   width: 108px;
@@ -39,5 +42,65 @@ nav ul li a img {
 }
 
 .active-sidebar {
+  color: #3661EB;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: #F9F9F9;
+  padding: 2rem;
+}
+.dashboard .search {
+  background-image: url(../assets/icons/search-icon.svg);
+  background-repeat: no-repeat;
+  background-position: 5% 50%;
+  background-color: #F3F3F3;
+  text-indent: 2rem;
+  border: none;
+  width: 300px;
+  padding: 1rem;
+  font-size: 16px;
+  outline: none;
+  font-weight: 400;
+}
+.dashboard .search::-moz-placeholder {
+  color: #A6A6A6;
+}
+.dashboard .search:-ms-input-placeholder {
+  color: #A6A6A6;
+}
+.dashboard .search::placeholder, .dashboard .search {
+  color: #A6A6A6;
+}
+.dashboard .hide {
+  background-image: none;
+  text-indent: none;
+}
+.dashboard h1 {
+  font-weight: 500;
+  font-size: 24px;
+}
+.dashboard .wrapper-circular {
+  display: flex;
+  gap: 1rem;
+}
+.dashboard .wrapper-circular .card-circular-statistic {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  background-color: white;
+  padding: 1rem;
+}
+.dashboard .wrapper-circular .card-circular-statistic p {
+  margin: 0;
+  margin-left: 1.5rem;
+  color: #9B9B9B;
+  font-size: 14px;
+  font-weight: 500;
+}
+.dashboard .wrapper-circular .card-circular-statistic p:nth-child(2) {
+  font-size: 20px;
+  font-weight: 600;
   color: #3661EB;
 }/*# sourceMappingURL=App.css.map */
