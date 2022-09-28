@@ -1,6 +1,7 @@
 .body {
   max-width: 1440px;
   display: flex;
+  justify-content: space-between;
   margin: 0 auto;
 }
 
@@ -23,6 +24,7 @@ nav .logo-sidebar img {
 nav .logo-sidebar h1 {
   font-size: 20px;
   font-weight: 600;
+  margin-top: 1rem;
 }
 nav ul li {
   list-style: none;
@@ -138,6 +140,7 @@ nav ul li a img {
   justify-content: space-between;
   color: #9B9B9B;
   cursor: pointer;
+  padding-right: 0.5rem;
 }
 .dashboard .statistic-chart .div-1 .dropdown button:hover {
   background-color: #F3F3F3;
@@ -151,6 +154,7 @@ nav ul li a img {
   padding-left: 0;
 }
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul li {
+  padding: 0.5rem;
   padding-left: 12px;
   list-style: none;
   font-size: 13px;
@@ -171,11 +175,15 @@ nav ul li a img {
 .dashboard .statistic-chart .div-2 .chartInfo p:nth-child(1) {
   font-size: 14px;
   font-weight: 600;
+  margin-bottom: 1rem;
 }
 .dashboard .statistic-chart .div-2 .chartInfo .role {
   display: flex;
   align-items: center;
   height: 30px;
+  color: #9B9B9B;
+  font-weight: 500;
+  font-size: 12px;
 }
 .dashboard .statistic-chart .div-2 .chartInfo .role div {
   width: 20px;
@@ -204,4 +212,51 @@ nav ul li a img {
   margin-right: 1rem;
   width: 15px;
   height: 15px;
+}
+
+.sidebar-right {
+  border-left: 1px solid #EBF0FE;
+  padding: 2rem;
+  width: 342px;
+  position: relative;
+}
+.sidebar-right .jadwal h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.sidebar-right .jadwal .card-jadwal {
+  width: 100%;
+  border: 1px solid #EBF0FE;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.sidebar-right .jadwal .card-jadwal h4 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.sidebar-right .jadwal .card-jadwal p {
+  font-size: 12px;
+}
+.sidebar-right .jadwal .card-jadwal div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+.profile img:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+}
+.profile img:nth-child(3) {
+  transform: scale(2);
+  margin-left: auto;
 }/*# sourceMappingURL=App.css.map */

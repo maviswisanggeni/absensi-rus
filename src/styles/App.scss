@@ -9,6 +9,7 @@ $grey: #9B9B9B;
 .body{
     max-width: 1440px;
     display: flex;
+    justify-content: space-between;
     margin: 0 auto;
 }
 
@@ -32,6 +33,7 @@ nav{
         h1{
             font-size: 20px;
             font-weight: 600;
+            margin-top: 1rem;
         }
     }
 
@@ -145,7 +147,7 @@ nav{
 
             .dropdown{
                 cursor: pointer;
-    
+                
                 button{
                     width: 90px;
                     height: 25px;
@@ -157,8 +159,9 @@ nav{
                     justify-content: space-between;
                     color: $grey;
                     cursor: pointer;
+                    padding-right: .5rem;
                 }
-    
+                
                 button:hover{
                     background-color: $bg-button;
                 }
@@ -172,6 +175,7 @@ nav{
                         padding-left: 0;
     
                         li{
+                            padding: .5rem;
                             padding-left: 12px;
                             list-style: none;
                             font-size: 13px;
@@ -198,12 +202,16 @@ nav{
                 p:nth-child(1){
                     font-size: 14px;
                     font-weight: 600;
+                    margin-bottom: 1rem;
                 }
 
                 .role{
                     display: flex;
                     align-items: center;
                     height: 30px;
+                    color: $grey;
+                    font-weight: 500;
+                    font-size: 12px;
 
                     div{
                         width: 20px;
@@ -241,5 +249,61 @@ nav{
                 }
             }
         }
+    }
+}
+
+.sidebar-right{
+    border-left: 1px solid $secondary-color;
+    padding: 2rem;
+    width: 342px;
+    position: relative;
+
+    .jadwal{
+        h1{
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card-jadwal{
+            width: 100%;
+            border: 1px solid $secondary-color;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+    
+            h4{
+                font-weight: 600;
+                margin-bottom: .5rem;
+            }
+    
+            p{
+                font-size: 12px;
+            }
+    
+            div{
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+    }
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+    width: 100%;
+
+    img:nth-child(1){
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+    }
+
+    img:nth-child(3){
+        transform: scale(2);
+        margin-left: auto;
     }
 }

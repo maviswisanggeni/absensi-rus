@@ -4,8 +4,8 @@ import Profile from '../components/Profile'
 function Kehadiran() {
   return (
     <div>
-      Kehadiran
-      <Profile/>
+      <h1>Kehadiran Karyawan</h1>
+      
     </div>
   )
 }
