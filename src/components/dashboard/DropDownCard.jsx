@@ -1,6 +1,6 @@
 import React from "react";
 
-function DropDownCard({ data = [], setOpen, setCurrent }){
+function DropDownCard({ data = [], setOpen, setCurrent, current }){
   function log(e){
     setOpen(false)
     setCurrent(e.innerText)
@@ -9,7 +9,7 @@ function DropDownCard({ data = [], setOpen, setCurrent }){
     <div className="shadow h-auto w-56 absolute drop-down-content">
       <ul className="text-left">
       {data.map((item, i) => (
-        <li key={i} className='' onClick={(item) => log(item.target)}>
+        <li key={i} className={item === current ? 'activeDropdownli' : ''} onClick={(item) => log(item.target)}>
           {item}  
         </li>
       ))}

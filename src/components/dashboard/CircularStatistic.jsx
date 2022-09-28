@@ -3,7 +3,7 @@ import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-pro
 import 'react-circular-progressbar/dist/styles.css';
 
 function CircularStatistic(props) {
-  const percentage = 60;
+  const percentage = 50;
 
   return (
     <div className='card-circular-statistic'>

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/Dashboard.css'
 import CircularStatistic from '../components/dashboard/CircularStatistic'
 import Search from '../components/Search'
 import masukIcon from '../assets/icons/masuk-icon.svg'
@@ -11,7 +12,7 @@ import Jadwal from '../components/sidebar-right/Jadwal'
 function Dashboard() {
   return (
     <>
-      <div className='dashboard'>
+      <div className='dashboard dashboard-and-kehadiran'>
         <Search/>
         <h1>Dashboard</h1>
         <div className='wrapper-circular'>
