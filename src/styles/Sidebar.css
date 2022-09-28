@@ -1,0 +1,37 @@
+nav {
+  width: 261px;
+  height: 100vh;
+  border-right: 1px solid #EBF0FE;
+}
+nav .logo-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+nav .logo-sidebar img {
+  width: 108px;
+  height: 108px;
+}
+nav .logo-sidebar h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+nav ul li {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+nav ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 600;
+  color: #9B9B9B;
+}
+nav ul li a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 1rem;
+}/*# sourceMappingURL=Sidebar.css.map */

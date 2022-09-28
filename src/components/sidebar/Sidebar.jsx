@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../styles/Sidebar.css'
 import { NavLink, useLocation } from 'react-router-dom'
 import LogoSidebar from './LogoSidebar'
 import dashboardLogoBlue from '../../assets/icons/dashboard-icon-blue.svg'
