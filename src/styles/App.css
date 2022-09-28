@@ -1,43 +1,69 @@
 .body {
-  max-width: 1300px;
+  max-width: 1440px;
   display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
-nav {
-  width: 261px;
-}
-nav .logo-sidebar {
+.dashboard-and-kehadiran {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0;
-}
-nav .logo-sidebar img {
-  width: 108px;
-  height: 108px;
-}
-nav .logo-sidebar h1 {
-  font-size: 20px;
-  font-weight: 600;
-}
-nav ul li {
-  list-style: none;
-  margin-bottom: 1.5rem;
-}
-nav ul li a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  font-weight: 600;
-  color: #9B9B9B;
-}
-nav ul li a img {
-  width: 20px;
-  height: 20px;
-  margin-right: 1rem;
+  background-color: #F9F9F9;
+  padding: 2rem;
+  width: 837px;
 }
 
 .active-sidebar {
   color: #3661EB;
+}
+
+.wrapper-circular {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+.wrapper-circular .card-circular-statistic {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #EBF0FE;
+  border-radius: 10px;
+}
+.wrapper-circular .card-circular-statistic p {
+  margin: 0;
+  margin-left: 1.5rem;
+  color: #9B9B9B;
+  font-size: 14px;
+  font-weight: 500;
+}
+.wrapper-circular .card-circular-statistic p:nth-child(2) {
+  font-size: 20px;
+  font-weight: 600;
+  color: #3661EB;
+}
+
+.sidebar-right {
+  border-left: 1px solid #EBF0FE;
+  padding: 2rem;
+  width: 342px;
+  position: relative;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+.profile img:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+}
+.profile img:nth-child(3) {
+  transform: scale(2);
+  margin-left: auto;
 }/*# sourceMappingURL=App.css.map */

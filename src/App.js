@@ -18,8 +18,6 @@ function App() {
         <Route path='/kalender' element={<Kalender/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
-
-      
     </div>
   );
 }
