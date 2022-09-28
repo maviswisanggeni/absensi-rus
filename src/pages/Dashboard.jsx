@@ -8,6 +8,7 @@ import absenIcon from '../assets/icons/absen-icon.svg'
 import StatisticChart from '../components/dashboard/StatisticChart'
 import Profile from '../components/Profile';
 import Jadwal from '../components/sidebar-right/Jadwal'
+import Calender from '../components/Calender'
 
 function Dashboard() {
   return (
@@ -25,6 +26,7 @@ function Dashboard() {
 
       <div className='sidebar-right'>
         <Profile/>
+        <Calender/>
         <Jadwal/>
       </div>
     </>

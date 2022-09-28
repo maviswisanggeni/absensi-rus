@@ -42,9 +42,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 }
 .dashboard .statistic-chart .div-1 p {
   font-weight: 500;
+  font-size: 14px;
 }
 .dashboard .statistic-chart .div-1 .dropdown {
   cursor: pointer;
