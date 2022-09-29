@@ -1,0 +1,24 @@
+.kehadiran h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.kehadiran .search-calendar {
+  width: 100%;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #EBF0FE;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+.kehadiran .search-calendar .search {
+  background-position: 5% 50%;
+  background-size: 13px;
+  text-indent: 2rem;
+  border: none;
+  width: 400px;
+  padding: 0.5rem;
+  outline: none;
+  font-weight: 400;
+  border: 1.5px solid #EBF0FE;
+}/*# sourceMappingURL=Kehadiran.css.map */

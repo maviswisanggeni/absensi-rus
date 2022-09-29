@@ -1,0 +1,30 @@
+@import "./variables/variables.scss";
+
+.kehadiran{
+    h1{
+        font-size: 24px;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    .search-calendar{
+        width: 100%;
+        background-color: white;
+        padding: 1rem;
+        border: 1px solid $secondary-color;
+        border-radius: 10px;
+        margin-top: 1rem;
+
+        .search{
+            background-position: 5% 50%;
+            background-size: 13px;
+            text-indent: 2rem;
+            border: none;
+            width: 400px;
+            padding: .5rem;
+            outline: none;
+            font-weight: 400;
+            border: 1.5px solid $secondary-color;
+        }
+    }
+}
