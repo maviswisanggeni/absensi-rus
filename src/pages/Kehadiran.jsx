@@ -4,7 +4,8 @@ import masukIcon from '../assets/icons/masuk-icon.svg'
 import keluarIcon from '../assets/icons/keluar-icon.svg'
 import absenIcon from '../assets/icons/absen-icon.svg'
 import Profile from '../components/Profile';
-import '../styles/Kehadiran.css'
+import '../styles/css/Kehadiran.css'
+import SearchAndCalendar from '../components/kehadiran/SearchAndCalendar'
 
 function Kehadiran() {
   return (
@@ -16,6 +17,7 @@ function Kehadiran() {
           <CircularStatistic name="Keluar" value="142 / 240" imgSrc={keluarIcon}/>
           <CircularStatistic name="Absen" value="64 Orang" imgSrc={absenIcon}/>
         </div>
+        <SearchAndCalendar/>
       </div>
       <div className='sidebar-right'>
         <Profile/>

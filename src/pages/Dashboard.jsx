@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Dashboard.css'
+import '../styles/css/Dashboard.css'
 import CircularStatistic from '../components/dashboard/CircularStatistic'
 import Search from '../components/Search'
 import masukIcon from '../assets/icons/masuk-icon.svg'

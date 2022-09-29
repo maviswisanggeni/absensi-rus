@@ -13,6 +13,23 @@
   width: 837px;
 }
 
+.search {
+  background-image: url(../../assets/icons/search-icon.svg);
+  background-repeat: no-repeat;
+}
+
+.search::-moz-placeholder {
+  color: #A6A6A6;
+}
+
+.search:-ms-input-placeholder {
+  color: #A6A6A6;
+}
+
+.search::placeholder, .search {
+  color: #A6A6A6;
+}
+
 .active-sidebar {
   color: #3661EB;
 }
@@ -68,8 +85,12 @@
   margin-left: auto;
 }
 
+.sidebar-right {
+  width: 342px;
+}
+
 .react-calendar {
-  width: 300px;
+  width: 100%;
   max-width: 100%;
   background: white;
   line-height: 1.125em;
