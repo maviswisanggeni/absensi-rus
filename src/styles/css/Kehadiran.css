@@ -4,9 +4,12 @@
   margin-bottom: 1rem;
 }
 .kehadiran .search-calendar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
   width: 100%;
   background-color: white;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   border: 1px solid #EBF0FE;
   border-radius: 10px;
   margin-top: 1rem;
@@ -16,9 +19,48 @@
   background-size: 13px;
   text-indent: 2rem;
   border: none;
-  width: 400px;
+  width: 60%;
   padding: 0.5rem;
   outline: none;
   font-weight: 400;
   border: 1.5px solid #EBF0FE;
+}
+.kehadiran .search-calendar .wrapper-pilih-tanggal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+}
+.kehadiran .search-calendar .wrapper-pilih-tanggal img {
+  width: 14px;
+  height: 14px;
+}
+.kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #EBF0FE;
+  padding: 0.5rem;
+  flex-direction: column;
+}
+.kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .btn-pilih-tanggal {
+  display: flex;
+  cursor: pointer;
+}
+.kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .react-calendar {
+  width: 300px;
+  position: absolute;
+  border: 1.5px solid #EBF0FE;
+  padding: 1rem;
+  border-radius: 7px;
+  transform: translateX(25%);
+  z-index: 999;
+}
+.kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal img {
+  width: 13px;
+  height: 13px;
+  margin-right: 0.5rem;
+}
+.kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal p {
+  font-size: 10px;
+  color: #A6A6A6;
 }/*# sourceMappingURL=Kehadiran.css.map */
