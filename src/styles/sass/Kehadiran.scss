@@ -15,7 +15,9 @@
         background-color: white;
         padding: 1rem 1.5rem;
         border: 1px solid $secondary-color;
-        border-radius: 10px;
+        // border-radius: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         margin-top: 1rem;
 
         .search{
@@ -48,10 +50,12 @@
                 align-items: center;
                 border: 1.5px solid $secondary-color;
                 padding: .5rem;
+                padding-right: 0;
                 flex-direction: column;
 
                 .btn-pilih-tanggal{
                     display: flex;
+                    align-items: center;
                     cursor: pointer;
                 }
     
@@ -76,6 +80,161 @@
                     color: $light-grey;
                 }
             }   
+        }
+    }
+
+    .tabbar-filter{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background-color: white;
+        padding: 1rem 1.5rem;
+        padding-left: 0;
+        padding-bottom: 0;
+        border: 1px solid $secondary-color;
+        border-top: none;
+
+        .tabbar{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: fit-content;
+
+            .tabbar-text{
+                display: flex;
+
+                div{
+                    width: 130px;
+                    text-align: center;
+                    padding-bottom: 1rem;
+                    transition: border 0.3s ease-in-out;
+                    cursor: pointer;
+                    font-weight: 500;
+                    font-size: 14px;
+                }
+
+                div:nth-child(2){
+                    border-bottom: none;
+                    color: $grey;
+                }
+
+                div.active{
+                    color: $primary-color;
+                }
+            }
+
+            .line{
+                width: 130px;
+                height: 2px;
+                background-color: $primary-color;
+                transform: translateX(0);
+                transition: transform .3s ease-in-out;
+            }
+
+            .line.active{
+                transform: translateX(100%);
+            }
+        }
+
+        .filter-download{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .filter{
+            cursor: pointer;
+            transform: translateY(-.25rem);
+
+            ul{
+                position: absolute;
+                transform: translateX(-27%);
+                margin-top: .5rem;
+
+                li{
+                    list-style: none;
+                    padding: .5rem;
+                    padding-left: 12px;
+                    list-style: none;
+                    font-size: 13px;
+                    background-color: white;
+                    width: 120px;
+                    z-index: 999;
+                    cursor: pointer;
+                    font-size: 11px;
+                }
+
+                li:hover{
+                    background-color: $bg-button;
+                }
+
+                .activeDropdownli{
+                    background-color: $bg-button;
+                }
+            }
+        }
+    }
+
+    .table{
+        width: 100%;
+        background-color: white;
+        padding: 1rem 1.5rem;
+        border: 1px solid $secondary-color;
+        border-top: none;
+        border-collapse: collapse;
+        
+        thead{
+            th{
+                text-align: left;
+                font-weight: 500;
+                font-size: 14px;
+                padding: 1.5rem 0;
+            }
+
+            th:nth-child(1){
+                padding-left: 1.5rem;
+            }
+        }
+
+        tbody{
+            tr{
+                // display: flex;
+                // justify-content: space-between;
+                width: 100%;
+            }
+
+            tr:nth-child(odd){
+                background-color: $secondary-color;
+            }
+
+            .btn-detail{
+                background-color: $primary-color;
+                color: white;
+                border: none;
+                width: 80px;
+                height: 30px;
+                border-radius: 5px;
+                font-size: 10px;
+            }
+        }
+
+        td{
+            font-size: 10px;
+            color: $grey;
+        }
+
+        .row-img{
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            padding: .5rem 1.5rem;
+
+            img{
+                width: 35px;
+                height: 35px;
+                margin-right: 1rem;
+                border-radius: 50%;
+            }
         }
     }
 }

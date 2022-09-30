@@ -1,8 +1,17 @@
 import React from 'react'
+import Download from './Download'
+import Filter from './Filter'
+import Tabbar from './Tabbar'
 
 function TabbarAndFilter() {
   return (
-    <div>TabbarAndFilter</div>
+    <div className='tabbar-filter'>
+        <Tabbar/>
+        <div className='filter-download'>
+            <Filter/>
+            <Download/>
+        </div>
+    </div>
   )
 }
 
