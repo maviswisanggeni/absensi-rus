@@ -1,4 +1,4 @@
-@import "./variables/variables.scss";
+@import "../variables/variables.scss";
 
 .kehadiran{
     h1{
@@ -8,9 +8,12 @@
     }
 
     .search-calendar{
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
         width: 100%;
         background-color: white;
-        padding: 1rem;
+        padding: 1rem 1.5rem;
         border: 1px solid $secondary-color;
         border-radius: 10px;
         margin-top: 1rem;
@@ -20,11 +23,59 @@
             background-size: 13px;
             text-indent: 2rem;
             border: none;
-            width: 400px;
+            // width: 400px;
+            width: 60%;
             padding: .5rem;
             outline: none;
             font-weight: 400;
             border: 1.5px solid $secondary-color;
+        }
+
+        .wrapper-pilih-tanggal{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 40%;
+
+            img{
+                width: 14px;
+                height: 14px;
+            }
+
+            .pilih-tanggal{
+                width: 125px;
+                display: flex;
+                align-items: center;
+                border: 1.5px solid $secondary-color;
+                padding: .5rem;
+                flex-direction: column;
+
+                .btn-pilih-tanggal{
+                    display: flex;
+                    cursor: pointer;
+                }
+    
+                .react-calendar{
+                    width: 300px;
+                    position: absolute;
+                    border: 1.5px solid $secondary-color;
+                    padding: 1rem;
+                    border-radius: 7px;
+                    transform: translateX(25%);
+                    z-index: 999;
+                }
+
+                img{
+                    width: 13px;
+                    height: 13px;
+                    margin-right: .5rem;
+                }
+    
+                p{
+                    font-size: 10px;
+                    color: $light-grey;
+                }
+            }   
         }
     }
 }

@@ -1,4 +1,4 @@
-@import "./variables/variables.scss";
+@import "../variables/variables.scss";
 
 .dashboard{
     .search{
@@ -176,6 +176,11 @@
     
             p{
                 font-size: 12px;
+                color: $grey;
+            }
+
+            span{
+                font-weight: 500;
             }
     
             div{

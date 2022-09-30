@@ -12,7 +12,7 @@ function DropDownCard({ data = [], setOpen, setCurrent, current }){
         <li key={i} className={item === current ? 'activeDropdownli' : ''} onClick={(item) => log(item.target)}>
           {item}  
         </li>
-      ))}
+      ))} 
       </ul>
     </div>
   )
