@@ -5,7 +5,7 @@ import Kehadiran from './pages/Kehadiran';
 import Karyawan from './pages/Karyawan';
 import Kalender from './pages/Kalender';
 import Login from './pages/Login';
-import './styles/App.css';
+import './styles/css/App.css';
 
 function App() {
   return (

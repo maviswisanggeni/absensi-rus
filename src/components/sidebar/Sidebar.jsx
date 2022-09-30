@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/Sidebar.css'
+import '../../styles/css/Sidebar.css'
 import { NavLink, useLocation } from 'react-router-dom'
 import LogoSidebar from './LogoSidebar'
 import dashboardLogoBlue from '../../assets/icons/dashboard-icon-blue.svg'
@@ -14,6 +14,11 @@ import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 
 function Navbar() {
   let query = useLocation()
+
+  if (query.pathname === '/login') {
+    return null
+  } 
+
   return (
     <nav>
         <LogoSidebar/>

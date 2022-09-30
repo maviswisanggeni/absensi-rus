@@ -4,7 +4,7 @@ import masukIcon from '../assets/icons/masuk-icon.svg'
 import keluarIcon from '../assets/icons/keluar-icon.svg'
 import absenIcon from '../assets/icons/absen-icon.svg'
 import Profile from '../components/Profile';
-import '../styles/Kehadiran.css'
+import '../styles/css/Kehadiran.css'
 
 function Kehadiran() {
   return (
