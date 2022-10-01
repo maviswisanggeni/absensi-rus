@@ -197,4 +197,94 @@
   height: 35px;
   margin-right: 1rem;
   border-radius: 50%;
+}
+.kehadiran .pagination-container {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin-top: 2.5rem;
+}
+.kehadiran .pagination-container .pagination-item {
+  padding: 0 12px;
+  height: 32px;
+  text-align: center;
+  margin: auto 4px;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  letter-spacing: 0.01071em;
+  line-height: 1.43;
+  font-size: 14px;
+  min-width: 32px;
+  font-weight: 600;
+  border-radius: 7px;
+}
+.kehadiran .pagination-container .pagination-item.dots:hover {
+  background-color: transparent;
+  cursor: default;
+}
+.kehadiran .pagination-container .pagination-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+.kehadiran .pagination-container .pagination-item.selected {
+  border: solid 2px #3661EB;
+  color: #3661EB;
+}
+.kehadiran .pagination-container .pagination-item .arrow::before {
+  position: relative;
+  /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+  content: "";
+  /* By using an em scale, the arrows will size with the font */
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+  border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+}
+.kehadiran .pagination-container .pagination-item .arrow.left {
+  transform: rotate(-135deg) translate(-50%);
+}
+.kehadiran .pagination-container .pagination-item .arrow.right {
+  transform: rotate(45deg);
+}
+.kehadiran .pagination-container .pagination-item.disabled {
+  pointer-events: none;
+}
+.kehadiran .pagination-container .pagination-item.disabled .arrow::before {
+  border-right: 0.12em solid rgba(0, 0, 0, 0.43);
+  border-top: 0.12em solid rgba(0, 0, 0, 0.43);
+}
+.kehadiran .pagination-container .pagination-item.disabled:hover {
+  background-color: transparent;
+  cursor: default;
+}
+
+.sidebar-right .kehadiran-terbaru .header-refresh {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.sidebar-right .kehadiran-terbaru ul li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-bottom: 1rem;
+}
+.sidebar-right .kehadiran-terbaru ul li div {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-right .kehadiran-terbaru ul li div p {
+  font-size: 12px;
+  font-weight: 600;
+}
+.sidebar-right .kehadiran-terbaru ul li div p:nth-child(2) {
+  color: #9B9B9B;
+}
+.sidebar-right .kehadiran-terbaru ul li img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 1.5rem;
 }/*# sourceMappingURL=Kehadiran.css.map */
