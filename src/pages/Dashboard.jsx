@@ -8,7 +8,7 @@ import absenIcon from '../assets/icons/absen-icon.svg'
 import StatisticChart from '../components/dashboard/StatisticChart'
 import Profile from '../components/Profile';
 import Jadwal from '../components/sidebar-right/Jadwal'
-import Calender from '../components/Calender'
+import Calender from '../components/CustomCalendar'
 
 function Dashboard() {
   return (

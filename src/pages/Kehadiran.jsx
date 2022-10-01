@@ -8,6 +8,8 @@ import '../styles/css/Kehadiran.css'
 import SearchAndCalendar from '../components/kehadiran/SearchAndCalendar'
 import TabbarAndFilter from '../components/kehadiran/TabbarAndFilter'
 import Table from '../components/kehadiran/Table'
+import Calender from '../components/CustomCalendar'
+import KehadiranTerbaru from '../components/sidebar-right/KehadiranTerbaru'
 
 function Kehadiran() {
   return (
@@ -25,6 +27,8 @@ function Kehadiran() {
       </div>
       <div className='sidebar-right'>
         <Profile/>
+        <Calender/>
+        <KehadiranTerbaru/>
       </div>
     </>
   )
