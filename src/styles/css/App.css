@@ -1,13 +1,22 @@
 .body {
   max-width: 1440px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin: 0 auto;
 }
 
 .dashboard-and-kehadiran {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   background-color: #F9F9F9;
   padding: 2rem;
   width: 837px;
@@ -18,11 +27,15 @@
   background-repeat: no-repeat;
 }
 
-.search::-moz-placeholder {
+.search::-webkit-input-placeholder, .search {
   color: #A6A6A6;
 }
 
-.search:-ms-input-placeholder {
+.search:-ms-input-placeholder, .search {
+  color: #A6A6A6;
+}
+
+.search::-ms-input-placeholder, .search {
   color: #A6A6A6;
 }
 
@@ -35,20 +48,30 @@
 }
 
 .wrapper-circular {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 100%;
   gap: 1rem;
 }
+
 .wrapper-circular .card-circular-statistic {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 250px;
   background-color: white;
   padding: 1rem;
   border: 1px solid #EBF0FE;
   border-radius: 10px;
 }
+
 .wrapper-circular .card-circular-statistic p {
   margin: 0;
   margin-left: 1.5rem;
@@ -56,6 +79,7 @@
   font-size: 14px;
   font-weight: 500;
 }
+
 .wrapper-circular .card-circular-statistic p:nth-child(2) {
   font-size: 20px;
   font-weight: 600;
@@ -70,18 +94,25 @@
 }
 
 .profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-bottom: 1rem;
   width: 100%;
 }
+
 .profile img:nth-child(1) {
   width: 40px;
   height: 40px;
   margin-right: 1rem;
 }
+
 .profile img:nth-child(3) {
-  transform: scale(2);
+  -webkit-transform: scale(2);
+          transform: scale(2);
   margin-left: auto;
 }
 
@@ -102,6 +133,8 @@
 }
 
 .react-calendar--doubleView .react-calendar__viewContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: -0.5em;
 }
@@ -115,6 +148,7 @@
 .react-calendar *,
 .react-calendar *:before,
 .react-calendar *:after {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -129,6 +163,8 @@
 }
 
 .react-calendar__navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 44px;
   margin-bottom: 1em;
@@ -162,9 +198,15 @@
 }
 
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: 0.75em;
   font-weight: bold;
 }
@@ -236,8 +278,12 @@
 }
 
 .react-calendar__navigation__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .react-calendar__navigation__label__labelText {
@@ -252,9 +298,15 @@
 }
 
 .react-calendar__tile--hasActive {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .react-calendar__navigation__prev2-button {
@@ -266,9 +318,14 @@
 }
 
 .react-calendar__navigation__next-button {
-  order: 1;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
 }
 
 .react-calendar__navigation__prev-button {
-  order: 1;
-}/*# sourceMappingURL=App.css.map */
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+/*# sourceMappingURL=App.css.map */
