@@ -14,6 +14,11 @@ import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 
 function Navbar() {
   let query = useLocation()
+
+  if (query.pathname === "/login") {
+    return null
+  }
+
   return (
     <nav>
         <LogoSidebar/>

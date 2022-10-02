@@ -1,0 +1,110 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login__container {
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 50px;
+    // border: 1px solid #ECEEF2;
+
+    .login__logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 10px;
+      color: #9b9b9b;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 25px;
+
+      .login__input {
+        width: 350px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        border: 1px solid #ECEEF2;
+        border-radius: 8px;
+        outline: none;
+
+        img {
+          padding: 0 15px;
+        }
+
+        input {
+          border: none;
+          outline: none;
+          width: 100%;
+          height: 100%;
+          border-radius: 8px;
+          &::placeholder {
+            color: #9b9b9b;
+          }
+        }
+        &:focus-within {
+          border: 1px solid #277ffe;
+        }
+      }
+
+      .login__button {
+        width: 350px;
+        height: 50px;
+        margin-top: 8px;
+        margin-bottom: 30px;
+
+        button {
+          width: 100%;
+          height: 100%;
+          border: none;
+          border-radius: 8px;
+          background-color: #277ffe;
+          color: white;
+          font-weight: 500;
+          font-size: 15px;
+          cursor: pointer;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -o-border-radius: 8px;
+          transition: .5s;
+          &:hover {
+            background-color: #1e6be5;
+          }
+        }
+      }
+    }
+
+    .login__forgotPassword {
+      font-weight: 400;
+      font-size: 10px;
+      color: #9b9b9b;
+
+      a {
+        text-decoration: none;
+        color: #277ffe;
+      }
+    }
+  }
+}
