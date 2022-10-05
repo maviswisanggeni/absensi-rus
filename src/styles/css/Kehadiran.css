@@ -3,9 +3,14 @@
   font-weight: 500;
   margin-bottom: 1rem;
 }
+
 .kehadiran .search-calendar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   gap: 1rem;
   width: 100%;
   background-color: white;
@@ -15,62 +20,93 @@
   border-top-right-radius: 10px;
   margin-top: 1rem;
 }
+
 .kehadiran .search-calendar .search {
   background-position: 5% 50%;
   background-size: 13px;
   text-indent: 2rem;
   border: none;
   width: 60%;
-  padding: 0.5rem;
+  padding: .5rem;
   outline: none;
   font-weight: 400;
   border: 1.5px solid #EBF0FE;
 }
+
 .kehadiran .search-calendar .wrapper-pilih-tanggal {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 40%;
 }
+
 .kehadiran .search-calendar .wrapper-pilih-tanggal img {
   width: 14px;
   height: 14px;
 }
+
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal {
   width: 125px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 1.5px solid #EBF0FE;
-  padding: 0.5rem;
+  padding: .5rem;
   padding-right: 0;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .btn-pilih-tanggal {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   cursor: pointer;
 }
+
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .react-calendar {
   width: 300px;
   position: absolute;
   border: 1.5px solid #EBF0FE;
   padding: 1rem;
   border-radius: 7px;
-  transform: translateX(25%);
+  -webkit-transform: translateX(25%);
+          transform: translateX(25%);
   z-index: 999;
 }
+
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal img {
   width: 13px;
   height: 13px;
-  margin-right: 0.5rem;
+  margin-right: .5rem;
 }
+
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal p {
   font-size: 10px;
   color: #A6A6A6;
 }
+
 .kehadiran .tabbar-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 100%;
   background-color: white;
   padding: 1rem 1.5rem;
@@ -79,60 +115,92 @@
   border: 1px solid #EBF0FE;
   border-top: none;
 }
+
 .kehadiran .tabbar-filter .tabbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
+
 .kehadiran .tabbar-filter .tabbar .tabbar-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
 .kehadiran .tabbar-filter .tabbar .tabbar-text div {
   width: 130px;
   text-align: center;
   padding-bottom: 1rem;
+  -webkit-transition: border 0.3s ease-in-out;
   transition: border 0.3s ease-in-out;
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
 }
+
 .kehadiran .tabbar-filter .tabbar .tabbar-text div:nth-child(2) {
   border-bottom: none;
   color: #9B9B9B;
 }
+
 .kehadiran .tabbar-filter .tabbar .tabbar-text div.active {
   color: #3661EB;
 }
+
 .kehadiran .tabbar-filter .tabbar .line {
   width: 130px;
   height: 2px;
   background-color: #3661EB;
-  transform: translateX(0);
-  transition: transform 0.3s ease-in-out;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+  transition: -webkit-transform .3s ease-in-out;
+  transition: transform .3s ease-in-out;
+  transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
 }
+
 .kehadiran .tabbar-filter .tabbar .line.active {
-  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
 }
+
 .kehadiran .tabbar-filter .filter-download {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 2rem;
 }
+
 .kehadiran .tabbar-filter .filter {
   cursor: pointer;
-  transform: translateY(-0.25rem);
+  -webkit-transform: translateY(-0.25rem);
+          transform: translateY(-0.25rem);
 }
+
 .kehadiran .tabbar-filter .filter ul {
   position: absolute;
-  transform: translateX(-27%);
-  margin-top: 0.5rem;
+  -webkit-transform: translateX(-27%);
+          transform: translateX(-27%);
+  margin-top: .5rem;
 }
+
 .kehadiran .tabbar-filter .filter ul li {
   list-style: none;
-  padding: 0.5rem;
+  padding: .5rem;
   padding-left: 12px;
   list-style: none;
   font-size: 13px;
@@ -142,12 +210,15 @@
   cursor: pointer;
   font-size: 11px;
 }
+
 .kehadiran .tabbar-filter .filter ul li:hover {
   background-color: #F3F3F3;
 }
+
 .kehadiran .tabbar-filter .filter ul .activeDropdownli {
   background-color: #F3F3F3;
 }
+
 .kehadiran .table {
   width: 100%;
   background-color: white;
@@ -156,21 +227,26 @@
   border-top: none;
   border-collapse: collapse;
 }
+
 .kehadiran .table thead th {
   text-align: left;
   font-weight: 500;
   font-size: 14px;
   padding: 1.5rem 0;
 }
+
 .kehadiran .table thead th:nth-child(1) {
   padding-left: 1.5rem;
 }
+
 .kehadiran .table tbody tr {
   width: 100%;
 }
+
 .kehadiran .table tbody tr:nth-child(odd) {
   background-color: #EBF0FE;
 }
+
 .kehadiran .table tbody .btn-detail {
   background-color: #3661EB;
   color: white;
@@ -180,18 +256,25 @@
   border-radius: 5px;
   font-size: 10px;
 }
+
 .kehadiran .table td {
   font-size: 10px;
   color: #9B9B9B;
 }
+
 .kehadiran .table .row-img {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  padding: 0.5rem 1.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .5rem 1.5rem;
 }
+
 .kehadiran .table .row-img img {
   width: 35px;
   height: 35px;
