@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "../sass/Test.scss"
-    ],
-    "names": [],
-    "file": "Test.css"
-}
+{"version":3,"sources":[],"names":[],"mappings":"","file":"Test.css"}

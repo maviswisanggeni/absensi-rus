@@ -3,8 +3,13 @@
 .body{
     max-width: 1440px;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     margin: 0 auto;
+}
+
+// remove scrollbar 
+::-webkit-scrollbar {
+    display: none;
 }
 
 .dashboard-and-kehadiran{
@@ -13,6 +18,7 @@
     background-color: $background-color;
     padding: 2rem;
     width: 837px;
+    // width: 50%;
 }
 
 .search{
@@ -63,6 +69,7 @@
     border-left: 1px solid $secondary-color;
     padding: 2rem;
     width: 342px;
+    // width: 30%;
     position: relative;
 }
 

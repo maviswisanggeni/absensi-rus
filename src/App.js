@@ -6,6 +6,7 @@ import Karyawan from './pages/Karyawan';
 import Kalender from './pages/Kalender';
 import './styles/css/App.css';
 import Login from './pages/Login';
+import Detail from './components/kehadiran/Detail';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Dashboard/>}/>
         <Route path='/kehadiran' element={<Kehadiran/>}/>
+        <Route path='/kehadiran/detail:id' element={<Detail/>}/>
         <Route path='/karyawan' element={<Karyawan/>}/>
         <Route path='/kalender' element={<Kalender/>}/>
         <Route path='/login' element={<Login/>}/>

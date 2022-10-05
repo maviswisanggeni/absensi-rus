@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
 
 let PageSize = 10;
@@ -7,6 +8,7 @@ function Table() {
 
     const data = [
         {
+            "id": "1",
             "name": "Leanne Graham",
             "src": "people-1.jpg",
             "niy": "1234567",
@@ -14,6 +16,7 @@ function Table() {
             "masuk": '06.44 WIB'
         },
         {
+            "id": "2",
             "name": "Leanne Graham",
             "src": "people-2.jpg",
             "niy": "1234567",
@@ -236,7 +239,10 @@ function Table() {
                     <td>{item.niy}</td>
                     <td>{item.jabatan}</td>
                     <td>{item.masuk}</td>
-                    <td><button className='btn-detail'>Detail</button></td>
+                    <td>
+                        <Link className='btn-detail' to={`/kehadiran/detail-${item.id}`}>Detail</Link>
+                        {/* <button className='btn-detail'></button> */}
+                    </td>
                 </tr>
                 )
             })}

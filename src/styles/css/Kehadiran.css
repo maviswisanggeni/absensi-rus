@@ -3,14 +3,9 @@
   font-weight: 500;
   margin-bottom: 1rem;
 }
-
 .kehadiran .search-calendar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   gap: 1rem;
   width: 100%;
   background-color: white;
@@ -20,93 +15,62 @@
   border-top-right-radius: 10px;
   margin-top: 1rem;
 }
-
 .kehadiran .search-calendar .search {
   background-position: 5% 50%;
   background-size: 13px;
   text-indent: 2rem;
   border: none;
   width: 60%;
-  padding: .5rem;
+  padding: 0.5rem;
   outline: none;
   font-weight: 400;
   border: 1.5px solid #EBF0FE;
 }
-
 .kehadiran .search-calendar .wrapper-pilih-tanggal {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
   width: 40%;
 }
-
 .kehadiran .search-calendar .wrapper-pilih-tanggal img {
   width: 14px;
   height: 14px;
 }
-
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal {
   width: 125px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   border: 1.5px solid #EBF0FE;
-  padding: .5rem;
+  padding: 0.5rem;
   padding-right: 0;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .btn-pilih-tanggal {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   cursor: pointer;
 }
-
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .react-calendar {
   width: 300px;
   position: absolute;
   border: 1.5px solid #EBF0FE;
   padding: 1rem;
   border-radius: 7px;
-  -webkit-transform: translateX(25%);
-          transform: translateX(25%);
+  transform: translateX(25%);
   z-index: 999;
 }
-
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal img {
   width: 13px;
   height: 13px;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
-
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal p {
   font-size: 10px;
   color: #A6A6A6;
 }
-
 .kehadiran .tabbar-filter {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   width: 100%;
   background-color: white;
   padding: 1rem 1.5rem;
@@ -115,92 +79,60 @@
   border: 1px solid #EBF0FE;
   border-top: none;
 }
-
 .kehadiran .tabbar-filter .tabbar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
-
 .kehadiran .tabbar-filter .tabbar .tabbar-text {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 .kehadiran .tabbar-filter .tabbar .tabbar-text div {
   width: 130px;
   text-align: center;
   padding-bottom: 1rem;
-  -webkit-transition: border 0.3s ease-in-out;
   transition: border 0.3s ease-in-out;
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
 }
-
 .kehadiran .tabbar-filter .tabbar .tabbar-text div:nth-child(2) {
   border-bottom: none;
   color: #9B9B9B;
 }
-
 .kehadiran .tabbar-filter .tabbar .tabbar-text div.active {
   color: #3661EB;
 }
-
 .kehadiran .tabbar-filter .tabbar .line {
   width: 130px;
   height: 2px;
   background-color: #3661EB;
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  -webkit-transition: -webkit-transform .3s ease-in-out;
-  transition: -webkit-transform .3s ease-in-out;
-  transition: transform .3s ease-in-out;
-  transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
 }
-
 .kehadiran .tabbar-filter .tabbar .line.active {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
+  transform: translateX(100%);
 }
-
 .kehadiran .tabbar-filter .filter-download {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   gap: 2rem;
 }
-
 .kehadiran .tabbar-filter .filter {
   cursor: pointer;
-  -webkit-transform: translateY(-0.25rem);
-          transform: translateY(-0.25rem);
+  transform: translateY(-0.25rem);
 }
-
 .kehadiran .tabbar-filter .filter ul {
   position: absolute;
-  -webkit-transform: translateX(-27%);
-          transform: translateX(-27%);
-  margin-top: .5rem;
+  transform: translateX(-27%);
+  margin-top: 0.5rem;
 }
-
 .kehadiran .tabbar-filter .filter ul li {
   list-style: none;
-  padding: .5rem;
+  padding: 0.5rem;
   padding-left: 12px;
   list-style: none;
   font-size: 13px;
@@ -210,15 +142,12 @@
   cursor: pointer;
   font-size: 11px;
 }
-
 .kehadiran .tabbar-filter .filter ul li:hover {
   background-color: #F3F3F3;
 }
-
 .kehadiran .tabbar-filter .filter ul .activeDropdownli {
   background-color: #F3F3F3;
 }
-
 .kehadiran .table {
   width: 100%;
   background-color: white;
@@ -227,54 +156,43 @@
   border-top: none;
   border-collapse: collapse;
 }
-
 .kehadiran .table thead th {
   text-align: left;
   font-weight: 500;
   font-size: 14px;
   padding: 1.5rem 0;
 }
-
 .kehadiran .table thead th:nth-child(1) {
   padding-left: 1.5rem;
 }
-
 .kehadiran .table tbody tr {
   width: 100%;
 }
-
 .kehadiran .table tbody tr:nth-child(odd) {
   background-color: #EBF0FE;
 }
-
 .kehadiran .table tbody .btn-detail {
   background-color: #3661EB;
-  color: white;
-  border: none;
   width: 80px;
   height: 30px;
   border-radius: 5px;
   font-size: 10px;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
 }
-
 .kehadiran .table td {
   font-size: 10px;
   color: #9B9B9B;
 }
-
 .kehadiran .table .row-img {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: .5rem 1.5rem;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
 }
-
 .kehadiran .table .row-img img {
   width: 35px;
   height: 35px;
@@ -370,4 +288,138 @@
   width: 40px;
   border-radius: 50%;
   margin-right: 1.5rem;
+}
+
+.detail {
+  width: 80%;
+}
+.detail .navigation {
+  display: flex;
+  border-bottom: 1px solid #EBF0FE;
+  padding: 1rem 2.5rem;
+}
+.detail .navigation a {
+  display: flex;
+  align-items: center;
+}
+.detail .navigation h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-left: 2rem;
+}
+.detail .main {
+  display: flex;
+  justify-content: space-between;
+}
+.detail .main .detail-masuk-keluar {
+  width: 65%;
+  display: flex;
+  gap: 4rem;
+  padding: 2rem 2.5rem;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar {
+  width: 315px;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .jam-masuk {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .jam-masuk h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .jam-masuk p {
+  font-size: 12px;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #EBF0FE;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card img {
+  width: 315px;
+  height: 372px;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .note, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
+  padding: 1rem;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .note h3, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates h3 {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .note p, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates p {
+  font-size: 10px;
+  color: #9B9B9B;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
+  background-color: #F9F9F9;
+  display: flex;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates h3 {
+  margin-bottom: 0;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates div:nth-child(1) {
+  margin-right: 6rem;
+}
+.detail .main .detail-profile {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding: 2rem 2rem;
+  border-left: 1px solid #EBF0FE;
+  height: 90vh;
+}
+.detail .main .detail-profile .div-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.detail .main .detail-profile .div-1 h1 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+.detail .main .detail-profile .div-1 img {
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+}
+.detail .main .detail-profile .div-1 h3 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9B9B9B;
+  margin: 1rem 0 0.25rem;
+}
+.detail .main .detail-profile .div-1 p {
+  font-size: 11px;
+  color: #9B9B9B;
+}
+.detail .main .detail-profile .div-2 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.detail .main .detail-profile .info h3 {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+.detail .main .detail-profile .info p {
+  font-size: 12px;
+  color: #9B9B9B;
+}
+.detail .main .detail-profile button {
+  width: 125px;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  background-color: #3661EB;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 5rem;
 }/*# sourceMappingURL=Kehadiran.css.map */
