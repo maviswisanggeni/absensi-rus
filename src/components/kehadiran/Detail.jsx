@@ -6,7 +6,8 @@ import people2 from '../../assets/images/Rectangle 39.jpg'
 import DetailProfile from './DetailProfile'
 import { Link } from 'react-router-dom'
 
-function Detail() {
+function Detail() { 
+    
   return (
     <div className='detail'>
         <div className='navigation'>
@@ -17,8 +18,8 @@ function Detail() {
         </div>
         <div className='main'>
             <div className='detail-masuk-keluar'>
-                <MasukKeluar img={people1}/>
-                <MasukKeluar img={people2}/>
+                <MasukKeluar keterangan="Masuk" img={people1}/>
+                <MasukKeluar keterangan="Keluar" img={people2}/>
             </div>
             <DetailProfile/>
         </div>

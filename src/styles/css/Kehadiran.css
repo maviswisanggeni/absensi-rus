@@ -18,13 +18,11 @@
 .kehadiran .search-calendar .search {
   background-position: 5% 50%;
   background-size: 13px;
-  text-indent: 2rem;
   border: none;
   width: 60%;
   padding: 0.5rem;
   outline: none;
   font-weight: 400;
-  border: 1.5px solid #EBF0FE;
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal {
   display: flex;
@@ -310,6 +308,7 @@
 .detail .main {
   display: flex;
   justify-content: space-between;
+  gap: 3rem;
 }
 .detail .main .detail-masuk-keluar {
   width: 65%;
@@ -412,14 +411,16 @@
   font-size: 12px;
   color: #9B9B9B;
 }
-.detail .main .detail-profile button {
+.detail .main .detail-profile a {
   width: 125px;
   color: white;
   border: none;
-  padding: 0.75rem 2rem;
+  padding: 0.5rem 0;
   background-color: #3661EB;
   border-radius: 8px;
   text-align: center;
   margin: 0 auto;
   margin-top: 5rem;
+  text-decoration: none;
+  font-size: 14px;
 }/*# sourceMappingURL=Kehadiran.css.map */

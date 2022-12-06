@@ -10,16 +10,19 @@ import TabbarAndFilter from '../components/kehadiran/TabbarAndFilter'
 import Table from '../components/kehadiran/Table'
 import Calender from '../components/CustomCalendar'
 import KehadiranTerbaru from '../components/sidebar-right/KehadiranTerbaru'
+import { ContextApiKehadiranJmlKehadiran } from '../contexts/api/ContextApiKehadiran'
+import { useContext } from 'react'
 
 function Kehadiran() {
+  const [jmlKehadiran] = useContext(ContextApiKehadiranJmlKehadiran)
   return (
     <>
       <div className='kehadiran dashboard-and-kehadiran'>
         <h1>Kehadiran karyawan</h1>
         <div className='wrapper-circular'>
-          <CircularStatistic name="Masuk" value="240 / 310" imgSrc={masukIcon}/>
-          <CircularStatistic name="Keluar" value="142 / 240" imgSrc={keluarIcon}/>
-          <CircularStatistic name="Absen" value="64 Orang" imgSrc={absenIcon}/>
+          <CircularStatistic name="Masuk" firstValue={jmlKehadiran?.jml_masuk} secondValue={jmlKehadiran?.jml_karyawan} uiValue={`${jmlKehadiran?.jml_masuk} / ${jmlKehadiran?.jml_karyawan}`} imgSrc={masukIcon}/>
+          <CircularStatistic name="Keluar" firstValue={jmlKehadiran?.jml_pulang} secondValue={jmlKehadiran?.jml_karyawan} uiValue={`${jmlKehadiran?.jml_pulang} / ${jmlKehadiran?.jml_karyawan}`} imgSrc={keluarIcon}/>
+          <CircularStatistic name="Absen"firstValue={jmlKehadiran?.jml_absen} secondValue={jmlKehadiran?.jml_karyawan} uiValue={`${jmlKehadiran?.jml_absen}`} imgSrc={absenIcon}/>
         </div>
         <SearchAndCalendar/>
         <TabbarAndFilter/>

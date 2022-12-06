@@ -23,14 +23,11 @@
         .search{
             background-position: 5% 50%;
             background-size: 13px;
-            text-indent: 2rem;
             border: none;
-            // width: 400px;
             width: 60%;
             padding: .5rem;
             outline: none;
             font-weight: 400;
-            border: 1.5px solid $secondary-color;
         }
 
         .wrapper-pilih-tanggal{
@@ -379,6 +376,7 @@
     .main{
         display: flex;
         justify-content: space-between;
+        gap: 3rem;
 
         .detail-masuk-keluar{
             width: 65%;
@@ -504,16 +502,18 @@
                 }
             }
 
-            button{
+            a{
                 width: 125px;
                 color: white;
                 border: none;
-                padding: .75rem 2rem;
+                padding: .5rem 0;
                 background-color: $primary-color;
                 border-radius: 8px;
                 text-align: center;
                 margin: 0 auto;
                 margin-top: 5rem;
+                text-decoration: none;
+                font-size: 14px;
             }
         }
     }

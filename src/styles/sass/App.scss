@@ -57,10 +57,13 @@
             font-weight: 500;
         }
 
-        p:nth-child(2){
-            font-size: 20px;
-            font-weight: 600;
-            color: $primary-color;
+        .box-values{
+          margin-left: 1.5rem;
+          span{
+              font-size: 20px;
+              font-weight: 600;
+              color: $primary-color;
+          }
         }
     }
 }
