@@ -1,20 +1,19 @@
 import React, { useMemo, useState } from 'react'
 import Pagination from './Pagination';
 import people2 from '../../assets/images/Rectangle 39.jpg'
-import { ContextApiKehadiranList } from '../../contexts/api/ContextApiKehadiranListData';
-import { useContext } from 'react';
+import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
 import { Link } from 'react-router-dom';
 
 let PageSize = 10;
 
 function Table() {
-    const [listAbsensi] = useContext(ContextApiKehadiranList)
-
+    const context = useKehadiranListAbsensi()
+    // console.log(context);
     const [currentPage, setCurrentPage] = useState(1);
     const currentTableData = useMemo(() => {
       const firstPageIndex = (currentPage - 1) * PageSize;
       const lastPageIndex = firstPageIndex + PageSize;
-      return listAbsensi?.data?.data?.slice(firstPageIndex, lastPageIndex);
+      return context.listAbsensi?.data?.data?.slice(firstPageIndex, lastPageIndex);
     }, [currentPage]);
   
   return (
@@ -29,9 +28,11 @@ function Table() {
                 <th>Action</th>
             </tr>
         </thead>
-
+         
         <tbody>
-            {listAbsensi?.data?.data?.map((item, key) => {
+            {!context.loading ? <tr><td>Loading...</td></tr>
+            : 
+            context.listAbsensi?.data?.data?.map((item, key) => {
                 return (
                 <tr key={key}>
                     <td className='row-img'>
@@ -49,13 +50,16 @@ function Table() {
                     </td>
                 </tr>
                 )
-            })}
-        </tbody>
+            })
+            }
+            
+            </tbody>
+        
     </table>
     <Pagination 
         className="pagination-bar"
         currentPage={currentPage}
-        totalCount={listAbsensi?.data?.data?.length === undefined ? 0 : listAbsensi?.data?.data?.length}
+        totalCount={context.listAbsensi?.data?.data?.length === undefined ? 0 : context.listAbsensi?.data?.data?.length}
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
     />

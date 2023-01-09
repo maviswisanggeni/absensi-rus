@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
+import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
+import formatDate from '../useFormatCalendar';
+import { useTanggalKehadiran } from '../../contexts/app/ContextTanggalKehadiran'
 
 function PilihTanggal(props) {
+  const contextList = useKehadiranListAbsensi()
+  const contextTanggal = useTanggalKehadiran()
   const [open, setOpen] = useState(false)
-  const [tanggal, setTanggal] = useState(new Date());
-  const [text, setText] = useState(props.text)
 
   const drop = useRef(null);
 
@@ -23,18 +26,23 @@ function PilihTanggal(props) {
   });
 
   function change(e){
-    setTanggal(e)
-    setText(e.toLocaleDateString())  
-    console.log('text');
+    props.funcTanggal(e)
+    props.funcTime(formatDate(e))
+    props.funcText(formatDate(e))
   }
   
+  useEffect(() => {
+    contextList.setStartTime(contextTanggal.startTime)
+    contextList.setEndTime(contextTanggal.endTime)
+  }, [props.text])
+
   return (
     <div className='pilih-tanggal' ref={drop}>
       <div className='btn-pilih-tanggal' onClick={() => setOpen(open => !open)}>
         <img src={calenderIcon} alt=""/>
-        <p>{text}</p>
+        <p>{props.text}</p>
       </div>
-      {open && <Calendar onChange={change} value={tanggal}/>}
+      {open && <Calendar onChange={change} value={props.value}/>}
     </div>
   )
 }

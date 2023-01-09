@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import filter from '../../assets/icons/filter.svg'
+import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
 
 function Filter() {
+    const context = useKehadiranListAbsensi()
     const filterData = ['Tercepat', 'Terlambat'];
     const [open, setOpen] = useState(false);
     const [current, setCurrent] = useState('Tercepat')
@@ -18,11 +20,16 @@ function Filter() {
         return () => {
           document.removeEventListener("click", handleClick);
         };
-    });
+    }, []);
+
+    useEffect(() => {
+        context.setUrutan(current === 'Tercepat' ? 'tercepat' : 'terlambat')
+    }, [current])
 
     function log(e){
         setOpen(false)
         setCurrent(e.innerText)
+        context.setUrutan(current === 'Tercepat' ? 'tercepat' : 'terlambat')
     }
 
   return (

@@ -59,13 +59,8 @@
   font-size: 14px;
   font-weight: 500;
 }
-.wrapper-circular .card-circular-statistic .box-values {
-  margin-left: 1.5rem;
-}
-.wrapper-circular .card-circular-statistic .box-values span {
-  font-size: 20px;
-  font-weight: 600;
-  color: #3661EB;
+.wrapper-circular .card-circular-statistic .wrapper-value p:nth-child(2) {
+  margin-top: 0px;
 }
 
 .sidebar-right {
@@ -277,4 +272,27 @@
 
 .react-calendar__navigation__prev-button {
   order: 1;
+}
+
+.dots:before {
+  display: block;
+  height: 0.1px;
+  width: 0.1px;
+  content: "";
+  margin: 20px 0px 0 15px;
+  -webkit-animation: spin 1s infinite;
+  animation: spin 1s infinite;
+  border-radius: 100%;
+  box-shadow: 10px 0 0 3px #3661EB, -10px 0 0 3px #3661EB;
+}
+
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }/*# sourceMappingURL=App.css.map */

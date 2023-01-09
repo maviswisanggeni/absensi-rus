@@ -340,6 +340,10 @@
 .detail .main .detail-masuk-keluar .masuk-keluar .card img {
   width: 315px;
   height: 372px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 100% 0;
+     object-position: 100% 0;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .note, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
   padding: 1rem;

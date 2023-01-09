@@ -10,27 +10,50 @@ import TabbarAndFilter from '../components/kehadiran/TabbarAndFilter'
 import Table from '../components/kehadiran/Table'
 import Calender from '../components/CustomCalendar'
 import KehadiranTerbaru from '../components/sidebar-right/KehadiranTerbaru'
-import { ContextApiKehadiranJmlKehadiran } from '../contexts/api/ContextApiKehadiran'
-import { useContext } from 'react'
+import { useKehadiranJmlKehadiran } from '../contexts/api/ContextApiKehadiran'
+import { TanggalKehadiranProvider } from '../contexts/app/ContextTanggalKehadiran'
 
 function Kehadiran() {
-  const [jmlKehadiran] = useContext(ContextApiKehadiranJmlKehadiran)
+  const context = useKehadiranJmlKehadiran()
   return (
     <>
       <div className='kehadiran dashboard-and-kehadiran'>
         <h1>Kehadiran karyawan</h1>
         <div className='wrapper-circular'>
-          <CircularStatistic name="Masuk" firstValue={jmlKehadiran?.jml_masuk} secondValue={jmlKehadiran?.jml_karyawan} uiValue={`${jmlKehadiran?.jml_masuk} / ${jmlKehadiran?.jml_karyawan}`} imgSrc={masukIcon}/>
-          <CircularStatistic name="Keluar" firstValue={jmlKehadiran?.jml_pulang} secondValue={jmlKehadiran?.jml_karyawan} uiValue={`${jmlKehadiran?.jml_pulang} / ${jmlKehadiran?.jml_karyawan}`} imgSrc={keluarIcon}/>
-          <CircularStatistic name="Absen"firstValue={jmlKehadiran?.jml_absen} secondValue={jmlKehadiran?.jml_karyawan} uiValue={`${jmlKehadiran?.jml_absen}`} imgSrc={absenIcon}/>
+        
+          <CircularStatistic 
+            name="Masuk"
+            firstValue={context.jmlKehadiran?.jml_masuk} 
+            secondValue={context.jmlKehadiran?.jml_karyawan} 
+            uiValue={context.loading ? <p>{`${context.jmlKehadiran?.jml_masuk} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>} 
+            imgSrc={masukIcon}
+          />
+
+          <CircularStatistic 
+            name="Keluar" 
+            firstValue={context.jmlKehadiran?.jml_pulang} 
+            secondValue={context.jmlKehadiran?.jml_karyawan} 
+            uiValue={context.loading ? <p>{`${context.jmlKehadiran?.jml_pulang} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>} 
+            imgSrc={keluarIcon}
+          />
+
+          <CircularStatistic 
+            name="Absen"
+            firstValue={context.jmlKehadiran?.jml_absen} 
+            secondValue={context.jmlKehadiran?.jml_karyawan}
+            uiValue={ context.loading ?<p>{`${context.jmlKehadiran  ?.jml_absen}`}</p> : <div className='dots'></div>} 
+            imgSrc={absenIcon}
+          />
         </div>
-        <SearchAndCalendar/>
+        <TanggalKehadiranProvider>
+          <SearchAndCalendar/>
+        </TanggalKehadiranProvider>
         <TabbarAndFilter/>
         <Table/>
       </div>
       <div className='sidebar-right'>
         <Profile/>
-        <Calender/>
+        <Calender func={context.setDate}/>
         <KehadiranTerbaru/>
       </div>
     </>

@@ -18,13 +18,10 @@ function CircularStatistic(props) {
         <img src={props.imgSrc} alt="" style={{width: 45, height: 45}}/>
         </CircularProgressbarWithChildren>
       </div>
-      <div>
+      <div className='wrapper-value'>
         <p>{props.name}</p>
-        {/* <div className='box-values'>
-          <span>{props.firstValue} / </span>
-          <span>{props.secondValue}</span>
-        </div> */}
-        <p>{props.uiValue}</p>
+        {props.uiValue}
+        {/* <p>{props.uiValue}</p> */}
       </div>
     </div>
   )

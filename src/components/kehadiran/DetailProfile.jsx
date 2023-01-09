@@ -1,19 +1,17 @@
-import React, { useContext } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import people1 from '../../assets/images/Rectangle 35.jpg'
-import { ContextApiKehadiranList } from '../../contexts/api/ContextApiKehadiranListData'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData'
+import people1 from '../../assets/images/user-foto.png'
 
 function DetailProfile() {
-    const params = useParams()
-    const [listAbsensi] = useContext(ContextApiKehadiranList)
-    
+    const context = useKehadiranListAbsensi()
   return (
     <div className='detail-profile'>
         <div className='div-1'>
             <h1>Foto Profile</h1>
             <img src={people1} alt="" />
-            <h3>{listAbsensi?.data?.data[0]?.karyawan?.niy}</h3>
-            <p></p>
+            <h3>{context.listAbsensi?.data?.data[0]?.karyawan?.niy}</h3>
+            <p>{context.listAbsensi?.data?.data[0]?.karyawan?.nama}</p>
         </div>
         <div className='div-2'>
             <div className='info'>
@@ -22,7 +20,7 @@ function DetailProfile() {
             </div>
             <div className='info'>
                 <h3>Nomer HP</h3>
-                <p>{listAbsensi?.data?.data[0]?.karyawan?.no_hp}</p>
+                <p>{context.listAbsensi?.data?.data[0]?.karyawan?.no_hp}</p>
             </div>
         </div>
         <div className='info'>

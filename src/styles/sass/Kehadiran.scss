@@ -411,6 +411,8 @@
                     img{
                         width: 315px;
                         height: 372px;
+                        object-fit: cover;
+                        object-position: 100% 0;
                     }
     
                     .note, .coordinates{

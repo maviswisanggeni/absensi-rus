@@ -3,12 +3,12 @@ import Select from 'react-select'
 import { ContextApiKehadiranList } from '../contexts/api/ContextApiKehadiranListData'
 
 function Search() {
-  const [listAbsensi] = useContext(ContextApiKehadiranList)
+  const context = useContext(ContextApiKehadiranList)
 
-  const options = listAbsensi?.data?.data?.map((item) => {
+  const options = context.listAbsensi?.data?.data?.map((item) => {
       return {value: item?.karyawan?.nama, label: item?.karyawan?.nama}
   })
-  
+    
   function handleChange(e){
     
   }
