@@ -19,7 +19,7 @@ function Dashboard() {
         <div className='wrapper-circular'>
           <CircularStatistic
               name="Masuk" 
-              firstValue={context.jmlKehadiran?.jml_masuk} 
+              firstValue={context.jmlKehadiran?.jml_masuk}
               secondValue={context.jmlKehadiran?.jml_karyawan} 
               uiValue={context.loading ? <p>{`${context.jmlKehadiran?.jml_masuk} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>} 
               imgSrc={masukIcon}

@@ -31,7 +31,7 @@ function DashboardApiProvider ({children}) {
                     params: request
                 })
                 .then((response) => {
-                setJmlKehadiran(response.data);
+                setJmlKehadiran(response.data.data.jml_kehadiran);
                 setLoading(true);
                 console.log(response.data);
             }).catch((error) => {
