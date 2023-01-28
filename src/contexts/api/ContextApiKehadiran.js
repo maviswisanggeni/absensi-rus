@@ -14,21 +14,21 @@ function KehadiranJmlKehadiranProvider ({children}) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        async function getDataJmlKehadiran() {
-            const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/kehadiran/jml-kehadiran"
-            const request = {   
-                start_time: date,
-                end_time: date,
-            }
-            setLoading(false);
-            axios.get(url, {params: request}).then((response) => {
-                setJmlKehadiran(response.data); 
-                setLoading(true);
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
-        getDataJmlKehadiran();
+        // async function getDataJmlKehadiran() {
+        //     const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/kehadiran/jml-kehadiran"
+        //     const request = {   
+        //         start_time: date,
+        //         end_time: date,
+        //     }
+        //     setLoading(false);
+        //     axios.get(url, {params: request}).then((response) => {
+        //         setJmlKehadiran(response.data); 
+        //         setLoading(true);
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     })
+        // }
+        // getDataJmlKehadiran();
     }, [date]);
 
     const contextValue = {

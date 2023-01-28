@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+// import { Route, Routes } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Kehadiran from './pages/Kehadiran';
@@ -10,6 +10,7 @@ import Detail from './components/kehadiran/Detail';
 import { KehadiranJmlKehadiranProvider } from './contexts/api/ContextApiKehadiran';
 import { KehadiranListProvider } from './contexts/api/ContextApiKehadiranListData';
 import { DashboardApiProvider } from './contexts/api/ContextApiDashboard';
+import { Route, Routes } from 'react-router';
 
 function App() {
   return (
