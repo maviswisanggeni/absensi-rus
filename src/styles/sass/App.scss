@@ -3,8 +3,13 @@
 .body{
     max-width: 1440px;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     margin: 0 auto;
+}
+
+// remove scrollbar 
+::-webkit-scrollbar {
+    display: none;
 }
 
 .dashboard-and-kehadiran{
@@ -13,6 +18,7 @@
     background-color: $background-color;
     padding: 2rem;
     width: 837px;
+    // width: 50%;
 }
 
 .search{
@@ -51,10 +57,10 @@
             font-weight: 500;
         }
 
-        p:nth-child(2){
-            font-size: 20px;
-            font-weight: 600;
-            color: $primary-color;
+        .wrapper-value{
+          p:nth-child(2){
+            margin-top: 0px;
+          }
         }
     }
 }
@@ -63,6 +69,7 @@
     border-left: 1px solid $secondary-color;
     padding: 2rem;
     width: 342px;
+    // width: 30%;
     position: relative;
 }
 
@@ -247,3 +254,25 @@
 .react-calendar__navigation__prev-button{
   order: 1;
 }
+
+.dots:before {
+  display: block;
+  height: .1px;
+  width: .1px;
+  content: '';
+  margin: 20px 0px 0 15px;
+  -webkit-animation: spin 1s infinite;
+          animation: spin 1s infinite;
+  border-radius: 100%;
+  -webkit-box-shadow: 10px 0 0 3px $primary-color, -10px 0 0 3px $primary-color;
+          box-shadow: 10px 0 0 3px $primary-color, -10px 0 0 3px $primary-color; }
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }

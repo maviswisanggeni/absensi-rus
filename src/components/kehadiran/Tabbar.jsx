@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
 
 function Tabbar() {
-    const [current, setCurrent] = useState('Masuk')
+  const context = useKehadiranListAbsensi()
+  const [current, setCurrent] = useState('Masuk')
 
-    function handleClick(e){
-        setCurrent(e.target.innerText)
+  function handleClick(e){
+      setCurrent(e.target.innerText)
     }
+    
+  useEffect(() => {
+    context.setKeterangan(current === 'Keluar' ? 'pulang' : 'masuk')
+  }, [current])
 
   return (
     <div className='tabbar'>

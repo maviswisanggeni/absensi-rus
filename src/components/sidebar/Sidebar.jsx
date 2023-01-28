@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/css/Sidebar.css'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useParams } from 'react-router-dom'
 import LogoSidebar from './LogoSidebar'
 import dashboardLogoBlue from '../../assets/icons/dashboard-icon-blue.svg'
 import dashboardLogoGrey from '../../assets/icons/dashboard-icon-grey.svg'
@@ -14,7 +14,7 @@ import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 
 function Navbar() {
   let query = useLocation()
-
+ 
   if (query.pathname === "/login") {
     return null
   }
@@ -30,8 +30,8 @@ function Navbar() {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/kehadiran' className={query.pathname === '/kehadiran' ? 'active-sidebar' : ''}>
-              <img src={query.pathname === '/kehadiran' ? kehadiranLogoBlue : kehadiranLogoGrey} alt="" />
+            <NavLink to='/kehadiran' className={query.pathname === '/kehadiran' || query.pathname === '/kehadiran/detail- ' ? 'active-sidebar' : ''}>
+              <img src={query.pathname === '/kehadiran' || query.pathname === '/kehadiran/detail' ? kehadiranLogoBlue : kehadiranLogoGrey} alt="" />
               Kehadiran
             </NavLink>
           </li>

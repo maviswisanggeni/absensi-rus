@@ -1,22 +1,16 @@
 .body {
   max-width: 1440px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   margin: 0 auto;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .dashboard-and-kehadiran {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   background-color: #F9F9F9;
   padding: 2rem;
   width: 837px;
@@ -27,15 +21,11 @@
   background-repeat: no-repeat;
 }
 
-.search::-webkit-input-placeholder, .search {
+.search::-moz-placeholder {
   color: #A6A6A6;
 }
 
-.search:-ms-input-placeholder, .search {
-  color: #A6A6A6;
-}
-
-.search::-ms-input-placeholder, .search {
+.search:-ms-input-placeholder {
   color: #A6A6A6;
 }
 
@@ -48,30 +38,20 @@
 }
 
 .wrapper-circular {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   width: 100%;
   gap: 1rem;
 }
-
 .wrapper-circular .card-circular-statistic {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   width: 250px;
   background-color: white;
   padding: 1rem;
   border: 1px solid #EBF0FE;
   border-radius: 10px;
 }
-
 .wrapper-circular .card-circular-statistic p {
   margin: 0;
   margin-left: 1.5rem;
@@ -79,11 +59,8 @@
   font-size: 14px;
   font-weight: 500;
 }
-
-.wrapper-circular .card-circular-statistic p:nth-child(2) {
-  font-size: 20px;
-  font-weight: 600;
-  color: #3661EB;
+.wrapper-circular .card-circular-statistic .wrapper-value p:nth-child(2) {
+  margin-top: 0px;
 }
 
 .sidebar-right {
@@ -94,25 +71,18 @@
 }
 
 .profile {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding-bottom: 1rem;
   width: 100%;
 }
-
 .profile img:nth-child(1) {
   width: 40px;
   height: 40px;
   margin-right: 1rem;
 }
-
 .profile img:nth-child(3) {
-  -webkit-transform: scale(2);
-          transform: scale(2);
+  transform: scale(2);
   margin-left: auto;
 }
 
@@ -133,8 +103,6 @@
 }
 
 .react-calendar--doubleView .react-calendar__viewContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin: -0.5em;
 }
@@ -148,7 +116,6 @@
 .react-calendar *,
 .react-calendar *:before,
 .react-calendar *:after {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -163,8 +130,6 @@
 }
 
 .react-calendar__navigation {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: 44px;
   margin-bottom: 1em;
@@ -198,15 +163,9 @@
 }
 
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-size: 0.75em;
   font-weight: bold;
 }
@@ -278,12 +237,8 @@
 }
 
 .react-calendar__navigation__label {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .react-calendar__navigation__label__labelText {
@@ -298,15 +253,9 @@
 }
 
 .react-calendar__tile--hasActive {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .react-calendar__navigation__prev2-button {
@@ -318,14 +267,32 @@
 }
 
 .react-calendar__navigation__next-button {
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
+  order: 1;
 }
 
 .react-calendar__navigation__prev-button {
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
+  order: 1;
 }
-/*# sourceMappingURL=App.css.map */
+
+.dots:before {
+  display: block;
+  height: 0.1px;
+  width: 0.1px;
+  content: "";
+  margin: 20px 0px 0 15px;
+  -webkit-animation: spin 1s infinite;
+  animation: spin 1s infinite;
+  border-radius: 100%;
+  box-shadow: 10px 0 0 3px #3661EB, -10px 0 0 3px #3661EB;
+}
+
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=App.css.map */
