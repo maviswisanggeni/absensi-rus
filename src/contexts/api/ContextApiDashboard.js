@@ -11,18 +11,29 @@ function DashboardApiProvider ({children}) {
     const [jmlKehadiran, setJmlKehadiran] = useState(null);
     const [date, setDate] = useState(formatDate(new Date()))
     const [loading, setLoading] = useState(false);
+    const token = localStorage.getItem("token");
     
     useEffect(() => {
         async function getData() {
             const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/dashboard/jml-kehadiran"
+            const urlLocal = "http://127.0.0.1:8000/api/dashboard/"; 
             const request = {
                 start_time: date,
                 end_time: date,
             }
             setLoading(false);
-            axios.get(url, {params: request}).then((response) => {
+            axios.get(
+                urlLocal,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    params: request
+                })
+                .then((response) => {
                 setJmlKehadiran(response.data);
                 setLoading(true);
+                console.log(response.data);
             }).catch((error) => {
                 console.log(error);
             })

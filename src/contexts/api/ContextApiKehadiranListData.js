@@ -16,28 +16,28 @@ function KehadiranListProvider ({children}) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        async function getDataListAbsensi() {
-            const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/kehadiran/list-absensi"
-            const headers = {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-            }
-            const request = {
-                    start_time: startTime,
-                    end_time: endTime,
-                    keterangan: keterangan,
-                    urutan: urutan,
-                    per_page: 1, 
-            }
-            setLoading(false);
-            axios.post(url, {params: request}, {headers: headers}).then((response) => {
-                setListAbsensi(response.data);
-                setLoading(true);
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
-        getDataListAbsensi();
+        // async function getDataListAbsensi() {
+        //     const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/kehadiran/list-absensi"
+        //     const headers = {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*',
+        //     }
+        //     const request = {
+        //             start_time: startTime,
+        //             end_time: endTime,
+        //             keterangan: keterangan,
+        //             urutan: urutan,
+        //             per_page: 1, 
+        //     }
+        //     setLoading(false);
+        //     axios.post(url, {params: request}, {headers: headers}).then((response) => {
+        //         setListAbsensi(response.data);
+        //         setLoading(true);
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     })
+        // }
+        // getDataListAbsensi();
     }, [startTime, endTime, keterangan, urutan]);
 
     const contextValue = {
