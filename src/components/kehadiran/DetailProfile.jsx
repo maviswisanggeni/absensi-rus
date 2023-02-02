@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData'
 import people1 from '../../assets/images/user-foto.png'
 
-function DetailProfile() {
+function DetailProfile(props) {
+    console.log(props.data  );
     const context = useKehadiranListAbsensi()
   return (
     <div className='detail-profile'>

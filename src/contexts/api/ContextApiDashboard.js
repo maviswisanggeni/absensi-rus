@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import formatDate from "../../components/useFormatCalendar";
+import { useNavigate } from "react-router";
 const ContextApiDashboard = createContext({})
 
 function useApiDashboard(){
@@ -12,31 +13,40 @@ function DashboardApiProvider ({children}) {
     const [date, setDate] = useState(formatDate(new Date()))
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
-    
-    useEffect(() => {
-        async function getData() {
-            const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/dashboard/jml-kehadiran"
-            const urlLocal = "http://127.0.0.1:8000/api/dashboard/"; 
-            const request = {
-                start_time: date,
-                end_time: date,
+    const navigate = useNavigate();
+
+    async function getData() {
+        const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/dashboard"
+        const urlLocal = "http://127.0.0.1:8000/api/dashboard/"; 
+        const request = {
+            start_time: date,
+            end_time: date,
+        }
+        setLoading(false);
+        axios.get(
+            urlLocal, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Credentials': 'true',
+                    'Content-Type': 'application/json'
+                },
+                crossdomain: true
             }
-            setLoading(false);
-            axios.get(
-                urlLocal,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    params: request
-                })
-                .then((response) => {
-                setJmlKehadiran(response.data.data.jml_kehadiran);
-                setLoading(true);
-                console.log(response.data);
-            }).catch((error) => {
-                console.log(error);
-            })
+            )
+            .then((response) => {
+            setJmlKehadiran(response.data.data.jml_kehadiran);
+            setLoading(true);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    useEffect(() => {
+        if(!token){
+            navigate('/login')
         }
         getData();
     }, [date]);

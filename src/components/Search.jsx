@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Select from 'react-select'
-import { ContextApiKehadiranList } from '../contexts/api/ContextApiKehadiranListData'
+import { useApiKehadiranSearch } from '../contexts/api/ContextApiKehadiranSearch'
 
 function Search() {
-  const context = useContext(ContextApiKehadiranList)
+  const context = useApiKehadiranSearch()
 
-  const options = context.listAbsensi?.data?.data?.map((item) => {
-      return {value: item?.karyawan?.nama, label: item?.karyawan?.nama}
+  const options = context.listSearch?.map((item) => {
+      return {value: item?.user?.id, label: item?.user?.nama}
   })
     
   function handleChange(e){
-    
+    context.setSearch(e?.value)
   }
 
   return (

@@ -12,11 +12,14 @@ import Calender from '../components/CustomCalendar'
 import KehadiranTerbaru from '../components/sidebar-right/KehadiranTerbaru'
 import { useKehadiranJmlKehadiran } from '../contexts/api/ContextApiKehadiran'
 import { TanggalKehadiranProvider } from '../contexts/app/ContextTanggalKehadiran'
+import { useKehadiranListAbsensi } from '../contexts/api/ContextApiKehadiranListData'
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
+  const contextListAbsen = useKehadiranListAbsensi()
   return (
     <>
+      <TanggalKehadiranProvider>
       <div className='kehadiran dashboard-and-kehadiran'>
         <h1>Kehadiran karyawan</h1>
         <div className='wrapper-circular'>
@@ -45,17 +48,16 @@ function Kehadiran() {
             imgSrc={absenIcon}
           />
         </div>
-        <TanggalKehadiranProvider>
-          <SearchAndCalendar/>
-        </TanggalKehadiranProvider>
-        <TabbarAndFilter/>
-        <Table/>
+            <SearchAndCalendar/>
+          <TabbarAndFilter/>
+          <Table/>
       </div>
       <div className='sidebar-right'>
         <Profile/>
-        <Calender func={context.setDate}/>
+        <Calender func={context.setDate} tanggal={contextListAbsen.setTanggal} bulan={contextListAbsen.setBulan} tahun={contextListAbsen.setTahun}/>
         <KehadiranTerbaru/>
       </div>
+          </TanggalKehadiranProvider>
     </>
   )
 }

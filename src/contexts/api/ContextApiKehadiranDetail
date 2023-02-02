@@ -1,0 +1,50 @@
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from 'axios';
+const ContextApiKehadiranDetail = createContext({})
+
+function useKehadiranDetail(){
+    return useContext(ContextApiKehadiranDetail)
+}
+
+function KehadiranDetailProvider ({children}) {
+    const [id, setId] = useState(null);
+    const [detail, setDetail]  = useState(null);
+    const [loading, setLoading] = useState(false);
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+        async function getDetail() {
+            const url = `http://127.0.0.1:8000/api/kehadiran/detail/${id}`;
+            setLoading(false);
+            axios.get(url, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then((response) => {
+                    setDetail(response.data);
+                    setLoading(true);
+                }).catch((error) => {
+                    console.log(error);
+                })
+        }
+        getDetail();
+    }, []);
+
+    const contextValue = {
+        id,
+        setId,
+        detail,
+        setDetail,
+        loading,
+        setLoading,
+    }
+
+    return(
+        <ContextApiKehadiranDetail.Provider value={contextValue}>
+            {children}
+        </ContextApiKehadiranDetail.Provider>
+    )
+}
+
+export {ContextApiKehadiranDetail, KehadiranDetailProvider, useKehadiranDetail}

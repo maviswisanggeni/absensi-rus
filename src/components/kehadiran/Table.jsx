@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 import Pagination from './Pagination';
-import people2 from '../../assets/images/Rectangle 39.jpg'
 import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
 import { Link } from 'react-router-dom';
 
@@ -8,14 +7,13 @@ let PageSize = 10;
 
 function Table() {
     const context = useKehadiranListAbsensi()
-    // console.log(context);
     const [currentPage, setCurrentPage] = useState(1);
     const currentTableData = useMemo(() => {
       const firstPageIndex = (currentPage - 1) * PageSize;
       const lastPageIndex = firstPageIndex + PageSize;
       return context.listAbsensi?.data?.data?.slice(firstPageIndex, lastPageIndex);
     }, [currentPage]);
-  
+
   return (
     <>
     <table className='table'>
@@ -32,21 +30,20 @@ function Table() {
         <tbody>
             {!context.loading ? <tr><td>Loading...</td></tr>
             : 
-            context.listAbsensi?.data?.data?.map((item, key) => {
+            context.listAbsensi.masuk?.data?.map((item, key) => {
                 return (
                 <tr key={key}>
                     <td className='row-img'>
                         {/* <img src={require(`../../assets/images/${item.src}`)} alt="" /> */}
-                        <img src={item?.foto} alt="" />
+                        <img src={item?.foto_masuk} alt="" />
                         {/* <img src={people2} alt="" /> */}
-                        {item?.karyawan?.nama}
+                        {item?.user?.nama}
                     </td>
-                    <td>{item?.karyawan?.niy}</td>
-                    <td>{item?.karyawan?.role_id}</td>
-                    <td>{item?.waktu}</td>
+                    <td>{item?.user?.niy}</td>
+                    <td>{item?.user?.jenis_user}</td>
+                    <td>{item?.waktu_masuk}</td>
                     <td>
-                        <Link className='btn-detail' to={`/kehadiran/detail-${item?.id}`}>Detail</Link>
-                        {/* <button className='btn-detail'>Detail</button> */}
+                        <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
                     </td>
                 </tr>
                 )

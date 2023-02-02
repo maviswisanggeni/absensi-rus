@@ -4,26 +4,32 @@ import calenderIcon from '../../assets/icons/kalender-card.svg'
 import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
 import formatDate from '../useFormatCalendar';
 import { useTanggalKehadiran } from '../../contexts/app/ContextTanggalKehadiran'
+import { useApiKehadiranSearch } from '../../contexts/api/ContextApiKehadiranSearch';
 
 function PilihTanggal(props) {
   const contextList = useKehadiranListAbsensi()
   const contextTanggal = useTanggalKehadiran()
+  const contextSearch = useApiKehadiranSearch()
   const [open, setOpen] = useState(false)
 
   const drop = useRef(null);
+  const inputRef = useRef();
 
   function handleClick(e) {
     if (!e.target.closest(`.${drop.current.className}`) && open) {
       setOpen(false);
     }
+    // if(inputRef.current && !inputRef.current.contains(e.target)){
+    //   setOpen(false)
+    // }
   }
 
-  useEffect(() => {
-      document.addEventListener("click", handleClick);
-      return () => {
-        document.removeEventListener("click", handleClick);
-      };
-  });
+  // useEffect(() => {
+  //     document.addEventListener("click", handleClick);
+  //     return () => {
+  //       document.removeEventListener("click", handleClick);
+  //     };
+  // });
 
   function change(e){
     props.funcTanggal(e)
@@ -34,10 +40,12 @@ function PilihTanggal(props) {
   useEffect(() => {
     contextList.setStartTime(contextTanggal.startTime)
     contextList.setEndTime(contextTanggal.endTime)
+    contextSearch.setStartTime(contextTanggal.startTime)
+    contextSearch.setEndTime(contextTanggal.endTime)
   }, [props.text])
 
   return (
-    <div className='pilih-tanggal' ref={drop}>
+    <div className='pilih-tanggal' ref={inputRef}>
       <div className='btn-pilih-tanggal' onClick={() => setOpen(open => !open)}>
         <img src={calenderIcon} alt=""/>
         <p>{props.text}</p>
