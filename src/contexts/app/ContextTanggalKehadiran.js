@@ -14,6 +14,8 @@ function TanggalKehadiranProvider ({children}) {
     const [endText, setEndText] = useState('Tanggal mulai')
     const [startTime, setStartTime] = useState(formatDate(new Date()))
     const [endTime, setEndTime] = useState(formatDate(new Date()))
+    const [id, setId] = useState(null)
+    const [detail, setDetail]  = useState(null);
 
     const contextValue = {
         startTanggal,
@@ -27,7 +29,11 @@ function TanggalKehadiranProvider ({children}) {
         startText,
         setStartText,
         endText,
-        setEndText
+        setEndText,
+        id,
+        setId,
+        detail,
+        setDetail,
     }
 
     return(

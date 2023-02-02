@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/css/Sidebar.css'
-import { NavLink, useLocation, useParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import LogoSidebar from './LogoSidebar'
 import dashboardLogoBlue from '../../assets/icons/dashboard-icon-blue.svg'
 import dashboardLogoGrey from '../../assets/icons/dashboard-icon-grey.svg'
@@ -11,13 +11,28 @@ import karyawanLogoBlue from '../../assets/icons/karyawan-icon-blue.svg'
 import kalenderLogoGrey from '../../assets/icons/kalender-icon-grey.svg'
 import kalenderLogoBlue from '../../assets/icons/kalender-icon-blue.svg'
 import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg' 
+import axios from 'axios'
 
 function Navbar() {
   let query = useLocation()
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate()
  
   if (query.pathname === "/login") {
     return null
   }
+
+  const logoutHanlder = async () => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    const url = 'https://absensiguru.smkradenumarsaidkudus.sch.id/api/logout'
+    const urlLocal = 'http://127.0.0.1:8000/api/logout'
+    await axios.get(urlLocal)
+    .then(() => {
+        localStorage.removeItem("token");
+        navigate('/login')
+    });
+  };
+
 
   return (
     <nav>
@@ -48,10 +63,10 @@ function Navbar() {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/login' className={query.pathname === '/login' ? 'active-sidebar' : ''}>
+            <a onClick={logoutHanlder} className={query.pathname === '/login' ? 'active-sidebar' : ''}>
               <img src={query.pathname === '/login' ? loginLogoGrey : loginLogoGrey} alt="" />
               Logout
-            </NavLink>
+            </a>
           </li>
         </ul>
     </nav>

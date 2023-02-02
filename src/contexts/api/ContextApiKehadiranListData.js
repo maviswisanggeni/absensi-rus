@@ -14,7 +14,10 @@ function KehadiranListProvider ({children}) {
     const [startTime, setStartTime] = useState(formatDate(new Date()))
     const [endTime, setEndTime] = useState(formatDate(new Date()))
     const [loading, setLoading] = useState(false);
-
+    const [tanggal, setTanggal] = useState(new Date().getDate())
+    const [bulan, setBulan] = useState(new Date().getMonth() + 1)
+    const [tahun, setTahun] = useState(new Date().getFullYear())
+    const token = localStorage.getItem("token");
     useEffect(() => {
         // async function getDataListAbsensi() {
         //     const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/kehadiran/list-absensi"
@@ -38,7 +41,31 @@ function KehadiranListProvider ({children}) {
         //     })
         // }
         // getDataListAbsensi();
-    }, [startTime, endTime, keterangan, urutan]);
+        async function getDataJmlKehadiran() {
+            const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/kehadiran/jml-kehadiran"
+            const urlLocal = "http://127.0.0.1:8000/api/kehadiran/history"; 
+            const request = {
+                tanggal: tanggal,
+                bulan: bulan,
+                tahun: tahun,
+            }
+            setLoading(false);
+            axios.get(urlLocal, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    params: request
+                })
+                .then((response) => {
+                    setListAbsensi(response.data.data);
+                    setLoading(true);
+                }).catch((error) => {
+                    console.log(error);
+                })
+        }
+        getDataJmlKehadiran();
+    }, [tanggal, bulan, tahun]);
 
     const contextValue = {
         listAbsensi, 
@@ -52,7 +79,13 @@ function KehadiranListProvider ({children}) {
         endTime, 
         setEndTime,
         loading,
-        setLoading
+        setLoading,
+        tanggal,
+        setTanggal,
+        bulan,
+        setBulan,
+        tahun,
+        setTahun,
     }
 
     return(
