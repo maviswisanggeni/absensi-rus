@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import filter from '../../assets/icons/filter.svg'
-import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
 
 function Filter() {
-    const context = useKehadiranListAbsensi()
     const filterData = ['Tercepat', 'Terlambat'];
     const [open, setOpen] = useState(false);
     const [current, setCurrent] = useState('Tercepat')
@@ -11,41 +9,39 @@ function Filter() {
 
     function handleClick(e) {
         if (!e.target.closest(`.${drop.current.className}`) && open) {
-          setOpen(false);
+            setOpen(false);
         }
     }
 
     useEffect(() => {
         document.addEventListener("click", handleClick);
         return () => {
-          document.removeEventListener("click", handleClick);
+            document.removeEventListener("click", handleClick);
         };
     }, []);
 
     useEffect(() => {
-        context.setUrutan(current === 'Tercepat' ? 'tercepat' : 'terlambat')
     }, [current])
 
-    function log(e){
+    function log(e) {
         setOpen(false)
         setCurrent(e.innerText)
-        context.setUrutan(current === 'Tercepat' ? 'tercepat' : 'terlambat')
     }
 
-  return (
-    <div className='filter' ref={drop} onClick={() => setOpen(open => !open)}>
-        <img src={filter} alt="" />
-        {open && 
-            <ul>
-                {filterData.map((item, i) => (
-                    <li key={i} className={item === current ? 'activeDropdownli' : ''} onClick={(item) => log(item.target)}>
-                        {item}
-                    </li>
-                ))}
-            </ul>
-        }
-    </div>
-  )
+    return (
+        <div className='filter' ref={drop} onClick={() => setOpen(open => !open)}>
+            <img src={filter} alt="" />
+            {open &&
+                <ul>
+                    {filterData.map((item, i) => (
+                        <li key={i} className={item === current ? 'activeDropdownli' : ''} onClick={(item) => log(item.target)}>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            }
+        </div>
+    )
 }
 
 export default Filter

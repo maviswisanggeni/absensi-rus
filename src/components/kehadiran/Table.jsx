@@ -27,30 +27,75 @@ function Table() {
             </tr>
         </thead>
          
+        
+
         <tbody>
-            {!context.loading ? <tr><td>Loading...</td></tr>
-            : 
-            context.listAbsensi.masuk?.data?.map((item, key) => {
-                return (
-                <tr key={key}>
-                    <td className='row-img'>
-                        {/* <img src={require(`../../assets/images/${item.src}`)} alt="" /> */}
-                        <img src={item?.foto_masuk} alt="" />
-                        {/* <img src={people2} alt="" /> */}
-                        {item?.user?.nama}
-                    </td>
-                    <td>{item?.user?.niy}</td>
-                    <td>{item?.user?.jenis_user}</td>
-                    <td>{item?.waktu_masuk}</td>
-                    <td>
-                        <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
-                    </td>
-                </tr>
-                )
-            })
+            {
+                context.keterangan === 'Pulang' ?
+                context.listAbsensiKeluar?.data?.map((item, key) => {
+                    return (
+                        <tr key={key}>
+                        <td className='row-img'>
+                            <img src={item?.foto_pulang} alt="" />
+                            {item?.user?.nama}
+                        </td>
+                        <td>{item?.user?.niy}</td>
+                        <td>{item?.user?.jenis_user}</td>
+                        <td>{item?.waktu_pulang}</td>
+                        <td>
+                            <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
+                        </td>
+                    </tr>
+                    )
+                })
+                : context.keterangan === 'Masuk' ?
+                context.listAbsensiMasuk?.data?.map((item, key) => {
+                    return (
+                    <tr key={key}>
+                        <td className='row-img'>
+                            <img src={item?.foto_masuk} alt="" />
+                            {item?.user?.nama}
+                        </td>
+                        <td>{item?.user?.niy}</td>
+                        <td>{item?.user?.jenis_user}</td>
+                        <td>{item?.waktu_masuk}</td>
+                        <td>
+                            <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
+                        </td>
+                    </tr>
+                    )
+                }) 
+                : <tr><td>Loading...</td></tr>
             }
+
+            {/* {
+                !context.loading ? <tr><td>Loading...</td></tr>
+                : context.listAbsensiMasuk?.data?.length === 0 ? <tr><td>Data tidak ditemukan</td></tr>
+                : context.listAbsensiKeluar?.data?.length === 0 ? <tr><td>Data tidak ditemukan</td></tr>
+                : null
+            } */}
+
+            {/* // {!context.loading ? <tr><td>Loading...</td></tr>
+            // : 
+            // context.listAbsensiMasuk.data?.map((item, key) => {
+            //     return (
+            //     <tr key={key}>
+            //         <td className='row-img'>
+            //             <img src={item?.foto_masuk} alt="" />
+            //             {item?.user?.nama}
+            //         </td>
+            //         <td>{item?.user?.niy}</td>
+            //         <td>{item?.user?.jenis_user}</td>
+            //         <td>{item?.waktu_masuk}</td>
+            //         <td>
+            //             <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
+            //         </td>
+            //     </tr>
+            //     )
+            // })
+            // } */}
             
-            </tbody>
+        </tbody>
         
     </table>
     <Pagination 

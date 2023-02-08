@@ -11,7 +11,7 @@ function Tabbar() {
     }
     
   useEffect(() => {
-    context.setKeterangan(current === 'Keluar' ? 'pulang' : 'masuk')
+    context.setKeterangan(current === 'Keluar' ? 'Pulang' : 'Masuk')
   }, [current])
 
   return (

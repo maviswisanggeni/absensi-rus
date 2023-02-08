@@ -24,9 +24,8 @@ function Navbar() {
 
   const logoutHanlder = async () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    const url = 'https://absensiguru.smkradenumarsaidkudus.sch.id/api/logout'
-    const urlLocal = 'http://127.0.0.1:8000/api/logout'
-    await axios.get(urlLocal)
+    const url = 'https://absensiguru.smkrus.com/api/logout'
+    await axios.get(url)
     .then(() => {
         localStorage.removeItem("token");
         navigate('/login')

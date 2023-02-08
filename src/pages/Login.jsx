@@ -22,17 +22,16 @@ function Login() {
     const formData = new FormData();
     formData.append('niy', email);
     formData.append('password', password);
-    const url = "https://absensiguru.smkradenumarsaidkudus.sch.id/api/";
+    const url = "https://absensiguru.smkrus.com/api/login";
     const urlLocal = "http://127.0.0.1:8000/api/";
 
     await axios({
       method: "post",
-      url: url + "login",
+      url: url,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then((response) => {
-        console.log('login sukses')
         localStorage.setItem('token', response.data.token);
         navigate('/');
       })

@@ -17,7 +17,7 @@ function KehadiranSearchProvider ({children}) {
 
     useEffect(() => {
         async function getDataJmlKehadiran() {
-            const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/kehadiran/jml-kehadiran"
+            const url = "https://absensiguru.smkrus.com/api/kehadiran/search"
             const urlLocal = "http://127.0.0.1:8000/api/kehadiran/search"; 
 
             setLoading(false);
@@ -29,7 +29,7 @@ function KehadiranSearchProvider ({children}) {
                 end_time: endTime,
             }
 
-            axios.post(urlLocal, request, {
+            axios.post(url, request, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         "Content-Type": "multipart/form-data",

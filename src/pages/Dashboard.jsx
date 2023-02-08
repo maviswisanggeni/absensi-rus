@@ -8,7 +8,7 @@ import StatisticChart from '../components/dashboard/StatisticChart'
 import Profile from '../components/Profile';
 import Jadwal from '../components/sidebar-right/Jadwal'
 import Calender from '../components/CustomCalendar'
-import { useApiDashboard } from '../contexts/api/ContextApiDashboard'
+import { useApiDashboard } from '../contexts/api/dashboard/ContextApiDashboard'
 
 function Dashboard() {
   const context = useApiDashboard()

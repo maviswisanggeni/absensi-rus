@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
-import formatDate from "../../components/useFormatCalendar";
+import formatDate from "../../../components/useFormatCalendar";
 import { useNavigate } from "react-router";
 const ContextApiDashboard = createContext({})
 
@@ -16,24 +16,17 @@ function DashboardApiProvider ({children}) {
     const navigate = useNavigate();
 
     async function getData() {
-        const url = "http://absensiguru.smkradenumarsaidkudus.sch.id/api/dashboard"
-        const urlLocal = "http://127.0.0.1:8000/api/dashboard/"; 
+        const url = "https://absensiguru.smkrus.com/api/dashboard"
         const request = {
-            start_time: date,
-            end_time: date,
+            tanggal: date
         }
         setLoading(false);
-        axios.get(
-            urlLocal, 
+        axios.get(url, 
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': '*',
-                    'Access-Control-Allow-Credentials': 'true',
-                    'Content-Type': 'application/json'
                 },
-                crossdomain: true
+                params: request
             }
             )
             .then((response) => {
