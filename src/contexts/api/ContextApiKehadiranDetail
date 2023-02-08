@@ -13,7 +13,7 @@ function KehadiranDetailProvider ({children}) {
     const token = localStorage.getItem("token");
     useEffect(() => {
         async function getDetail() {
-            const url = `http://127.0.0.1:8000/api/kehadiran/detail/${id}`;
+            const url = `https://absensiguru.smkrus.com/api/kehadiran/${id}`;
             setLoading(false);
             axios.get(url, 
                 {

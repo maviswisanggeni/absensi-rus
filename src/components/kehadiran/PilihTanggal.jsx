@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
-import { useKehadiranListAbsensi } from '../../contexts/api/ContextApiKehadiranListData';
 import formatDate from '../useFormatCalendar';
 import { useTanggalKehadiran } from '../../contexts/app/ContextTanggalKehadiran'
 import { useApiKehadiranSearch } from '../../contexts/api/ContextApiKehadiranSearch';
 
 function PilihTanggal(props) {
-  const contextList = useKehadiranListAbsensi()
   const contextTanggal = useTanggalKehadiran()
   const contextSearch = useApiKehadiranSearch()
   const [open, setOpen] = useState(false)
@@ -38,8 +36,6 @@ function PilihTanggal(props) {
   }
   
   useEffect(() => {
-    contextList.setStartTime(contextTanggal.startTime)
-    contextList.setEndTime(contextTanggal.endTime)
     contextSearch.setStartTime(contextTanggal.startTime)
     contextSearch.setEndTime(contextTanggal.endTime)
   }, [props.text])
