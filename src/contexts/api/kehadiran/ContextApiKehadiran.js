@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import axios from 'axios';
-import formatDate from "../../components/useFormatCalendar";
+import formatDate from "../../../components/useFormatCalendar";
 
 const ContextApiKehadiranJmlKehadiran = createContext({})
 
@@ -17,11 +17,6 @@ function KehadiranJmlKehadiranProvider ({children}) {
     useEffect(() => {
         async function getDataJmlKehadiran() {
             const url = "https://absensiguru.smkrus.com/api/kehadiran"
-            const urlLocal = "http://127.0.0.1:8000/api/kehadiran"; 
-            const request = {   
-                start_time: date,
-                end_time: date,
-            }
             setLoading(false);
             axios.get(url, 
                 {
@@ -37,7 +32,7 @@ function KehadiranJmlKehadiranProvider ({children}) {
                 })
         }
         getDataJmlKehadiran();
-    }, [date]);
+    }, []);
 
     const contextValue = {
         jmlKehadiran,

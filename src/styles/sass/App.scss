@@ -49,17 +49,22 @@
         border: 1px solid $secondary-color;
         border-radius: 10px;
 
-        p{
-            margin: 0;
-            margin-left: 1.5rem;
-            color: $grey;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
+        
         .wrapper-value{
-          p:nth-child(2){
-            margin-top: 0px;
+          p{
+              margin: 0;
+              margin-left: 1.5rem;
+            }
+            .p1{
+              color: $grey;
+              font-size: 14px;
+              font-weight: 400;
+          }
+          .p2{
+            // margin: 0px;
+            color: $primary-color;
+            font-size: 20px;
+            font-weight: 600;
           }
         }
     }
@@ -255,12 +260,17 @@
   order: 1;
 }
 
+.css-1hb7zxy-IndicatorsContainer{
+  display: none;
+  visibility: hidden;
+}
+
 .dots:before {
   display: block;
   height: .1px;
   width: .1px;
   content: '';
-  margin: 20px 0px 0 15px;
+  margin: 25px 0 0 2.5rem;
   -webkit-animation: spin 1s infinite;
           animation: spin 1s infinite;
   border-radius: 100%;

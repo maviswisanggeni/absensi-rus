@@ -10,12 +10,12 @@
     .search-calendar{
         display: flex;
         justify-content: space-between;
-        gap: 1rem;
+        align-items: center;
+        gap:.5rem;
         width: 100%;
         background-color: white;
         padding: 1rem 1.5rem;
         border: 1px solid $secondary-color;
-        // border-radius: 10px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         margin-top: 1rem;
@@ -25,6 +25,7 @@
             background-size: 13px;
             border: none;
             width: 60%;
+            // height: 35px;
             padding: .5rem;
             outline: none;
             font-weight: 400;
@@ -34,6 +35,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1rem;
             width: 40%;
 
             img{
@@ -77,6 +79,24 @@
                     color: $light-grey;
                 }
             }   
+        }
+
+        .btn-search{
+            width: 50px;
+            height: 35px;
+            border-radius: 3px;
+            // padding: .5rem 1.5rem;
+            border: 2px solid #ECEEF2;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img{
+                width: 13px;
+                height: 13px;
+            }
         }
     }
 
@@ -211,9 +231,6 @@
                 color: white;
                 text-decoration: none;
                 padding: .5rem 1.5rem;
-
-                a{
-                }
             }
         }
 
@@ -475,7 +492,7 @@
                 h3{
                     font-size: 14px;
                     font-weight: 400;
-                    color: $grey;
+                    color: #5A6474;
                     margin: 1rem 0 .25rem;
                 }
 

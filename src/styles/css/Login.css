@@ -6,10 +6,8 @@
   align-items: center;
 }
 .login .login__container {
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   display: flex;
@@ -60,9 +58,6 @@
   border-radius: 8px;
 }
 .login .login__container form .login__input input::-moz-placeholder {
-  color: #9b9b9b;
-}
-.login .login__container form .login__input input:-ms-input-placeholder {
   color: #9b9b9b;
 }
 .login .login__container form .login__input input::placeholder {
