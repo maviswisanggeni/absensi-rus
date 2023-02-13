@@ -3,7 +3,7 @@ import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
 import formatDate from '../useFormatCalendar';
 import { useTanggalKehadiran } from '../../contexts/app/ContextTanggalKehadiran'
-import { useApiKehadiranSearch } from '../../contexts/api/ContextApiKehadiranSearch';
+import { useApiKehadiranSearch } from '../../contexts/api/kehadiran/ContextApiKehadiranSearch';
 
 function PilihTanggal(props) {
   const contextTanggal = useTanggalKehadiran()
@@ -29,12 +29,12 @@ function PilihTanggal(props) {
   //     };
   // });
 
-  function change(e){
+  function change(e) {
     props.funcTanggal(e)
     props.funcTime(formatDate(e))
     props.funcText(formatDate(e))
   }
-  
+
   useEffect(() => {
     contextSearch.setStartTime(contextTanggal.startTime)
     contextSearch.setEndTime(contextTanggal.endTime)
@@ -43,10 +43,10 @@ function PilihTanggal(props) {
   return (
     <div className='pilih-tanggal' ref={inputRef}>
       <div className='btn-pilih-tanggal' onClick={() => setOpen(open => !open)}>
-        <img src={calenderIcon} alt=""/>
+        <img src={calenderIcon} alt="" />
         <p>{props.text}</p>
       </div>
-      {open && <Calendar onChange={change} value={props.value}/>}
+      {open && <Calendar onChange={change} value={props.value} />}
     </div>
   )
 }

@@ -21,7 +21,7 @@ function Dashboard() {
               name="Masuk" 
               firstValue={context.jmlKehadiran?.jml_masuk}
               secondValue={context.jmlKehadiran?.jml_karyawan} 
-              uiValue={context.loading ? <p>{`${context.jmlKehadiran?.jml_masuk} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>} 
+              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_masuk} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>} 
               imgSrc={masukIcon}
             />
 
@@ -29,7 +29,7 @@ function Dashboard() {
             name="Keluar" 
             firstValue={context.jmlKehadiran?.jml_pulang} 
             secondValue={context.jmlKehadiran?.jml_karyawan} 
-            uiValue={context.loading ? <p>{`${context.jmlKehadiran?.jml_pulang} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>} 
+            uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_pulang} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>} 
             imgSrc={keluarIcon}
           />
 
@@ -37,7 +37,7 @@ function Dashboard() {
             name="Absen"
             firstValue={context.jmlKehadiran?.jml_absen} 
             secondValue={context.jmlKehadiran?.jml_karyawan} 
-            uiValue={context.loading ? <p>{`${context.jmlKehadiran  ?.jml_absen}`}</p> : <div className='dots'></div>} 
+            uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran  ?.jml_absen}`} Orang</p> : <div className='dots'></div>} 
             imgSrc={absenIcon}
           />
         </div>

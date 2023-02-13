@@ -25,10 +25,6 @@
   color: #A6A6A6;
 }
 
-.search:-ms-input-placeholder {
-  color: #A6A6A6;
-}
-
 .search::placeholder, .search {
   color: #A6A6A6;
 }
@@ -52,15 +48,19 @@
   border: 1px solid #EBF0FE;
   border-radius: 10px;
 }
-.wrapper-circular .card-circular-statistic p {
+.wrapper-circular .card-circular-statistic .wrapper-value p {
   margin: 0;
   margin-left: 1.5rem;
+}
+.wrapper-circular .card-circular-statistic .wrapper-value .p1 {
   color: #9B9B9B;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
 }
-.wrapper-circular .card-circular-statistic .wrapper-value p:nth-child(2) {
-  margin-top: 0px;
+.wrapper-circular .card-circular-statistic .wrapper-value .p2 {
+  color: #3661EB;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .sidebar-right {
@@ -274,22 +274,20 @@
   order: 1;
 }
 
+.css-1hb7zxy-IndicatorsContainer {
+  display: none;
+  visibility: hidden;
+}
+
 .dots:before {
   display: block;
   height: 0.1px;
   width: 0.1px;
   content: "";
-  margin: 20px 0px 0 15px;
-  -webkit-animation: spin 1s infinite;
+  margin: 25px 0 0 2.5rem;
   animation: spin 1s infinite;
   border-radius: 100%;
   box-shadow: 10px 0 0 3px #3661EB, -10px 0 0 3px #3661EB;
-}
-
-@-webkit-keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
 @keyframes spin {
   to {

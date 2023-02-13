@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
+import formatDate from "../../../components/useFormatCalendar";
+
 const ContextApiKehadiranList = createContext({})
 
 function useKehadiranListAbsensi(){
@@ -7,13 +9,16 @@ function useKehadiranListAbsensi(){
 }
 
 function KehadiranListProvider ({children}) {
-    const [listAbsensiMasuk, setListAbsensiMasuk] = useState(null);
-    const [listAbsensiKeluar, setListAbsensiKeluar] = useState(null);
+    const [listAbsensiMasuk, setListAbsensiMasuk] = useState([]);
+    const [listAbsensiKeluar, setListAbsensiKeluar] = useState([]);
     const [keterangan, setKeterangan] = useState('Masuk');
     const [loading, setLoading] = useState(false);
     const [tanggal, setTanggal] = useState(new Date().getDate())
     const [bulan, setBulan] = useState(new Date().getMonth() + 1)
     const [tahun, setTahun] = useState(new Date().getFullYear())
+    const [jmlKehadiran, setJmlKehadiran] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+
     const token = localStorage.getItem("token");
     useEffect(() => {
         async function getDataJmlKehadiran() {
@@ -32,8 +37,9 @@ function KehadiranListProvider ({children}) {
                     params: request
                 })
                 .then((response) => {
-                    setListAbsensiMasuk(response.data.data.masuk);
-                    setListAbsensiKeluar(response.data.data.pulang);
+                    setListAbsensiMasuk(response.data.data.list_absen.masuk.data);
+                    setListAbsensiKeluar(response.data.data.list_absen.pulang.data);
+                    setJmlKehadiran(response.data.data.jml_kehadiran);
                     setLoading(true);
                 }).catch((error) => {
                     console.log(error);
@@ -43,20 +49,15 @@ function KehadiranListProvider ({children}) {
     }, [tanggal, bulan, tahun]);
 
     const contextValue = {
-        listAbsensiMasuk, 
-        setListAbsensiMasuk, 
-        listAbsensiKeluar,
-        setListAbsensiKeluar,
-        loading,
-        setLoading,
-        tanggal,
-        setTanggal,
-        bulan,
-        setBulan,
-        tahun,
-        setTahun,
-        keterangan,
-        setKeterangan
+        listAbsensiMasuk, setListAbsensiMasuk, 
+        listAbsensiKeluar, setListAbsensiKeluar,
+        loading, setLoading,
+        tanggal, setTanggal,
+        bulan, setBulan,
+        tahun, setTahun,
+        keterangan, setKeterangan,
+        jmlKehadiran, setJmlKehadiran,
+        currentPage, setCurrentPage,
     }
 
     return(

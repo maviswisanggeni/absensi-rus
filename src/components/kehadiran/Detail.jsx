@@ -13,7 +13,7 @@ function Detail() {
     const token = localStorage.getItem("token");
     useEffect(() => {
         async function getData() {
-            const url = "http://127.0.0.1:8000/api/kehadiran/detail/" + userId.id
+            const url = "https://absensiguru.smkrus.com/api/kehadiran/detail/" + userId.id
             setLoading(false);
             axios.get(
                 url,
@@ -47,23 +47,23 @@ function Detail() {
                     <div className='masuk-keluar'>
                         <div className='jam-masuk'>
                             <h3>Masuk</h3>
-                            <p>{detail?.waktu_masuk}</p>
+                            <p>{detail?.absen?.waktu_masuk}</p>
                         </div>
 
                         <div className='card'>
-                            <img src={detail?.foto_masuk} alt="" />
+                            <img src={detail?.absen?.foto_masuk} alt="" />
                             <div className='note'>
                                 <h3>Note: </h3>
-                                <p>{detail?.catatan_masuk}</p>
+                                <p>{detail?.absen?.catatan_masuk}</p>
                             </div>
                             <div className='coordinates'>
                                 <div>
                                     <h3>Latitude</h3>
-                                    <p>{detail?.longitude_masuk}</p>
+                                    <p>{detail?.absen?.longitude_masuk}</p>
                                 </div>
                                 <div>
                                     <h3>Longitude</h3>
-                                    <p>{detail?.longitude_pulang}</p>
+                                    <p>{detail?.absen?.longitude_pulang}</p>
                                 </div>
                             </div>
                         </div>
@@ -71,23 +71,23 @@ function Detail() {
                     <div className='masuk-keluar'>
                         <div className='jam-masuk'>
                             <h3>Keluar</h3>
-                            <p>{detail?.waktu_pulang}</p>
+                            <p>{detail?.absen?.waktu_pulang}</p>
                         </div>
 
                         <div className='card'>
-                            <img src={detail?.foto_pulang} alt="" />
+                            <img src={detail?.absen?.foto_pulang} alt="" />
                             <div className='note'>
                                 <h3>Note: </h3>
-                                <p>{detail?.catatan_pulang}</p>
+                                <p>{detail?.absen?.catatan_pulang}</p>
                             </div>
                             <div className='coordinates'>
                                 <div>
                                     <h3>Latitude</h3>
-                                    <p>{detail?.longitude_masuk}</p>
+                                    <p>{detail?.absen?.longitude_masuk}</p>
                                 </div>
                                 <div>
                                     <h3>Longitude</h3>
-                                    <p>{detail?.longitude_pulang}</p>
+                                    <p>{detail?.absen?.longitude_pulang}</p>
                                 </div>
                             </div>
                         </div>
