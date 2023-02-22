@@ -1,0 +1,167 @@
+.kalender {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.kalender button {
+  border: none;
+}
+.kalender .arrow {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  color: #4B5563;
+  cursor: pointer;
+}
+.kalender .arrow:last-child {
+  transform: rotate(180deg);
+}
+.kalender .header h1 {
+  margin-right: 2.5rem;
+  color: #6B7280;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.kalender .header h2 {
+  margin-left: 1rem;
+  color: #6B7280;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+.kalender .header .today {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-right: 1.25rem;
+  border: none;
+  border-radius: 0.25rem;
+  border-width: 1px;
+}
+.kalender .header button {
+  border: none;
+}
+.kalender .sidebar-month {
+  display: flex;
+  flex: 1 1 0%;
+}
+.kalender .month {
+  display: grid;
+  flex: 1 1 0%;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+}
+.kalender .day {
+  display: flex;
+  flex-direction: column;
+  border-width: 1px;
+  border-color: #E5E7EB;
+}
+.kalender .day header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.kalender .day header h1 {
+  margin-right: 2.5rem;
+  color: #6B7280;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.kalender .day header .currentDay {
+  background-color: #2563EB;
+  color: #ffffff;
+  border-radius: 9999px;
+}
+.kalender .day header p:first-child {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.kalender .day header p {
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.kalender .small-calendar header {
+  display: flex;
+  justify-content: space-between;
+}
+.kalender .small-calendar .grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+}
+.kalender .small-calendar .grid .hari {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+.kalender .small-calendar .grid .btn {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  width: 100%;
+}
+.kalender .small-calendar .grid .btn span {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.kalender .small-calendar .grid .btn-today {
+  background-color: #3B82F6;
+  color: #ffffff;
+  border-radius: 9999px;
+}
+.kalender .modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+.kalender .modal form {
+  background-color: #ffffff;
+  width: 25%;
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+.kalender .modal form header {
+  display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #F3F4F6;
+  justify-content: space-between;
+  align-items: center;
+}
+.kalender .modal form header .drag {
+  color: #9CA3AF;
+}
+.kalender .modal form .wrapper-label {
+  display: flex;
+}
+.kalender .modal form .wrapper-label .label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+.kalender .modal form .wrapper-label .label img {
+  width: 10px;
+  height: 10px;
+}/*# sourceMappingURL=Kalendar.css.map */

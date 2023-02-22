@@ -1,0 +1,196 @@
+.add-karyawan {
+  width: 80%;
+}
+.add-karyawan .navigation {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #EBF0FE;
+  padding: 1rem 2.5rem;
+}
+.add-karyawan .navigation div {
+  display: flex;
+  align-items: center;
+}
+.add-karyawan .navigation div a {
+  display: flex;
+  align-items: center;
+}
+.add-karyawan .navigation div h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-left: 2rem;
+}
+.add-karyawan .navigation input {
+  width: 125px;
+  height: 40px;
+  background-color: #3661EB;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: white;
+}
+.add-karyawan .form-foto-profile {
+  display: flex;
+}
+.add-karyawan .form {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2.5rem;
+}
+.add-karyawan .form label {
+  font-size: 18px;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 1rem;
+}
+.add-karyawan .form input {
+  height: 45px;
+  border: 2px solid #ECEEF2;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  color: #5A6474;
+  padding: 0 1rem;
+}
+.add-karyawan .form input::-moz-placeholder {
+  color: #9B9B9B;
+}
+.add-karyawan .form input::placeholder {
+  color: #9B9B9B;
+}
+.add-karyawan .form .nama, .add-karyawan .form .niy, .add-karyawan .form .email, .add-karyawan .form .no-hp, .add-karyawan .form .jabatan, .add-karyawan .form .gender, .add-karyawan .form .alamat {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.add-karyawan .form .nama, .add-karyawan .form .niy, .add-karyawan .form .email, .add-karyawan .form .no-hp, .add-karyawan .form .jabatan-gender {
+  margin-bottom: 1rem;
+}
+.add-karyawan .form .nama img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  position: absolute;
+  right: 0;
+  transform: translate(-50%, 225%);
+}
+.add-karyawan .form .niy input:nth-child(2) {
+  margin-bottom: 0.5rem;
+}
+.add-karyawan .form .niy img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translate(-50%, 25%);
+}
+.add-karyawan .form .jabatan-gender {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.add-karyawan .form .jabatan-gender .select select {
+  width: 100%;
+  height: 45px;
+  border: 2px solid #ECEEF2;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  color: #5A6474;
+  padding: 0 1rem;
+}
+.add-karyawan .form .jabatan-gender .select select::-moz-placeholder {
+  color: #9B9B9B;
+}
+.add-karyawan .form .jabatan-gender .select select::placeholder {
+  color: #9B9B9B;
+}
+.add-karyawan .form .jabatan-gender .select select:focus {
+  border: 2px solid #3661EB;
+}
+.add-karyawan .form .jabatan-gender .select select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url(../../assets/icons/arrow-down.svg);
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+.add-karyawan .form .jabatan-gender .jabatan {
+  width: 65%;
+}
+.add-karyawan .form .jabatan-gender .gender {
+  width: 35%;
+}
+.add-karyawan .form-file-upload {
+  max-width: 100%;
+  text-align: center;
+  position: relative;
+  padding-top: 2rem;
+}
+.add-karyawan .form-file-upload h1:nth-child(1) {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.add-karyawan .form-file-upload .wrap-text h1 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.add-karyawan #input-file-upload {
+  display: none;
+}
+.add-karyawan #label-file-upload {
+  height: 100%;
+  height: 193px;
+  width: 386px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 1px;
+  border-radius: 8px;
+  border-style: dashed;
+  border-color: #3661EB;
+  background-color: #FAFAFA;
+}
+.add-karyawan .upload-button {
+  cursor: pointer;
+  font-size: 12px;
+  border: none;
+  background-color: #FAFAFA;
+  color: #9B9B9B;
+  line-height: 24px;
+}
+.add-karyawan .upload-button:hover {
+  text-decoration-line: underline;
+}
+.add-karyawan #label-file-upload.drag-active {
+  background-color: #ffffff;
+}
+.add-karyawan #drag-file-element {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}/*# sourceMappingURL=add-karyawan.css.map */

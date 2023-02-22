@@ -265,6 +265,217 @@
   visibility: hidden;
 }
 
+.tabbar{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+
+  .tabbar-text{
+      display: flex;
+
+      div{
+          width: 130px;
+          text-align: center;
+          padding-bottom: 1rem;
+          transition: border 0.3s ease-in-out;
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 14px;
+      }
+
+      div:nth-child(2){
+          border-bottom: none;
+          color: $grey;
+      }
+
+      div.active{
+          color: $primary-color;
+      }
+  }
+
+  .line{
+      width: 130px;
+      height: 2px;
+      background-color: $primary-color;
+      transform: translateX(0);
+      transition: transform .3s ease-in-out;
+  }
+
+  .line.active{
+      transform: translateX(100%);
+  }
+}
+
+.filter{
+  cursor: pointer;
+  transform: translateY(-.25rem);
+
+  ul{
+      position: absolute;
+      transform: translateX(-27%);
+      margin-top: .5rem;
+
+      li{
+          list-style: none;
+          padding: .5rem;
+          padding-left: 12px;
+          list-style: none;
+          font-size: 13px;
+          background-color: white;
+          width: 120px;
+          z-index: 999;
+          cursor: pointer;
+          font-size: 11px;
+      }
+
+      li:hover{
+          background-color: $bg-button;
+      }
+
+      .activeDropdownli{
+          background-color: $bg-button;
+      }
+  }
+}
+
+.table{
+  width: 100%;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  border: 1px solid $secondary-color;
+  border-top: none;
+  border-collapse: collapse;
+  
+  thead{
+      th{
+          text-align: left;
+          font-weight: 500;
+          font-size: 14px;
+          padding: 1.5rem 0;
+      }
+
+      th:nth-child(1){
+          padding-left: 1.5rem;
+      }
+  }
+
+  tbody{
+      tr{
+          width: 100%;
+      }
+
+      tr:nth-child(odd){
+          background-color: $secondary-color;
+      }
+
+      .btn-detail{
+          background-color: $primary-color;
+          width: 80px;
+          height: 30px;
+          border-radius: 5px;
+          font-size: 10px;
+          color: white;
+          text-decoration: none;
+          padding: .5rem 1.5rem;
+      }
+  }
+
+  td{
+      font-size: 10px;
+      color: $grey;
+  }
+
+  .row-img{
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      padding: .5rem 1.5rem;
+
+      img{
+          width: 35px;
+          height: 35px;
+          margin-right: 1rem;
+          border-radius: 50%;
+      }
+  }
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin-top: 2.5rem;
+
+  .pagination-item {
+      padding: 0 12px;
+      height: 32px;
+      text-align: center;
+      margin: auto 4px;
+      display: flex;
+      box-sizing: border-box;
+      align-items: center;
+      letter-spacing: 0.01071em;
+      line-height: 1.43;
+      font-size: 14px;
+      min-width: 32px;
+      font-weight: 600;
+      border-radius: 7px;
+
+    &.dots:hover {
+      background-color: transparent;
+      cursor: default;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+      cursor: pointer;
+    }
+
+    &.selected {
+      border: solid 2px $primary-color;
+      color: $primary-color;
+    }
+
+    .arrow {
+      &::before {
+        position: relative;
+        /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+        content: '';
+        /* By using an em scale, the arrows will size with the font */
+        display: inline-block;
+        width: 0.4em;
+        height: 0.4em;
+        border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+        border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+      }
+
+      &.left {
+        transform: rotate(-135deg) translate(-50%);
+      }
+
+      &.right {
+        transform: rotate(45deg);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      // background-color: #919EAB;
+      // color: white;
+
+      .arrow::before {
+        border-right: 0.12em solid rgba(0, 0, 0, 0.43);
+        border-top: 0.12em solid rgba(0, 0, 0, 0.43);
+      }
+
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}
+
 .dots:before {
   display: block;
   height: .1px;
