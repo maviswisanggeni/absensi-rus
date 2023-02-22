@@ -1,12 +1,13 @@
 .kalender {
-  width: 100vw;
+  width: 82%;
   height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .kalender button {
   border: none;
@@ -18,20 +19,22 @@
   cursor: pointer;
 }
 .kalender .arrow:last-child {
-  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
-.kalender .header h1 {
-  margin-right: 2.5rem;
-  color: #6B7280;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.kalender .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1.5rem 0 1.5rem 2rem;
+  border-bottom: 2px solid #ECEEF2;
+  width: 100%;
 }
 .kalender .header h2 {
   margin-left: 1rem;
-  color: #6B7280;
-  font-size: 1.25rem;
+  font-size: 30px;
   line-height: 1.75rem;
-  font-weight: 700;
+  font-weight: 400;
 }
 .kalender .header .today {
   padding-top: 0.5rem;
@@ -43,29 +46,55 @@
   border-radius: 0.25rem;
   border-width: 1px;
 }
-.kalender .header button {
-  border: none;
-}
 .kalender .sidebar-month {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex: 1 1 0%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
 }
 .kalender .month {
   display: grid;
-  flex: 1 1 0%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
 }
 .kalender .day {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  border-width: 1px;
-  border-color: #E5E7EB;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-right: #E5E7EB 1px solid;
+  border-bottom: #E5E7EB 1px solid;
 }
 .kalender .day header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.kalender .day header .days {
+  border-bottom: 2px solid #ECEEF2;
+  width: 100%;
+  text-align: center;
+  color: #9B9B9B;
+  font-weight: 500;
+}
+.kalender .day header .dd {
+  text-align: left;
+  font-size: 10px;
 }
 .kalender .day header h1 {
   margin-right: 2.5rem;
@@ -74,14 +103,13 @@
   line-height: 1.75rem;
 }
 .kalender .day header .currentDay {
+  display: grid;
+  place-items: center;
   background-color: #2563EB;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
   color: #ffffff;
-  border-radius: 9999px;
-}
-.kalender .day header p:first-child {
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 .kalender .day header p {
   padding: 0.25rem;
@@ -89,10 +117,15 @@
   margin-bottom: 0.25rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  text-align: left;
 }
 .kalender .small-calendar header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .kalender .small-calendar .grid {
   display: grid;
@@ -121,41 +154,160 @@
   border-radius: 9999px;
 }
 .kalender .modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
   height: 100vh;
 }
 .kalender .modal form {
   background-color: #ffffff;
-  width: 25%;
+  width: 500px;
+  height: 470px;
   border-radius: 0.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+.kalender .modal form .wrapper-input {
+  padding: 2rem 1.5rem 1rem;
+}
+.kalender .modal form .wrapper-input .kegiatan-input {
+  width: 400px;
+  border: none;
+  border-bottom: 2px solid #3661EB;
+  outline: none;
+  font-size: 24px;
+  margin-left: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.kalender .modal form .wrapper-input .kegiatan-input::-webkit-input-placeholder {
+  color: #9B9B9B;
+}
+.kalender .modal form .wrapper-input .kegiatan-input::-moz-placeholder {
+  color: #9B9B9B;
+}
+.kalender .modal form .wrapper-input .kegiatan-input:-ms-input-placeholder {
+  color: #9B9B9B;
+}
+.kalender .modal form .wrapper-input .kegiatan-input::-ms-input-placeholder {
+  color: #9B9B9B;
+}
+.kalender .modal form .wrapper-input .kegiatan-input::placeholder {
+  color: #9B9B9B;
+}
+.kalender .modal form .wrapper-input .date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.kalender .modal form .wrapper-input .date p {
+  color: #5A6474;
+}
+.kalender .modal form .wrapper-input .description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 1rem;
+}
+.kalender .modal form .wrapper-input .description textarea {
+  width: 400px;
+  height: 100px;
+  resize: none;
+  outline: none;
+  border: none;
+  background-color: #F3F3F3;
+  padding: 10px;
+  font-family: "poppins";
+}
+.kalender .modal form .wrapper-input .description img {
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+}
+.kalender .modal form .wrapper-input .checkbox-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 2rem;
+  margin: 1rem 0 1rem;
+  gap: 1rem;
+}
+.kalender .modal form .wrapper-input .checkbox-form .wrap-for, .kalender .modal form .wrapper-input .checkbox-form .wrap-is-libur {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
+.kalender .modal form .wrapper-input .checkbox-form .wrap-label-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.kalender .modal form .wrapper-input .checkbox-form label {
+  font-size: 12px;
+  color: #5A6474;
+  margin-left: 0.5rem;
 }
 .kalender .modal form header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background-color: #F3F4F6;
-  justify-content: space-between;
-  align-items: center;
+  padding-left: 1.5rem;
+  padding-right: 0.5rem;
+  background-color: #3661EB;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 10px 10px 0px 0px;
 }
-.kalender .modal form header .drag {
-  color: #9CA3AF;
+.kalender .modal form header .action img:first-child {
+  margin-right: 1rem;
+}
+.kalender .modal form header h3 {
+  font-weight: 400;
+  font-size: 14px;
+  color: #ffffff;
 }
 .kalender .modal form .wrapper-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  padding-left: 2rem;
+  margin-top: 2rem;
+  gap: 0.5rem;
 }
 .kalender .modal form .wrapper-label .label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 9999px;
@@ -164,4 +316,21 @@
 .kalender .modal form .wrapper-label .label img {
   width: 10px;
   height: 10px;
-}/*# sourceMappingURL=Kalendar.css.map */
+}
+.kalender .modal form footer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 1.5rem;
+}
+.kalender .modal form footer .submit {
+  width: 115px;
+  height: 40px;
+  background: #3661EB;
+  border-radius: 5px;
+  color: white;
+}

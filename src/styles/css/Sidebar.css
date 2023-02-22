@@ -4,10 +4,19 @@ nav {
   border-right: 1px solid #EBF0FE;
 }
 nav .logo-sidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 2rem 0;
 }
 nav .logo-sidebar img {
@@ -24,8 +33,12 @@ nav ul li {
   margin-bottom: 1.5rem;
 }
 nav ul li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-decoration: none;
   font-weight: 600;
   color: #9B9B9B;
@@ -34,4 +47,4 @@ nav ul li a img {
   width: 20px;
   height: 20px;
   margin-right: 1rem;
-}/*# sourceMappingURL=Sidebar.css.map */
+}

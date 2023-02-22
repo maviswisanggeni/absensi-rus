@@ -24,9 +24,15 @@
   margin-top: 1rem;
 }
 .dashboard .statistic-chart .div-1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 1rem;
 }
 .dashboard .statistic-chart .div-1 p {
@@ -42,9 +48,15 @@
   padding-left: 12px;
   border: none;
   background-color: #F9F9F9;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   color: #9B9B9B;
   cursor: pointer;
   padding-right: 0.5rem;
@@ -76,11 +88,18 @@
   background-color: #F3F3F3;
 }
 .dashboard .statistic-chart .div-2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 .dashboard .statistic-chart .div-2 .chartInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .dashboard .statistic-chart .div-2 .chartInfo p:nth-child(1) {
   font-size: 14px;
@@ -88,8 +107,12 @@
   margin-bottom: 1rem;
 }
 .dashboard .statistic-chart .div-2 .chartInfo .role {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 30px;
   color: #9B9B9B;
   font-weight: 500;
@@ -105,9 +128,15 @@
   background-color: #C2D2FF;
 }
 .dashboard .statistic-chart .div-2 .chartInfo .btn-download {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin: 0 auto;
   margin-top: auto;
   background-color: #3661EB;
@@ -153,7 +182,13 @@
   font-weight: 500;
 }
 .sidebar-right .jadwal .card-jadwal div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}/*# sourceMappingURL=Dashboard.css.map */
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}

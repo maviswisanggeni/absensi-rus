@@ -20,7 +20,7 @@ function Kalender() {
       { showEventModal && <EventModal />}
       <CalendarHeader />
       <div className='sidebar-month'>
-        <Sidebar/>
+        {/* <Sidebar/> */}
         <Month month={currentMonth}/>
       </div>
     </div>

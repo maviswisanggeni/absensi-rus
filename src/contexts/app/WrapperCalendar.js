@@ -29,8 +29,6 @@ export default function WrapperCalendar(props) {
     const [selectedEvent, setSelectedEvent] = useState(null)
     const [savedEvents, dispatchCalEvent] = useReducer(savedEventsReducer, [], initEvents)
 
-    console.log(savedEvents);
-
     useEffect(() => {
         localStorage.setItem('savedEvents', JSON.stringify(savedEvents))
     }, [savedEvents])

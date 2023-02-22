@@ -1,14 +1,10 @@
 @import "../variables/variables.scss";
 
 .kalender{
-    width: 100vw;
+    width: 82%;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem; 
-    padding-left: 1rem;
-    padding-right: 1rem; 
 
     button{
         border: none;
@@ -26,19 +22,16 @@
     }
 
     .header{
-        h1{
-            margin-right: 2.5rem; 
-            color: #6B7280; 
-            font-size: 1.25rem;
-            line-height: 1.75rem; 
-        }
+        display: flex;
+        padding: 1.5rem 0 1.5rem 2rem;
+        border-bottom: 2px solid #ECEEF2;
+        width: 100%;
 
         h2{
             margin-left: 1rem; 
-            color: #6B7280; 
-            font-size: 1.25rem;
+            font-size: 30px;
             line-height: 1.75rem; 
-            font-weight: 700; 
+            font-weight: 400; 
         }
 
         .today{
@@ -50,10 +43,6 @@
             border: none;
             border-radius: 0.25rem; 
             border-width: 1px; 
-        }
-
-        button{
-            border: none;
         }
     }
 
@@ -71,15 +60,31 @@
     
 
     .day{
+        // width: 150px;
+        // height: 150px;
         display: flex; 
         flex-direction: column; 
-        border-width: 1px; 
-        border-color: #E5E7EB; 
+        border-right: #E5E7EB 1px solid; 
+        border-bottom: #E5E7EB 1px solid; 
 
         header{
             display: flex; 
             flex-direction: column; 
-            align-items: center; 
+            // align-items: center; 
+            justify-content: flex-start;
+
+            .days{
+                border-bottom: 2px solid #ECEEF2;
+                width: 100%;
+                text-align: center;
+                color: #9B9B9B;
+                font-weight: 500;
+            }
+
+            .dd{
+                text-align: left;
+                font-size: 10px;
+            }
 
             h1{
                 margin-right: 2.5rem; 
@@ -89,15 +94,13 @@
             }
 
             .currentDay{
+                display: grid;
+                place-items: center;
                 background-color: #2563EB; 
+                border-radius: 50%; 
+                width: 30px;
+                height: 30px;
                 color: #ffffff; 
-                border-radius: 9999px; 
-            }
-
-            p:first-child{
-                margin-top: 0.25rem; 
-                font-size: 0.875rem;
-                line-height: 1.25rem; 
             }
 
             p{
@@ -106,6 +109,7 @@
                 margin-bottom: 0.25rem; 
                 font-size: 0.875rem;
                 line-height: 1.25rem; 
+                text-align: left;
             }
         }
     }
@@ -160,27 +164,116 @@
         
         form{
             background-color: #ffffff; 
-            width: 25%; 
+            width: 500px; 
+            height: 470px;
             border-radius: 0.5rem; 
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);    
+
+            .wrapper-input{
+                padding: 2rem 1.5rem 1rem;
+
+                .kegiatan-input{
+                    width: 400px;
+                    border: none;
+                    border-bottom: 2px solid $primary-color;
+                    outline: none;
+                    font-size: 24px;
+                    margin-left: 2.5rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .kegiatan-input::placeholder{
+                    color: #9B9B9B;
+                }
+
+                .date{
+                    display: flex;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+
+                    p{
+                        color: #5A6474;
+                    }
+                }
+
+                .description{
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1rem;
+
+                    textarea{
+                        width: 400px;
+                        height: 100px;
+                        resize: none;
+                        outline: none;
+                        border: none;
+                        background-color: #F3F3F3;
+                        padding: 10px;
+                        font-family: 'poppins';
+                    }
+
+                    img{
+                        transform: translateY(10px);
+                    }
+                }
+
+                .checkbox-form{
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 2rem;
+                    margin: 1rem 0 1rem;
+                    gap: 1rem;
+
+                    .wrap-for, .wrap-is-libur{
+                        display: flex;
+                        gap: 1rem;
+                    }
+
+                    .wrap-label-input{
+                        display: flex;
+                    }
+
+                    label{
+                        font-size: 12px;
+                        color: #5A6474;
+                        margin-left: .5rem;
+                    }
+
+                    input{
+
+                    }
+                }
+            }
             
             header{
                 display: flex; 
                 padding-top: 0.5rem;
                 padding-bottom: 0.5rem; 
-                padding-left: 1rem;
-                padding-right: 1rem; 
-                background-color: #F3F4F6; 
+                padding-left: 1.5rem;
+                padding-right: .5rem; 
+                background-color: $primary-color; 
                 justify-content: space-between; 
                 align-items: center; 
+                border-radius: 10px 10px 0px 0px;
 
-                .drag{
-                    color: #9CA3AF; 
+                .action{
+                    img:first-child{
+                        margin-right: 1rem;
+                    }
+                }
+
+                h3{
+                    font-weight: 400;
+                    font-size: 14px;
+                    color: #ffffff;
                 }
             }
 
             .wrapper-label{
                 display: flex;
+                padding-left: 2rem;
+                margin-top: 2rem;
+                gap: .5rem;
                 
                 .label{
                     display: flex; 
@@ -195,6 +288,21 @@
                         width: 10px;
                         height: 10px;
                     }
+                }
+            }
+        
+            footer{
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                padding-right: 1.5rem;
+
+                .submit{
+                    width: 115px;
+                    height: 40px;
+                    background: $primary-color;
+                    border-radius: 5px;     
+                    color: white;           
                 }
             }
 
