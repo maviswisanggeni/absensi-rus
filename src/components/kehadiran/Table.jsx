@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import Pagination from './Pagination';
+import React, { useMemo } from 'react'
+import Pagination from '../Pagination';
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData';
 import { useApiKehadiranSearch } from '../../contexts/api/kehadiran/ContextApiKehadiranSearch';
 import { Link } from 'react-router-dom';

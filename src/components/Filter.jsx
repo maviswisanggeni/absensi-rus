@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import filter from '../../assets/icons/filter.svg'
+import filter from '../assets/icons/filter.svg'
 
-function Filter() {
-    const filterData = ['Tercepat', 'Terlambat'];
+function Filter(props) {
+    const filterData = [props.option1, props.option2];
     const [open, setOpen] = useState(false);
-    const [current, setCurrent] = useState('Tercepat')
+    const [current, setCurrent] = useState(props.option1)
     const drop = useRef(null);
 
     function handleClick(e) {
