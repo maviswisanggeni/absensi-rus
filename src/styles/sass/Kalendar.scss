@@ -61,7 +61,7 @@
 
     .day{
         // width: 150px;
-        // height: 150px;
+        // height: auto;
         display: flex; 
         flex-direction: column; 
         border-right: #E5E7EB 1px solid; 
@@ -84,6 +84,7 @@
             .dd{
                 text-align: left;
                 font-size: 10px;
+                font-weight: 500;
             }
 
             h1{
@@ -111,6 +112,11 @@
                 line-height: 1.25rem; 
                 text-align: left;
             }
+        }
+
+        .day-events{
+            color: white;
+            background-color: $primary-color;
         }
     }
 
@@ -257,7 +263,8 @@
                 border-radius: 10px 10px 0px 0px;
 
                 .action{
-                    img:first-child{
+                    padding-right: 1rem;
+                    .trash{
                         margin-right: 1rem;
                     }
                 }

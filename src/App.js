@@ -20,41 +20,68 @@ import { KaryawanStoreUserProvider } from './contexts/api/karyawan/ContextApiKar
 import DetailKaryawan from './components/karyawan/DetailKaryawan';
 import { KaryawanUpdateProvider } from './contexts/api/karyawan/ContextApiKaryawanEdit';
 import WrapperCalendar from './contexts/app/WrapperCalendar';
+import { KalenderProvider } from './contexts/api/kalender/ContextApiKalender';
 
 function App() {
   return (
     <div className='body'>
-      <WrapperCalendar>
-        <KaryawanUpdateProvider>
-          <KaryawanStoreUserProvider>
-            <KaryawanProvider>
-              <KehadiranSearchProvider>
-                <KehadiranListProvider>
+      <Sidebar />
+      <ProfileApiProvider>
+        <KaryawanProvider>
+          <KehadiranListProvider>
+            <Routes>
+              <Route path='/'
+                element={
+                  <DashboardApiProvider>
+                    <DashboardApiStatistikProvider>
+                      <Dashboard />
+                    </DashboardApiStatistikProvider>
+                  </DashboardApiProvider>
+                }
+              />
+
+              <Route path='/kehadiran'
+                element={
                   <KehadiranJmlKehadiranProvider>
-                    <Sidebar />
-                    <DashboardApiProvider>
-                      <DashboardApiStatistikProvider>
-                        <ProfileApiProvider>
-                          <Routes>
-                            <Route path='/' element={<Dashboard />} />
-                            <Route path='/kehadiran' element={<Kehadiran />} />
-                            <Route path='/kehadiran/detail/:id' element={<Detail />} />
-                            <Route path='/karyawan' element={<Karyawan />} />
-                            <Route path='/kalender' element={<Kalender />} />
-                            <Route path='/login' element={<Login />} />
-                            <Route path='/karyawan/add' element={<AddKaryawan/>}/>
-                            <Route path='/karyawan/edit/:id' element={<DetailKaryawan />} />
-                          </Routes>
-                        </ProfileApiProvider>
-                      </DashboardApiStatistikProvider>
-                    </DashboardApiProvider>
+                    <KehadiranListProvider>
+                      <KehadiranSearchProvider>
+                        <Kehadiran />
+                      </KehadiranSearchProvider>
+                    </KehadiranListProvider>
                   </KehadiranJmlKehadiranProvider>
-                </KehadiranListProvider>
-              </KehadiranSearchProvider>
-            </KaryawanProvider>
-          </KaryawanStoreUserProvider>
-        </KaryawanUpdateProvider>
-      </WrapperCalendar>
+                }
+              />
+
+              <Route path='/kehadiran/detail/:id' element={<Detail />} />
+
+              <Route path='/karyawan'
+                element={
+                  <KaryawanProvider>
+                    <KaryawanStoreUserProvider>
+                      <KaryawanUpdateProvider>
+                        <Karyawan />
+                      </KaryawanUpdateProvider>
+                    </KaryawanStoreUserProvider>
+                  </KaryawanProvider>
+                }
+              />
+
+              <Route path='/kalender'
+                element={
+                  <KalenderProvider>
+                    <WrapperCalendar>
+                        <Kalender />
+                    </WrapperCalendar>
+                  </KalenderProvider>
+                }
+              />
+              <Route path='/login' element={<Login />} />
+              <Route path='/karyawan/add' element={<AddKaryawan />} />
+              <Route path='/karyawan/edit/:id' element={<DetailKaryawan />} />
+            </Routes>
+          </KehadiranListProvider>
+        </KaryawanProvider>
+      </ProfileApiProvider>
     </div>
   );
 }

@@ -95,6 +95,7 @@
 .kalender .day header .dd {
   text-align: left;
   font-size: 10px;
+  font-weight: 500;
 }
 .kalender .day header h1 {
   margin-right: 2.5rem;
@@ -118,6 +119,10 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   text-align: left;
+}
+.kalender .day .day-events {
+  color: white;
+  background-color: #3661EB;
 }
 .kalender .small-calendar header {
   display: -webkit-box;
@@ -282,7 +287,10 @@
           align-items: center;
   border-radius: 10px 10px 0px 0px;
 }
-.kalender .modal form header .action img:first-child {
+.kalender .modal form header .action {
+  padding-right: 1rem;
+}
+.kalender .modal form header .action .trash {
   margin-right: 1rem;
 }
 .kalender .modal form header h3 {

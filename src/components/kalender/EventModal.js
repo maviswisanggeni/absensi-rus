@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import close from '../../assets/icons/close-calendar.svg'
 import trash from '../../assets/icons/trash.svg'
 import hamburger from '../../assets/icons/hamburger.svg'
 import GlobalCalendar from '../../contexts/app/GlobalCalendar'
 import calendarIcon from '../../assets/icons/calendar-black.svg'
+import { useApiKalender } from '../../contexts/api/kalender/ContextApiKalender'
 
 const labelsClasses = [
     "indigo",
@@ -15,10 +16,12 @@ const labelsClasses = [
 ];
 
 export default function EventModal() {
+    const context = useApiKalender()
     const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent, setSelectedEvent } = useContext(GlobalCalendar)
-
-    const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : '')
-    const [description, setDescription] = useState(selectedEvent ? selectedEvent.description : '')
+    const [title, setTitle] = useState(selectedEvent ? selectedEvent.judul : '')
+    const [description, setDescription] = useState(selectedEvent ? selectedEvent.deskripsi : '')
+    const [isLibur, setIsLibur] = useState(selectedEvent ? selectedEvent.is_libur : '0')
+    const [untuk, setUntuk] = useState(selectedEvent ? selectedEvent.untuk : null)
     const [selectedLabel, setSelectedLabel] = useState(
         selectedEvent ? labelsClasses.find((lbl) => lbl === selectedEvent.label) : labelsClasses[0]
     )
@@ -40,11 +43,14 @@ export default function EventModal() {
         setShowEventModal(false)
     }
 
-    console.log(selectedEvent)
-
     function handleClose(){
         setShowEventModal(false) 
         setSelectedEvent(null)
+    }
+
+    function handleRadio(e){
+        setUntuk(e.target.value)
+        // setIsLibur(e.target.value)
     }
 
     return (
@@ -56,9 +62,10 @@ export default function EventModal() {
                     </h3>
                     <div className='action'>
                         {selectedEvent && (
-                            <img onClick={() => {
+                            <img className='trash' onClick={() => {
                                 dispatchCalEvent({ type: 'delete', payload: selectedEvent })
                                 setShowEventModal(false)
+                                setSelectedEvent(null)
                             }}
                                 src={trash} />
                         )}
@@ -94,29 +101,29 @@ export default function EventModal() {
                     <div className='checkbox-form'>
                         <div className='wrap-for'>
                             <div className='wrap-label-input'>
-                                <input type='radio' id='semua karyawan' name='for'/>
+                                <input type='radio' value='all' id='semua karyawan' name='for' onChange={handleRadio} checked={untuk === 'all' ? true : false}/>
                                 <label htmlFor='semua karyawan'>Semua Karyawan</label>
                             </div>
 
                             <div className='wrap-label-input'>
-                                <input type='radio' id='Hanya Guru' name='for'/>
+                                <input type='radio'value='guru' id='Hanya Guru' name='for' onChange={handleRadio} checked={untuk === 'guru' ? true : false}/>
                                 <label htmlFor='Hanya Guru'>Hanya Guru</label>
                             </div>
 
                             <div className='wrap-label-input'>
-                                <input type='radio' id='Hanya Staff' name='for'/>
+                                <input type='radio'value='staff' id='Hanya Staff' name='for' onChange={handleRadio} checked={untuk === 'staff' ? true : false}/>
                                 <label htmlFor='Hanya Staff'>Hanya Staff</label>
                             </div>
                         </div>
 
                         <div className='wrap-is-libur'>
                             <div className='wrap-label-input'> 
-                                <input type='radio' id='Libur' name='is libur'/>
+                                <input type='radio' id='Libur' value='libur' name='is libur' onChange={handleRadio}/>
                                 <label htmlFor='Libur'>Libur</label>
                             </div>
 
                             <div className='wrap-label-input'>
-                                <input type='radio' id='Tidak Libur' name='is libur'/>
+                                <input type='radio' id='Tidak Libur' value='tidak libur' name='is libur' onChange={handleRadio}/>
                                 <label htmlFor='Tidak Libur'>Tidak Libur</label>
                             </div>
                         </div>
