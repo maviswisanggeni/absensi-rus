@@ -35,6 +35,7 @@ function Table() {
         {headers: {Authorization: `Bearer ${token}`}}
       ).then(() => {
         console.log('sukses');
+        context.getKaryawan()
       }).catch((error) => {
         console.log(error);
       })

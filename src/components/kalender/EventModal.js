@@ -5,6 +5,7 @@ import hamburger from '../../assets/icons/hamburger.svg'
 import GlobalCalendar from '../../contexts/app/GlobalCalendar'
 import calendarIcon from '../../assets/icons/calendar-black.svg'
 import { useApiKalender } from '../../contexts/api/kalender/ContextApiKalender'
+import axios from 'axios'
 
 const labelsClasses = [
     "indigo",
@@ -18,29 +19,66 @@ const labelsClasses = [
 export default function EventModal() {
     const context = useApiKalender()
     const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent, setSelectedEvent } = useContext(GlobalCalendar)
-    const [title, setTitle] = useState(selectedEvent ? selectedEvent.judul : '')
+    const [id, setId] = useState(selectedEvent ? selectedEvent.id : '')
+    const [judul, setJudul] = useState(selectedEvent ? selectedEvent.judul : '')
     const [description, setDescription] = useState(selectedEvent ? selectedEvent.deskripsi : '')
-    const [isLibur, setIsLibur] = useState(selectedEvent ? selectedEvent.is_libur : '0')
+    const [tanggal, setTanggal] = useState(selectedEvent ? selectedEvent.tanggal : daySelected.format('YYYY-MM-DD'))
     const [untuk, setUntuk] = useState(selectedEvent ? selectedEvent.untuk : null)
+    const [isLibur, setIsLibur] = useState(selectedEvent ? selectedEvent.is_libur : null)
     const [selectedLabel, setSelectedLabel] = useState(
         selectedEvent ? labelsClasses.find((lbl) => lbl === selectedEvent.label) : labelsClasses[0]
     )
 
-    function handleSubmit(e) {
+    const token = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append('judul', judul);
+    formData.append('deskripsi', description);
+    formData.append('tanggal', tanggal);
+    formData.append('untuk', untuk);
+    formData.append('is_libur', isLibur);
+
+    function addEvent(e) {
         e.preventDefault()
-        const calendarEvent = {
-            title,
-            description,
-            label: selectedLabel,
-            day: daySelected.valueOf(),
-            id: selectedEvent ? selectedEvent.id : Date.now()
-        }
-        if (selectedEvent) {
-            dispatchCalEvent({ type: 'update', payload: calendarEvent })
-        } else {
-            dispatchCalEvent({ type: 'push', payload: calendarEvent })
-        }
-        setShowEventModal(false)
+
+        axios({
+            method: 'post',
+            url: `https://absensiguru.smkrus.com/api/kalender/create`, 
+            data: formData,
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => {
+            setShowEventModal(false)
+            context.getKalender()
+            setSelectedEvent(null)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    function editEvent(e){
+        e.preventDefault()
+        formData.append('id', id);
+        axios({
+            method: 'post',
+            url: `https://absensiguru.smkrus.com/api/kalender/edit`, 
+            data: formData,
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => {
+            setShowEventModal(false)
+            context.getKalender()
+            setSelectedEvent(null)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     function handleClose(){
@@ -48,9 +86,18 @@ export default function EventModal() {
         setSelectedEvent(null)
     }
 
-    function handleRadio(e){
-        setUntuk(e.target.value)
-        // setIsLibur(e.target.value)
+    function handleDelete(id) {
+        axios.get(`https://absensiguru.smkrus.com/api/kalender/destroy/${id}`, {
+            headers: { Authorization: `Bearer ${token}`}
+        })
+        .then((response) => {
+            context.getKalender()
+            setShowEventModal(false) 
+            setSelectedEvent(null)
+        })
+        .catch((error) => {
+            console.log(error)
+         })
     }
 
     return (
@@ -62,12 +109,7 @@ export default function EventModal() {
                     </h3>
                     <div className='action'>
                         {selectedEvent && (
-                            <img className='trash' onClick={() => {
-                                dispatchCalEvent({ type: 'delete', payload: selectedEvent })
-                                setShowEventModal(false)
-                                setSelectedEvent(null)
-                            }}
-                                src={trash} />
+                            <img className='trash' onClick={() => handleDelete(selectedEvent.id)}src={trash} />
                         )}
                         <img onClick={handleClose} src={close} />
                     </div>
@@ -78,9 +120,9 @@ export default function EventModal() {
                         type='text'
                         name='kegiatan'
                         placeholder='Kegiatan'
-                        value={title}
+                        value={judul}
                         required
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => setJudul(e.target.value)}
                     />
                     <div className='date'>
                         <img src={calendarIcon} />
@@ -101,29 +143,29 @@ export default function EventModal() {
                     <div className='checkbox-form'>
                         <div className='wrap-for'>
                             <div className='wrap-label-input'>
-                                <input type='radio' value='all' id='semua karyawan' name='for' onChange={handleRadio} checked={untuk === 'all' ? true : false}/>
+                                <input type='radio' value='all' id='semua karyawan' name='untuk' onChange={(e) => setUntuk(e.target.value)} checked={untuk === 'all' ? true : false}/>
                                 <label htmlFor='semua karyawan'>Semua Karyawan</label>
                             </div>
 
                             <div className='wrap-label-input'>
-                                <input type='radio'value='guru' id='Hanya Guru' name='for' onChange={handleRadio} checked={untuk === 'guru' ? true : false}/>
+                                <input type='radio'value='guru' id='Hanya Guru' name='untuk' onChange={(e) => setUntuk(e.target.value)} checked={untuk === 'guru' ? true : false}/>
                                 <label htmlFor='Hanya Guru'>Hanya Guru</label>
                             </div>
 
                             <div className='wrap-label-input'>
-                                <input type='radio'value='staff' id='Hanya Staff' name='for' onChange={handleRadio} checked={untuk === 'staff' ? true : false}/>
+                                <input type='radio'value='staff' id='Hanya Staff' name='untuk' onChange={(e) => setUntuk(e.target.value)} checked={untuk === 'staff' ? true : false}/>
                                 <label htmlFor='Hanya Staff'>Hanya Staff</label>
                             </div>
                         </div>
 
                         <div className='wrap-is-libur'>
                             <div className='wrap-label-input'> 
-                                <input type='radio' id='Libur' value='libur' name='is libur' onChange={handleRadio}/>
+                                <input type='radio' id='Libur' value='0' name='isLibur' onChange={(e) => setIsLibur(e.target.value)} checked={isLibur === '0' ? true : false}/>
                                 <label htmlFor='Libur'>Libur</label>
                             </div>
 
                             <div className='wrap-label-input'>
-                                <input type='radio' id='Tidak Libur' value='tidak libur' name='is libur' onChange={handleRadio}/>
+                                <input type='radio' id='Tidak Libur' value='1' name='isLibur' onChange={(e) => setIsLibur(e.target.value)} checked={isLibur === '1' ? true : false}/>
                                 <label htmlFor='Tidak Libur'>Tidak Libur</label>
                             </div>
                         </div>
@@ -139,7 +181,7 @@ export default function EventModal() {
                     </div>
                 </div>
                 <footer>
-                    <button type='submit' className='submit' onClick={handleSubmit}>Konfirmasi</button>
+                    <button type='submit' className='submit' onClick={selectedEvent ? editEvent : addEvent}>Konfirmasi</button>
                 </footer>
             </form>
         </div>

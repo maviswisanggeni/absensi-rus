@@ -12,22 +12,25 @@ function SearchAndCalendar() {
   const contextSearch = useApiKehadiranSearch()
   const contextListAbsen = useKehadiranListAbsensi()
 
-  function handleSearch(){
-    contextSearch.getSearch()
-    contextListAbsen.setListAbsensiMasuk(contextSearch.listSearch.filter((item) => item?.keterangan === 'masuk'))
-    contextListAbsen.setListAbsensiKeluar(contextSearch.listSearch.filter((item) => item?.keterangan === 'pulang'))
-    
+  async function handleSearch() {
+    contextSearch.getSearch().then((res) => {
+      contextSearch.setLoading(true);
+      contextSearch.setListSearch(res.data.data);
+      contextListAbsen.setListAbsensiMasuk(res.data.data.filter((item) => item?.keterangan === 'masuk'))
+      contextListAbsen.setListAbsensiKeluar(res.data.data.filter((item) => item?.keterangan === 'pulang'))
+    })
+
   }
 
   return (
     <div className='search-calendar'>
-        <Search/>
-        <div className='wrapper-pilih-tanggal'>
-          <PilihTanggal text={context.startText} funcText={context.setStartText} funcTime={context.setStartTime} funcTanggal={context.setStartTanggal} value={context.startTanggal}/>
-          <img src={calenderIcon} alt="" />
-          <PilihTanggal text={context.endText} funcText={context.setEndText} funcTime={context.setEndTime} funcTanggal={context.setEndTanggal} value={context.endTanggal}/>
-        </div>
-        <button className='btn-search' onClick={handleSearch}><img src={searchIcon} alt="" /></button>
+      <Search />
+      <div className='wrapper-pilih-tanggal'>
+        <PilihTanggal text={context.startText} funcText={context.setStartText} funcTime={context.setStartTime} funcTanggal={context.setStartTanggal} value={context.startTanggal} />
+        <img src={calenderIcon} alt="" />
+        <PilihTanggal text={context.endText} funcText={context.setEndText} funcTime={context.setEndTime} funcTanggal={context.setEndTanggal} value={context.endTanggal} />
+      </div>
+      <button className='btn-search' onClick={handleSearch}><img src={searchIcon} alt="" /></button>
     </div>
   )
 }

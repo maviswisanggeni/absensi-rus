@@ -76,8 +76,8 @@ function App() {
                 }
               />
               <Route path='/login' element={<Login />} />
-              <Route path='/karyawan/add' element={<AddKaryawan />} />
-              <Route path='/karyawan/edit/:id' element={<DetailKaryawan />} />
+              <Route path='/karyawan/add' element={<KaryawanStoreUserProvider><AddKaryawan /></KaryawanStoreUserProvider>} />
+              <Route path='/karyawan/edit/:id' element={<KaryawanUpdateProvider><DetailKaryawan /></KaryawanUpdateProvider>} />
             </Routes>
           </KehadiranListProvider>
         </KaryawanProvider>

@@ -15,36 +15,8 @@ function KehadiranSearchProvider ({children}) {
     const [search , setSearch] = useState(null);
     const [startTime, setStartTime] = useState(formatDate(new Date()))
     const [endTime, setEndTime] = useState(formatDate(new Date()))
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const token = localStorage.getItem('token');
-
-    // useEffect(() => {
-    //     async function getSearch() {
-    //         const url = "https://absensiguru.smkrus.com/api/kehadiran/search"
-
-    //         setLoading(false);
-    //         const request = {
-    //             search: search,
-    //             start_time: startTime,
-    //             end_time: endTime,
-    //         }
-
-    //         axios.post(url, request, {
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`,
-    //                     "Content-Type": "multipart/form-data",
-    //                 },
-    //             })
-    //             .then((response) => {
-    //                 setListSearch(response.data.data);
-    //                 setLoading(true);
-    //             }).catch((error) => {
-    //                 console.log(error);
-    //             })
-    //     }
-    //     getSearch();
-    // // }, [startTime, endTime, search]);
-    // }, []);
 
     async function getSearch() {
         const url = "https://absensiguru.smkrus.com/api/kehadiran/search"
@@ -54,23 +26,13 @@ function KehadiranSearchProvider ({children}) {
             start_time: startTime,
             end_time: endTime,
         }
-        axios.post(url, request, {
+        return axios.post(url, request, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
                 },
             })
-            .then((response) => {
-                setLoading(true);
-                setListSearch(response.data.data);
-            }).catch((error) => {
-                console.log(error);
-            })
     }
-
-    useEffect(() => {
-        getSearch();
-    }, []);
 
     const contextValue = {
         listSearch,

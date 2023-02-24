@@ -9,13 +9,13 @@ import '../../styles/css/add-karyawan.css'
 function AddKaryawan() {
     const context = useApiKaryawanStoreUser()
     let navigate = useNavigate()
-
+    console.log(context);
     async function addUser(e) {
         e.preventDefault();
         // context.storeUser()
-        let a = await context.storeUser()
-        console.log(a);
-        navigate('/karyawan')
+        context.storeUser().then(() => {
+            navigate('/karyawan')
+        })
     }
     return (
         <form className='add-karyawan' onSubmit={addUser}>

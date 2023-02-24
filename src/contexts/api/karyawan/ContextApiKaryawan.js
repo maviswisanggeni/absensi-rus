@@ -16,25 +16,25 @@ function KaryawanProvider ({children}) {
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
 
+    async function getKaryawan() {
+        const url = "https://absensiguru.smkrus.com/api/karyawan"
+        setLoading(false);
+        axios.get(url, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setListKaryawan(response.data);
+                setListPengajar(response.data.pengajar)
+                setListStaff(response.data.staff)
+                setLoading(true);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
     useEffect(() => {
-        async function getKaryawan() {
-            const url = "https://absensiguru.smkrus.com/api/karyawan"
-            setLoading(false);
-            axios.get(url, 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then((response) => {
-                    setListKaryawan(response.data);
-                    setListPengajar(response.data.pengajar)
-                    setListStaff(response.data.staff)
-                    setLoading(true);
-                }).catch((error) => {
-                    console.log(error);
-                })
-        }
         getKaryawan();
     }, []);
 
@@ -50,7 +50,8 @@ function KaryawanProvider ({children}) {
         keterangan,
         setKeterangan,
         loading,
-        setLoading
+        setLoading,
+        getKaryawan,
     }
     return(
         <ContextApiKaryawan.Provider value={contextValue}>

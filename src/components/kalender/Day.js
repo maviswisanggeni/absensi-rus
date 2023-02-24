@@ -14,7 +14,7 @@ export default function Day({ day, rowIdx }) {
         // const events = savedEvents.filter(evt => dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY"))
         const events = context.listKalender.filter(evt => dayjs(evt.tanggal).format("DD-MM-YY") === day.format("DD-MM-YY"))
         setDayEvents(events)
-    }, [savedEvents, day, context.loading])
+    }, [savedEvents, day, context.loading, context.listKalender])
 
     function getCurrentDayClass() {
         return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")

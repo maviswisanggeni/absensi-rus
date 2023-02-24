@@ -11,24 +11,24 @@ function KalenderProvider ({children}) {
     const [listKalender, setListKalender] = useState([])
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
-
+    
+    async function getKalender() {
+        const url = "https://absensiguru.smkrus.com/api/kalender"
+        setLoading(false);
+        axios.get(url, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setListKalender(response.data.events);
+                setLoading(true);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
     useEffect(() => {
-        async function getKalender() {
-            const url = "https://absensiguru.smkrus.com/api/kalender"
-            setLoading(false);
-            axios.get(url, 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then((response) => {
-                    setListKalender(response.data.events);
-                    setLoading(true);
-                }).catch((error) => {
-                    console.log(error);
-                })
-        }
         getKalender();
     }, []);
 
@@ -36,7 +36,8 @@ function KalenderProvider ({children}) {
         listKalender,
         setListKalender,
         loading,
-        setLoading
+        setLoading,
+        getKalender
     }
     return(
         <ContextApiKalender.Provider value={contextValue}>

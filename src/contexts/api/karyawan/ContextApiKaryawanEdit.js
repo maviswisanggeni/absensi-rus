@@ -26,7 +26,7 @@ function KaryawanUpdateProvider ({children}) {
         formData.append('no_hp', noHp);
         formData.append('jenis_user', jenisUser);
 
-        axios({
+        return axios({
             method: 'post',
             url,
             data: formData,
@@ -35,11 +35,11 @@ function KaryawanUpdateProvider ({children}) {
                 Authorization: `Bearer ${token}`,
             },
         })
-            .then((response) => {
-                setLoading(true);
-            }).catch((error) => {
-                console.log(error);
-            })
+            // .then((response) => {
+            //     setLoading(true);
+            // }).catch((error) => {
+            //     console.log(error);
+            // })
     }
 
     useEffect(() => {

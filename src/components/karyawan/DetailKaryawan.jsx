@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import arrowLeft from '../../assets/icons/arrow-left.svg'
 import '../../styles/css/Karyawan.css'
 import EditForm from './EditForm'
@@ -13,7 +13,8 @@ function DetailKaryawan() {
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");  
     const context = useApiKaryawanUpdate()
-    
+    let navigate = useNavigate()
+
         useEffect(() => {
         async function getData() {
             const url = "https://absensiguru.smkrus.com/api/karyawan/edit/" + userId.id
@@ -42,7 +43,9 @@ function DetailKaryawan() {
 
     function updateUser(e) {
         e.preventDefault();
-        context.updateUser()
+        context.updateUser().then(() => {
+            navigate('/karyawan')
+        })
     }
 
     return (

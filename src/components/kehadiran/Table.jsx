@@ -17,6 +17,7 @@ function Table() {
             : context.listAbsensiMasuk?.slice(firstPageIndex, lastPageIndex);
     }, [context.currentPage, context.keterangan, context.listAbsensiKeluar, context.listAbsensiMasuk]);
 
+    console.log(currentTableData)
     return (
         <>
             <table className='table'>
@@ -32,7 +33,8 @@ function Table() {
 
                 <tbody>
                     {
-                        !context.loading ? <tr><td>Loading...</td></tr>
+                        !context.loading || !contextSearch.loading ? <tr><td>Loading...</td></tr> :
+                        currentTableData.length === 0 ? <tr><td>Data tidak ditemukan</td></tr>
                             :
                             // context.listAbsensiMasuk?.data?.map((item, key) => {
                             currentTableData?.map((item, key) => {

@@ -39,17 +39,13 @@ function KaryawanStoreUserProvider({ children }) {
                 Authorization: `Bearer ${token}`,
             },
         })
-        .then((response) => {
-            console.log(response);
-            setLoading(true);
-        }).catch((error) => {
-            console.log(error);
-        })
+        // .then((response) => {
+        //     console.log(response);
+        //     setLoading(true);
+        // }).catch((error) => {
+        //     console.log(error);
+        // })
     }
-
-    useEffect(() => {
-
-    }, []);
 
     const contextValue = {
         nama, setNama,
