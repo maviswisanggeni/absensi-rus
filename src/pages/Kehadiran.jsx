@@ -28,7 +28,7 @@ function Kehadiran() {
               name="Masuk"
               firstValue={contextListAbsen.jmlKehadiran?.jml_masuk}
               secondValue={contextListAbsen.jmlKehadiran?.jml_karyawan}
-              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_masuk} / ${contextListAbsen.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>}
+              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_masuk} / ${contextListAbsen.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
               imgSrc={masukIcon}
             />
 
@@ -36,7 +36,7 @@ function Kehadiran() {
               name="Keluar"
               firstValue={contextListAbsen.jmlKehadiran?.jml_pulang}
               secondValue={contextListAbsen.jmlKehadiran?.jml_karyawan}
-              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_pulang} / ${contextListAbsen.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots'></div>}
+              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_pulang} / ${contextListAbsen.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
               imgSrc={keluarIcon}
             />
 
@@ -44,7 +44,7 @@ function Kehadiran() {
               name="Absen"
               firstValue={contextListAbsen.jmlKehadiran?.jml_absen}
               secondValue={contextListAbsen.jmlKehadiran?.jml_karyawan}
-              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_absen}`} Orang</p> : <div className='dots'></div>}
+              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_absen}`} Orang</p> : <div className='dots loading'></div>}
               imgSrc={absenIcon}
             />
           </div>

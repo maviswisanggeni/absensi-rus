@@ -265,13 +265,39 @@
           flex-direction: column;
   border: 1px solid #EBF0FE;
 }
-.detail .main .detail-masuk-keluar .masuk-keluar .card img {
+.detail .main .detail-masuk-keluar .masuk-keluar .card .foto-masuk, .detail .main .detail-masuk-keluar .masuk-keluar .card .default-foto {
+  display: grid;
+  place-items: center;
   width: 315px;
   height: 372px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: 100% 0;
      object-position: 100% 0;
+  cursor: pointer;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .pop-up {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 999;
+  cursor: pointer;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .pop-up .img-user {
+  height: 80vh;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .note, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
   padding: 1rem;
@@ -383,6 +409,9 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: 1.5rem;
+}
+.sidebar-right .kehadiran-terbaru ul .loading::before {
+  margin: 0 1rem;
 }
 .sidebar-right .kehadiran-terbaru ul li {
   display: -webkit-box;

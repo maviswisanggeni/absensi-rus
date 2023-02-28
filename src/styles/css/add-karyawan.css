@@ -1,6 +1,9 @@
 .add-karyawan {
   width: 80%;
 }
+.add-karyawan .unhide {
+  cursor: pointer;
+}
 .add-karyawan .navigation {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -171,10 +174,7 @@
   background-size: 1em;
 }
 .add-karyawan .form .jabatan-gender .jabatan {
-  width: 65%;
-}
-.add-karyawan .form .jabatan-gender .gender {
-  width: 35%;
+  width: 100%;
 }
 .add-karyawan .form-file-upload {
   max-width: 100%;

@@ -4,6 +4,10 @@
 .add-karyawan{
     width: 80%;
 
+    .unhide{
+        cursor: pointer;
+    }
+
     .navigation{
         display: flex;
         justify-content: space-between;
@@ -144,11 +148,7 @@
             }
 
             .jabatan{
-                width: 65%;
-            }
-
-            .gender{
-                width: 35%;
+                width: 100%;
             }
         }
     }

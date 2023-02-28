@@ -505,7 +505,7 @@
   font-weight: 600;
   border-radius: 7px;
 }
-.pagination-container .pagination-item.dots:hover {
+.pagination-container .pagination-item.dloadingots:hover {
   background-color: transparent;
   cursor: default;
 }
@@ -548,7 +548,7 @@
   cursor: default;
 }
 
-.dots:before {
+.loading:before {
   display: block;
   height: 0.1px;
   width: 0.1px;

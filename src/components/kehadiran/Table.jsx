@@ -3,6 +3,7 @@ import Pagination from '../Pagination';
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData';
 import { useApiKehadiranSearch } from '../../contexts/api/kehadiran/ContextApiKehadiranSearch';
 import { Link } from 'react-router-dom';
+import defaultFoto from '../../assets/images/user-foto.png'
 
 let PageSize = 10;
 
@@ -15,9 +16,8 @@ function Table() {
         const lastPageIndex = firstPageIndex + PageSize;
         return context.keterangan === 'Pulang' ? context.listAbsensiKeluar?.slice(firstPageIndex, lastPageIndex)
             : context.listAbsensiMasuk?.slice(firstPageIndex, lastPageIndex);
-    }, [context.currentPage, context.keterangan, context.listAbsensiKeluar, context.listAbsensiMasuk]);
+    }, [context.currentPage, context.keterangan, context.listAbsensiKeluar, context.listAbsensiMasuk, context.urutan]);
 
-    console.log(context.listAbsensiKeluar)
     return (
         <>
             <table className='table'>
@@ -33,15 +33,14 @@ function Table() {
 
                 <tbody>
                     {
-                        !context.loading || !contextSearch.loading ? <tr><td>Loading...</td></tr> :
-                        currentTableData.length === 0 ? <tr><td>Data tidak ditemukan</td></tr>
-                            :
-                            // context.listAbsensiMasuk?.data?.map((item, key) => {
+                        !context.loading || !contextSearch.loading ? <tr><td>Loading...</td></tr> 
+                        : currentTableData.length === 0 ? <tr><td>Data tidak ditemukan</td></tr>
+                        : 
                             currentTableData?.map((item, key) => {
                                 return (
                                     <tr key={key}>
                                         <td className='row-img'>
-                                            <img src={item?.foto_masuk} alt="" />
+                                            <img src={item?.pf_foto ? item?.pf_foto : defaultFoto} alt="" />
                                             {item?.user?.nama}
                                         </td>
                                         <td>{item?.user?.niy}</td>

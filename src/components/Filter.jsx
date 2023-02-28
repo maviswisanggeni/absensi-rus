@@ -21,7 +21,23 @@ function Filter(props) {
     }, []);
 
     useEffect(() => {
-    }, [current])
+        props.setState(current)
+        if (current === 'Tercepat') {
+            props.setlist1(props.list1.reverse())
+            props.setlist2(props.list2.reverse())
+        } else if(current === 'Terlambat') {
+            props.setlist1(props.list1?.reverse())
+            props.setlist2(props.list2?.reverse())
+        }
+        else if(current === 'Sesuai abjad') {
+            props.setlist1(props.list1?.sort((a, b) => a.nama?.localeCompare(b.nama)))
+            props.setlist2(props.list2?.sort((a, b) => a.nama?.localeCompare(b.nama)))
+        }
+        else{
+            props.setlist1(props.list1?.sort((a, b) => a.niy.localeCompare(b.niy)))
+            props.setlist2(props.list2?.sort((a, b) => a.niy.localeCompare(b.niy)))
+        }
+    }, [current, props])
 
     function log(e) {
         setOpen(false)

@@ -12,6 +12,7 @@ function KehadiranListProvider ({children}) {
     const [listAbsensiMasuk, setListAbsensiMasuk] = useState([]);
     const [listAbsensiKeluar, setListAbsensiKeluar] = useState([]);
     const [keterangan, setKeterangan] = useState('Masuk');
+    const [urutan, setUrutan] = useState('Tercepat')
     const [loading, setLoading] = useState(false);
     const [tanggal, setTanggal] = useState(new Date().getDate())
     const [bulan, setBulan] = useState(new Date().getMonth() + 1)
@@ -20,36 +21,35 @@ function KehadiranListProvider ({children}) {
     const [currentPage, setCurrentPage] = useState(1);
 
     const token = localStorage.getItem("token");
-    useEffect(() => {
-        async function getDataJmlKehadiran() {
-            const url = "https://absensiguru.smkrus.com/api/kehadiran"
-            const request = {
-                tanggal: tanggal,
-                bulan: bulan,
-                tahun: tahun,
-            }
-            setLoading(false);
-            axios.get(url, 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    params: request
-                })
-                .then((response) => {
-                    setListAbsensiMasuk(response.data.data.list_absen.masuk.data);
-                    setListAbsensiKeluar(response.data.data.list_absen.pulang.data);
-                    console.log(response.data.data.list_absen.pulang.data)
-                    setJmlKehadiran(response.data.data.jml_kehadiran);
-                    setLoading(true);
-                }).catch((error) => {
-                    console.log(error);
-                })
-        }
-        getDataJmlKehadiran();
-    }, [tanggal, bulan, tahun]);
 
-    console.log(listAbsensiKeluar);
+    function getDataJmlKehadiran() {
+        const url = "https://absensiguru.smkrus.com/api/kehadiran"
+        const request = {
+            tanggal: tanggal,
+            bulan: bulan,
+            tahun: tahun,
+        }
+        setLoading(false);
+        axios.get(url, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: request
+            })
+            .then((response) => {
+                setListAbsensiMasuk(response.data.data.list_absen.masuk.data);
+                setListAbsensiKeluar(response.data.data.list_absen.pulang.data);
+                setJmlKehadiran(response.data.data.jml_kehadiran);
+                setLoading(true);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
+    useEffect(() => {
+        getDataJmlKehadiran();
+    }, []);
 
     const contextValue = {
         listAbsensiMasuk, setListAbsensiMasuk, 
@@ -61,6 +61,8 @@ function KehadiranListProvider ({children}) {
         keterangan, setKeterangan,
         jmlKehadiran, setJmlKehadiran,
         currentPage, setCurrentPage,
+        urutan, setUrutan,
+        getDataJmlKehadiran
     }
 
     return(

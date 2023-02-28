@@ -9,9 +9,9 @@ export default function Day({ day, rowIdx }) {
     const {setDaySelected, setShowEventModal, savedEvents, setSelectedEvent, selectedEvent} = useContext(GlobalCalendar)
     
     const context = useApiKalender()
+    console.log(dayEvents)
 
     useEffect(() => {
-        // const events = savedEvents.filter(evt => dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY"))
         const events = context.listKalender.filter(evt => dayjs(evt.tanggal).format("DD-MM-YY") === day.format("DD-MM-YY"))
         setDayEvents(events)
     }, [savedEvents, day, context.loading, context.listKalender])
@@ -30,13 +30,13 @@ export default function Day({ day, rowIdx }) {
             )}
             <p className={'dd ' + getCurrentDayClass()}>{day.format('DD')}</p>
         </header>
-        <div style={{flex: "1 1 0%"}} onClick={() => {
+        <div className='handle-add' onClick={() => {
             setDaySelected(day)
             setShowEventModal(true)
         }}>
             {dayEvents.map((evt, idx) => (
                 <div key={idx} className='day-events' 
-                // style={{backgroundColor: selectedEvent?.is_libur === '1' ? "#21D2FF" : '#EA4D90'}} 
+                style={{backgroundColor: evt?.is_libur === '1' ? "#21D2FF" : '#EA4D90'}} 
                 onClick={() => setSelectedEvent(evt)}>
                     {evt.judul}
                 </div>

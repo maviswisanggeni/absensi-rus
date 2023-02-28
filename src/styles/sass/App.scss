@@ -422,7 +422,7 @@
       font-weight: 600;
       border-radius: 7px;
 
-    &.dots:hover {
+    &.dloadingots:hover {
       background-color: transparent;
       cursor: default;
     }
@@ -476,7 +476,7 @@
   }
 }
 
-.dots:before {
+.loading:before {
   display: block;
   height: .1px;
   width: .1px;

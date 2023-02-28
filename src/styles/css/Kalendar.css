@@ -73,6 +73,12 @@
   border-right: #E5E7EB 1px solid;
   border-bottom: #E5E7EB 1px solid;
 }
+.kalender .day .handle-add {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
+  cursor: pointer;
+}
 .kalender .day header {
   display: -webkit-box;
   display: -ms-flexbox;

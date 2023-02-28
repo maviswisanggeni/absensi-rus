@@ -1,12 +1,12 @@
 import Pagination from '../Pagination'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import data from './data.json'
 import copy from '../../assets/icons/copy.svg'
 import edit from '../../assets/icons/edit.svg'
 import trash from '../../assets/icons/trash.svg'
 import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan';
 import axios from 'axios';
+import defaultUser from '../../assets/images/user-foto.png'
 
 let PageSize = 10;
 
@@ -21,7 +21,7 @@ function Table() {
     return context.keterangan ?
       context.listPengajar.slice(firstPageIndex, lastPageIndex) :
       context.listStaff.slice(firstPageIndex, lastPageIndex)
-  }, [context.currentPage, context.keterangan, context.listPengajar, context.listStaff]);
+  }, [context.currentPage, context.keterangan, context.listPengajar, context.listStaff, context.listKaryawan, context.urutan]);
 
   function handleDetail(id){
     // navigate(`/karyawan/detail/${id}`)
@@ -58,12 +58,14 @@ function Table() {
 
         <tbody>
           {
+            !context.loading ? <tr><td colSpan='7' style={{textAlign: 'center'}}>Loading...</td></tr> :
+            currentTableData?.length === 0 ? <tr><td colSpan='7' style={{textAlign: 'center'}}>Data tidak ditemukan</td></tr> :
             currentTableData?.map((item, key) => {
               return (
                 <tr key={key} onClick={() => handleDetail(item.id)}>
                   <td className='niy-col'>{item?.niy}</td>
                   <td className='row-img'>
-                    <img src={item?.pf_foto} alt="" />
+                    <img src={item?.pf_foto ? item?.pf_foto : defaultUser} alt="" />
                     {item?.nama}
                   </td>
                   <td>{item?.jenis_user}</td>

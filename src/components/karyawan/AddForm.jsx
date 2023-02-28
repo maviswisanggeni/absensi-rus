@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import close from '../../assets/icons/close.svg'
 import eye from '../../assets/icons/eye.svg'
 import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser'
@@ -8,41 +8,34 @@ import Select from './Select'
 
 function Form() {
     const context = useApiKaryawanStoreUser()
+    const [passwordShown, setPasswordShown] = useState(false);
+
     let data = [
-        {
-            id: 1,
-            nama: 'Pengajar'
-        },
-        {
-            id: 2,
-            nama: 'Staff'
-        },
+        {id: 1, nama: 'Pengajar'},
+        {id: 2,nama: 'Staff'},
     ]
 
-    let gender = [
-        {
-            id: 1,
-            nama: 'Laki-laki'
-        },
-        {
-            id: 2,
-            nama: 'Perempuan'
-        },
-    ]
+    function handleDeleteInput(){
+        context.setNama('')
+    }
+
+    function handleUnhide(){
+        setPasswordShown(passwordShown ? false : true);
+    }
 
     return (
         <div className='form'>
             <div className='nama'>
                 <Label className='nama' label='Nama lengkap'/>
                 <Input className='nama' type='text' placeholder='Masukkan nama karyawan' value={context.nama} func={context.setNama}/>
-                <img src={close}/>
+                <img src={close} onClick={handleDeleteInput}/>
             </div>
 
             <div className='niy'>
                 <Label className='niy' label='NIY'/>
                 <Input className='niy' type='number' placeholder='Masukkan Nomer Induk Yayasan' value={context.niy} func={context.setNiy}/>
-                <Input className='password' type='password' placeholder='Password' value={context.password} func={context.setPassword}/>
-                <img src={eye}/>
+                <Input className='password' type={passwordShown ? 'text' : 'password'} placeholder='Password' value={context.password} func={context.setPassword}/>
+                <img src={eye} onClick={handleUnhide} className='unhide'/>
             </div>
 
             <div className='email'>
@@ -59,10 +52,6 @@ function Form() {
                 <div className='jabatan select'>
                     <Label className='jabatan' label='Jabatan'/>
                     <Select data={data} amountData={data.length + 1} func={context.setjenisUser}/>
-                </div>
-                <div className='gender select'>
-                    <Label className='gender' label='Gender'/>
-                    <Select data={gender} amountData={gender.length + 1}/>
                 </div>
             </div>
 

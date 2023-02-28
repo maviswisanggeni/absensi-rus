@@ -60,12 +60,16 @@
     
 
     .day{
-        // width: 150px;
-        // height: auto;
         display: flex; 
         flex-direction: column; 
         border-right: #E5E7EB 1px solid; 
         border-bottom: #E5E7EB 1px solid; 
+
+        .handle-add{
+            // display: flex;
+            flex: 1 1 0%;
+            cursor: pointer;
+        }
 
         header{
             display: flex; 
