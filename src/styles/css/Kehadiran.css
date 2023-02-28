@@ -410,6 +410,10 @@
           justify-content: space-between;
   margin-bottom: 1.5rem;
 }
+.sidebar-right .kehadiran-terbaru .header-refresh h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
 .sidebar-right .kehadiran-terbaru ul .loading::before {
   margin: 0 1rem;
 }

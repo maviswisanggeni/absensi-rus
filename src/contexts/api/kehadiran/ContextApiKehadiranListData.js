@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
-import formatDate from "../../../components/useFormatCalendar";
+import { useNavigate } from "react-router";
 
 const ContextApiKehadiranList = createContext({})
 
@@ -9,6 +9,7 @@ function useKehadiranListAbsensi(){
 }
 
 function KehadiranListProvider ({children}) {
+    const navigate = useNavigate()
     const [listAbsensiMasuk, setListAbsensiMasuk] = useState([]);
     const [listAbsensiKeluar, setListAbsensiKeluar] = useState([]);
     const [keterangan, setKeterangan] = useState('Masuk');
@@ -22,6 +23,20 @@ function KehadiranListProvider ({children}) {
 
     const token = localStorage.getItem("token");
 
+    let dummydata = 
+    [
+        {
+            "id": 1,
+            "nip": "1234567890",
+            "nama": "Nama Guru",
+        },
+        {
+            "id": 2,
+            "nip": "1234567890",
+            "nama": "Nama Guru",
+        },
+    ]
+
     function getDataJmlKehadiran() {
         const url = "https://absensiguru.smkrus.com/api/kehadiran"
         const request = {
@@ -30,7 +45,7 @@ function KehadiranListProvider ({children}) {
             tahun: tahun,
         }
         setLoading(false);
-        axios.get(url, 
+        return axios.get(url, 
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -42,15 +57,19 @@ function KehadiranListProvider ({children}) {
                 setListAbsensiKeluar(response.data.data.list_absen.pulang.data);
                 setJmlKehadiran(response.data.data.jml_kehadiran);
                 setLoading(true);
+                // setKehadiranTerbaru(response.data.data)
             }).catch((error) => {
                 console.log(error);
             })
     }
 
     useEffect(() => {
+        if(!token){
+            navigate('/login')
+        }
         getDataJmlKehadiran();
     }, []);
-
+    
     const contextValue = {
         listAbsensiMasuk, setListAbsensiMasuk, 
         listAbsensiKeluar, setListAbsensiKeluar,

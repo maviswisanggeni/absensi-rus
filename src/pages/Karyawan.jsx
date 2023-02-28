@@ -30,7 +30,7 @@ function Karyawan() {
         </div>
 
         <div className='tabbar-filter'>
-          <Tabbar option1="Guru" option2="Staff"/>
+          <Tabbar option1="Guru" option2="Staff" funcKeterangan={context.setKeterangan}/>
           <div className='filter-angka'>
             <Filter option1="Sesuai abjad" option2="Urut NIY"
               setState={context.setUrutan} 

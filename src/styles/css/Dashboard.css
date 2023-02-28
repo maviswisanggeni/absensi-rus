@@ -158,6 +158,9 @@
   padding: 2rem;
   position: relative;
 }
+.sidebar-right .jadwal .loading::before {
+  margin: 2rem 1rem;
+}
 .sidebar-right .jadwal h1 {
   font-size: 20px;
   font-weight: 600;

@@ -156,6 +156,10 @@
     position: relative;
 
     .jadwal{
+        .loading::before{
+            margin: 2rem 1rem;
+        }
+
         h1{
             font-size: 20px;
             font-weight: 600;

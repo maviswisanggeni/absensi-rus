@@ -4,18 +4,17 @@ import { useApiKaryawan } from '../contexts/api/karyawan/ContextApiKaryawan';
 import { useKehadiranListAbsensi } from '../contexts/api/kehadiran/ContextApiKehadiranListData';
 
 function Tabbar(props) {
-  const context = useKehadiranListAbsensi()
   const contextKaryawan = useApiKaryawan()
   const [current, setCurrent] = useState(props.option1)
 
   function handleClick(e) {
     setCurrent(e.target.innerText)
-    context.setCurrentPage(1)
+    props.funcPage(1)
   }
   
   useEffect(() => {
-    contextKaryawan.setKeterangan(current === 'Guru' ? true : false)
-    context.setKeterangan(current === 'Keluar' ? 'Pulang' : 'Masuk')
+    // contextKaryawan.setKeterangan(current === 'Guru' ? true : false)
+    props.funcKeterangan(current === 'Keluar' ? 'Pulang' : 'Masuk')
   }, [current])
 
   return (

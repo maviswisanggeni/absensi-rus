@@ -15,23 +15,23 @@ function KehadiranJmlKehadiranProvider ({children}) {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        async function getDataJmlKehadiran() {
-            const url = "https://absensiguru.smkrus.com/api/kehadiran"
-            setLoading(false);
-            axios.get(url, 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then((response) => {
-                    setJmlKehadiran(response.data.data.jml_kehadiran); 
-                    setLoading(true);
-                }).catch((error) => {
-                    console.log(error);
-                })
-        }
-        getDataJmlKehadiran();
+        // async function getDataJmlKehadiran() {
+        //     const url = "https://absensiguru.smkrus.com/api/kehadiran"
+        //     setLoading(false);
+        //     axios.get(url, 
+        //         {
+        //             headers: {
+        //                 Authorization: `Bearer ${token}`,
+        //             },
+        //         })
+        //         .then((response) => {
+        //             setJmlKehadiran(response.data.data.jml_kehadiran); 
+        //             setLoading(true);
+        //         }).catch((error) => {
+        //             console.log(error);
+        //         })
+        // }
+        // getDataJmlKehadiran();
     }, []);
 
     const contextValue = {

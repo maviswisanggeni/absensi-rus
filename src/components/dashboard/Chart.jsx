@@ -1,7 +1,10 @@
+import dayjs from 'dayjs';
 import React from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { useApiDashboardStatistik } from '../../contexts/api/dashboard/ApiDashboardStatistik';
 
 function Chart(props) {
+  const context = useApiDashboardStatistik()
   const data = [
     {
       name: 'Kamis',
@@ -50,9 +53,22 @@ function Chart(props) {
     if (tmp > highest) highest = tmp;
   }
 
+  const updatedData = props.data?.map((item) => {
+    return {
+      ...item,
+      date: dayjs(item.date).format('dddd')
+    }
+  })
+
+  const loading = [
+    {
+      loading: 'loading'
+    }
+  ]
+
   return (
     <LineChart
-      data={props.data}
+      data={context.loading ? updatedData : loading}
       width={500}
       height={300}
       margin={{
@@ -63,13 +79,15 @@ function Chart(props) {
       }}
     >
       <CartesianGrid strokeDasharray="1" />
-      {/* <XAxis dataKey="name" style={{fontSize: 12}}/> */}
-      <XAxis dataKey="date" style={{ fontSize: 12 }} />
-      <YAxis domain={[lowest, highest]} tickCount={8} padding={{ top: 10 }} tickSize={12} style={{ fontSize: 12 }} />
+      <XAxis dataKey={context.loading ? 'date' : 'loading'}
+       style={{ fontSize: 12 }} />
+      <YAxis domain={[lowest, highest]} 
+      dataKey="count"
+      tickCount={props.data?.length < 8 ? props.data?.length : 8} 
+      tickFormatter={(tick) => tick.toFixed(0)}
+      padding={{ top: 10 }} tickSize={12} style={{ fontSize: 12 }} />
       <Tooltip />
-      {/* <Legend /> */}
-      <Line type="monotone" dataKey="karyawan" stroke="#C2D2FF" dot={{ strokeWidth: 2, fill: '#C2D2FF', stroke: '#C2D2FF' }} />
-      {/* <Line type="monotone" dataKey="Staff" stroke="#3661EB" strokeWidth={2} dot={{ strokeWidth: 2, fill: '#3661EB' }}/> */}
+      <Line type="monotone" dataKey="count" stroke="#C2D2FF" dot={{ strokeWidth: 2, fill: '#C2D2FF', stroke: '#C2D2FF' }} />
     </LineChart>
   )
 }

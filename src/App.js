@@ -27,8 +27,6 @@ function App() {
     <div className='body'>
       <Sidebar />
       <ProfileApiProvider>
-        <KaryawanProvider>
-          <KehadiranListProvider>
             <Routes>
               <Route path='/'
                 element={
@@ -79,8 +77,6 @@ function App() {
               <Route path='/karyawan/add' element={<KaryawanStoreUserProvider><AddKaryawan /></KaryawanStoreUserProvider>} />
               <Route path='/karyawan/edit/:id' element={<KaryawanUpdateProvider><DetailKaryawan /></KaryawanUpdateProvider>} />
             </Routes>
-          </KehadiranListProvider>
-        </KaryawanProvider>
       </ProfileApiProvider>
     </div>
   );

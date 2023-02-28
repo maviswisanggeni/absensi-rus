@@ -3,13 +3,18 @@ import React from 'react'
 import refeshIcons from '../../assets/icons/refresh.svg'
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData'
 import userFoto from '../../assets/images/user-foto.png'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 function KehadiranTerbaru() {
   const context = useKehadiranListAbsensi()
-
   function handleRefresh(){
     context.getDataJmlKehadiran()
   }
+
+  useEffect(() => {
+    context.getDataJmlKehadiran()
+  }, [])
 
   return (
     <div className='kehadiran-terbaru'>

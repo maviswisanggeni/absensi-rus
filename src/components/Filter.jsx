@@ -37,7 +37,7 @@ function Filter(props) {
             props.setlist1(props.list1?.sort((a, b) => a.niy.localeCompare(b.niy)))
             props.setlist2(props.list2?.sort((a, b) => a.niy.localeCompare(b.niy)))
         }
-    }, [current, props])
+    }, [current])
 
     function log(e) {
         setOpen(false)
