@@ -22,7 +22,7 @@ function KehadiranListProvider ({children}) {
     const token = localStorage.getItem("token");
     useEffect(() => {
         async function getDataJmlKehadiran() {
-            const url = "https://absensiguru.smkrus.com/api/kehadiran/history"
+            const url = "https://absensiguru.smkrus.com/api/kehadiran"
             const request = {
                 tanggal: tanggal,
                 bulan: bulan,
@@ -39,6 +39,7 @@ function KehadiranListProvider ({children}) {
                 .then((response) => {
                     setListAbsensiMasuk(response.data.data.list_absen.masuk.data);
                     setListAbsensiKeluar(response.data.data.list_absen.pulang.data);
+                    console.log(response.data.data.list_absen.pulang.data)
                     setJmlKehadiran(response.data.data.jml_kehadiran);
                     setLoading(true);
                 }).catch((error) => {
@@ -47,6 +48,8 @@ function KehadiranListProvider ({children}) {
         }
         getDataJmlKehadiran();
     }, [tanggal, bulan, tahun]);
+
+    console.log(listAbsensiKeluar);
 
     const contextValue = {
         listAbsensiMasuk, setListAbsensiMasuk, 

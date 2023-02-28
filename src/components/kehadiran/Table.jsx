@@ -17,7 +17,7 @@ function Table() {
             : context.listAbsensiMasuk?.slice(firstPageIndex, lastPageIndex);
     }, [context.currentPage, context.keterangan, context.listAbsensiKeluar, context.listAbsensiMasuk]);
 
-    console.log(currentTableData)
+    console.log(context.listAbsensiKeluar)
     return (
         <>
             <table className='table'>

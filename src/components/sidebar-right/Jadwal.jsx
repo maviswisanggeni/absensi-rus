@@ -27,9 +27,6 @@ function Jadwal() {
             <CardJadwal title={item.judul} date={item.tanggal} status={item.untuk} key={key}/>
           )
         })}  
-        <CardJadwal title="Upacara Hari Pramuka" date="14 Agustus 2022" status="Semua siswa"/>
-        <CardJadwal title="Classmeet" date="16 Agustus 2022" status="Semua guru dan siswa"/>
-        <CardJadwal title="Classmeet" date="16 Agustus 2022" status="Semua guru dan siswa"/>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import DetailProfile from './DetailProfile'
 import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 function Detail() {
     let userId = useParams()
@@ -30,6 +31,10 @@ function Detail() {
                 })
         }
         getData();
+        let a = '2023-02-25'
+        dayjs(a).format('DDDD-MMMM-yyyy')
+        // console.log(formattedTo?day);        
+        console.log(dayjs(a).format('dddd-DD-MMM-YYYY'));
     }, [userId]);
 
     return (
@@ -38,7 +43,7 @@ function Detail() {
                 <Link to={'/kehadiran'}>
                     <img src={arrowLeft} alt="" />
                 </Link>
-                <h1>Detail User</h1>
+                <h1>Detail Absensi</h1>
             </div>
             <div className='main'>
                 <div className='detail-masuk-keluar'>
@@ -47,7 +52,7 @@ function Detail() {
                     <div className='masuk-keluar'>
                         <div className='jam-masuk'>
                             <h3>Masuk</h3>
-                            <p>{detail?.absen?.waktu_masuk}</p>
+                            <p>{dayjs(detail?.absen?.tanggal_masuk).format('dddd-DD-MMM-YYYY')}, {detail?.absen?.waktu_masuk.slice(0, 5)}</p>
                         </div>
 
                         <div className='card'>
@@ -58,20 +63,20 @@ function Detail() {
                             </div>
                             <div className='coordinates'>
                                 <div>
-                                    <h3>Latitude</h3>
-                                    <p>{detail?.absen?.longitude_masuk}</p>
+                                    <h3>Lokasi</h3>
+                                    <p>{detail?.absen?.lokasi_masuk}</p>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <h3>Longitude</h3>
                                     <p>{detail?.absen?.longitude_pulang}</p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
                     <div className='masuk-keluar'>
                         <div className='jam-masuk'>
                             <h3>Keluar</h3>
-                            <p>{detail?.absen?.waktu_pulang}</p>
+                            <p>{detail?.absen?.tanggal_pulang}, {detail?.absen?.waktu_pulang}</p>
                         </div>
 
                         <div className='card'>
@@ -82,13 +87,13 @@ function Detail() {
                             </div>
                             <div className='coordinates'>
                                 <div>
-                                    <h3>Latitude</h3>
-                                    <p>{detail?.absen?.longitude_masuk}</p>
+                                    <h3>Lokasi</h3>
+                                    <p>{detail?.absen?.lokasi_pulang}</p>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <h3>Longitude</h3>
-                                    <p>{detail?.absen?.longitude_pulang}</p>
-                                </div>
+                                    <p>{detail?.absen?.lokasi_pulang}</p>
+                                </div> */}
                             </div>
                         </div>
                     </div>

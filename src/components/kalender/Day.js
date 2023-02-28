@@ -35,7 +35,9 @@ export default function Day({ day, rowIdx }) {
             setShowEventModal(true)
         }}>
             {dayEvents.map((evt, idx) => (
-                <div key={idx} className='day-events' onClick={() => setSelectedEvent(evt)}>
+                <div key={idx} className='day-events' 
+                // style={{backgroundColor: selectedEvent?.is_libur === '1' ? "#21D2FF" : '#EA4D90'}} 
+                onClick={() => setSelectedEvent(evt)}>
                     {evt.judul}
                 </div>
             ))}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import people1 from '../../assets/images/user-foto.png'
 
 function DetailProfile(props) {
+    console.log(props);
     return (
         <div className='detail-profile'>
             <div className='div-1'>

@@ -8,12 +8,8 @@ import { useApiKalender } from '../../contexts/api/kalender/ContextApiKalender'
 import axios from 'axios'
 
 const labelsClasses = [
-    "indigo",
-    "gray",
-    "green",
-    "blue",
-    "red",
-    "purple",
+    "#21D2FF",
+    "#EA4D90",
 ];
 
 export default function EventModal() {
@@ -36,6 +32,7 @@ export default function EventModal() {
     formData.append('tanggal', tanggal);
     formData.append('untuk', untuk);
     formData.append('is_libur', isLibur);
+    console.log('day selected ' + daySelected);
 
     function addEvent(e) {
         e.preventDefault()
@@ -166,11 +163,11 @@ export default function EventModal() {
 
                             <div className='wrap-label-input'>
                                 <input type='radio' id='Tidak Libur' value='1' name='isLibur' onChange={(e) => setIsLibur(e.target.value)} checked={isLibur === '1' ? true : false}/>
-                                <label htmlFor='Tidak Libur'>Tidak Libur</label>
+                                <label htmlFor='Tidak Libur'>Kegiatan</label>
                             </div>
                         </div>
                     </div>
-                    <div className='wrapper-label'>
+                    {/* <div className='wrapper-label'>
                         {labelsClasses.map((label, idx) => (
                             <div key={idx} onClick={() => setSelectedLabel(label)} style={{ backgroundColor: label }} className={`label ${label}`}>
                                 {selectedLabel === label && (
@@ -178,7 +175,7 @@ export default function EventModal() {
                                 )}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
                 <footer>
                     <button type='submit' className='submit' onClick={selectedEvent ? editEvent : addEvent}>Konfirmasi</button>
