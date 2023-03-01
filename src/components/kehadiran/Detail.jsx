@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import defaultFoto from '../../assets/images/user-foto.png'
+import Map from './Map'
 
 function Detail() {
     let userId = useParams()
@@ -42,7 +43,41 @@ function Detail() {
         return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
     }
 
-    console.log(isImgUrl('https://absensiguru.smkrus.com/'))
+
+    const data = [
+        {
+          id: 1,
+          name: 'Fahmi',
+          longitude: '110.8430553',
+          latitude: '-6.7536495',
+        },
+        {
+          id: 2,
+          name: '2',
+          longitude: '110.8428407',
+          latitude: '-6.7537856',
+        },
+        {
+          id: 3,
+          name: '3',
+          longitude: '110.843060',
+          latitude: '-6.753631',
+        },
+        {
+          id: 4,
+          name: '5',
+          longitude: '110.842142',
+          latitude: '-6.753258',
+        },
+    ];
+
+    data[0].circle = {
+        radius: 35,
+        options: {
+          strokeColor: '#ff0000',
+        },
+    };
+      
 
     return (
         <div className='detail'>
@@ -52,6 +87,15 @@ function Detail() {
                 </Link>
                 <h1>Detail Absensi</h1>
             </div>
+            <Map
+                data={data}
+                center={{
+                    longitude: '110.8430553',
+                    latitude: '-6.7536495',
+                }}
+                zoom={18}
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key="
+                />
             <div className='main'>
                 <div className='detail-masuk-keluar'>
                     <div className='masuk-keluar'>
