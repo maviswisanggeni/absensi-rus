@@ -9,10 +9,8 @@ import '../../styles/css/add-karyawan.css'
 function AddKaryawan() {
     const context = useApiKaryawanStoreUser()
     let navigate = useNavigate()
-    console.log(context);
     async function addUser(e) {
         e.preventDefault();
-        // context.storeUser()
         context.storeUser().then(() => {
             navigate('/karyawan')
         })

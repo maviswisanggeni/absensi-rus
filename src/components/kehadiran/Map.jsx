@@ -1,41 +1,22 @@
-/* global google */
-import React, {Fragment} from "react";
-import {
-  withGoogleMap,
-  GoogleMap,
-  withScriptjs,
-  Marker,
-  Circle
-} from "react-google-maps";
+import React from 'react'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-const Map = props => {
+function Map() {
     return (
-      <GoogleMap
-        defaultZoom={props.zoom}
-        defaultCenter={props.center}
-      >
-        {props.places.map(place => {
-          return (
-            <Fragment key={place.id}>
-              <Marker
-                position={{
-                  lat: parseFloat(place.latitude),
-                  lng: parseFloat(place.longitude)
-                }}
-              />
-              {place.circle && <Circle
-                defaultCenter={{
-                  lat: parseFloat(place.latitude),
-                  lng: parseFloat(place.longitude)
-                }}
-                radius={place.circle.radius}
-                options={place.circle.options}
-              />}
-            </Fragment>
-          );
-        })}
-      </GoogleMap>
-    );
+        <div className='map'>
+            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[51.505, -0.09]}>
+                    <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                </Marker>
+            </MapContainer>
+        </div>
+    )
 }
 
-export default withScriptjs(withGoogleMap(Map));
+export default Map

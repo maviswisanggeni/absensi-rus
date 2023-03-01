@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import defaultFoto from '../../assets/images/user-foto.png'
+import hamburger from '../../assets/icons/hamburger.svg'
 import Map from './Map'
 
 function Detail() {
@@ -13,6 +13,7 @@ function Detail() {
     const [detail, setDetail] = useState(null);
     const [loading, setLoading] = useState(false);
     const [popUpMasuk, setPopUpMasuk] = useState(false);
+    const [popUpMap, setPopUpMap] = useState(false);
     const [popUpKeluar, setPopUpKeluar] = useState(false);
     const token = localStorage.getItem("token");
 
@@ -71,31 +72,18 @@ function Detail() {
         },
     ];
 
-    data[0].circle = {
-        radius: 35,
-        options: {
-          strokeColor: '#ff0000',
-        },
-    };
+
       
 
     return (
         <div className='detail'>
-            <div className='navigation'>
+            {/* <div className='navigation'>
                 <Link to={'/kehadiran'}>
                     <img src={arrowLeft} alt="" />
                 </Link>
                 <h1>Detail Absensi</h1>
             </div>
-            <Map
-                data={data}
-                center={{
-                    longitude: '110.8430553',
-                    latitude: '-6.7536495',
-                }}
-                zoom={18}
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key="
-                />
+
             <div className='main'>
                 <div className='detail-masuk-keluar'>
                     <div className='masuk-keluar'>
@@ -123,6 +111,8 @@ function Detail() {
                                     <h3>Lokasi</h3>
                                     <p>{detail?.absen?.lokasi_masuk}</p>
                                 </div>
+                            
+                            <img src={hamburger} onClick={() => setPopUpMap(popUpMap ? false : true)}/>
                             </div>
                         </div>
                     </div>
@@ -153,12 +143,15 @@ function Detail() {
                                     <h3>Lokasi</h3>
                                     <p>{detail?.absen?.lokasi_pulang}</p>
                                 </div>
+                                <img src={hamburger}/>
                             </div>
                         </div>
                     </div>
                 </div>
                 <DetailProfile data={detail}/>
-            </div>
+            </div> */}
+
+            <Map/>
         </div>
     )
 }
