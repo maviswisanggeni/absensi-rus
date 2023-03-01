@@ -85,6 +85,9 @@
   color: #3661EB;
   font-weight: 600;
 }
+.karyawan .action-col img {
+  cursor: pointer;
+}
 .karyawan .action-col a {
   margin: 0 1rem;
 }

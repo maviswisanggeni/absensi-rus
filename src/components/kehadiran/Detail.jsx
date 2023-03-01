@@ -5,13 +5,15 @@ import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import defaultFoto from '../../assets/images/user-foto.png'
+import hamburger from '../../assets/icons/hamburger.svg'
+import Map from './Map'
 
 function Detail() {
     let userId = useParams()
     const [detail, setDetail] = useState(null);
     const [loading, setLoading] = useState(false);
     const [popUpMasuk, setPopUpMasuk] = useState(false);
+    const [popUpMap, setPopUpMap] = useState(false);
     const [popUpKeluar, setPopUpKeluar] = useState(false);
     const token = localStorage.getItem("token");
 
@@ -42,16 +44,46 @@ function Detail() {
         return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
     }
 
-    console.log(isImgUrl('https://absensiguru.smkrus.com/'))
+
+    const data = [
+        {
+          id: 1,
+          name: 'Fahmi',
+          longitude: '110.8430553',
+          latitude: '-6.7536495',
+        },
+        {
+          id: 2,
+          name: '2',
+          longitude: '110.8428407',
+          latitude: '-6.7537856',
+        },
+        {
+          id: 3,
+          name: '3',
+          longitude: '110.843060',
+          latitude: '-6.753631',
+        },
+        {
+          id: 4,
+          name: '5',
+          longitude: '110.842142',
+          latitude: '-6.753258',
+        },
+    ];
+
+
+      
 
     return (
         <div className='detail'>
-            <div className='navigation'>
+            {/* <div className='navigation'>
                 <Link to={'/kehadiran'}>
                     <img src={arrowLeft} alt="" />
                 </Link>
                 <h1>Detail Absensi</h1>
             </div>
+
             <div className='main'>
                 <div className='detail-masuk-keluar'>
                     <div className='masuk-keluar'>
@@ -79,6 +111,8 @@ function Detail() {
                                     <h3>Lokasi</h3>
                                     <p>{detail?.absen?.lokasi_masuk}</p>
                                 </div>
+                            
+                            <img src={hamburger} onClick={() => setPopUpMap(popUpMap ? false : true)}/>
                             </div>
                         </div>
                     </div>
@@ -109,12 +143,15 @@ function Detail() {
                                     <h3>Lokasi</h3>
                                     <p>{detail?.absen?.lokasi_pulang}</p>
                                 </div>
+                                <img src={hamburger}/>
                             </div>
                         </div>
                     </div>
                 </div>
                 <DetailProfile data={detail}/>
-            </div>
+            </div> */}
+
+            <Map/>
         </div>
     )
 }

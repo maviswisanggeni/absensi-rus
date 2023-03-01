@@ -316,12 +316,18 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates h3 {
   margin-bottom: 0;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates div:nth-child(1) {
   margin-right: 6rem;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates img {
+  cursor: pointer;
 }
 .detail .main .detail-profile {
   display: -webkit-box;
@@ -399,6 +405,11 @@
   margin-top: 5rem;
   text-decoration: none;
   font-size: 14px;
+}
+.detail .map {
+  width: 50vw;
+  height: 50vw;
+  background-color: #F9F9F9;
 }
 
 .sidebar-right .kehadiran-terbaru .header-refresh {

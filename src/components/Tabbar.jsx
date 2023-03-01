@@ -14,7 +14,7 @@ function Tabbar(props) {
   
   useEffect(() => {
     // contextKaryawan.setKeterangan(current === 'Guru' ? true : false)
-    props.funcKeterangan(current === 'Keluar' ? 'Pulang' : 'Masuk')
+    props.funcKeterangan(current === 'Keluar' ? 'Pulang' :  current === 'Masuk' ? 'Masuk' : current === 'Guru' ? true : false)
   }, [current])
 
   return (

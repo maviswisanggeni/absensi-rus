@@ -89,7 +89,7 @@ function Table() {
       <Pagination
         className="pagination-bar"
         currentPage={context.currentPage}
-        totalCount={context.keterangan === 'Guru' ? context.listPengajar?.length : context?.keterangan === 'Staff' ? context.listStaff?.length : 0}
+        totalCount={context.keterangan ? context.listPengajar?.length : context?.keterangan ? context.listStaff?.length : 0}
         pageSize={PageSize}
         onPageChange={page => context.setCurrentPage(page)}
       />

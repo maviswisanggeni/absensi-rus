@@ -14,6 +14,7 @@ function KaryawanProvider ({children}) {
     const [currentPage, setCurrentPage] = useState(1)
     const [keterangan, setKeterangan] = useState(true)
     const [urutan, setUrutan] = useState('Sesuai abjad')
+    const [current, setCurrent] = useState(1)
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
 
@@ -45,6 +46,7 @@ function KaryawanProvider ({children}) {
         listStaff, setListStaff,
         currentPage, setCurrentPage,
         keterangan, setKeterangan,
+        current, setCurrent,
         loading, setLoading,
         getKaryawan,
         urutan, setUrutan,
