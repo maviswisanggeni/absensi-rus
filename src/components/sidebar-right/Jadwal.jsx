@@ -19,18 +19,21 @@ function Jadwal() {
       console.log(err)
     })
   }
+
   useEffect(() => {
     getJadwal()
   }, [])
+
   return (
     <div className='jadwal'>
-        <h1>Jadwal</h1>
-      {!loading ? <div className='loading'></div> : 
-          data?.map((item, key) => {
+      <h1>Jadwal</h1>
+      {!loading ? <div className='loading'></div> :
+        data?.length === 0 ? <p>Tidak ada jadwal hari ini</p> :
+        data?.map((item, key) => {
           return (
-            <CardJadwal title={item.judul} date={item.tanggal} status={item.untuk} key={key}/>
-          )
-        })}  
+      <CardJadwal title={item.judul} date={item.tanggal} status={item.untuk} key={key} />
+      )
+        })}
     </div>
   )
 }

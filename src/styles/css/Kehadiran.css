@@ -137,60 +137,23 @@
           align-items: center;
   gap: 2rem;
 }
-.kehadiran .table {
-  width: 100%;
-  background-color: white;
-  padding: 1rem 1.5rem;
-  border: 1px solid #EBF0FE;
-  border-top: none;
-  border-collapse: collapse;
-}
-.kehadiran .table thead th {
-  text-align: left;
-  font-weight: 500;
-  font-size: 14px;
-  padding: 1.5rem 0;
-}
-.kehadiran .table thead th:nth-child(1) {
-  padding-left: 1.5rem;
-}
-.kehadiran .table tbody tr {
-  width: 100%;
-}
-.kehadiran .table tbody tr:nth-child(odd) {
-  background-color: #EBF0FE;
-}
-.kehadiran .table tbody .btn-detail {
-  background-color: #3661EB;
-  width: 80px;
-  height: 30px;
-  border-radius: 5px;
-  font-size: 10px;
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1.5rem;
-}
-.kehadiran .table td {
-  font-size: 10px;
-  color: #9B9B9B;
-}
-.kehadiran .table .row-img {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+.kehadiran table .loading-table {
+  position: absolute;
+  width: 100% !important;
+  height: 10vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0.5rem 1.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
 }
-.kehadiran .table .row-img img {
-  width: 35px;
-  height: 35px;
-  margin-right: 1rem;
-  border-radius: 50%;
+.kehadiran table .loading::before {
+  margin: 0;
 }
 
 .detail {
@@ -265,7 +228,8 @@
           flex-direction: column;
   border: 1px solid #EBF0FE;
 }
-.detail .main .detail-masuk-keluar .masuk-keluar .card .foto-masuk, .detail .main .detail-masuk-keluar .masuk-keluar .card .default-foto {
+.detail .main .detail-masuk-keluar .masuk-keluar .card .foto-masuk,
+.detail .main .detail-masuk-keluar .masuk-keluar .card .default-foto {
   display: grid;
   place-items: center;
   width: 315px;
@@ -299,15 +263,18 @@
 .detail .main .detail-masuk-keluar .masuk-keluar .card .pop-up .img-user {
   height: 80vh;
 }
-.detail .main .detail-masuk-keluar .masuk-keluar .card .note, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
+.detail .main .detail-masuk-keluar .masuk-keluar .card .note,
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
   padding: 1rem;
 }
-.detail .main .detail-masuk-keluar .masuk-keluar .card .note h3, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates h3 {
+.detail .main .detail-masuk-keluar .masuk-keluar .card .note h3,
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates h3 {
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-.detail .main .detail-masuk-keluar .masuk-keluar .card .note p, .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates p {
+.detail .main .detail-masuk-keluar .masuk-keluar .card .note p,
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates p {
   font-size: 10px;
   color: #9B9B9B;
 }
@@ -407,9 +374,47 @@
   font-size: 14px;
 }
 .detail .map {
-  width: 50vw;
-  height: 50vw;
-  background-color: #F9F9F9;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 999;
+}
+.detail .leaflet-container {
+  width: 500px;
+  height: 500px;
+}
+.detail .wrapper-close {
+  position: absolute;
+  z-index: 999;
+  width: 24px;
+  height: 24px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  -webkit-transform: translate(250px, -290px);
+          transform: translate(250px, -290px);
+}
+.detail .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  z-index: 999;
 }
 
 .sidebar-right .kehadiran-terbaru .header-refresh {
@@ -424,6 +429,9 @@
 .sidebar-right .kehadiran-terbaru .header-refresh h3 {
   font-size: 20px;
   font-weight: 600;
+}
+.sidebar-right .kehadiran-terbaru .header-refresh img {
+  cursor: pointer;
 }
 .sidebar-right .kehadiran-terbaru ul .loading::before {
   margin: 0 1rem;

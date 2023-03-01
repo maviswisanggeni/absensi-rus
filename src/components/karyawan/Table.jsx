@@ -58,8 +58,8 @@ function Table() {
 
         <tbody>
           {
-            !context.loading ? <tr><td colSpan='7' style={{textAlign: 'center'}}>Loading...</td></tr> :
-            currentTableData?.length === 0 ? <tr><td colSpan='7' style={{textAlign: 'center'}}>Data tidak ditemukan</td></tr> :
+            !context.loading ? <tr className='loading loading-table'>loading...</tr> 
+            : currentTableData.length === 0 ? <tr className='loading-table'>Data tidak ditemukan</tr> :
             currentTableData?.map((item, key) => {
               return (
                 <tr key={key} onClick={() => handleDetail(item.id)}>

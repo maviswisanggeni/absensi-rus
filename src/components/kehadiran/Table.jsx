@@ -33,8 +33,8 @@ function Table() {
 
                 <tbody>
                     {
-                        !context.loading || !contextSearch.loading ? <tr><td>Loading...</td></tr> 
-                        : currentTableData.length === 0 ? <tr><td>Data tidak ditemukan</td></tr>
+                        !context.loading || !contextSearch.loading ? <tr className='loading loading-table'>loading...</tr> 
+                        : currentTableData.length === 0 ? <tr className='loading-table'>Data tidak ditemukan</tr>
                         : 
                             currentTableData?.map((item, key) => {
                                 return (
