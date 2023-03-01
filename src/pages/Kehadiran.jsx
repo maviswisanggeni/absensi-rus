@@ -26,25 +26,25 @@ function Kehadiran() {
 
             <CircularStatistic
               name="Masuk"
-              firstValue={contextListAbsen.jmlKehadiran?.jml_masuk}
-              secondValue={contextListAbsen.jmlKehadiran?.jml_karyawan}
-              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_masuk} / ${contextListAbsen.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
+              firstValue={context.jmlKehadiran?.jml_masuk}
+              secondValue={context.jmlKehadiran?.jml_karyawan}
+              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_masuk} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
               imgSrc={masukIcon}
             />
 
             <CircularStatistic
               name="Keluar"
-              firstValue={contextListAbsen.jmlKehadiran?.jml_pulang}
-              secondValue={contextListAbsen.jmlKehadiran?.jml_karyawan}
-              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_pulang} / ${contextListAbsen.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
+              firstValue={context.jmlKehadiran?.jml_pulang}
+              secondValue={context.jmlKehadiran?.jml_karyawan}
+              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_pulang} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
               imgSrc={keluarIcon}
             />
 
             <CircularStatistic
               name="Absen"
-              firstValue={contextListAbsen.jmlKehadiran?.jml_absen}
-              secondValue={contextListAbsen.jmlKehadiran?.jml_karyawan}
-              uiValue={contextListAbsen.loading ? <p className='p2'>{`${contextListAbsen.jmlKehadiran?.jml_absen}`} Orang</p> : <div className='dots loading'></div>}
+              firstValue={context.jmlKehadiran?.jml_absen}
+              secondValue={context.jmlKehadiran?.jml_karyawan}
+              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_absen}`} Orang</p> : <div className='dots loading'></div>}
               imgSrc={absenIcon}
             />
           </div>
@@ -54,7 +54,7 @@ function Kehadiran() {
         </div>
         <div className='sidebar-right'>
           <Profile />
-          <Calender tanggal={contextListAbsen.setTanggal} bulan={contextListAbsen.setBulan} tahun={contextListAbsen.setTahun} />
+          <Calender tanggal={context.setTanggal} bulan={context.setBulan} tahun={context.setTahun} />
           <KehadiranTerbaru />
         </div>
       </TanggalKehadiranProvider>
