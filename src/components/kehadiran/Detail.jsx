@@ -95,19 +95,25 @@ function Detail() {
                                 <p>{checkNull(detail?.absen?.catatan_masuk)}</p>
                             </div>
                             <div className='coordinates'>
-                                <div>
+                                <div className='location'>
                                     <h3>Lokasi</h3>
                                     <p>{checkNull(detail?.absen?.lokasi_masuk)}</p>
                                 </div>
-                                {popUpMapMasuk &&
-                                    <>
-                                        <Map latitude={detail?.absen?.latitude_masuk} longitude={detail?.absen?.longitude_masuk} loading={loading} />
-                                        <div className='wrapper-close'>
-                                            <img src={close} className='close' onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
-                                        </div>
-                                    </>
-                                }
-                                <img className='mape' src={map} onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
+                                <div className='map-and-status'>
+                                    {popUpMapMasuk &&
+                                        <>
+                                            <Map latitude={detail?.absen?.latitude_masuk} longitude={detail?.absen?.longitude_masuk} loading={loading} />
+                                            <div className='wrapper-close'>
+                                                <img src={close} className='close' onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
+                                            </div>
+                                        </>
+                                    }
+                                    <img className='mape' src={map} onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
+                                    <div className='wrapper-status'>
+                                        <div className={`valid-masuk-pulang ${detail?.absen?.is_valid_masuk === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
+                                        <p className='status'>{checkNull(detail?.absen?.is_valid_masuk === '1' ? 'Didalam' : 'Diluar')}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -145,21 +151,29 @@ function Detail() {
                                 <p>{checkNull(detail?.absen?.catatan_pulang)}</p>
                             </div>
                             <div className='coordinates'>
-                                <div>
+                                <div className='location'>
                                     <h3>Lokasi</h3>
                                     <p>{checkNull(detail?.absen?.lokasi_pulang)}</p>
                                 </div>
-                                {popUpMapKeluar
-                                    && detail?.absen?.latitude_pulang
-                                    &&
-                                    <>
-                                        <Map latitude={detail?.absen?.latitude_pulang} longitude={detail?.absen?.longitude_pulang} loading={loading} />
-                                        <div className='wrapper-close'>
-                                            <img src={close} className='close' onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
+                                <div className='map-and-status'>
+                                    {popUpMapKeluar
+                                        && detail?.absen?.latitude_pulang
+                                        &&
+                                        <>
+                                            <Map latitude={detail?.absen?.latitude_pulang} longitude={detail?.absen?.longitude_pulang} loading={loading} />
+                                            <div className='wrapper-close'>
+                                                <img src={close} className='close' onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
+                                            </div>
+                                        </>
+                                    }
+                                    <img className='mape' src={map} onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
+                                    { detail?.absen?.latitude_pulang === null ? null : 
+                                        <div className='wrapper-status'>
+                                            <div className={`valid-masuk-pulang ${detail?.absen?.is_valid_pulang === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
+                                            <p className='status'>{checkNull(detail?.absen?.is_valid_pulang === '1' ? 'Didalam' : 'Diluar')}</p>
                                         </div>
-                                    </>
-                                }
-                                <img className='mape' src={map} onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

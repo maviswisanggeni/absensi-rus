@@ -22,7 +22,7 @@ function DetailProfile(props) {
             <div className='div-2'>
                 <div className='info'>
                     <h3>Jabatan</h3>
-                    <p>{checkNull(props?.data?.absen.user?.jenis_user)}</p>
+                    <p>{checkNull(props?.data?.absen.user?.jabatan)}</p>
                 </div>
                 <div className='info'>
                     <h3>Nomer HP</h3>

@@ -42,6 +42,10 @@ function Table() {
     }
   }
 
+  function isImgUrl(url) {
+    return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+}
+
   return (
     <>
       <table className='table'>
@@ -64,7 +68,7 @@ function Table() {
                 <tr key={key} onClick={() => handleDetail(item.id)}>
                   <td className='niy-col'>{item?.niy}</td>
                   <td className='row-img'>
-                    <img src={item?.pf_foto ? item?.pf_foto : defaultUser} alt="" />
+                    <img src={isImgUrl(item?.pf_foto) ? item?.pf_foto : defaultUser} alt="" />
                     {item?.nama}
                   </td>
                   <td>{item?.jenis_user}</td>

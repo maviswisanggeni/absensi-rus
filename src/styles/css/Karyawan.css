@@ -111,6 +111,9 @@
   color: #9B9B9B;
   font-size: 14px;
 }
+.karyawan .row-img {
+  padding: 0.5rem 0;
+}
 .karyawan .niy-col {
   padding-left: 1.5rem;
   color: #3661EB;

@@ -26,7 +26,8 @@ function Table() {
                         <th>Nama</th>
                         <th>NIY</th>
                         <th>Jabatan</th>
-                        <th>Masuk</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -40,12 +41,14 @@ function Table() {
                                 return (
                                     <tr key={key}>
                                         <td className='row-img'>
+                                            <div className={`valid-masuk-pulang ${item?.is_valid_masuk === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
                                             <img src={item?.pf_foto ? item?.pf_foto : defaultFoto} alt="" />
                                             {item?.user?.nama}
                                         </td>
                                         <td>{item?.user?.niy}</td>
                                         <td>{item?.user?.jenis_user}</td>
-                                        <td>{item?.waktu_masuk}</td>
+                                        <td>{item?.tanggal_masuk}</td>
+                                        <td>{item?.waktu_masuk.slice(0, 5)}</td>
                                         <td>
                                             <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
                                         </td>
