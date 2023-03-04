@@ -30,9 +30,22 @@
           justify-content: space-between;
   margin-bottom: 2rem;
 }
-.karyawan .search-and-profile .search {
-  width: 30%;
+.karyawan .search-and-profile .wrap-search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.karyawan .search-and-profile .wrap-search .search {
+  width: 300px;
+  height: 48px;
   margin-right: 1rem;
+  background-color: #F3F3F3;
+}
+.karyawan .search-and-profile .wrap-search .btn-search {
+  height: 48px;
 }
 .karyawan .search-and-profile .profile {
   width: 25%;

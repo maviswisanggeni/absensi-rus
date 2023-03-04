@@ -14,6 +14,7 @@ function KehadiranJmlKehadiranProvider ({children}) {
     const [tanggal, setTanggal] = useState(new Date().getDate())
     const [bulan, setBulan] = useState(new Date().getMonth() + 1)
     const [tahun, setTahun] = useState(new Date().getFullYear())
+    const [startTime, setStartTime] = useState(formatDate(new Date()))
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
 
@@ -22,9 +23,10 @@ function KehadiranJmlKehadiranProvider ({children}) {
             const url = "https://absensiguru.smkrus.com/api/kehadiran"
             setLoading(false);
             const request = {
-                tanggal: tanggal,
-                bulan: bulan,
-                tahun: tahun,
+                // tanggal: tanggal,
+                // bulan: bulan,
+                // tahun: tahun,
+                start_time: startTime,
             }
             axios.get(url, 
                 {
@@ -41,7 +43,7 @@ function KehadiranJmlKehadiranProvider ({children}) {
                 })
         }
         getDataJmlKehadiran();
-    }, [tanggal, bulan, tahun]);
+    }, [startTime]);
 
     const contextValue = {
         jmlKehadiran,
@@ -53,6 +55,7 @@ function KehadiranJmlKehadiranProvider ({children}) {
         tahun, setTahun,
         bulan, setBulan,
         tanggal, setTanggal,
+        startTime, setStartTime,
     }
     return(
         <ContextApiKehadiranJmlKehadiran.Provider value={contextValue}>

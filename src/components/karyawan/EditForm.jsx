@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import close from '../../assets/icons/close.svg'
 import eye from '../../assets/icons/eye.svg'
 import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
@@ -7,9 +7,13 @@ import Label from './Label'
 
 function EditForm({detailData}) {
     const context = useApiKaryawanUpdate()
-
+    const [passwordShown, setPasswordShown] = useState(false);
     function handleChange(e){
         context.setAlamat(e.target.value)
+    }
+
+    function handleUnhide(){
+        setPasswordShown(passwordShown ? false : true);
     }
 
     return (
@@ -29,11 +33,11 @@ function EditForm({detailData}) {
                 value={context.email} 
                 func={context.setEmail} 
                 />
-                <Input className='password' type='password' placeholder='Password' 
+                <Input className='password' type={passwordShown ? 'text' : 'password'} placeholder='Password' 
                 value='fkodskofksdof' 
                 // func={context.setPassword} 
                 />
-                <img src={eye} />
+                <img src={eye} onClick={handleUnhide}/>
             </div>
 
             <div className='no-hp'>

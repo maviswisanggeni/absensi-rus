@@ -25,8 +25,9 @@ function KehadiranTerbaru() {
 
         <ul>
           {
-            context.loading ?
-            context.listAbsensiMasuk?.map((item, index) => (
+            !context.loading ? <div className='loading'></div> 
+            : context.listAbsensiMasuk?.length === 0 ? <div className='no-data'>Tidak ada data</div>
+            :context.listAbsensiMasuk?.map((item, index) => (
               <li key={index}>
                 <img src={item?.pf_foto ? item?.pf_foto : userFoto} alt="" />
                 <div>
@@ -35,7 +36,6 @@ function KehadiranTerbaru() {
                 </div>
               </li>
             ))
-            : <div className='loading'></div>
           }
         </ul>
     </div>

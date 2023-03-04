@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router";
 
 const ContextApiKalender = createContext({})
 
@@ -11,6 +12,7 @@ function KalenderProvider ({children}) {
     const [listKalender, setListKalender] = useState([])
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
+    const navigate = useNavigate();
     
     async function getKalender() {
         const url = "https://absensiguru.smkrus.com/api/kalender"
@@ -29,6 +31,9 @@ function KalenderProvider ({children}) {
             })
     }
     useEffect(() => {
+        if(!token){
+            navigate('/login')
+        }
         getKalender();
     }, []);
 

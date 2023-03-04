@@ -15,6 +15,7 @@ function CustomCalendar(props) {
 
     useEffect(() => {
       props.func(formatDate(value))
+      props.setStartTime(formatDate(value))
       props.tanggal(value.getDate())
       props.bulan(value.getMonth() + 1)
       props.tahun(value.getFullYear())
@@ -32,7 +33,9 @@ CustomCalendar.defaultProps = {
   func: () => {},
   tanggal: () => {},
   bulan: () => {},
-  tahun: () => {}
+  tahun: () => {},
+  setStartTime: () => {},
+  
 }
 
 export default CustomCalendar

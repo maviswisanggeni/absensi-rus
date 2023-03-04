@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router";
 
 const ContextApiKaryawan = createContext({})
 
@@ -17,6 +18,7 @@ function KaryawanProvider ({children}) {
     const [current, setCurrent] = useState(1)
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
+    const navigate = useNavigate();
 
     async function getKaryawan() {
         const url = "https://absensiguru.smkrus.com/api/karyawan"
@@ -37,6 +39,9 @@ function KaryawanProvider ({children}) {
             })
     }
     useEffect(() => {
+        if(!token){
+            navigate('/login')
+        }
         getKaryawan();
     }, []);
 

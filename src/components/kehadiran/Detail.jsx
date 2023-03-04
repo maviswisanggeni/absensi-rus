@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import hamburger from '../../assets/icons/hamburger.svg'
+import map from '../../assets/images/map.png'
 import close from '../../assets/icons/close.svg'
 import Map from './Map'
 
@@ -46,7 +46,7 @@ function Detail() {
         return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
     }
 
-    function checkNull(data){
+    function checkNull(data) {
         return data ? data : '-'
     }
 
@@ -65,15 +65,15 @@ function Detail() {
                         <div className='jam-masuk'>
                             <h3>Masuk</h3>
                             <p>
-                                {   
-                                    detail?.absen?.tanggal_masuk 
-                                    ? dayjs(detail?.absen?.tanggal_masuk).format('dddd DD MMM YYYY') + ', '
-                                    : '-'
-                                } 
-                                { 
+                                {
+                                    detail?.absen?.tanggal_masuk
+                                        ? dayjs(detail?.absen?.tanggal_masuk).format('dddd DD MMM YYYY') + ', '
+                                        : '-'
+                                }
+                                {
                                     detail?.absen?.waktu_masuk ?
-                                    detail?.absen?.waktu_masuk.slice(0, 5)
-                                    : ''
+                                        detail?.absen?.waktu_masuk.slice(0, 5)
+                                        : ''
                                 }
                             </p>
                         </div>
@@ -81,7 +81,7 @@ function Detail() {
                         <div className='card'>
                             {
                                 loading ? <img className={`foto-masuk`} src={detail?.absen?.foto_masuk} alt="" onClick={() => setPopUpMasuk(popUpMasuk ? false : true)} />
-                                : <div className={`foto-masuk ${loading && 'shimmer'}`}></div>
+                                    : <div className={`foto-masuk ${loading && 'shimmer'}`}></div>
                             }
                             {
                                 popUpMasuk &&
@@ -107,9 +107,7 @@ function Detail() {
                                         </div>
                                     </>
                                 }
-                                                                        {/* <Map latitude={detail?.absen?.latitude_masuk} longitude={detail?.absen?.longitude_masuk} loading={loading} /> */}
-
-                                <img src={hamburger} onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
+                                <img className='mape' src={map} onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
                             </div>
                         </div>
                     </div>
@@ -119,22 +117,22 @@ function Detail() {
                             <p>
                                 {
                                     detail?.absen?.tanggal_pulang
-                                    ? dayjs(detail?.absen?.tanggal_pulang).format('dddd DD MMM YYYY') + ','
-                                    : '-'
+                                        ? dayjs(detail?.absen?.tanggal_pulang).format('dddd DD MMM YYYY') + ','
+                                        : '-'
                                 }
                                 {
                                     detail?.absen?.waktu_pulang
-                                    ? detail?.absen?.waktu_pulang?.slice(0, 5)
-                                    : ''
+                                        ? detail?.absen?.waktu_pulang?.slice(0, 5)
+                                        : ''
                                 }
                             </p>
                         </div>
 
                         <div className='card'>
-                            {                    
-                                !loading ?  <div className={`foto-masuk ${loading && 'shimmer'}`}></div> 
-                                : !isImgUrl(detail?.absen?.foto_pulang) && loading ? <div className='default-foto'>Belum Keluar</div>
-                                : <img className='foto-masuk' src={detail?.absen?.foto_pulang} alt="" onClick={() => setPopUpKeluar(popUpKeluar ? false : true)} />
+                            {
+                                !loading ? <div className={`foto-masuk ${loading && 'shimmer'}`}></div>
+                                    : !isImgUrl(detail?.absen?.foto_pulang) && loading ? <div className='default-foto'>Belum Keluar</div>
+                                        : <img className='foto-masuk' src={detail?.absen?.foto_pulang} alt="" onClick={() => setPopUpKeluar(popUpKeluar ? false : true)} />
                             }
                             {
                                 popUpKeluar &&
@@ -161,7 +159,7 @@ function Detail() {
                                         </div>
                                     </>
                                 }
-                                <img src={hamburger} onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
+                                <img className='mape' src={map} onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
                             </div>
                         </div>
                     </div>

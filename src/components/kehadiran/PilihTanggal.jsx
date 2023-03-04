@@ -17,28 +17,25 @@ function PilihTanggal(props) {
     if (!e.target.closest(`.${drop.current.className}`) && open) {
       setOpen(false);
     }
-    // if(inputRef.current && !inputRef.current.contains(e.target)){
-    //   setOpen(false)
-    // }
   }
-
-  // useEffect(() => {
-  //     document.addEventListener("click", handleClick);
-  //     return () => {
-  //       document.removeEventListener("click", handleClick);
-  //     };
-  // });
 
   function change(e) {
     props.funcTanggal(e)
     props.funcTime(formatDate(e))
     props.funcText(formatDate(e))
+    props?.setStartTime(formatDate(e))
+    props?.setEndTime(formatDate(e))
   }
 
   useEffect(() => {
     contextSearch.setStartTime(contextTanggal.startTime)
-    contextSearch.setEndTime(contextTanggal.endTime)
+    if(contextTanggal.endText !== 'Tanggal mulai'){
+      contextSearch.setEndTime(contextTanggal.endTime)
+    }
+    // contextSearch.setEndTime(contextTanggal.endTime)
   }, [props.text])
+
+  // make optional props for pilih tanggal  
 
   return (
     <div className='pilih-tanggal' ref={inputRef}>
@@ -49,6 +46,11 @@ function PilihTanggal(props) {
       {open && <Calendar onChange={change} value={props.value} />}
     </div>
   )
+}
+
+PilihTanggal.defaultProps = {
+  setStartTime: () => {},
+  setEndTime: () => {},
 }
 
 export default PilihTanggal

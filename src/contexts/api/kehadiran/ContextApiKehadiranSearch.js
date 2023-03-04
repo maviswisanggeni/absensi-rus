@@ -14,23 +14,23 @@ function KehadiranSearchProvider ({children}) {
     const [listSearchMasuk, setListSearchMasuk] = useState([]);
     const [search , setSearch] = useState(null);
     const [startTime, setStartTime] = useState(formatDate(new Date()))
-    const [endTime, setEndTime] = useState(formatDate(new Date()))
+    const [endTime, setEndTime] = useState(null)
     const [loading, setLoading] = useState(true);
     const token = localStorage.getItem('token');
-
     async function getSearch() {
-        const url = "https://absensiguru.smkrus.com/api/kehadiran/search"
+        const url = "https://absensiguru.smkrus.com/api/kehadiran"
         setLoading(false);
         const request = {
             search: search,
             start_time: startTime,
-            end_time: endTime,
+            end_time: endTime === null ? null : endTime,
         }
-        return axios.post(url, request, {
+        return axios.get(url, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
                 },
+                params: request
             })
     }
 

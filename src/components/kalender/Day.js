@@ -38,7 +38,7 @@ export default function Day({ day, rowIdx }) {
                 <div key={idx} className='day-events' 
                 style={{backgroundColor: evt?.is_libur === '1' ? "#21D2FF" : '#EA4D90'}} 
                 onClick={() => setSelectedEvent(evt)}>
-                    {evt.judul}
+                    {context.loading ? evt.judul : 'Loading...'}
                 </div>
             ))}
         </div>

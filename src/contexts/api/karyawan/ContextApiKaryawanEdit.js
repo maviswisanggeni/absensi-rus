@@ -13,6 +13,7 @@ function KaryawanUpdateProvider ({children}) {
     const [alamat, setAlamat] = useState('')
     const [noHp, setnoHp] = useState('')
     const [jenisUser, setjenisUser] = useState('Pengajar')
+    const [foto, setFoto] = useState([])
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
 
@@ -25,6 +26,7 @@ function KaryawanUpdateProvider ({children}) {
         formData.append('alamat', alamat);
         formData.append('no_hp', noHp);
         formData.append('jenis_user', jenisUser);
+        formData.append('pf_foto', foto);
 
         return axios({
             method: 'post',
@@ -53,6 +55,7 @@ function KaryawanUpdateProvider ({children}) {
         noHp, setnoHp,
         jenisUser, setjenisUser,
         loading, setLoading,
+        foto, setFoto,
         updateUser,
     }
 

@@ -54,7 +54,9 @@ function Kehadiran() {
         </div>
         <div className='sidebar-right'>
           <Profile />
-          <Calender tanggal={context.setTanggal} bulan={context.setBulan} tahun={context.setTahun} />
+          <Calender tanggal={context.setTanggal} bulan={context.setBulan} tahun={context.setTahun} 
+            setStartTime={context.setStartTime}
+          />
           <KehadiranTerbaru />
         </div>
       </TanggalKehadiranProvider>

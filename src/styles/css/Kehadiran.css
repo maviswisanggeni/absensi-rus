@@ -25,9 +25,9 @@
 .kehadiran .search-calendar .search {
   background-position: 5% 50%;
   background-size: 13px;
-  border: none;
+  border: 2px solid #EBF0FE;
   width: 60%;
-  padding: 0.5rem;
+  padding: 0.5rem 2.5rem;
   outline: none;
   font-weight: 400;
 }
@@ -92,27 +92,6 @@
   font-size: 10px;
   color: #A6A6A6;
 }
-.kehadiran .search-calendar .btn-search {
-  width: 50px;
-  height: 35px;
-  border-radius: 3px;
-  border: 2px solid #ECEEF2;
-  background-color: white;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.kehadiran .search-calendar .btn-search img {
-  width: 13px;
-  height: 13px;
-}
 .kehadiran .tabbar-filter {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -151,6 +130,9 @@
       -ms-flex-pack: center;
           justify-content: center;
   gap: 2rem;
+}
+.kehadiran table .loading-table td {
+  font-size: 14px;
 }
 .kehadiran table .loading::before {
   margin: 0;
@@ -335,7 +317,7 @@
 .detail .main .detail-profile .div-1 h3 {
   font-size: 14px;
   font-weight: 400;
-  color: #5A6474;
+  color: #5a6474;
   margin: 1rem 0 0.25rem;
 }
 .detail .main .detail-profile .div-1 p {
@@ -372,6 +354,11 @@
   margin-top: 5rem;
   text-decoration: none;
   font-size: 14px;
+}
+.detail .mape {
+  width: 40px;
+  height: 40px;
+  position: relative;
 }
 .detail .map {
   display: -webkit-box;

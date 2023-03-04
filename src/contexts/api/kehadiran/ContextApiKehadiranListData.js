@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router";
+import formatDate from "../../../components/useFormatCalendar";
 
 const ContextApiKehadiranList = createContext({})
 
@@ -18,31 +19,21 @@ function KehadiranListProvider ({children}) {
     const [tanggal, setTanggal] = useState(new Date().getDate())
     const [bulan, setBulan] = useState(new Date().getMonth() + 1)
     const [tahun, setTahun] = useState(new Date().getFullYear())
+    const [startTime, setStartTime] = useState(formatDate(new Date()))
+    const [endTime, setEndTime] = useState(null)
     const [jmlKehadiran, setJmlKehadiran] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
 
     const token = localStorage.getItem("token");
 
-    let dummydata = 
-    [
-        {
-            "id": 1,
-            "nip": "1234567890",
-            "nama": "Nama Guru",
-        },
-        {
-            "id": 2,
-            "nip": "1234567890",
-            "nama": "Nama Guru",
-        },
-    ]
-
     function getDataJmlKehadiran() {
         const url = "https://absensiguru.smkrus.com/api/kehadiran"
         const request = {
-            tanggal: tanggal,
-            bulan: bulan,
-            tahun: tahun,
+            // tanggal: tanggal,
+            // bulan: bulan,
+            // tahun: tahun,
+            start_time: startTime,
+            end_time: endTime,
         }
         setLoading(false);
         return axios.get(url, 
@@ -57,7 +48,6 @@ function KehadiranListProvider ({children}) {
                 setListAbsensiKeluar(response.data.data.list_absen.pulang.data);
                 setJmlKehadiran(response.data.data.jml_kehadiran);
                 setLoading(true);
-                // setKehadiranTerbaru(response.data.data)
             }).catch((error) => {
                 console.log(error);
             })
@@ -81,6 +71,8 @@ function KehadiranListProvider ({children}) {
         jmlKehadiran, setJmlKehadiran,
         currentPage, setCurrentPage,
         urutan, setUrutan,
+        startTime, setStartTime,
+        endTime, setEndTime,
         getDataJmlKehadiran
     }
 

@@ -24,9 +24,20 @@
         justify-content: space-between;
         margin-bottom: 2rem;
 
-        .search{
-            width: 30%;
-            margin-right: 1rem;
+        .wrap-search{
+            display: flex;
+            align-items: center;
+
+            .search{
+                width: 300px;
+                height: 48px;
+                margin-right: 1rem;
+                background-color: #F3F3F3;
+            }
+            
+            .btn-search{
+                height: 48px;
+            }
         }
 
         .profile{

@@ -50,7 +50,6 @@ function Table() {
             <th>NIY</th>
             <th>Nama</th>
             <th>Jabatan</th>
-            <th>Gender</th>
             <th>Nomer HP</th>
             <th>Email</th>
           </tr>
@@ -58,8 +57,8 @@ function Table() {
 
         <tbody>
           {
-            !context.loading ? <tr className='loading loading-table'>loading...</tr> 
-            : currentTableData.length === 0 ? <tr className='loading-table'>Data tidak ditemukan</tr> :
+            !context.loading ? <tr className='loading loading-table'><td>loading...</td></tr> 
+            : currentTableData.length === 0 ? <tr className='loading-table'><td>Data tidak ditemukan</td></tr> :
             currentTableData?.map((item, key) => {
               return (
                 <tr key={key} onClick={() => handleDetail(item.id)}>
@@ -69,7 +68,7 @@ function Table() {
                     {item?.nama}
                   </td>
                   <td>{item?.jenis_user}</td>
-                  <td>{item?.alamat}</td>
+                  {/* <td>{item?.alamat}</td> */}
                   <td>{item?.no_hp}</td>
                   <td>{item?.email}</td>
                   <td className='action-col'>
