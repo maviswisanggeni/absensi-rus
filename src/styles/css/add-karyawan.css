@@ -60,6 +60,11 @@
           flex-direction: column;
   padding: 2rem 2.5rem;
 }
+.add-karyawan .form .validator-text {
+  color: #FF4530;
+  font-size: 12px;
+  margin: 0.25rem 1rem 0rem;
+}
 .add-karyawan .form label {
   font-size: 18px;
   font-weight: 500;
@@ -100,7 +105,7 @@
           flex-direction: column;
   position: relative;
 }
-.add-karyawan .form .nama, .add-karyawan .form .niy, .add-karyawan .form .email, .add-karyawan .form .no-hp, .add-karyawan .form .jabatan-gender {
+.add-karyawan .form .nama, .add-karyawan .form .email, .add-karyawan .form .no-hp, .add-karyawan .form .jabatan-gender {
   margin-bottom: 1rem;
 }
 .add-karyawan .form .nama img {
@@ -112,9 +117,6 @@
   right: 0;
   -webkit-transform: translate(-50%, 225%);
           transform: translate(-50%, 225%);
-}
-.add-karyawan .form .niy input:nth-child(2) {
-  margin-bottom: 0.5rem;
 }
 .add-karyawan .form .niy img {
   width: 24px;

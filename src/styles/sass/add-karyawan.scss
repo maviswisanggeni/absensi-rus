@@ -51,6 +51,12 @@
         flex-direction: column;
         padding: 2rem 2.5rem;
 
+        .validator-text{
+            color:  #FF4530;
+            font-size: 12px;
+            margin: .25rem 1rem 0rem;
+        }
+
         label{
             font-size: 18px;
             font-weight: 500;
@@ -78,7 +84,7 @@
             position: relative;
         }
 
-        .nama, .niy, .email, .no-hp, .jabatan-gender{
+        .nama, .email, .no-hp, .jabatan-gender{
             margin-bottom: 1rem;
         }
 
@@ -96,7 +102,7 @@
 
         .niy{
             input:nth-child(2){
-                margin-bottom: .5rem;
+                // margin-bottom: .5rem;
             }
 
             img{

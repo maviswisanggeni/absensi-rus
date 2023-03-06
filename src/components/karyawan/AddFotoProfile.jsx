@@ -34,7 +34,6 @@ function FotoProfile() {
     };
 
     const handleChange = function (e) {
-        e.preventDefault();
         if (e.target.files && e.target.files[0]) {
             // at least one file has been selected so do something
             // handleFiles(e.target.files);

@@ -111,7 +111,7 @@ function Detail() {
                                     <img className='mape' src={map} onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
                                     <div className='wrapper-status'>
                                         <div className={`valid-masuk-pulang ${detail?.absen?.is_valid_masuk === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
-                                        <p className='status'>{checkNull(detail?.absen?.is_valid_masuk === '1' ? 'Didalam' : 'Diluar')}</p>
+                                        <p className='status'>{checkNull(detail?.absen?.is_valid_masuk === '1' ? 'Di dalam sekolah' : 'Di luar sekolah')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@ function Detail() {
                                     { detail?.absen?.latitude_pulang === null ? null : 
                                         <div className='wrapper-status'>
                                             <div className={`valid-masuk-pulang ${detail?.absen?.is_valid_pulang === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
-                                            <p className='status'>{checkNull(detail?.absen?.is_valid_pulang === '1' ? 'Didalam' : 'Diluar')}</p>
+                                            <p className='status'>{checkNull(detail?.absen?.is_valid_pulang === '1' ? 'Di dalam sekolah' : 'Di luar sekolah')}</p>
                                         </div>
                                     }
                                 </div>

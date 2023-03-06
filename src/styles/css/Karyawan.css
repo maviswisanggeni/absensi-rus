@@ -327,6 +327,28 @@
   padding: 2rem 2rem;
   gap: 1.5rem;
 }
+.detail-karyawan .detail-profile .wrapper-img {
+  position: relative;
+}
+.detail-karyawan .detail-profile .wrapper-img .edit-img {
+  width: 35px;
+  height: 35px;
+  background-color: #3661EB;
+  border-radius: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.detail-karyawan .detail-profile .wrapper-img .edit-img img {
+  width: 20px;
+  height: 20px;
+}
+.detail-karyawan .detail-profile .wrapper-img .edit-img input {
+  display: none;
+}
 .detail-karyawan .detail-profile .jabatan {
   margin-bottom: 1.5rem;
 }

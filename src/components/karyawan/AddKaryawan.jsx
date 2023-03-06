@@ -11,10 +11,21 @@ function AddKaryawan() {
     let navigate = useNavigate()
     async function addUser(e) {
         e.preventDefault();
-        context.storeUser().then(() => {
-            navigate('/karyawan')
+        context.setLoading(false)
+        context.storeUser().then((res) => {
+            if(res.status === 200){
+                context.setLoading(true)
+                navigate('/karyawan')
+            }
+        })
+        .catch((res) => {
+            console.log(res);
+            if(res.message === 'Request failed with status code 400'){
+                context.setLoading(true)
+            }
         })
     }
+    console.log(context.loading);
     return (
         <form className='add-karyawan' onSubmit={addUser}>
             <div className='navigation'>
@@ -31,6 +42,7 @@ function AddKaryawan() {
                 <Form/>
                 <FotoProfile/>
             </div>
+            {!context.loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
         </form>
     )
 }

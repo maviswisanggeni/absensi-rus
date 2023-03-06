@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import axios from 'axios';
+import { useParams } from "react-router";
 
 const ContextApiKaryawanUpadate = createContext({})
 
@@ -16,11 +17,12 @@ function KaryawanUpdateProvider ({children}) {
     const [foto, setFoto] = useState([])
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
-
+    let idKaryawan = useParams()
     async function updateUser() {
         const url = "https://absensiguru.smkrus.com/api/karyawan/update-user"
         setLoading(false);
         const formData = new FormData();
+        formData.append('id', idKaryawan.id);
         formData.append('nama', nama);
         formData.append('email', email);
         formData.append('alamat', alamat);

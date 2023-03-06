@@ -287,6 +287,32 @@
         padding: 2rem 2rem;
         gap: 1.5rem;
 
+        .wrapper-img{
+            position: relative;
+            .edit-img{
+                width: 35px;
+                height: 35px;
+                background-color: $primary-color;
+                border-radius: 100%;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+
+                img{
+                    width: 20px;
+                    height: 20px;
+                }
+    
+                input{
+                    display: none;
+                }
+            }
+        }
+
+
         .jabatan{
             margin-bottom: 1.5rem;
         }

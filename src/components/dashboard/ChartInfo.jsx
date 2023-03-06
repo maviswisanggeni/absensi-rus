@@ -18,14 +18,14 @@ function ChartInfo() {
         }
       </p>
 
-      <div className='role pengajar'>
+      {/* <div className='role pengajar'>
         <div></div>
         <p>Pengajar</p>
       </div>
       <div className='role staff'>
         <div></div>
         <p>Staff</p>
-      </div>
+      </div> */}
       <ButtonDownload />
     </div>
   )

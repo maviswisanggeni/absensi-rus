@@ -69,6 +69,12 @@
             // display: flex;
             flex: 1 1 0%;
             cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .handle-add:hover{
+            background-color: rgb(161, 161, 161);
         }
 
         header{

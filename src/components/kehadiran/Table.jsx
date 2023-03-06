@@ -17,7 +17,15 @@ function Table() {
         return context.keterangan === 'Pulang' ? context.listAbsensiKeluar?.slice(firstPageIndex, lastPageIndex)
             : context.listAbsensiMasuk?.slice(firstPageIndex, lastPageIndex);
     }, [context.currentPage, context.keterangan, context.listAbsensiKeluar, context.listAbsensiMasuk, context.urutan]);
+    console.log(context.keterangan)
 
+    function checkKeterangan(masuk, pulang){
+        if(context.keterangan === 'Masuk'){
+            return masuk
+        }else{
+            return pulang
+        }
+    }
     return (
         <>
             <table className='table'>
@@ -41,13 +49,13 @@ function Table() {
                                 return (
                                     <tr key={key}>
                                         <td className='row-img'>
-                                            <div className={`valid-masuk-pulang ${item?.is_valid_masuk === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
+                                            <div className={`valid-masuk-pulang ${checkKeterangan(item?.is_valid_masuk, item?.is_valid_pulang) === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
                                             <img src={item?.pf_foto ? item?.pf_foto : defaultFoto} alt="" />
                                             {item?.user?.nama}
                                         </td>
                                         <td>{item?.user?.niy}</td>
                                         <td>{item?.user?.jenis_user}</td>
-                                        <td>{item?.tanggal_masuk}</td>
+                                        <td>{checkKeterangan(item?.tanggal_masuk, item?.tanggal_pulang)}</td>
                                         <td>{item?.waktu_masuk.slice(0, 5)}</td>
                                         <td>
                                             <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
