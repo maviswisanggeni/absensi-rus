@@ -15,7 +15,7 @@ function KaryawanStoreUserProvider({ children }) {
     const [alamat, setAlamat] = useState('')
     const [noHp, setnoHp] = useState('')
     const [jenisUser, setjenisUser] = useState('Pengajar')
-    const [foto, setFoto] = useState([])
+    const [foto, setFoto] = useState(null)
     const [loading, setLoading] = useState(true);
     const token = localStorage.getItem("token");
 

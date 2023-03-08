@@ -5,11 +5,14 @@ import Form from './AddForm'
 import FotoProfile from './AddFotoProfile'
 import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser'
 import '../../styles/css/add-karyawan.css'
+import { useWrapperAddKaryawan } from '../../contexts/app/WrapperAddKaryawan'
 
 function AddKaryawan() {
     const context = useApiKaryawanStoreUser()
+    const contextValidator = useWrapperAddKaryawan()
     let navigate = useNavigate()
     async function addUser(e) {
+        console.log('ini ke submit')
         e.preventDefault();
         context.setLoading(false)
         context.storeUser().then((res) => {
@@ -22,12 +25,12 @@ function AddKaryawan() {
             console.log(res);
             if(res.message === 'Request failed with status code 400'){
                 context.setLoading(true)
+                alert('Isi semua form')
             }
         })
     }
-    console.log(context.loading);
     return (
-        <form className='add-karyawan' onSubmit={addUser}>
+        <div className='add-karyawan'>
             <div className='navigation'>
                 <div>
                     <Link to={'/karyawan'}>
@@ -36,14 +39,24 @@ function AddKaryawan() {
                     <h1>Tambah Karyawan</h1>
                 </div>
 
-                <input type="submit" value='Konfirmasi'/>
+                <button 
+                disabled={
+                    context.nama && context.niy && context.password && context.email 
+                    && context.noHp && context.alamat &&
+                    contextValidator.validatorNama && contextValidator.validatorNIY
+                    && contextValidator.validatorPwd && contextValidator.validatorEmail
+                    && contextValidator.validatorNoHP && contextValidator.validatorAlamat
+                    && context.foto 
+                    ? false : true
+                }
+                onClick={addUser} className='btn-submit'>Konfirmasi</button>
             </div>
             <div className='form-foto-profile'>
                 <Form/>
                 <FotoProfile/>
             </div>
             {!context.loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
-        </form>
+        </div>
     )
 }
 

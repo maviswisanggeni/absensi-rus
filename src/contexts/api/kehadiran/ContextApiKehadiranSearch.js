@@ -17,6 +17,7 @@ function KehadiranSearchProvider ({children}) {
     const [endTime, setEndTime] = useState(null)
     const [loading, setLoading] = useState(true);
     const token = localStorage.getItem('token');
+    console.log(endTime)
     async function getSearch() {
         const url = "https://absensiguru.smkrus.com/api/kehadiran"
         setLoading(false);

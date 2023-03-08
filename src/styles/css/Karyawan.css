@@ -185,6 +185,11 @@
           flex-direction: column;
   padding: 2rem 2.5rem;
 }
+.detail-karyawan .form .validator-text {
+  color: #FF4530;
+  font-size: 12px;
+  margin: 0.25rem 0rem 0rem;
+}
 .detail-karyawan .form label {
   font-size: 18px;
   font-weight: 500;
@@ -237,9 +242,7 @@
   right: 0;
   -webkit-transform: translate(-50%, 225%);
           transform: translate(-50%, 225%);
-}
-.detail-karyawan .form .niy input:nth-child(2) {
-  margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 .detail-karyawan .form .niy img {
   width: 24px;
@@ -251,6 +254,7 @@
   bottom: 0;
   -webkit-transform: translate(-50%, 25%);
           transform: translate(-50%, 25%);
+  cursor: pointer;
 }
 .detail-karyawan .form .alamat textarea {
   height: 150px;

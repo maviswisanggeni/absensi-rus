@@ -17,7 +17,6 @@ function Table() {
         return context.keterangan === 'Pulang' ? context.listAbsensiKeluar?.slice(firstPageIndex, lastPageIndex)
             : context.listAbsensiMasuk?.slice(firstPageIndex, lastPageIndex);
     }, [context.currentPage, context.keterangan, context.listAbsensiKeluar, context.listAbsensiMasuk, context.urutan]);
-    console.log(context.keterangan)
 
     function checkKeterangan(masuk, pulang){
         if(context.keterangan === 'Masuk'){

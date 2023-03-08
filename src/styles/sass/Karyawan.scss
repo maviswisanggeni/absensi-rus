@@ -160,6 +160,12 @@
         flex-direction: column;
         padding: 2rem 2.5rem;
 
+        .validator-text{
+            color:  #FF4530;
+            font-size: 12px;
+            margin: .25rem 0rem 0rem;
+        }
+
         label{
             font-size: 18px;
             font-weight: 500;
@@ -200,14 +206,11 @@
                 position: absolute;
                 right: 0;
                 transform: translate(-50%, 225%);
+                cursor: pointer;
             }
         }
 
         .niy{
-            input:nth-child(2){
-                margin-bottom: .5rem;
-            }
-
             img{
                 width: 24px;
                 height: 24px;
@@ -217,6 +220,7 @@
                 right: 0;
                 bottom: 0;
                 transform: translate(-50%, 25%);
+                cursor: pointer;
             }
         }
 

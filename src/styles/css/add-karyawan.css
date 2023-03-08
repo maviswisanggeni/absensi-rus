@@ -35,7 +35,7 @@
   font-weight: 500;
   margin-left: 2rem;
 }
-.add-karyawan .navigation input {
+.add-karyawan .navigation .btn-submit {
   width: 125px;
   height: 40px;
   background-color: #3661EB;
@@ -43,6 +43,14 @@
   border: none;
   outline: none;
   color: white;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.add-karyawan .navigation .btn-submit:disabled {
+  background-color: #5A6474;
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 .add-karyawan .form-foto-profile {
   display: -webkit-box;
@@ -63,7 +71,7 @@
 .add-karyawan .form .validator-text {
   color: #FF4530;
   font-size: 12px;
-  margin: 0.25rem 1rem 0rem;
+  margin: 0.25rem 0rem 0rem;
 }
 .add-karyawan .form label {
   font-size: 18px;
@@ -117,17 +125,27 @@
   right: 0;
   -webkit-transform: translate(-50%, 225%);
           transform: translate(-50%, 225%);
+  cursor: pointer;
+}
+.add-karyawan .form .niy {
+  margin-bottom: 1.5rem;
+}
+.add-karyawan .form .niy .validator-text.pwd {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
 }
 .add-karyawan .form .niy img {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  margin-bottom: 1rem;
   position: absolute;
   right: 0;
   bottom: 0;
-  -webkit-transform: translate(-50%, 25%);
-          transform: translate(-50%, 25%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 .add-karyawan .form .jabatan-gender {
   display: -webkit-box;
@@ -251,5 +269,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type=number] {
+  -webkit-appearance: textfield;
+          appearance: textfield;
   -moz-appearance: textfield;
 }

@@ -22,6 +22,7 @@ import { KaryawanUpdateProvider } from './contexts/api/karyawan/ContextApiKaryaw
 import WrapperCalendar from './contexts/app/WrapperCalendar';
 import { KalenderProvider } from './contexts/api/kalender/ContextApiKalender';
 import NotFound from './components/NotFound';
+import { WrapperAddKaryawanProvider } from './contexts/app/WrapperAddKaryawan';
 
 function App() {
   return (
@@ -58,7 +59,7 @@ function App() {
                   <KaryawanProvider>
                     <KaryawanStoreUserProvider>
                       <KaryawanUpdateProvider>
-                        <Karyawan />
+                          <Karyawan />
                       </KaryawanUpdateProvider>
                     </KaryawanStoreUserProvider>
                   </KaryawanProvider>
@@ -75,7 +76,13 @@ function App() {
                 }
               />
               <Route path='/login' element={<Login />} />
-              <Route path='/karyawan/add' element={<KaryawanStoreUserProvider><AddKaryawan /></KaryawanStoreUserProvider>} />
+              <Route path='/karyawan/add' element={
+                <KaryawanStoreUserProvider>
+                  <WrapperAddKaryawanProvider>
+                    <AddKaryawan />
+                  </WrapperAddKaryawanProvider>                  
+                </KaryawanStoreUserProvider>} 
+              />
               <Route path='/karyawan/edit/:id' element={<KaryawanUpdateProvider><DetailKaryawan /></KaryawanUpdateProvider>} />
               <Route path='*' element={<NotFound />}/>
             </Routes>

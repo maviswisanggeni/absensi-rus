@@ -29,7 +29,7 @@ function PilihTanggal(props) {
 
   useEffect(() => {
     contextSearch.setStartTime(contextTanggal.startTime)
-    if(contextTanggal.endText !== 'Tanggal mulai'){
+    if(contextTanggal.endText !== 'Tanggal berakhir'){
       contextSearch.setEndTime(contextTanggal.endTime)
     }
     // contextSearch.setEndTime(contextTanggal.endTime)

@@ -9,7 +9,6 @@ export default function Day({ day, rowIdx }) {
     const {setDaySelected, setShowEventModal, savedEvents, setSelectedEvent, selectedEvent} = useContext(GlobalCalendar)
     
     const context = useApiKalender()
-    console.log(dayEvents)
 
     useEffect(() => {
         const events = context.listKalender.filter(evt => dayjs(evt.tanggal).format("DD-MM-YY") === day.format("DD-MM-YY"))
