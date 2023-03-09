@@ -9,4 +9,12 @@ function Input({className, type, placeholder, value, func, setValidator}) {
   )
 }
 
+Input.defaultProps = {
+  // type: 'text',
+  // placeholder: 'Masukkan nama karyawan',
+  // value: '',
+  func: () => {},
+  setValidator: () => {}
+}
+
 export default Input

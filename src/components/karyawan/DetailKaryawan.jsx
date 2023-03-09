@@ -6,6 +6,7 @@ import EditForm from './EditForm'
 import DetailFotoProfile from './DetailFotoProfile'
 import axios from 'axios'
 import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
+import { useWrapperEditKaryawan } from '../../contexts/app/WrapperEditKaryawan'
 
 function DetailKaryawan() {
     let userId = useParams()
@@ -13,6 +14,7 @@ function DetailKaryawan() {
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");  
     const context = useApiKaryawanUpdate()
+    const contextValidator = useWrapperEditKaryawan()
     let navigate = useNavigate()
 
         useEffect(() => {
@@ -58,12 +60,20 @@ function DetailKaryawan() {
                     <h1>Detail Karyawan</h1>
                 </div>
 
-                <input type="submit" value='Konfirmasi' />
+                <input disabled={
+                    context.nama && context.email 
+                    && context.noHp && context.alamat &&
+                    contextValidator.validatorNama && contextValidator.validatorEmail
+                    && contextValidator.validatorNoHP && contextValidator.validatorAlamat
+                    ? false : true
+                } 
+                type="submit" value='Konfirmasi' className='btn-submit'/>
             </div>
             <div className='detail-form'>
                 <EditForm detailData={detail}/>
                 <DetailFotoProfile detailData={detail}/>
             </div>
+            {!loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
         </form>
     )
 }

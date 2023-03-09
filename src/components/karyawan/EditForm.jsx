@@ -2,17 +2,15 @@ import React, { useState } from 'react'
 import close from '../../assets/icons/close.svg'
 import eye from '../../assets/icons/eye.svg'
 import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
+import { useWrapperEditKaryawan } from '../../contexts/app/WrapperEditKaryawan'
 import Input from './Input'
 import Label from './Label'
 
 function EditForm({detailData}) {
     const context = useApiKaryawanUpdate()
+    const contextValidator = useWrapperEditKaryawan()
     const [passwordShown, setPasswordShown] = useState(false);
-    const [validatorNama, setValidatorNama] = useState(false)
-    const [validatorPwd, setValidatorPwd] = useState(false)
-    const [validatorEmail, setValidatorEmail] = useState(false)
-    const [validatorNoHP, setValidatorNoHP] = useState(false)
-    const [validatorAlamat, setValidatorAlamat] = useState(false)
+
     function handleChange(e){
         context.setAlamat(e.target.value)
     }
@@ -25,9 +23,31 @@ function EditForm({detailData}) {
     {
      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
       {
+        contextValidator.setValidatorEmail(true)
         return (true)
       }
+        contextValidator.setValidatorEmail(false)
         return(false)
+    }
+
+    function checkInputNull(input, setValidator){
+        if(input.length === 0){
+            setValidator(false)
+            return false
+        }else{
+            // setValidator(true)
+            return true
+        }
+    }
+
+    function validateNoHp(){
+        if(context.noHp.length < 10){
+            // contextValidator.setValidatorNoHP(false)
+            return false
+        }else{
+            // contextValidator.setValidatorNoHP(true)
+            return true
+        }
     }
 
     return (
@@ -37,10 +57,9 @@ function EditForm({detailData}) {
                 <Input className='nama' type='text' placeholder='Masukkan nama karyawan' 
                 value={context.nama}
                 func={context.setNama}
-                setValidator={setValidatorNama}
                 />
                 <p className='validator-text'>
-                    { context.nama.length === 0 && validatorNama ? 'Isi nama' : ''}
+                    { checkInputNull(context.nama, contextValidator.setValidatorNama) ? '' : 'Isi nama'}
                 </p>                
                 <img src={close} onClick={() => context.setNama('')}/>
             </div>
@@ -50,10 +69,9 @@ function EditForm({detailData}) {
                 <Input className='email' type='email' placeholder='Masukkan Email' 
                 value={context.email} 
                 func={context.setEmail} 
-                setValidator={setValidatorEmail}
                 />
                 <p className='validator-text'>
-                    { context.email.length === 0 && validatorEmail ? 'Isi email' : !ValidateEmail(context.email) && validatorEmail ? 'Email tidak valid' : ''}
+                    { !checkInputNull(context.email, contextValidator.setValidatorEmail)? 'Isi email' : !ValidateEmail(context.email) ? 'Email tidak valid' : ''}
                 </p>                
                 <Input className='password' type={passwordShown ? 'text' : 'password'} placeholder='Password' 
                 value='fkodskofksdof' 
@@ -71,18 +89,17 @@ function EditForm({detailData}) {
                 <Input className='no-hp' type='number' placeholder='Masukkan Nomer HP' 
                 value={context.noHp} 
                 func={context.setnoHp} 
-                setValidator={setValidatorNoHP}
                 />
                 <p className='validator-text'>
-                    { context.noHp.length === 0 && validatorNoHP ? 'Isi Nomor HP' : context.noHp.length < 10 && validatorNoHP? 'Nomor tidak valid' : ''}
+                    { !checkInputNull(context.noHp, contextValidator.setValidatorNoHP) ? 'Isi Nomor HP' : !validateNoHp() ? 'Nomor tidak valid' : ''}
                 </p>                
             </div>
 
             <div className='alamat'>
                 <Label className='alamat' label='Alamat' />
-                <textarea placeholder='Alamat Karyawan' value={context.alamat} onChange={handleChange} cols="40" rows="5" onInput={() => setValidatorAlamat(true)}></textarea>
+                <textarea placeholder='Alamat Karyawan' value={context.alamat} onChange={handleChange} cols="40" rows="5" ></textarea>
                 <p className='validator-text'>
-                    { context.alamat.length === 0 && validatorAlamat ? 'Isi Alamat' : ''}
+                    { !checkInputNull(context.alamat, contextValidator.setValidatorAlamat) ? 'Isi Alamat' : ''}
                 </p>                
             </div>
         </div>
