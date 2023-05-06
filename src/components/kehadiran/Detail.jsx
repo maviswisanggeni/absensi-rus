@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import arrowLeft from '../../assets/icons/arrow-left.svg'
 import DetailProfile from './DetailProfile'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
@@ -11,6 +11,7 @@ import Map from './Map'
 
 function Detail() {
     let userId = useParams()
+    const navigate = useNavigate()
     const [detail, setDetail] = useState(null);
     const [loading, setLoading] = useState(false);
     const [popUpMasuk, setPopUpMasuk] = useState(false);
@@ -53,9 +54,9 @@ function Detail() {
     return (
         <div className='detail'>
             <div className='navigation'>
-                <Link to={'/kehadiran'}>
-                    <img src={arrowLeft} alt="" />
-                </Link>
+                {/* <Link to={navigate}> */}
+                    <img onClick={() => navigate(-1)} src={arrowLeft} alt="" />
+                {/* </Link> */}
                 <h1>Detail Absensi</h1>
             </div>
 

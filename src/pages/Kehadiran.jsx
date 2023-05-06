@@ -16,7 +16,6 @@ import { useKehadiranListAbsensi } from '../contexts/api/kehadiran/ContextApiKeh
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
-  const contextListAbsen = useKehadiranListAbsensi()
   return (
     <>
       <TanggalKehadiranProvider>

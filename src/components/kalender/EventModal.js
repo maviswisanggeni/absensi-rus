@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import close from '../../assets/icons/close-calendar.svg'
-import trash from '../../assets/icons/trash.svg'
+import trash from '../../assets/icons/trashRed.svg'
 import hamburger from '../../assets/icons/hamburger.svg'
 import GlobalCalendar from '../../contexts/app/GlobalCalendar'
 import calendarIcon from '../../assets/icons/calendar-black.svg'

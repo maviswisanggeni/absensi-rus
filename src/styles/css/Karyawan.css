@@ -160,20 +160,6 @@
   font-weight: 500;
   margin-left: 2rem;
 }
-.detail-karyawan .navigation .btn-submit {
-  width: 125px;
-  height: 40px;
-  background-color: #3661EB;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  color: white;
-}
-.detail-karyawan .navigation .btn-submit:disabled {
-  background-color: #5A6474;
-  opacity: 0.7;
-  cursor: not-allowed;
-}
 .detail-karyawan .detail-form {
   display: -webkit-box;
   display: -ms-flexbox;

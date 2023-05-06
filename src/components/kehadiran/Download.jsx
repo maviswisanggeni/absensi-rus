@@ -8,7 +8,7 @@ function Download() {
     if(context.endText === 'Tanggal berakhir'){
       return ''
     }else{
-      return `?end_time=${context.endTime}`
+      return `&end_time=${context.endTime}`
     }
   }
   function downloadExcel(){

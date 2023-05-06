@@ -1,7 +1,7 @@
 @import "../variables/variables.scss";
 
 .kalender{
-    width: 82%;
+    width: 1179px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -255,10 +255,6 @@
                         color: #5A6474;
                         margin-left: .5rem;
                     }
-
-                    input{
-
-                    }
                 }
             }
             
@@ -325,5 +321,156 @@
             }
 
         }                
+    }
+}
+
+.wrapper-kalender-add{
+    height: 100vh;
+    width: 1179px;    
+    background-color: $background-color;
+    border-right: 1px solid $secondary-color;
+
+    .nav-kalender{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid $secondary-color;
+        padding: 1rem 2.5rem;
+        width: 100%;
+        background-color: $white;
+    
+        .wrapper-back-btn{
+            display: flex;
+            background-color: $white;
+
+            img{
+                cursor: pointer;
+            }
+    
+            h1{
+                font-size: 24px;
+                font-weight: 500;
+                margin-left: 2rem;
+            }
+        }
+
+        .wrapper-action-btn{
+            display: flex;
+            gap: 1rem;
+
+            button{
+                width: 40px;
+                height: 40px;
+                border-radius: 8px;
+                border: none;
+                cursor: pointer;
+                background-color: #FF4530;
+            }
+        }
+    }
+
+    .wrapper-content{
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem 2.5rem;
+        width: 100%;
+
+        .wrapper-form{
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+
+            h3{
+                font-weight: 400;
+                font-size: 14px;
+                margin-bottom: 1rem;
+            }
+    
+            .input{
+                border: 1px solid #9B9B9B;
+                border-radius: 7.5px;
+                padding-left: 1rem;
+                padding-right: 0.25rem;
+                background-color: $background-color;
+                font-weight: 400;
+                font-size: 12px;
+                height: 35px;
+            }
+    
+            .input::placeholder{
+                color: $grey;
+            }
+    
+            .input-nama-event{
+                height: 60px;
+                font-size: 20px;
+            }
+    
+            .checkbox-form{
+                display: flex;
+                gap: 2rem;
+                margin: 1rem 0;
+    
+                .wrap-label-radio{
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+    
+                    input{
+                        cursor: pointer;
+                        width: 15px;
+                        height: 15px;
+                    }
+    
+                    label{
+                        font-size: 12px;
+                        cursor: pointer;
+                    }
+                }
+            }
+    
+            .wrapper-time{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 1rem 0;
+    
+                input[type="text"]{
+                    width: 50%;
+                }
+    
+                input::placeholder{
+                    color: black;
+                }
+    
+                input[type="time"]{
+                    width: 22.5%;
+                }
+    
+                input[type="time"]::-webkit-calendar-picker-indicator { 
+                    background: none; 
+                    background-image: url(../../assets/icons/arrow-down.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    cursor: pointer;
+                }
+    
+                .line{
+                    width: 8px;
+                    height: 1px;
+                    background-color: black;
+                }
+            }
+    
+            .input-deskripsi-event{
+                height: 140px;
+                padding-top: .5rem;
+                resize: none;
+            }
+        }
+
+        .wrapper-partisipasi{
+            width: 40%;
+        }
     }
 }

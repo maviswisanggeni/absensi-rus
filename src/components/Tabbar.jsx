@@ -2,28 +2,41 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useApiKaryawan } from '../contexts/api/karyawan/ContextApiKaryawan';
 import { useKehadiranListAbsensi } from '../contexts/api/kehadiran/ContextApiKehadiranListData';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-function Tabbar(props) {
+function Tabbar({ option1, option2, funcPage, funcKeterangan }) {
   const contextKaryawan = useApiKaryawan()
-  const [current, setCurrent] = useState(props.option1)
+  const dispatch = useDispatch()
+  const [current, setCurrent] = useState(option1)
+  let location = useLocation();
+  const navigate = useNavigate();
 
   function handleClick(e) {
     setCurrent(e.target.innerText)
-    props.funcPage(1)
+    funcPage(1)
   }
-  
+
   useEffect(() => {
     // contextKaryawan.setKeterangan(current === 'Guru' ? true : false)
-    props.funcKeterangan(current === 'Keluar' ? 'Pulang' :  current === 'Masuk' ? 'Masuk' : current === 'Guru' ? true : false)
-  }, [current])
+    if(current === 'Keluar'){
+      dispatch(funcKeterangan('Pulang'))
+    }else if(current === 'Masuk'){
+      dispatch(funcKeterangan('Masuk'))
+    }else if(current === 'Staff'){
+      dispatch(funcKeterangan(false))
+    }else{
+      dispatch(funcKeterangan(true))
+    }
+  }, [current, location])
 
   return (
     <div className='tabbar'>
       <div className='tabbar-text'>
-        <div onClick={handleClick} className={current === props.option1 ? 'active' : ''}>{props.option1}</div>
-        <div onClick={handleClick} className={current === props.option2 ? 'active' : ''}>{props.option2}</div>
+          <div onClick={handleClick} className={current === option1 ? 'active' : ''}>{option1}</div>
+          <div onClick={handleClick} className={current === option2 ? 'active' : ''}>{option2}</div>
       </div>
-      <div className={`line ${current === props.option1 ? '' : 'active'}`}></div>
+      <div className={`line ${current === option1 ? '' : 'active'}`}></div>
     </div>
   )
 }

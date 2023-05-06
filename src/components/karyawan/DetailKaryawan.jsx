@@ -7,9 +7,18 @@ import DetailFotoProfile from './DetailFotoProfile'
 import axios from 'axios'
 import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
 import { useWrapperEditKaryawan } from '../../contexts/app/WrapperEditKaryawan'
+import { useDispatch } from 'react-redux'
+import { detailKaryawan } from '../../features/karyawanSlice'
 
 function DetailKaryawan() {
     let userId = useParams()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(detailKaryawan(userId.id))
+    }, [userId])
+    // const { listPengajar, listStaff } = useSelector(state => state.karyawan)
+
     const [detail, setDetail] = useState([]);
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");  

@@ -42,7 +42,7 @@ function KaryawanProvider ({children}) {
         if(!token){
             navigate('/login')
         }
-        getKaryawan();
+        // getKaryawan();
     }, []);
 
     const contextValue = {

@@ -1,5 +1,5 @@
 .kalender {
-  width: 82%;
+  width: 1179px;
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -354,4 +354,186 @@
   background: #3661EB;
   border-radius: 5px;
   color: white;
+}
+
+.wrapper-kalender-add {
+  height: 100vh;
+  width: 1179px;
+  background-color: #F9F9F9;
+  border-right: 1px solid #EBF0FE;
+}
+.wrapper-kalender-add .nav-kalender {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid #EBF0FE;
+  padding: 1rem 2.5rem;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+.wrapper-kalender-add .nav-kalender .wrapper-back-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #FFFFFF;
+}
+.wrapper-kalender-add .nav-kalender .wrapper-back-btn img {
+  cursor: pointer;
+}
+.wrapper-kalender-add .nav-kalender .wrapper-back-btn h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-left: 2rem;
+}
+.wrapper-kalender-add .nav-kalender .wrapper-action-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
+.wrapper-kalender-add .nav-kalender .wrapper-action-btn button {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #FF4530;
+}
+.wrapper-kalender-add .wrapper-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2rem 2.5rem;
+  width: 100%;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 60%;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form h3 {
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input {
+  border: 1px solid #9B9B9B;
+  border-radius: 7.5px;
+  padding-left: 1rem;
+  padding-right: 0.25rem;
+  background-color: #F9F9F9;
+  font-weight: 400;
+  font-size: 12px;
+  height: 35px;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input::-webkit-input-placeholder {
+  color: #9B9B9B;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input::-moz-placeholder {
+  color: #9B9B9B;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input:-ms-input-placeholder {
+  color: #9B9B9B;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input::-ms-input-placeholder {
+  color: #9B9B9B;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input::placeholder {
+  color: #9B9B9B;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input-nama-event {
+  height: 60px;
+  font-size: 20px;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .checkbox-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .checkbox-form .wrap-label-radio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .checkbox-form .wrap-label-radio input {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .checkbox-form .wrap-label-radio label {
+  font-size: 12px;
+  cursor: pointer;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 1rem 0;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input[type=text] {
+  width: 50%;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input::-webkit-input-placeholder {
+  color: black;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input::-moz-placeholder {
+  color: black;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input:-ms-input-placeholder {
+  color: black;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input::-ms-input-placeholder {
+  color: black;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input::placeholder {
+  color: black;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input[type=time] {
+  width: 22.5%;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input[type=time]::-webkit-calendar-picker-indicator {
+  background: none;
+  background-image: url(../../assets/icons/arrow-down.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .line {
+  width: 8px;
+  height: 1px;
+  background-color: black;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input-deskripsi-event {
+  height: 140px;
+  padding-top: 0.5rem;
+  resize: none;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi {
+  width: 40%;
 }

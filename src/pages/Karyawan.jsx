@@ -10,13 +10,16 @@ import { useApiKaryawan } from '../contexts/api/karyawan/ContextApiKaryawan'
 import { useState } from 'react'
 import searchIcon from '../assets/icons/search-icon.svg'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { tabbarToggle } from '../features/karyawanSlice'
 
 function Karyawan() {
+  const { keterangan, listPengajar, listStaff } = useSelector(state => state.karyawan)
+  console.log(keterangan)
   const context = useApiKaryawan()
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const token = localStorage.getItem("token");
-  console.log(search);
   function searchKaryawan() {
     const url = "https://absensiguru.smkrus.com/api/karyawan"
     setLoading(false);
@@ -54,7 +57,7 @@ function Karyawan() {
         </div>
 
         <div className='tabbar-filter'>
-          <Tabbar option1="Guru" option2="Staff" funcPage={context.setCurrentPage} funcKeterangan={context.setKeterangan}/>
+          <Tabbar option1="Guru" option2="Staff" funcPage={context.setCurrentPage} funcKeterangan={tabbarToggle}/>
           <div className='filter-angka'>
             <Filter option1="Sesuai abjad" option2="Urut NIY"
               setState={context.setUrutan} 
@@ -63,7 +66,7 @@ function Karyawan() {
               setlist1={context.setListPengajar}
               setlist2={context.setListStaff}
             />
-            <p>{context.keterangan ? context.listPengajar.length : context.listStaff.length} Guru</p>
+            <p>{keterangan ? listPengajar.length : listStaff.length} Guru</p>
           </div>
         </div>
         <Table/>

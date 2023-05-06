@@ -3,7 +3,6 @@
 .body {
   max-width: 1440px;
   display: flex;
-  // justify-content: space-between;
   margin: 0 auto;
 }
 
@@ -543,6 +542,43 @@
         cursor: default;
       }
     }
+  }
+}
+
+.btn-submit{
+  width: 125px;
+  height: 40px;
+  background-color: $primary-color;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-submit:disabled{
+  background-color: #5A6474;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.wrapper-not-found{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h1{
+    font-size: 128px;
+    font-weight: bold;
+    color: #C4C4C4;
+  }
+
+  p{
+    color: #333333;
+    font-weight: 600;
+    font-size: 16px;
   }
 }
 

@@ -34,7 +34,7 @@ function Navbar() {
 
 
   return (
-    <nav>
+    <nav className='nav'>
       <LogoSidebar />
       <ul>
         <li>

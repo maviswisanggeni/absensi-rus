@@ -8,12 +8,14 @@ import "../styles/css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
+import apiUrl from '../datas/apiUrl';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState([]);
   const navigate = useNavigate();
+  console.log(apiUrl())
 
 
   const loginHandler = async (e) => {
@@ -27,9 +29,11 @@ function Login() {
 
     await axios({
       method: "post",
-      url: url,
+      url: apiUrl() + 'login',
       data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { 
+        "Content-Type": "multipart/form-data",
+      },
     })
       .then((response) => {
         localStorage.setItem('token', response.data.token);

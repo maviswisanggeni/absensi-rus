@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { usePagination, DOTS } from './usePagination';
+import { Link } from 'react-router-dom';
 const Pagination = props => {
   const {
     onPageChange,
@@ -49,14 +50,16 @@ const Pagination = props => {
         }
 
         return (
-          <li key={key}
-            className={classnames('pagination-item', {
-              selected: pageNumber === currentPage
-            })}
-            onClick={() => onPageChange(pageNumber)}
-          >
-            {pageNumber}
-          </li>
+          <Link key={key} to={`?paginate=${pageNumber}`}>
+            <li key={key}
+              className={classnames('pagination-item', {
+                selected: pageNumber === currentPage
+              })}
+              onClick={() => onPageChange(pageNumber)}
+            >
+              {pageNumber}
+            </li>
+          </Link>
         );
       })}
       <li

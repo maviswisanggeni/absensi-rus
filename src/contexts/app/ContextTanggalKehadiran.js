@@ -17,6 +17,10 @@ function TanggalKehadiranProvider ({children}) {
     const [id, setId] = useState(null)
     const [detail, setDetail]  = useState(null);
 
+    useEffect(() => {
+        // console.log(startText)
+    }, [startText])
+
     const contextValue = {
         startTanggal,
         setStartTanggal,

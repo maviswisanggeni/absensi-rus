@@ -597,6 +597,50 @@
   cursor: default;
 }
 
+.btn-submit {
+  width: 125px;
+  height: 40px;
+  background-color: #3661EB;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-submit:disabled {
+  background-color: #5A6474;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.wrapper-not-found {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.wrapper-not-found h1 {
+  font-size: 128px;
+  font-weight: bold;
+  color: #C4C4C4;
+}
+.wrapper-not-found p {
+  color: #333333;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 .loading:before {
   display: block;
   height: 0.1px;

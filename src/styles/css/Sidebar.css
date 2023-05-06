@@ -1,9 +1,9 @@
-nav {
+.nav {
   width: 261px;
   height: 100vh;
   border-right: 1px solid #EBF0FE;
 }
-nav .logo-sidebar {
+.nav .logo-sidebar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,20 +19,20 @@ nav .logo-sidebar {
           align-items: center;
   padding: 2rem 0;
 }
-nav .logo-sidebar img {
+.nav .logo-sidebar img {
   width: 108px;
   height: 108px;
 }
-nav .logo-sidebar h1 {
+.nav .logo-sidebar h1 {
   font-size: 20px;
   font-weight: 600;
   margin-top: 1rem;
 }
-nav ul li {
+.nav ul li {
   list-style: none;
   margin-bottom: 1.5rem;
 }
-nav ul li a {
+.nav ul li a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -43,7 +43,7 @@ nav ul li a {
   font-weight: 600;
   color: #9B9B9B;
 }
-nav ul li a img {
+.nav ul li a img {
   width: 20px;
   height: 20px;
   margin-right: 1rem;

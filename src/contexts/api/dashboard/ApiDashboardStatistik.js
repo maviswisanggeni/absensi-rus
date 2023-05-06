@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import formatDate from "../../../components/useFormatCalendar";
 import { useNavigate } from "react-router";
+import getBaseUrl from "../../../datas/apiUrl";
 const ApiDashboardStatistik = createContext({})
 
 function useApiDashboardStatistik(){
@@ -15,7 +16,7 @@ function DashboardApiStatistikProvider ({children}) {
     const navigate = useNavigate();
 
     async function getData() {
-        const url = "https://absensiguru.smkrus.com/api/dashboard/statistik"
+        const url = getBaseUrl() + "dashboard/statistik"
         setLoading(false);
         axios.get(url, 
             {

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import Pagination from '../Pagination';
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData';
-import { useApiKehadiranSearch } from '../../contexts/api/kehadiran/ContextApiKehadiranSearch';
 import { Link } from 'react-router-dom';
 import defaultFoto from '../../assets/images/user-foto.png'
 
@@ -9,7 +8,6 @@ let PageSize = 10;
 
 function Table() {
     const context = useKehadiranListAbsensi()
-    const contextSearch = useApiKehadiranSearch()
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (context.currentPage - 1) * PageSize;
@@ -41,7 +39,7 @@ function Table() {
 
                 <tbody>
                     {
-                        !context.loading || !contextSearch.loading ? <tr className='loading loading-table'><td>Loading...</td></tr> 
+                        !context.loading ? <tr className='loading loading-table'><td>Loading...</td></tr> 
                         : currentTableData.length === 0 ? <tr className='loading-table'><td>Data tidak ditemukan </td></tr>
                         : 
                             currentTableData?.map((item, key) => {

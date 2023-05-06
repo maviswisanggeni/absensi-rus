@@ -10,8 +10,6 @@ import { KehadiranJmlKehadiranProvider } from './contexts/api/kehadiran/ContextA
 import { KehadiranListProvider } from './contexts/api/kehadiran/ContextApiKehadiranListData';
 import { DashboardApiProvider } from './contexts/api/dashboard/ContextApiDashboard';
 import { Route, Routes } from 'react-router';
-import { KehadiranSearchProvider } from './contexts/api/kehadiran/ContextApiKehadiranSearch';
-import { KehadiranDetailProvider } from './contexts/api/kehadiran/ContextApiKehadiranDetail';
 import { ProfileApiProvider } from './contexts/api/ApiProfile';
 import { DashboardApiStatistikProvider } from './contexts/api/dashboard/ApiDashboardStatistik';
 import AddKaryawan from './components/karyawan/AddKaryawan';
@@ -24,77 +22,82 @@ import { KalenderProvider } from './contexts/api/kalender/ContextApiKalender';
 import NotFound from './components/NotFound';
 import { WrapperAddKaryawanProvider } from './contexts/app/WrapperAddKaryawan';
 import { WrapperEditKaryawanProvider } from './contexts/app/WrapperEditKaryawan';
+import KalenderAdd from './pages/KalenderAdd';
 
 function App() {
   return (
     <div className='body'>
       <Sidebar />
-      <ProfileApiProvider>
-            <Routes>
-              <Route path='/'
-                element={
-                  <DashboardApiProvider>
-                    <DashboardApiStatistikProvider>
-                      <Dashboard />
-                    </DashboardApiStatistikProvider>
-                  </DashboardApiProvider>
-                }
-              />
+      <Routes>
+        {/* <ProfileApiProvider> */}
+        <Route path='/'
+          element={
+            <DashboardApiProvider>
+              <DashboardApiStatistikProvider>
+                <Dashboard />
+              </DashboardApiStatistikProvider>
+            </DashboardApiProvider>
+          }
+        />
 
-              <Route path='/kehadiran'
-                element={
-                  <KehadiranJmlKehadiranProvider>
-                    <KehadiranListProvider>
-                      <KehadiranSearchProvider>
-                        <Kehadiran />
-                      </KehadiranSearchProvider>
-                    </KehadiranListProvider>
-                  </KehadiranJmlKehadiranProvider>
-                }
-              />
+        <Route path='/kehadiran'
+          element={
+            <KehadiranJmlKehadiranProvider>
+              <KehadiranListProvider>
+                <Kehadiran />
+              </KehadiranListProvider>
+            </KehadiranJmlKehadiranProvider>
+          }
+        />
 
-              <Route path='/kehadiran/detail/:id' element={<Detail />} />
+        <Route path='/kehadiran/detail/:id' element={<Detail />} />
 
-              <Route path='/karyawan'
-                element={
-                  <KaryawanProvider>
-                    <KaryawanStoreUserProvider>
-                      <KaryawanUpdateProvider>
-                          <Karyawan />
-                      </KaryawanUpdateProvider>
-                    </KaryawanStoreUserProvider>
-                  </KaryawanProvider>
-                }
-              />
-
-              <Route path='/kalender'
-                element={
-                  <KalenderProvider>
-                    <WrapperCalendar>
-                        <Kalender />
-                    </WrapperCalendar>
-                  </KalenderProvider>
-                }
-              />
-              <Route path='/login' element={<Login />} />
-              <Route path='/karyawan/add' element={
-                <KaryawanStoreUserProvider>
-                  <WrapperAddKaryawanProvider>
-                    <AddKaryawan />
-                  </WrapperAddKaryawanProvider>                  
-                </KaryawanStoreUserProvider>} 
-              />
-              <Route path='/karyawan/edit/:id' element={
+        <Route path='/karyawan'
+          element={
+            <KaryawanProvider>
+              <KaryawanStoreUserProvider>
                 <KaryawanUpdateProvider>
-                  <WrapperEditKaryawanProvider>
-                    <DetailKaryawan />
-                  </WrapperEditKaryawanProvider>
+                  <Karyawan />
                 </KaryawanUpdateProvider>
-                } 
-              />
-              <Route path='*' element={<NotFound />}/>
-            </Routes>
-      </ProfileApiProvider>
+              </KaryawanStoreUserProvider>
+            </KaryawanProvider>
+          }
+        />
+
+        <Route path='/kalender'
+          element={
+            <KalenderProvider>
+              <WrapperCalendar>
+                <Kalender />
+              </WrapperCalendar>
+            </KalenderProvider>
+          }
+        />
+
+        <Route path='/kalender/add' element={<KalenderAdd />} />
+
+        <Route path='/karyawan/add' element={
+          <KaryawanStoreUserProvider>
+            <WrapperAddKaryawanProvider>
+              <AddKaryawan />
+            </WrapperAddKaryawanProvider>
+          </KaryawanStoreUserProvider>}
+        />
+
+        <Route path='/karyawan/edit/:id' element={
+          <KaryawanUpdateProvider>
+            <WrapperEditKaryawanProvider>
+              <DetailKaryawan />
+            </WrapperEditKaryawanProvider>
+          </KaryawanUpdateProvider>
+        }
+        />
+        {/*           
+        </ProfileApiProvider> */}
+
+        <Route path='*' element={<NotFound />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </div>
   );
 }

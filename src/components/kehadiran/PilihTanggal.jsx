@@ -2,14 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
 import formatDate from '../useFormatCalendar';
-import { useTanggalKehadiran } from '../../contexts/app/ContextTanggalKehadiran'
-import { useApiKehadiranSearch } from '../../contexts/api/kehadiran/ContextApiKehadiranSearch';
+function PilihTanggal({ setFormattedDate, setText, setStartTime, setEndTime, setDate, text, value }) {
 
-function PilihTanggal(props) {
-  const contextTanggal = useTanggalKehadiran()
-  const contextSearch = useApiKehadiranSearch()
   const [open, setOpen] = useState(false)
-
   const drop = useRef(null);
   const inputRef = useRef();
 
@@ -20,37 +15,31 @@ function PilihTanggal(props) {
   }
 
   function change(e) {
-    props.funcTanggal(e)
-    props.funcTime(formatDate(e))
-    props.funcText(formatDate(e))
-    props?.setStartTime(formatDate(e))
-    props?.setEndTime(formatDate(e))
+    setDate(e)
+    setFormattedDate(formatDate(e))
+    setText(formatDate(e))
+    setStartTime(formatDate(e))
+    setEndTime(formatDate(e))
   }
 
-  useEffect(() => {
-    contextSearch.setStartTime(contextTanggal.startTime)
-    if(contextTanggal.endText !== 'Tanggal berakhir'){
-      contextSearch.setEndTime(contextTanggal.endTime)
-    }
-    // contextSearch.setEndTime(contextTanggal.endTime)
-  }, [props.text])
-
-  // make optional props for pilih tanggal  
+  // useEffect(() => {
+  //   console.log(text)
+  // }, [text])
 
   return (
     <div className='pilih-tanggal' ref={inputRef}>
       <div className='btn-pilih-tanggal' onClick={() => setOpen(open => !open)}>
         <img src={calenderIcon} alt="" />
-        <p>{props.text}</p>
+        <p>{text}</p>
       </div>
-      {open && <Calendar onChange={change} value={props.value} />}
+      {open && <Calendar onChange={change} value={value} />}
     </div>
   )
 }
 
 PilihTanggal.defaultProps = {
-  setStartTime: () => {},
-  setEndTime: () => {},
+  setStartTime: () => { },
+  setEndTime: () => { },
 }
 
 export default PilihTanggal
