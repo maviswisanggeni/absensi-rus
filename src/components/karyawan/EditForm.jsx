@@ -1,106 +1,164 @@
 import React, { useState } from 'react'
 import close from '../../assets/icons/close.svg'
 import eye from '../../assets/icons/eye.svg'
-import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
-import { useWrapperEditKaryawan } from '../../contexts/app/WrapperEditKaryawan'
-import Input from './Input'
+import at from '../../assets/icons/at.svg'
 import Label from './Label'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetField, updateFieldError, updateFieldValue } from '../../features/detailKaryawanSlice'
 
-function EditForm({detailData}) {
-    const context = useApiKaryawanUpdate()
-    const contextValidator = useWrapperEditKaryawan()
+function EditForm() {
+    const dispatch = useDispatch()
+    const { nama, email, password, noHp, alamat, errors } = useSelector(
+        (state) => state.detailKaryawanSlice
+    );
+
     const [passwordShown, setPasswordShown] = useState(false);
 
-    function handleChange(e){
-        context.setAlamat(e.target.value)
-    }
-
-    function handleUnhide(){
+    function handleUnhide() {
         setPasswordShown(passwordShown ? false : true);
     }
 
-    function ValidateEmail(mail) 
-    {
-     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-      {
-        contextValidator.setValidatorEmail(true)
-        return (true)
-      }
-        contextValidator.setValidatorEmail(false)
-        return(false)
+    const validateNama = (value) => {
+        if (value?.length < 1) {
+            return 'Isi nama';
+        }
+        return '';
+    };
+
+    const validatePwd = (value) => {
+        if (value.length < 8) {
+            return 'Isi password minimal 8 karakter';
+        }
+        return '';
+    };
+
+    function ValidateEmail(mail) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return ''
+        }
+        return 'Email tidak valid'
     }
 
-    function checkInputNull(input, setValidator){
-        if(input.length === 0){
-            setValidator(false)
-            return false
-        }else{
-            // setValidator(true)
-            return true
+    function validateNoHp(value) {
+        if (value?.length < 10) {
+            return 'Nomor tidak valid'
         }
+        return ''
     }
 
-    function validateNoHp(){
-        if(context.noHp.length < 10){
-            // contextValidator.setValidatorNoHP(false)
-            return false
-        }else{
-            // contextValidator.setValidatorNoHP(true)
-            return true
+    const validateAlamat = (value) => {
+        if (value?.length < 1) {
+            return 'Isi Alamat';
         }
-    }
+        return '';
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        dispatch(updateFieldValue({ field: name, value }));
+        let error = '';
+        switch (name) {
+            case 'nama':
+                error = validateNama(value);
+                break;
+            case 'email':
+                error = ValidateEmail(value);
+                break;
+            case 'password':
+                error = validatePwd(value);
+                break;
+            case 'noHp':
+                error = validateNoHp(value);
+                break;
+            case 'alamat':
+                error = validateAlamat(value);
+                break;
+            default:
+                break;
+        }
+        dispatch(updateFieldError({ field: name, error }));
+    };
+
+    const handleResetField = (field) => {
+        dispatch(resetField(field));
+    };
 
     return (
         <div className='form'>
             <div className='nama'>
                 <Label className='nama' label='Nama lengkap' />
-                <Input className='nama' type='text' placeholder='Masukkan nama karyawan' 
-                value={context.nama}
-                func={context.setNama}
+                <input
+                    type="text"
+                    name="nama"
+                    value={nama}
+                    placeholder='Masukkan nama karyawan'
+                    id='nama'
+                    onChange={handleInputChange}
                 />
                 <p className='validator-text'>
-                    { checkInputNull(context.nama, contextValidator.setValidatorNama) ? '' : 'Isi nama'}
-                </p>                
-                <img src={close} onClick={() => context.setNama('')}/>
+                    {errors.nama}
+                </p>
+                <img src={close} className='at-icon' onClick={() => handleResetField('nama')} />
             </div>
 
             <div className='niy'>
                 <Label className='email' label='Email' />
-                <Input className='email' type='email' placeholder='Masukkan Email' 
-                value={context.email} 
-                func={context.setEmail} 
+                <input
+                    type="email"
+                    name="email"
+                    id='email'
+                    value={email}
+                    placeholder='Masukkan Email'
+                    onChange={handleInputChange}
                 />
                 <p className='validator-text'>
-                    { !checkInputNull(context.email, contextValidator.setValidatorEmail)? 'Isi email' : !ValidateEmail(context.email) ? 'Email tidak valid' : ''}
-                </p>                
-                <Input className='password' type={passwordShown ? 'text' : 'password'} placeholder='Password' 
-                value='fkodskofksdof' 
-                // func={context.setPassword} 
-                // setValidator={setValidatorPwd}
+                    {errors.email}
+                </p>
+                <img src={at} className='at-icon' />
+
+                <input
+                    type={passwordShown ? 'text' : 'password'}
+                    name="password"
+                    id='password'
+                    value={password}
+                    placeholder='Password'
+                    onChange={handleInputChange}
                 />
-                {/* <p className='validator-text pwd'>
-                    { context.password.length <= 6 && validatorPwd ? 'Password minimal 6 karakter' : ''}
-                </p>                 */}
-                <img src={eye} onClick={handleUnhide}/>
+                <p className='validator-text pwd'>
+                    {errors.password}
+                </p>
+                <img src={eye} className='pwd-icon' onClick={handleUnhide} />
             </div>
 
             <div className='no-hp'>
                 <Label className='no-hp' label='Nomer HP' />
-                <Input className='no-hp' type='number' placeholder='Masukkan Nomer HP' 
-                value={context.noHp} 
-                func={context.setnoHp} 
+                <input
+                    type='number'
+                    name="noHp"
+                    id='Nomer HP'
+                    value={noHp}
+                    placeholder='Masukkan Nomer HP'
+                    onChange={handleInputChange}
                 />
                 <p className='validator-text'>
-                    { !checkInputNull(context.noHp, contextValidator.setValidatorNoHP) ? 'Isi Nomor HP' : !validateNoHp() ? 'Nomor tidak valid' : ''}
-                </p>                
+                    {errors.noHp}
+                </p>
             </div>
 
             <div className='alamat'>
                 <Label className='alamat' label='Alamat' />
-                <textarea placeholder='Alamat Karyawan' value={context.alamat} onChange={handleChange} cols="40" rows="5" ></textarea>
+                <textarea
+                    placeholder='Alamat Karyawan'
+                    name='alamat'
+                    id='Alamat'
+                    value={alamat}
+                    onChange={handleInputChange}
+                    cols="40" rows="5"
+                >
+                </textarea>
                 <p className='validator-text'>
-                    { !checkInputNull(context.alamat, contextValidator.setValidatorAlamat) ? 'Isi Alamat' : ''}
-                </p>                
+                    {errors.alamat}
+                </p>
             </div>
         </div>
     )

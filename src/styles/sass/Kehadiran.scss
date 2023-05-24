@@ -30,6 +30,11 @@
       font-weight: 400;
     }
 
+    .search::placeholder {
+      font-weight: 400;
+      font-size: 10px;
+    }
+
     .wrapper-pilih-tanggal {
       display: flex;
       align-items: center;
@@ -63,7 +68,7 @@
           border: 1.5px solid $secondary-color;
           padding: 1rem;
           border-radius: 7px;
-          transform: translateX(25%);
+          transform: translate(25%, 10%);
           z-index: 999;
         }
 
@@ -100,8 +105,8 @@
   }
 
   table {
-    .row-img{
-      padding: 0.5rem .75rem;
+    .row-img {
+      padding: 0.5rem 0.75rem;
     }
 
     .loading-table {
@@ -124,19 +129,19 @@
   }
 }
 
-.valid-masuk-pulang{
+.valid-masuk-pulang {
   width: 5px;
   height: 5px;
   border-radius: 100%;
   margin-right: 1rem;
 }
 
-.valid-masuk{
-  background-color: #04D57D;
+.valid-masuk {
+  background-color: #04d57d;
 }
 
-.valid-pulang{
-  background-color: #FF4530;
+.valid-pulang {
+  background-color: #ff4530;
 }
 
 .detail {
@@ -146,6 +151,10 @@
     display: flex;
     border-bottom: 1px solid $secondary-color;
     padding: 1rem 2.5rem;
+
+    img {
+      cursor: pointer;
+    }
 
     a {
       display: flex;
@@ -228,7 +237,7 @@
           .coordinates {
             padding: 1rem;
 
-            .location{
+            .location {
               width: 70%;
               margin: 0;
             }
@@ -244,7 +253,7 @@
               color: $grey;
             }
 
-            .map-and-status{
+            .map-and-status {
               display: flex;
               justify-content: space-between;
               align-items: center;
@@ -252,19 +261,18 @@
               gap: 1rem;
             }
 
-            .wrapper-status{
+            .wrapper-status {
               display: flex;
               align-items: center;
 
-              .valid-masuk-pulang{
-                margin-right: .5rem;
+              .valid-masuk-pulang {
+                margin-right: 0.5rem;
               }
 
-              .status{
+              .status {
                 font-size: 8px;
               }
             }
-
           }
 
           .coordinates {
@@ -342,7 +350,7 @@
         }
       }
 
-      a {
+      .back-btn {
         width: 125px;
         color: white;
         border: none;
@@ -354,6 +362,7 @@
         margin-top: 5rem;
         text-decoration: none;
         font-size: 14px;
+        cursor: pointer;
       }
     }
   }
@@ -407,6 +416,7 @@
 
 .sidebar-right {
   .kehadiran-terbaru {
+    padding: 2rem;
     .header-refresh {
       display: flex;
       justify-content: space-between;

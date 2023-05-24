@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import arrowLeft from '../../assets/icons/arrow-left.svg'
 import DetailProfile from './DetailProfile'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import map from '../../assets/images/map.png'
-import close from '../../assets/icons/close.svg'
-import Map from './Map'
+import Sidebar from '../sidebar/Sidebar'
+import DetailCard from './DetailCard'
 
 function Detail() {
     let userId = useParams()
@@ -52,137 +51,55 @@ function Detail() {
     }
 
     return (
-        <div className='detail'>
-            <div className='navigation'>
-                {/* <Link to={navigate}> */}
+        <div className='wrapper-detail'>
+            <Sidebar />
+            <div className='detail'>
+                <div className='navigation'>
                     <img onClick={() => navigate(-1)} src={arrowLeft} alt="" />
-                {/* </Link> */}
-                <h1>Detail Absensi</h1>
-            </div>
-
-            <div className='main'>
-                <div className='detail-masuk-keluar'>
-                    <div className='masuk-keluar'>
-                        <div className='jam-masuk'>
-                            <h3>Masuk</h3>
-                            <p>
-                                {
-                                    detail?.absen?.tanggal_masuk
-                                        ? dayjs(detail?.absen?.tanggal_masuk).format('dddd DD MMM YYYY') + ', '
-                                        : '-'
-                                }
-                                {
-                                    detail?.absen?.waktu_masuk ?
-                                        detail?.absen?.waktu_masuk.slice(0, 5)
-                                        : ''
-                                }
-                            </p>
-                        </div>
-
-                        <div className='card'>
-                            {
-                                loading ? <img className={`foto-masuk`} src={detail?.absen?.foto_masuk} alt="" onClick={() => setPopUpMasuk(popUpMasuk ? false : true)} />
-                                    : <div className={`foto-masuk ${loading && 'shimmer'}`}></div>
-                            }
-                            {
-                                popUpMasuk &&
-                                <div className={popUpMasuk ? 'pop-up' : ''} onClick={() => setPopUpMasuk(popUpMasuk ? false : true)}>
-                                    <img className='img-user' src={detail?.absen?.foto_masuk} alt="" />
-                                </div>
-                            }
-
-                            <div className='note'>
-                                <h3>Note:</h3>
-                                <p>{checkNull(detail?.absen?.catatan_masuk)}</p>
-                            </div>
-                            <div className='coordinates'>
-                                <div className='location'>
-                                    <h3>Lokasi</h3>
-                                    <p>{checkNull(detail?.absen?.lokasi_masuk)}</p>
-                                </div>
-                                <div className='map-and-status'>
-                                    {popUpMapMasuk &&
-                                        <>
-                                            <Map latitude={detail?.absen?.latitude_masuk} longitude={detail?.absen?.longitude_masuk} loading={loading} />
-                                            <div className='wrapper-close'>
-                                                <img src={close} className='close' onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
-                                            </div>
-                                        </>
-                                    }
-                                    <img className='mape' src={map} onClick={() => setPopUpMapMasuk(popUpMapMasuk ? false : true)} />
-                                    <div className='wrapper-status'>
-                                        <div className={`valid-masuk-pulang ${detail?.absen?.is_valid_masuk === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
-                                        <p className='status'>{checkNull(detail?.absen?.is_valid_masuk === '1' ? 'Di dalam sekolah' : 'Di luar sekolah')}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='masuk-keluar'>
-                        <div className='jam-masuk'>
-                            <h3>Keluar</h3>
-                            <p>
-                                {
-                                    detail?.absen?.tanggal_pulang
-                                        ? dayjs(detail?.absen?.tanggal_pulang).format('dddd DD MMM YYYY') + ','
-                                        : '-'
-                                }
-                                {
-                                    detail?.absen?.waktu_pulang
-                                        ? detail?.absen?.waktu_pulang?.slice(0, 5)
-                                        : ''
-                                }
-                            </p>
-                        </div>
-
-                        <div className='card'>
-                            {
-                                !loading ? <div className={`foto-masuk ${loading && 'shimmer'}`}></div>
-                                    : !isImgUrl(detail?.absen?.foto_pulang) && loading ? <div className='default-foto'>Belum Keluar</div>
-                                        : <img className='foto-masuk' src={detail?.absen?.foto_pulang} alt="" onClick={() => setPopUpKeluar(popUpKeluar ? false : true)} />
-                            }
-                            {
-                                popUpKeluar &&
-                                <div className={popUpKeluar ? 'pop-up' : ''} onClick={() => setPopUpKeluar(popUpKeluar ? false : true)}>
-                                    <img className='img-user' src={detail?.absen?.foto_pulang} alt="" />
-                                </div>
-                            }
-                            <div className='note'>
-                                <h3>Note:</h3>
-                                <p>{checkNull(detail?.absen?.catatan_pulang)}</p>
-                            </div>
-                            <div className='coordinates'>
-                                <div className='location'>
-                                    <h3>Lokasi</h3>
-                                    <p>{checkNull(detail?.absen?.lokasi_pulang)}</p>
-                                </div>
-                                <div className='map-and-status'>
-                                    {popUpMapKeluar
-                                        && detail?.absen?.latitude_pulang
-                                        &&
-                                        <>
-                                            <Map latitude={detail?.absen?.latitude_pulang} longitude={detail?.absen?.longitude_pulang} loading={loading} />
-                                            <div className='wrapper-close'>
-                                                <img src={close} className='close' onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
-                                            </div>
-                                        </>
-                                    }
-                                    <img className='mape' src={map} onClick={() => setPopUpMapKeluar(popUpMapKeluar ? false : true)} />
-                                    { detail?.absen?.latitude_pulang === null ? null : 
-                                        <div className='wrapper-status'>
-                                            <div className={`valid-masuk-pulang ${detail?.absen?.is_valid_pulang === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
-                                            <p className='status'>{checkNull(detail?.absen?.is_valid_pulang === '1' ? 'Di dalam sekolah' : 'Di luar sekolah')}</p>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h1>Detail Kehadiran</h1>
                 </div>
-                <DetailProfile data={detail} />
+
+                <div className='main'>
+                    <div className='detail-masuk-keluar'>
+                        <DetailCard
+                            type='Masuk'
+                            tanggal={detail?.tanggal_masuk}
+                            waktu={detail?.waktu_masuk}
+                            link_foto={detail?.link_foto_masuk}
+                            catatan={detail?.catatan_masuk}
+                            lokasi={detail?.lokasi_masuk}
+                            latitude={detail?.latitude_masuk}
+                            longitude={detail?.longitude_masuk}
+                            is_valid={detail?.is_valid_masuk}
+                            loading={loading}
+                            popUp={popUpMasuk}
+                            setPopUp={setPopUpMasuk}
+                            popUpMap={popUpMapMasuk}
+                            setPopUpMap={setPopUpMapMasuk}
+                            checkNull={checkNull}
+                        />
+
+                        <DetailCard
+                            type='Keluar'
+                            tanggal={detail?.tanggal_pulang}
+                            waktu={detail?.waktu_pulang}
+                            link_foto={detail?.link_foto_pulang}
+                            catatan={detail?.catatan_pulang}
+                            lokasi={detail?.lokasi_pulang}
+                            latitude={detail?.latitude_pulang}
+                            longitude={detail?.longitude_pulang}
+                            is_valid={detail?.is_valid_pulang}
+                            loading={loading}
+                            popUp={popUpKeluar}
+                            setPopUp={setPopUpKeluar}
+                            popUpMap={popUpMapKeluar}
+                            setPopUpMap={setPopUpMapKeluar}
+                            checkNull={checkNull}
+                        />
+                    </div>
+                    <DetailProfile data={detail} />
+                </div>
             </div>
-
-
         </div>
     )
 }

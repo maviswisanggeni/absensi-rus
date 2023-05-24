@@ -1,0 +1,2785 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Absensi - Admin RESTful API",
+        "description": "Dokumentasi API Absensi for Admin",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Sejati Adli",
+            "email": "adlisejati@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://absensiguru.smkrus.com/api",
+            "description": "Absensi RESTful API Server"
+        },
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "Absensi RESTful API Server (Local)"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login User",
+                "parameters": [
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "niy": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "guru": {
+                                    "description": "Contoh user guru",
+                                    "value": {
+                                        "niy": "89282132",
+                                        "password": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "respons": {
+                                        "value": {
+                                            "messege": "success",
+                                            "token": "4|poNn9fewZicSOyCpSzbvBU2SjoegKzyZYynMcmGf"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Wrong Password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthRespons"
+                                },
+                                "examples": {
+                                    "respons": {
+                                        "value": {
+                                            "messege": "wrong pass"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthRespons"
+                                },
+                                "examples": {
+                                    "respons": {
+                                        "value": {
+                                            "messege": "user not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout User",
+                "responses": {
+                    "200": {
+                        "description": "Success logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthRespons"
+                                },
+                                "examples": {
+                                    "respons": {
+                                        "value": {
+                                            "messege": "user logged out"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboard": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Dashboard(Admin)"
+                ],
+                "summary": "Page Dashboard",
+                "description": "Untuk data diagram lingkaran ",
+                "parameters": [
+                    {
+                        "name": "tanggal",
+                        "in": "query",
+                        "description": "tanggal untuk filter data",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "tanggal": {
+                                "value": "2023-05-3"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success get data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DashboardSchema"
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "messege": "success",
+                                            "data": {
+                                                "jml_kehadiran": {
+                                                    "jml_karyawan": 10,
+                                                    "jml_masuk": 10,
+                                                    "jml_izin": 10,
+                                                    "jml_absen": 10
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboard/statistik": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Dashboard(Admin)"
+                ],
+                "summary": "Statistik Dashboard",
+                "description": "Data dibawah adalah data statistik dengan urutan tanggal ascending",
+                "responses": {
+                    "200": {
+                        "description": "Success get data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DashboardStatistikSchema"
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "date": "2023-05-03",
+                                                    "count": 1
+                                                },
+                                                {
+                                                    "date": "2023-05-05",
+                                                    "count": 1
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboard/jadwal": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Dashboard(Admin)"
+                ],
+                "summary": "Event Terdekat",
+                "description": "Data dibawah adalah data jadwal event terdekat",
+                "responses": {
+                    "200": {
+                        "description": "Success get data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DashboardJadwalSchema"
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": 2,
+                                                    "judul": "excepturi eius et",
+                                                    "kategori_event": "event",
+                                                    "lokasi": "Gunnerland",
+                                                    "waktu_mulai": "2023-05-06 07:23:11",
+                                                    "waktu_selesai": "0000-00-00 00:00:00",
+                                                    "deskripsi": "Atque quia sit minus. Autem deserunt reiciendis et voluptatem."
+                                                },
+                                                {
+                                                    "id": 1,
+                                                    "judul": "vitae aut molestiae",
+                                                    "kategori_event": "libur",
+                                                    "lokasi": "East Alizebury",
+                                                    "waktu_mulai": "2023-05-06 10:32:39",
+                                                    "waktu_selesai": "0000-00-00 00:00:00",
+                                                    "deskripsi": "Voluptatem veniam et id dolores maxime accusantium expedita. Quasi ut voluptatem et omnis nihil. Nam a distinctio a nulla animi. Sequi hic soluta aut debitis blanditiis voluptatem."
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kehadiran": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kehadiran(Admin)"
+                ],
+                "summary": "List Kehadiran",
+                "description": "di endpoint ini ada 4 kondisi, yaitu saat parameter tidak ada, parameter time ada, parameter search ada, dan parameter time dan search ada. semua paramater tidak required",
+                "parameters": [
+                    {
+                        "name": "start_time",
+                        "in": "query",
+                        "description": "tanggal mulai untuk filter data",
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        },
+                        "examples": {
+                            "tanggal": {
+                                "value": "2023-05-07"
+                            }
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "query",
+                        "description": "tanggal selesai untuk filter data",
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        },
+                        "examples": {
+                            "tanggal": {
+                                "value": "2023-05-08"
+                            }
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search data dengan nama karyawan",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "search": {
+                                "value": "guru rpl"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success get data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/KehadiranSchema"
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "history kehadiran",
+                                            "data": {
+                                                "masuk": [
+                                                    {
+                                                        "id": 3,
+                                                        "user_id": 2,
+                                                        "keterangan": "masuk",
+                                                        "is_valid_masuk": 1,
+                                                        "catatan_masuk": "Atque rerum labore qui nisi.",
+                                                        "waktu_masuk": "12:31:40",
+                                                        "tanggal_masuk": "2023-05-08",
+                                                        "foto_masuk": "foto_masuk\/distinctio.png",
+                                                        "lokasi_masuk": "Weimanntown",
+                                                        "latitude_masuk": "8648822",
+                                                        "longitude_masuk": "7131516",
+                                                        "is_valid_pulang": 0,
+                                                        "catatan_pulang": null,
+                                                        "waktu_pulang": null,
+                                                        "tanggal_pulang": "2023-05-08",
+                                                        "foto_pulang": null,
+                                                        "lokasi_pulang": null,
+                                                        "latitude_pulang": null,
+                                                        "longitude_pulang": null,
+                                                        "user": {
+                                                            "id": 2,
+                                                            "niy": "00021324",
+                                                            "nama": "Staff",
+                                                            "email": "staff@gmail.com",
+                                                            "alamat": "Kudus",
+                                                            "no_hp": "081245673455",
+                                                            "pf_foto": null,
+                                                            "link_foto": "http:\/\/127.0.0.1:8000\/storage\/profile\/userdefault.png",
+                                                            "ktgkaryawan": [
+                                                                {
+                                                                    "id": 1,
+                                                                    "kategori": "expedita"
+                                                                },
+                                                                {
+                                                                    "id": 2,
+                                                                    "kategori": "debitis"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": 7,
+                                                        "user_id": 2,
+                                                        "keterangan": "masuk",
+                                                        "is_valid_masuk": 0,
+                                                        "catatan_masuk": "Est quia autem sint sint maxime mollitia at.",
+                                                        "waktu_masuk": "07:10:56",
+                                                        "tanggal_masuk": "2023-05-08",
+                                                        "foto_masuk": "foto_masuk\/impedit.png",
+                                                        "lokasi_masuk": "East Jovan",
+                                                        "latitude_masuk": "5324596",
+                                                        "longitude_masuk": "8139690",
+                                                        "is_valid_pulang": null,
+                                                        "catatan_pulang": null,
+                                                        "waktu_pulang": null,
+                                                        "tanggal_pulang": null,
+                                                        "foto_pulang": null,
+                                                        "lokasi_pulang": null,
+                                                        "latitude_pulang": null,
+                                                        "longitude_pulang": null,
+                                                        "user": {
+                                                            "id": 2,
+                                                            "niy": "00021324",
+                                                            "nama": "Staff",
+                                                            "email": "staff@gmail.com",
+                                                            "alamat": "Kudus",
+                                                            "no_hp": "081245673455",
+                                                            "pf_foto": null,
+                                                            "link_foto": "http:\/\/127.0.0.1:8000\/storage\/profile\/userdefault.png",
+                                                            "ktgkaryawan": [
+                                                                {
+                                                                    "id": 1,
+                                                                    "kategori": "expedita"
+                                                                },
+                                                                {
+                                                                    "id": 2,
+                                                                    "kategori": "debitis"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ],
+                                                "pulang": [
+                                                    {
+                                                        "id": 4,
+                                                        "user_id": 5,
+                                                        "keterangan": "pulang",
+                                                        "is_valid_masuk": 1,
+                                                        "catatan_masuk": "Et non modi quo placeat harum autem.",
+                                                        "waktu_masuk": "00:44:30",
+                                                        "tanggal_masuk": "2023-05-08",
+                                                        "foto_masuk": "foto_masuk\/voluptatum.png",
+                                                        "lokasi_masuk": "New Gia",
+                                                        "latitude_masuk": "3501482",
+                                                        "longitude_masuk": "7065934",
+                                                        "is_valid_pulang": 1,
+                                                        "catatan_pulang": null,
+                                                        "waktu_pulang": null,
+                                                        "tanggal_pulang": "2023-05-08",
+                                                        "foto_pulang": null,
+                                                        "lokasi_pulang": null,
+                                                        "latitude_pulang": null,
+                                                        "longitude_pulang": null,
+                                                        "user": {
+                                                            "id": 5,
+                                                            "niy": "03947382",
+                                                            "nama": "Guru DKV",
+                                                            "email": "dekape@gmail.com",
+                                                            "alamat": "Semarang",
+                                                            "no_hp": "082345675434",
+                                                            "pf_foto": null,
+                                                            "link_foto": "http:\/\/127.0.0.1:8000\/storage\/profile\/userdefault.png",
+                                                            "ktgkaryawan": [
+                                                                {
+                                                                    "id": 5,
+                                                                    "kategori": "dicta"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ],
+                                                "izin": [
+                                                    {
+                                                        "id": 5,
+                                                        "user_id": 4,
+                                                        "jenis_izin": "izin",
+                                                        "mulai_izin": "2023-05-03",
+                                                        "selesai_izin": "2023-05-10",
+                                                        "deskripsi": "Saepe totam consectetur unde molestiae repellat ipsam libero. Hic ut omnis perspiciatis aliquid. Maxime molestias natus mollitia impedit.",
+                                                        "path_file": "path_file\/cupiditate.png",
+                                                        "user": {
+                                                            "id": 4,
+                                                            "niy": "38493812",
+                                                            "nama": "Guru RPL",
+                                                            "email": "erpeel@gmail.com",
+                                                            "alamat": "Semarang",
+                                                            "no_hp": "082466527865",
+                                                            "pf_foto": null,
+                                                            "link_foto": "http:\/\/127.0.0.1:8000\/storage\/profile\/userdefault.png",
+                                                            "ktgkaryawan": [
+                                                                {
+                                                                    "id": 4,
+                                                                    "kategori": "officia"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": 7,
+                                                        "user_id": 4,
+                                                        "jenis_izin": "izin",
+                                                        "mulai_izin": "2023-05-03",
+                                                        "selesai_izin": "2023-05-15",
+                                                        "deskripsi": "Saepe totam consectetur unde molestiae repellat ipsam libero. Hic ut omnis perspiciatis aliquid. Maxime molestias natus mollitia impedit.",
+                                                        "path_file": "path_file\/cupiditate.png",
+                                                        "user": {
+                                                            "id": 4,
+                                                            "niy": "38493812",
+                                                            "nama": "Guru RPL",
+                                                            "email": "erpeel@gmail.com",
+                                                            "alamat": "Semarang",
+                                                            "no_hp": "082466527865",
+                                                            "pf_foto": null,
+                                                            "link_foto": "http:\/\/127.0.0.1:8000\/storage\/profile\/userdefault.png",
+                                                            "ktgkaryawan": [
+                                                                {
+                                                                    "id": 4,
+                                                                    "kategori": "officia"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": 8,
+                                                        "user_id": 4,
+                                                        "jenis_izin": "izin",
+                                                        "mulai_izin": "2023-05-01",
+                                                        "selesai_izin": "2023-05-15",
+                                                        "deskripsi": "Saepe totam consectetur unde molestiae repellat ipsam libero. Hic ut omnis perspiciatis aliquid. Maxime molestias natus mollitia impedit.",
+                                                        "path_file": "path_file\/cupiditate.png",
+                                                        "user": {
+                                                            "id": 4,
+                                                            "niy": "38493812",
+                                                            "nama": "Guru RPL",
+                                                            "email": "erpeel@gmail.com",
+                                                            "alamat": "Semarang",
+                                                            "no_hp": "082466527865",
+                                                            "pf_foto": null,
+                                                            "link_foto": "http:\/\/127.0.0.1:8000\/storage\/profile\/userdefault.png",
+                                                            "ktgkaryawan": [
+                                                                {
+                                                                    "id": 4,
+                                                                    "kategori": "officia"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kehadiran/jml-kehadiran": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kehadiran(Admin)"
+                ],
+                "summary": "Jumlah Kehadiran",
+                "description": "di endpoint ini ada 3 kondisi, yaitu saat parameter tidak ada, parameter start_time ada, dan parameter end_time ada, paramater start_time - end_time ada. semua paramater tidak required",
+                "parameters": [
+                    {
+                        "name": "start_time",
+                        "in": "query",
+                        "description": "tanggal mulai",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "tanggal": {
+                                "value": "2023-05-07"
+                            }
+                        }
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "query",
+                        "description": "tanggal selesai",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "tanggal": {
+                                "value": "2023-05-08"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "jumlah kehadiran",
+                                            "data": {
+                                                "jumlah_karyawan": 5,
+                                                "jumlah_kehadiran": 3,
+                                                "jumlah_izin": 4,
+                                                "jumlah_absen": 3
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kehadiran/detail/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kehadiran(Admin)"
+                ],
+                "summary": "Jumlah Kehadiran",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id kehadiran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "id": {
+                                "value": 5
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "status": 200,
+                                            "message": "Detail Absen",
+                                            "data": {
+                                                "id": 5,
+                                                "user_id": 2,
+                                                "keterangan": "pulang",
+                                                "is_valid_masuk": 1,
+                                                "catatan_masuk": "Reiciendis voluptatem vel magnam mollitia numquam tenetur repellendus.",
+                                                "waktu_masuk": "22:29:02",
+                                                "tanggal_masuk": "2023-05-07",
+                                                "foto_masuk": "foto_masuk/rerum.png",
+                                                "lokasi_masuk": "East Shaunton",
+                                                "latitude_masuk": "5204876",
+                                                "longitude_masuk": "3164916",
+                                                "is_valid_pulang": 1,
+                                                "catatan_pulang": "Reiciendis voluptatem vel magnam mollitia numquam",
+                                                "waktu_pulang": "22:29:02",
+                                                "tanggal_pulang": "2023-05-07",
+                                                "foto_pulang": "foto_pulang/rerum.png",
+                                                "lokasi_pulang": "East Shaunton",
+                                                "latitude_pulang": "5204876",
+                                                "longitude_pulang": "3164916",
+                                                "user": {
+                                                    "id": 2,
+                                                    "niy": "00021324",
+                                                    "nama": "Staff",
+                                                    "email": "staff@gmail.com",
+                                                    "alamat": "Kudus",
+                                                    "no_hp": "081245673455",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                    "ktgkaryawan": [
+                                                        {
+                                                            "id": 1,
+                                                            "kategori": "expedita"
+                                                        },
+                                                        {
+                                                            "id": 2,
+                                                            "kategori": "debitis"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karyawan": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Karyawan(Admin)"
+                ],
+                "summary": "List Karyawan per Kategori",
+                "description": "user harus mengiputkan parameter kategori_id, untuk mendapatkan data karyawan per kategori. user juga bisa search karyawan dengan memberikan parameter search seperti di contoh, karyawan bisa dicari berdasarkan nama karyawan atau niy nya",
+                "parameters": [
+                    {
+                        "name": "kategori_id",
+                        "in": "query",
+                        "description": "id kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "id": {
+                                "value": 1
+                            }
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search karyawan",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "nama": {
+                                "description": "search karyawan berdasarkan nama",
+                                "value": "guru animasi"
+                            },
+                            "niy": {
+                                "description": "search karyawan berdasarkan niy",
+                                "value": "38493812"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": 1,
+                                                    "niy": "01234567",
+                                                    "nama": "IT",
+                                                    "email": "it@gmail.com",
+                                                    "alamat": "Temanggung",
+                                                    "no_hp": "081234536675",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                    "ktgkaryawan": [
+                                                        {
+                                                            "id": 1,
+                                                            "kategori": "expedita"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "niy": "00021324",
+                                                    "nama": "Staff",
+                                                    "email": "staff@gmail.com",
+                                                    "alamat": "Kudus",
+                                                    "no_hp": "081245673455",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                    "ktgkaryawan": [
+                                                        {
+                                                            "id": 1,
+                                                            "kategori": "expedita"
+                                                        },
+                                                        {
+                                                            "id": 2,
+                                                            "kategori": "debitis"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karyawan/kategori": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Karyawan(Admin)"
+                ],
+                "summary": "List Kategori Karyawan",
+                "description": "get all list kategori karyawan",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": 1,
+                                                    "kategori": "expedita"
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "kategori": "debitis"
+                                                },
+                                                {
+                                                    "id": 3,
+                                                    "kategori": "ullam"
+                                                },
+                                                {
+                                                    "id": 4,
+                                                    "kategori": "officia"
+                                                },
+                                                {
+                                                    "id": 5,
+                                                    "kategori": "dicta"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karyawan/detail/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Karyawan(Admin)"
+                ],
+                "summary": "Detail Karyawan",
+                "description": "Detail data karyawan dari profile, jadwal kehadiran dan kategori karyawan",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "id": {
+                                "value": 2
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "user": {
+                                                "id": 2,
+                                                "niy": "00021324",
+                                                "nama": "Staff 1",
+                                                "email": "staff@gmail.com",
+                                                "alamat": "Bekasi",
+                                                "no_hp": "08213124312",
+                                                "pf_foto": "test",
+                                                "link_foto": "http://127.0.0.1:8000/test",
+                                                "ktgkaryawan": [
+                                                    {
+                                                        "id": 2,
+                                                        "kategori": "debitis"
+                                                    },
+                                                    {
+                                                        "id": 1,
+                                                        "kategori": "expedita"
+                                                    }
+                                                ],
+                                                "jadwal": [
+                                                    {
+                                                        "id": 10,
+                                                        "user_id": 2,
+                                                        "hari": "senin",
+                                                        "jam_masuk": "07:00:00",
+                                                        "jam_pulang": "01:00:00"
+                                                    },
+                                                    {
+                                                        "id": 8,
+                                                        "user_id": 2,
+                                                        "hari": "Jumat",
+                                                        "jam_masuk": "07:00:00",
+                                                        "jam_pulang": "15:00:00"
+                                                    },
+                                                    {
+                                                        "id": 6,
+                                                        "user_id": 2,
+                                                        "hari": "Sabtu",
+                                                        "jam_masuk": "07:00:00",
+                                                        "jam_pulang": "12:00:00"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karyawan/store": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Karyawan(Admin)"
+                ],
+                "summary": "Store Karyawan",
+                "description": "create data karyawan dari profile, jadwal kehadiran dan kategori karyawan",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+
+                            },
+                            "examples": {
+                                "request": {
+                                    "value": {
+                                        "nama": "Contoh",
+                                        "niy": "09873849",
+                                        "email": "contoh@gmail.com",
+                                        "password": "smkrus",
+                                        "alamat": "Bekasi",
+                                        "no_hp": "08213124312",
+                                        "pf_foto": "",
+                                        "jadwal": [
+                                            {
+                                                "hari": "Senin",
+                                                "jam_masuk": "08:00:00",
+                                                "jam_pulang": "02:00:00"
+                                            },
+                                            {
+                                                "hari": "Selasa",
+                                                "jam_masuk": "09:00:00",
+                                                "jam_pulang": "12:00:00"
+                                            }
+                                        ],
+                                        "ktg_karyawan" : [2,1]
+                                    }
+                                }
+                            },
+                            "responses": {
+                                "200": {
+                                    "description": "success",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+
+                                            },
+                                            "examples": {
+                                                "200": {
+                                                    "value": {
+                                                        "message": "success",
+                                                        "data": {
+                                                            "id": 2,
+                                                            "niy": "00021324",
+                                                            "nama": "Staff 1",
+                                                            "email": "staff@gmail.com",
+                                                            "alamat": "Bekasi",
+                                                            "no_hp": "08213124312",
+                                                            "pf_foto": "test",
+                                                            "link_foto": "http://127.0.0.1:8000/test",
+                                                            "jadwal": [
+                                                                {
+                                                                    "id": 10,
+                                                                    "user_id": 2,
+                                                                    "hari": "senin",
+                                                                    "jam_masuk": "07:00:00",
+                                                                    "jam_pulang": "01:00:00"
+                                                                },
+                                                                {
+                                                                    "id": 8,
+                                                                    "user_id": 2,
+                                                                    "hari": "Jumat",
+                                                                    "jam_masuk": "07:00:00",
+                                                                    "jam_pulang": "15:00:00"
+                                                                },
+                                                                {
+                                                                    "id": 6,
+                                                                    "user_id": 2,
+                                                                    "hari": "Sabtu",
+                                                                    "jam_masuk": "07:00:00",
+                                                                    "jam_pulang": "12:00:00"
+                                                                }
+                                                            ],
+                                                            "ktgkaryawan": [
+                                                                {
+                                                                    "id": 2,
+                                                                    "kategori": "debitis"
+                                                                },
+                                                                {
+                                                                    "id": 1,
+                                                                    "kategori": "expedita"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "nama": "Contoh",
+                                                "niy": "09873849",
+                                                "email": "contoh@gmail.com",
+                                                "password": "smkrus",
+                                                "alamat": "Bekasi",
+                                                "no_hp": "08213124312",
+                                                "pf_foto": "",
+                                                "jadwal": [
+                                                    {
+                                                        "hari": "Senin",
+                                                        "jam_masuk": "08:00:00",
+                                                        "jam_pulang": "02:00:00"
+                                                    },
+                                                    {
+                                                        "hari": "Selasa",
+                                                        "jam_masuk": "09:00:00",
+                                                        "jam_pulang": "12:00:00"
+                                                    }
+                                                ],
+                                                "ktg_karyawan": [
+                                                    2,
+                                                    1
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karyawan/update/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Karyawan(Admin)"
+                ],
+                "summary": "Update Karyawan",
+                "description": "edit data karyawan dari profile, jadwal kehadiran dan kategori karyawan",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "id": {
+                                "value": 2
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+
+                            },
+                            "examples": {
+                                "request": {
+                                    "value": {
+                                        "nama": "Staff",
+                                        "email": "staff@gmail.com",
+                                        "password": "smkrus",
+                                        "alamat": "Bekasi",
+                                        "no_hp": "08213124312",
+                                        "pf_foto": "",
+                                        "jadwal": [
+                                            {
+                                                "hari": "Senin",
+                                                "jam_masuk": "08:00:00",
+                                                "jam_pulang": "02:00:00"
+                                            },
+                                            {
+                                                "hari": "Selasa",
+                                                "jam_masuk": "09:00:00",
+                                                "jam_pulang": "12:00:00"
+                                            }
+                                        ],
+                                        "ktg_karyawan" : [
+                                            2,1
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "nama": "Staff",
+                                                "email": "staff@gmail.com",
+                                                "password": "smkrus",
+                                                "alamat": "Bekasi",
+                                                "no_hp": "08213124312",
+                                                "pf_foto": "",
+                                                "jadwal": [
+                                                    {
+                                                        "hari": "Senin",
+                                                        "jam_masuk": "08:00:00",
+                                                        "jam_pulang": "02:00:00"
+                                                    },
+                                                    {
+                                                        "hari": "Selasa",
+                                                        "jam_masuk": "09:00:00",
+                                                        "jam_pulang": "12:00:00"
+                                                    }
+                                                ],
+                                                "ktg_karyawan" : [
+                                                    2,1
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karyawan/delete/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Karyawan(Admin)"
+                ],
+                "summary": "Delete Karyawan",
+                "description": "delete data karyawan dari profile, jadwal kehadiran dan kategori karyawan",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "id": {
+                                "value": 7
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kalender": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kalender(Admin)"
+                ],
+                "summary": "Page Kalender",
+                "description": "get data event dengan parameter bulan",
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "query",
+                        "description": "bulan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "bulan": {
+                                "value": 5
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "messege": "success",
+                                            "data": [
+                                                {
+                                                    "id": 1,
+                                                    "judul": "vitae aut molestiae",
+                                                    "kategori_event": "libur",
+                                                    "lokasi": "East Alizebury",
+                                                    "waktu_mulai": "2023-05-06 10:32:39",
+                                                    "waktu_selesai": "0000-00-00 00:00:00",
+                                                    "deskripsi": "Voluptatem veniam et id dolores maxime accusantium expedita. Quasi ut voluptatem et omnis nihil. Nam a distinctio a nulla animi. Sequi hic soluta aut debitis blanditiis voluptatem."
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "judul": "excepturi eius et",
+                                                    "kategori_event": "event",
+                                                    "lokasi": "Gunnerland",
+                                                    "waktu_mulai": "2023-05-06 07:23:11",
+                                                    "waktu_selesai": "0000-00-00 00:00:00",
+                                                    "deskripsi": "Atque quia sit minus. Autem deserunt reiciendis et voluptatem."
+                                                },
+                                                {
+                                                    "id": 6,
+                                                    "judul": "Class Meeting",
+                                                    "kategori_event": "event",
+                                                    "lokasi": "",
+                                                    "waktu_mulai": "2023-05-13 00:00:00",
+                                                    "waktu_selesai": "2023-05-17 00:00:00",
+                                                    "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis"
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "judul": "Class Meeting",
+                                                    "kategori_event": "event",
+                                                    "lokasi": "",
+                                                    "waktu_mulai": "2023-05-13 00:00:00",
+                                                    "waktu_selesai": "2023-05-17 00:00:00",
+                                                    "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis"
+                                                },
+                                                {
+                                                    "id": 8,
+                                                    "judul": "Class Meeting Rus",
+                                                    "kategori_event": "event",
+                                                    "lokasi": "",
+                                                    "waktu_mulai": "2023-05-13 00:00:00",
+                                                    "waktu_selesai": "2023-05-17 00:00:00",
+                                                    "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kalender/detail/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kalender(Admin)"
+                ],
+                "summary": "Detail Event",
+                "description": "get detail data event",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id event",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "id": {
+                                "value": 1
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "id": 10,
+                                                "judul": "Class Meeting",
+                                                "kategori_event": "event",
+                                                "lokasi": "",
+                                                "waktu_mulai": "2023-05-13 00:00:00",
+                                                "waktu_selesai": "2023-05-17 00:00:00",
+                                                "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis",
+                                                "peserta": [
+                                                    {
+                                                        "id": 1,
+                                                        "niy": "01234567",
+                                                        "nama": "IT",
+                                                        "email": "it@gmail.com",
+                                                        "alamat": "Temanggung",
+                                                        "no_hp": "081234536675",
+                                                        "pf_foto": null,
+                                                        "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                        "ktgkaryawan": [
+                                                            {
+                                                                "id": 1,
+                                                                "kategori": "expedita"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "niy": "00021324",
+                                                        "nama": "Staff",
+                                                        "email": "staff@gmail.com",
+                                                        "alamat": "Bekasi",
+                                                        "no_hp": "08213124312",
+                                                        "pf_foto": "test",
+                                                        "link_foto": "http://127.0.0.1:8000/test",
+                                                        "ktgkaryawan": []
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kalender/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kalender(Admin)"
+                ],
+                "summary": "Create Event",
+                "description": "create data event dan peserta",
+                "requestBody": {
+                    "description": "untuk parameter peserta, isi dengan id karyawan yang akan dijadikan peserta",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "judul": "Class Meeting",
+                                        "kategori_event": "event",
+                                        "waktu_mulai": "2023-05-13",
+                                        "waktu_selesai": "2023-05-17",
+                                        "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis",
+                                        "peserta": [1,2]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "id": 10,
+                                                "judul": "Class Meeting",
+                                                "kategori_event": "event",
+                                                "lokasi": "",
+                                                "waktu_mulai": "2023-05-13 00:00:00",
+                                                "waktu_selesai": "2023-05-17 00:00:00",
+                                                "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis",
+                                                "peserta": [
+                                                    {
+                                                        "id": 1,
+                                                        "niy": "01234567",
+                                                        "nama": "IT",
+                                                        "email": "it@gmail.com",
+                                                        "alamat": "Temanggung",
+                                                        "no_hp": "081234536675",
+                                                        "pf_foto": null,
+                                                        "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                        "ktgkaryawan": [
+                                                            {
+                                                                "id": 1,
+                                                                "kategori": "expedita"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "niy": "00021324",
+                                                        "nama": "Staff",
+                                                        "email": "staff@gmail.com",
+                                                        "alamat": "Bekasi",
+                                                        "no_hp": "08213124312",
+                                                        "pf_foto": "test",
+                                                        "link_foto": "http://127.0.0.1:8000/test",
+                                                        "ktgkaryawan": []
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kalender/kategori": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kalender(Admin)"
+                ],
+                "summary": "List Kategori Karyawan",
+                "description": "get all list kategori karyawan",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": 1,
+                                                    "kategori": "expedita"
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "kategori": "debitis"
+                                                },
+                                                {
+                                                    "id": 3,
+                                                    "kategori": "ullam"
+                                                },
+                                                {
+                                                    "id": 4,
+                                                    "kategori": "officia"
+                                                },
+                                                {
+                                                    "id": 5,
+                                                    "kategori": "dicta"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kalender/get-karyawan": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kalender(Admin)"
+                ],
+                "summary": "List Karyawan per Kategori",
+                "description": "user harus mengiputkan parameter kategori_id, untuk mendapatkan data karyawan per kategori. user juga bisa search karyawan dengan memberikan parameter search seperti di contoh, karyawan bisa dicari berdasarkan nama karyawan atau niy nya, endpoint ini digunakan saat ingin menginput peserta saat create event",
+                "parameters": [
+                    {
+                        "name": "kategori_id",
+                        "in": "query",
+                        "description": "id kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "id": {
+                                "value": 1
+                            }
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search karyawan",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "nama": {
+                                "description": "search karyawan berdasarkan nama",
+                                "value": "guru animasi"
+                            },
+                            "niy": {
+                                "description": "search karyawan berdasarkan niy",
+                                "value": "38493812"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": 1,
+                                                    "niy": "01234567",
+                                                    "nama": "IT",
+                                                    "email": "it@gmail.com",
+                                                    "alamat": "Temanggung",
+                                                    "no_hp": "081234536675",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                    "ktgkaryawan": [
+                                                        {
+                                                            "id": 1,
+                                                            "kategori": "expedita"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "niy": "00021324",
+                                                    "nama": "Staff",
+                                                    "email": "staff@gmail.com",
+                                                    "alamat": "Kudus",
+                                                    "no_hp": "081245673455",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                    "ktgkaryawan": [
+                                                        {
+                                                            "id": 1,
+                                                            "kategori": "expedita"
+                                                        },
+                                                        {
+                                                            "id": 2,
+                                                            "kategori": "debitis"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kalender/update/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Kalender(Admin)"
+                ],
+                "summary": "Update Event",
+                "description": "update data event dan peserta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id event",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "example1": {
+                                "value": 8
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "untuk parameter peserta, isi dengan id karyawan yang akan dijadikan peserta",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "judul": "Class Meeting",
+                                        "kategori_event": "event",
+                                        "waktu_mulai": "2023-05-13",
+                                        "waktu_selesai": "2023-05-17",
+                                        "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis",
+                                        "peserta": [1,2]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "id": 8,
+                                                "judul": "Class Meeting Rus",
+                                                "kategori_event": "event",
+                                                "lokasi": "",
+                                                "waktu_mulai": "2023-05-13 00:00:00",
+                                                "waktu_selesai": "2023-05-17 00:00:00",
+                                                "deskripsi": "Acara perkumpulan setiap kelas dari semua angkatan untuk memenangkan lomba2 yang disediakan osis",
+                                                "peserta": [
+                                                    {
+                                                        "id": 1,
+                                                        "niy": "01234567",
+                                                        "nama": "IT",
+                                                        "email": "it@gmail.com",
+                                                        "alamat": "Temanggung",
+                                                        "no_hp": "081234536675",
+                                                        "pf_foto": null,
+                                                        "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                        "ktgkaryawan": [
+                                                            {
+                                                                "id": 1,
+                                                                "kategori": "expedita"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 2,
+                                                        "niy": "00021324",
+                                                        "nama": "Staff",
+                                                        "email": "staff@gmail.com",
+                                                        "alamat": "Bekasi",
+                                                        "no_hp": "08213124312",
+                                                        "pf_foto": "test",
+                                                        "link_foto": "http://127.0.0.1:8000/test",
+                                                        "ktgkaryawan": [
+                                                            {
+                                                                "id": 2,
+                                                                "kategori": "debitis"
+                                                            },
+                                                            {
+                                                                "id": 1,
+                                                                "kategori": "expedita"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 3,
+                                                        "niy": "89282132",
+                                                        "nama": "Guru Animasi",
+                                                        "email": "anim@gmail.com",
+                                                        "alamat": "Semarang",
+                                                        "no_hp": "082466527865",
+                                                        "pf_foto": null,
+                                                        "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                        "ktgkaryawan": []
+                                                    },
+                                                    {
+                                                        "id": 4,
+                                                        "niy": "38493812",
+                                                        "nama": "Guru RPL",
+                                                        "email": "erpeel@gmail.com",
+                                                        "alamat": "Semarang",
+                                                        "no_hp": "082466527865",
+                                                        "pf_foto": null,
+                                                        "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                        "ktgkaryawan": [
+                                                            {
+                                                                "id": 4,
+                                                                "kategori": "officia"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 5,
+                                                        "niy": "03947382",
+                                                        "nama": "Guru DKV",
+                                                        "email": "dekape@gmail.com",
+                                                        "alamat": "Semarang",
+                                                        "no_hp": "082345675434",
+                                                        "pf_foto": null,
+                                                        "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png",
+                                                        "ktgkaryawan": [
+                                                            {
+                                                                "id": 5,
+                                                                "kategori": "dicta"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kalender/destroy/{id}": {
+            "get": {
+                "tags": [
+                    "Kalender(Admin)"
+                ],
+                "summary": "Delete Event",
+                "description": "delete data event dan peserta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id event",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "example1": {
+                                "value": 9
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Get all Kategori",
+                "description": "get data kategori degan jumlah karyawan dengan kategori masing - masing",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": 1,
+                                                    "kategori": "expedita",
+                                                    "jumlah": 2
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "kategori": "debitis",
+                                                    "jumlah": 1
+                                                },
+                                                {
+                                                    "id": 3,
+                                                    "kategori": "dolorem",
+                                                    "jumlah": 0
+                                                },
+                                                {
+                                                    "id": 4,
+                                                    "kategori": "officia",
+                                                    "jumlah": 1
+                                                },
+                                                {
+                                                    "id": 5,
+                                                    "kategori": "dicta",
+                                                    "jumlah": 1
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori/store": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Add Kategori",
+                "description": "add data kategori",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama_kategori": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "nama_kategori": "Guru Tetap"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "kategori": "Guru Tetap",
+                                                "id": 7
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori/update/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Update Kategori",
+                "description": "update data kategori",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "example1": {
+                                "value": 7
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama_kategori": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "nama_kategori": "Guru Tetap"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "kategori": "Guru Tetap",
+                                                "id": 7
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori/delete/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Delete Kategori",
+                "description": "delete data kategori",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "example1": {
+                                "value": 7
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori/get-karyawan": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Get all Karyawan",
+                "description": "get data karyawan untuk assign kategori",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search karyawan dengan nama dan niy, parameter ini opsional jika tidak diisi maka akan return semua data karyawan",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "example1": {
+                                "value": "Guru"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "id": 3,
+                                                    "niy": "89282132",
+                                                    "nama": "Guru Animasi",
+                                                    "email": "anim@gmail.com",
+                                                    "alamat": "Semarang",
+                                                    "no_hp": "082466527865",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png"
+                                                },
+                                                {
+                                                    "id": 4,
+                                                    "niy": "38493812",
+                                                    "nama": "Guru RPL",
+                                                    "email": "erpeel@gmail.com",
+                                                    "alamat": "Semarang",
+                                                    "no_hp": "082466527865",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png"
+                                                },
+                                                {
+                                                    "id": 5,
+                                                    "niy": "03947382",
+                                                    "nama": "Guru DKV",
+                                                    "email": "dekape@gmail.com",
+                                                    "alamat": "Semarang",
+                                                    "no_hp": "082345675434",
+                                                    "pf_foto": null,
+                                                    "link_foto": "http://127.0.0.1:8000/storage/profile/userdefault.png"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori/detail/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Get Detail Kategori",
+                "description": "get detail data kategori",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id kategori",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "example1": {
+                                "value": 7
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "id": 7,
+                                                "nama_kategori": "Guru Tetap"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori/assign": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Assign Kategori",
+                "description": "assign kategori ke karyawan, bisa assign lebih dari satu karyawan",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "kategori_id": {
+                                        "type": "integer"
+                                    },
+                                    "karyawan_id": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "kategori_id": 7,
+                                        "karyawan_id": [
+                                            3,
+                                            4,
+                                            5
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kordinat": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kordinat"
+                ],
+                "summary": "Get Kordinat",
+                "description": "get data kordinat",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "key": "latitude",
+                                                    "value": "-7.175392"
+                                                },
+                                                {
+                                                    "key": "longitude",
+                                                    "value": "107.827153"
+                                                },
+                                                {
+                                                    "key": "radius",
+                                                    "value": "20"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kordinat/update": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kordinat"
+                ],
+                "summary": "Update Kordinat",
+                "description": "update data kordinat",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "latitude": {
+                                        "type": "string"
+                                    },
+                                    "longitude": {
+                                        "type": "string"
+                                    },
+                                    "radius": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "latitude": "-7.175392",
+                                        "longitude": "107.827153",
+                                        "radius": "20"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": [
+                                                {
+                                                    "key": "latitude",
+                                                    "value": "-7.175392"
+                                                },
+                                                {
+                                                    "key": "longitude",
+                                                    "value": "107.827153"
+                                                },
+                                                {
+                                                    "key": "radius",
+                                                    "value": "20"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AuthRespons": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "DashboardSchema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "jml_kehadiran": {
+                                "type": "object",
+                                "properties": {
+                                    "jml_karyawan": {
+                                        "type": "integer"
+                                    },
+                                    "jml_masuk": {
+                                        "type": "integer"
+                                    },
+                                    "jml_izin": {
+                                        "type": "integer"
+                                    },
+                                    "jml_absen": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "DashboardStatistikSchema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string"
+                                },
+                                "count": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "DashboardJadwalSchema": {
+                "type": "object",
+                "properties": {
+                    "message":{
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EventSchema"
+                        }
+                    }
+                }
+            },
+            "KehadiranSchema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "masuk": {
+                                "$ref": "#/components/schemas/KehadiranMasukSchema"
+                            }
+                        }
+                    }
+                }
+            },
+            "AbsenSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "keterangan": {
+                        "type": "string"
+                    },
+                    "is_valid_masuk": {
+                        "type": "boolean",
+                        "format": "int",
+                        "description": "1 = valid, 0 = tidak valid"
+                    },
+                    "catatan_masuk": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "waktu_masuk": {
+                        "type": "time"
+                    },
+                    "tanggal_masuk": {
+                        "type": "date"
+                    },
+                    "foto_masuk": {
+                        "type": "file"
+                    },
+                    "lokasi_masuk": {
+                        "type": "string"
+                    },
+                    "latitude_masuk": {
+                        "type": "string"
+                    },
+                    "longitude_masuk": {
+                        "type": "string"
+                    },
+                    "is_valid_pulang": {
+                        "type": "boolean",
+                        "format": "int",
+                        "description": "1 = valid, 0 = tidak valid"
+                    },
+                    "catatan_pulang": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "waktu_pulang": {
+                        "type": "time"
+                    },
+                    "tanggal_pulang": {
+                        "type": "date"
+                    },
+                    "foto_pulang": {
+                        "type": "file"
+                    },
+                    "lokasi_pulang": {
+                        "type": "string"
+                    },
+                    "latitude_pulang": {
+                        "type": "string"
+                    },
+                    "longitude_pulang": {
+                        "type": "string"
+                    }
+                }
+            },
+            "EventSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "judul": {
+                        "type": "string"
+                    },
+                    "kategori_event": {
+                        "type": "string",
+                        "enum": [
+                            "event",
+                            "libur"
+                        ]
+                    },
+                    "lokasi": {
+                        "type": "string"
+                    },
+                    "waktu_mulai": {
+                        "type": "datetime"
+                    },
+                    "waktu_selesai": {
+                        "type": "datetime"
+                    },
+                    "deskripsi": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UserSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "niy": {
+                        "type": "string"
+                    },
+                    "nama": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "alamat": {
+                        "type": "string"
+                    },
+                    "no_hp": {
+                        "type": "string"
+                    },
+                    "pf_foto": {
+                        "type": "string"
+                    },
+                    "link_foto": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UserKategoriSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "niy": {
+                        "type": "string"
+                    },
+                    "nama": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "alamat": {
+                        "type": "string"
+                    },
+                    "no_hp": {
+                        "type": "string"
+                    },
+                    "pf_foto": {
+                        "type": "string"
+                    },
+                    "link_foto": {
+                        "type": "string"
+                    },
+                    "ktgkaryawan": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "kategori": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "KehadiranMasukSchema": {
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "description": "Absensi Auth",
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "Sanctum"
+            }
+        }
+    }
+}

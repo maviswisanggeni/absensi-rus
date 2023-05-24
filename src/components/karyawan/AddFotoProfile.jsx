@@ -3,7 +3,7 @@ import { useState } from 'react';
 import uploadClour from '../../assets/icons/cloud-upload.svg'
 import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser';
 
-function FotoProfile() {
+function FotoProfile({ callback }) {
     const context = useApiKaryawanStoreUser()
     const [file, setFile] = useState({});
     const inputRef = useRef(null);
@@ -48,6 +48,10 @@ function FotoProfile() {
         inputRef.current.click();
     };
 
+    useEffect(() => {
+        callback(file)
+    }, [file])
+
     return (
         <div onDragEnter={handleDrag} className='form-file-upload'>
             <h1>Foto Profile</h1>
@@ -55,9 +59,9 @@ function FotoProfile() {
             <label id="label-file-upload" htmlFor="input-file-upload" className={dragActive ? "drag-active" : ""}>
                 <div className='wrap-text'>
                     <img src={uploadClour} alt="" />
-                    <h1>{file.name === undefined ? 'Tambahkan Foto' : file?.name}</h1> 
+                    <h1>{file.name === undefined ? 'Tambahkan Foto' : file?.name}</h1>
                     {/* <h1></h1> */}
-                    <button className="upload-button" onClick={onButtonClick}>Upload dari Komputer atau drag-n-drop image <br/>ber format .png or .jpg</button>
+                    <button className="upload-button" onClick={onButtonClick}>Upload dari Komputer atau drag-n-drop image <br />ber format .png or .jpg</button>
                 </div>
             </label>
             {dragActive && <div id="drag-file-element" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}

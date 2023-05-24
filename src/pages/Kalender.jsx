@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import '../styles/css/Kalendar.css'
 import { getMonth } from '../datas/util'
 import CalendarHeader from '../components/kalender/CalendarHeader';
-import Sidebar from '../components/kalender/Sidebar';
 import Month from '../components/kalender/Month';
 import GlobalCalendar from '../contexts/app/GlobalCalendar';
 import EventModal from '../components/kalender/EventModal';
+import Sidebar from '../components/sidebar/Sidebar';
 
 function Kalender() {
   const [currentMonth, setCurrentMonth] = useState(getMonth())
@@ -16,12 +16,15 @@ function Kalender() {
   }, [monthIndex])
 
   return (
-    <div className='kalender'>
-      { showEventModal && <EventModal />}
-      <CalendarHeader />
-      <div className='sidebar-month'>
-        {/* <Sidebar/> */}
-        <Month month={currentMonth}/>
+    <div className='wrapper-kalender'>
+      <Sidebar />
+      <div className='kalender'>
+        {showEventModal && <EventModal />}
+        <CalendarHeader />
+        <div className='sidebar-month'>
+          {/* <Sidebar/> */}
+          <Month month={currentMonth} />
+        </div>
       </div>
     </div>
   )

@@ -5,11 +5,11 @@ import { useNavigate } from "react-router";
 import getBaseUrl from "../../../datas/apiUrl";
 const ContextApiDashboard = createContext({})
 
-function useApiDashboard(){
+function useApiDashboard() {
     return useContext(ContextApiDashboard)
 }
 
-function DashboardApiProvider ({children}) {
+function DashboardApiProvider({ children }) {
     const [jmlKehadiran, setJmlKehadiran] = useState(null);
     const [date, setDate] = useState(formatDate(new Date()))
     const [loading, setLoading] = useState(false);
@@ -22,36 +22,36 @@ function DashboardApiProvider ({children}) {
             tanggal: date
         }
         setLoading(false);
-        axios.get(url, 
+        axios.get(url,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
                 params: request
             }
-            )
+        )
             .then((response) => {
-            setJmlKehadiran(response.data.data.jml_kehadiran);
-            setLoading(true);
-        }).catch((error) => {
-            console.log(error);
-        })
+                setJmlKehadiran(response.data.data.jml_kehadiran);
+                setLoading(true);
+            }).catch((error) => {
+                console.log(error);
+            })
     }
 
     useEffect(() => {
-        if(!token){
+        if (!token) {
             navigate('/login')
         }
-        getData();
+        // getData();
     }, [date]);
 
-    const contextValue = {jmlKehadiran, setJmlKehadiran, loading, setLoading, date, setDate}
+    const contextValue = { jmlKehadiran, setJmlKehadiran, loading, setLoading, date, setDate }
 
-    return(
+    return (
         <ContextApiDashboard.Provider value={contextValue}>
             {children}
         </ContextApiDashboard.Provider>
     )
 }
 
-export {ContextApiDashboard, DashboardApiProvider, useApiDashboard}
+export { ContextApiDashboard, DashboardApiProvider, useApiDashboard }

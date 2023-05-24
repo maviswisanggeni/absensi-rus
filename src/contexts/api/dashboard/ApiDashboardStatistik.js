@@ -5,11 +5,11 @@ import { useNavigate } from "react-router";
 import getBaseUrl from "../../../datas/apiUrl";
 const ApiDashboardStatistik = createContext({})
 
-function useApiDashboardStatistik(){
+function useApiDashboardStatistik() {
     return useContext(ApiDashboardStatistik)
 }
 
-function DashboardApiStatistikProvider ({children}) {
+function DashboardApiStatistikProvider({ children }) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
@@ -18,34 +18,34 @@ function DashboardApiStatistikProvider ({children}) {
     async function getData() {
         const url = getBaseUrl() + "dashboard/statistik"
         setLoading(false);
-        axios.get(url, 
+        axios.get(url,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
             .then((response) => {
-            setData(response.data);
-            setLoading(true);
-        }).catch((error) => {
-            console.log(error);
-        })
+                setData(response.data);
+                setLoading(true);
+            }).catch((error) => {
+                console.log(error);
+            })
     }
 
     useEffect(() => {
-        if(!token){
+        if (!token) {
             navigate('/login')
         }
-        getData();
+        // getData();
     }, []);
 
-    const contextValue = {loading, setLoading, data, setData}
+    const contextValue = { loading, setLoading, data, setData }
 
-    return(
+    return (
         <ApiDashboardStatistik.Provider value={contextValue}>
             {children}
         </ApiDashboardStatistik.Provider>
     )
 }
 
-export {ApiDashboardStatistik, DashboardApiStatistikProvider, useApiDashboardStatistik}
+export { ApiDashboardStatistik, DashboardApiStatistikProvider, useApiDashboardStatistik }

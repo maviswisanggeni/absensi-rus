@@ -2,30 +2,35 @@ import dayjs from 'dayjs'
 import React from 'react'
 import { useApiDashboardStatistik } from '../../contexts/api/dashboard/ApiDashboardStatistik'
 import ButtonDownload from './ButtonDownload'
+import { useSelector } from 'react-redux'
 
 function ChartInfo() {
   const context = useApiDashboardStatistik()
+
+  const { statistikData, loading } = useSelector(state => state.statistik)
+
   return (
     <div className='chartInfo'>
       <p>
-        {
-          context.data?.map((item, i) => (
+        {loading ?
+          statistikData?.map((item, i) => (
             <React.Fragment key={i}>
               {i === 0 ? dayjs(item.date).format('DD MMMM YYYY') + ' - ' : ''}
-              {context.data?.length - 1 === i ? dayjs(item.date).format('DD MMMM YYYY') : ''}
+              {statistikData?.length - 1 === i ? dayjs(item.date).format('DD MMMM YYYY') : ''}
             </React.Fragment>
           ))
+          : <div>-</div>
         }
       </p>
 
-      {/* <div className='role pengajar'>
+      <div className='role pengajar'>
         <div></div>
         <p>Pengajar</p>
       </div>
       <div className='role staff'>
         <div></div>
         <p>Staff</p>
-      </div> */}
+      </div>
       <ButtonDownload />
     </div>
   )

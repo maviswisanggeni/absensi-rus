@@ -1,47 +1,52 @@
 @import "../variables/variables.scss";
 
-.nav{
-    width: 261px;
-    height: 100vh;
-    border-right: 1px solid $secondary-color;
+.nav {
+  width: 261px;
+  height: 100vh;
+  border-right: 1px solid $secondary-color;
 
-    .logo-sidebar{
+  .active-sidebar {
+    color: $primary-color;
+  }
+
+  .logo-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+
+    img {
+      width: 108px;
+      height: 108px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+  }
+
+  ul {
+    li {
+      list-style: none;
+      margin-bottom: 1.5rem;
+
+      a {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-        padding: 2rem 0;
+        text-decoration: none;
+        font-weight: 600;
+        color: $grey;
+        cursor: pointer;
 
-        img{
-            width: 108px;
-            height: 108px;
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 1rem;
         }
-
-        h1{
-            font-size: 20px;
-            font-weight: 600;
-            margin-top: 1rem;
-        }
+      }
     }
-
-    ul{
-        li{
-            list-style: none;
-            margin-bottom: 1.5rem;            
-
-            a{
-                display: flex;
-                align-items: center;
-                text-decoration: none;
-                font-weight: 600;
-                color: $grey;
-
-                img{
-                    width: 20px;
-                    height: 20px;
-                    margin-right: 1rem;
-                }
-            }
-        }
-    }
+  }
 }

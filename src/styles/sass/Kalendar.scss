@@ -1,476 +1,667 @@
 @import "../variables/variables.scss";
 
-.kalender{
-    width: 1179px;
-    height: 100vh;
+.kalender {
+  width: 1179px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    border: none;
+  }
+
+  .arrow {
+    margin-right: 0.25rem;
+    color: #4b5563;
+    cursor: pointer;
+  }
+
+  .arrow:last-child {
+    transform: rotate(180deg);
+  }
+
+  .header {
+    display: flex;
+    padding: 1.5rem 0 1.5rem 2rem;
+    border-bottom: 2px solid #eceef2;
+    width: 100%;
+
+    h2 {
+      margin-left: 1rem;
+      font-size: 30px;
+      line-height: 1.75rem;
+      font-weight: 400;
+    }
+
+    .today {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-right: 1.25rem;
+      border: none;
+      border-radius: 0.25rem;
+      border-width: 1px;
+    }
+  }
+
+  .sidebar-month {
+    display: flex;
+    flex: 1 1 0%;
+  }
+
+  .month {
+    display: grid;
+    flex: 1 1 0%;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+  }
+
+  .day {
     display: flex;
     flex-direction: column;
+    border-right: #e5e7eb 1px solid;
+    border-bottom: #e5e7eb 1px solid;
 
-    button{
-        border: none;
+    .handle-add {
+      // display: flex;
+      flex: 1 1 0%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background-color: rgb(255, 255, 255);
     }
 
-    .arrow{
-        margin-left: 0.5rem;
-        margin-right: 0.5rem; 
-        color: #4B5563; 
-        cursor: pointer; 
+    .handle-add:hover {
+      background-color: rgb(161, 161, 161);
     }
 
-    .arrow:last-child{
-        transform: rotate(180deg);
+    header {
+      display: flex;
+      flex-direction: column;
+      // align-items: center;
+      justify-content: flex-start;
+
+      .days {
+        border-bottom: 2px solid #eceef2;
+        width: 100%;
+        text-align: center;
+        color: #9b9b9b;
+        font-weight: 500;
+      }
+
+      .dd {
+        text-align: left;
+        font-size: 10px;
+        font-weight: 500;
+      }
+
+      h1 {
+        margin-right: 2.5rem;
+        color: #6b7280;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+
+      .currentDay {
+        display: grid;
+        place-items: center;
+        background-color: #2563eb;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        color: #ffffff;
+      }
+
+      p {
+        padding: 0.25rem;
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        text-align: left;
+      }
     }
 
-    .header{
-        display: flex;
-        padding: 1.5rem 0 1.5rem 2rem;
-        border-bottom: 2px solid #ECEEF2;
+    .day-events {
+      color: white;
+      background-color: $primary-color;
+    }
+  }
+
+  .small-calendar {
+    header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      grid-template-rows: repeat(6, minmax(0, 1fr));
+
+      .hari {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        text-align: center;
+      }
+
+      .btn {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
         width: 100%;
 
-        h2{
-            margin-left: 1rem; 
-            font-size: 30px;
-            line-height: 1.75rem; 
-            font-weight: 400; 
+        span {
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+        }
+      }
+
+      .btn-today {
+        background-color: #3b82f6;
+        color: #ffffff;
+        border-radius: 9999px;
+      }
+    }
+  }
+
+  .modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+
+    form {
+      background-color: #ffffff;
+      width: 500px;
+      height: 470px;
+      border-radius: 0.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+      .wrapper-input {
+        padding: 2rem 1.5rem 1rem;
+
+        .kegiatan-input {
+          width: 400px;
+          border: none;
+          border-bottom: 2px solid $primary-color;
+          outline: none;
+          font-size: 24px;
+          margin-left: 2.5rem;
+          margin-bottom: 1.5rem;
         }
 
-        .today{
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem; 
-            padding-left: 1rem;
-            padding-right: 1rem; 
-            margin-right: 1.25rem; 
+        .kegiatan-input::placeholder {
+          color: #9b9b9b;
+        }
+
+        .date {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+
+          p {
+            color: #5a6474;
+          }
+        }
+
+        .description {
+          display: flex;
+          align-items: flex-start;
+          gap: 1rem;
+
+          textarea {
+            width: 400px;
+            height: 100px;
+            resize: none;
+            outline: none;
             border: none;
-            border-radius: 0.25rem; 
-            border-width: 1px; 
+            background-color: #f3f3f3;
+            padding: 10px;
+            font-family: "poppins";
+            border-radius: 5px;
+          }
+
+          img {
+            transform: translateY(10px);
+          }
         }
+
+        .checkbox-form {
+          display: flex;
+          flex-direction: column;
+          padding-left: 2rem;
+          margin: 1rem 0 1rem;
+          gap: 1rem;
+
+          .wrap-for,
+          .wrap-is-libur {
+            display: flex;
+            gap: 1rem;
+          }
+
+          .wrap-label-input {
+            display: flex;
+          }
+
+          label {
+            font-size: 12px;
+            color: #5a6474;
+            margin-left: 0.5rem;
+          }
+        }
+      }
+
+      header {
+        display: flex;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        padding-right: 0.5rem;
+        background-color: $primary-color;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px 10px 0px 0px;
+
+        .action {
+          padding-right: 1rem;
+          .trash {
+            margin-right: 1rem;
+          }
+        }
+
+        h3 {
+          font-weight: 400;
+          font-size: 14px;
+          color: #ffffff;
+        }
+      }
+
+      .wrapper-label {
+        display: flex;
+        padding-left: 2rem;
+        margin-top: 2rem;
+        gap: 0.5rem;
+
+        .label {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 9999px;
+          cursor: pointer;
+
+          img {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+
+      footer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 1.5rem;
+
+        .submit {
+          width: 115px;
+          height: 40px;
+          background: $primary-color;
+          border-radius: 5px;
+          color: white;
+        }
+      }
     }
-
-    .sidebar-month{
-        display: flex; 
-        flex: 1 1 0%; 
-    }
-
-    .month{
-        display: grid; 
-        flex: 1 1 0%; 
-        grid-template-columns: repeat(7, minmax(0, 1fr)); 
-        grid-template-rows: repeat(5, minmax(0, 1fr)); 
-    }
-    
-
-    .day{
-        display: flex; 
-        flex-direction: column; 
-        border-right: #E5E7EB 1px solid; 
-        border-bottom: #E5E7EB 1px solid; 
-
-        .handle-add{
-            // display: flex;
-            flex: 1 1 0%;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background-color: rgb(255, 255, 255);
-        }
-
-        .handle-add:hover{
-            background-color: rgb(161, 161, 161);
-        }
-
-        header{
-            display: flex; 
-            flex-direction: column; 
-            // align-items: center; 
-            justify-content: flex-start;
-
-            .days{
-                border-bottom: 2px solid #ECEEF2;
-                width: 100%;
-                text-align: center;
-                color: #9B9B9B;
-                font-weight: 500;
-            }
-
-            .dd{
-                text-align: left;
-                font-size: 10px;
-                font-weight: 500;
-            }
-
-            h1{
-                margin-right: 2.5rem; 
-                color: #6B7280; 
-                font-size: 1.25rem;
-                line-height: 1.75rem; 
-            }
-
-            .currentDay{
-                display: grid;
-                place-items: center;
-                background-color: #2563EB; 
-                border-radius: 50%; 
-                width: 30px;
-                height: 30px;
-                color: #ffffff; 
-            }
-
-            p{
-                padding: 0.25rem; 
-                margin-top: 0.25rem;
-                margin-bottom: 0.25rem; 
-                font-size: 0.875rem;
-                line-height: 1.25rem; 
-                text-align: left;
-            }
-        }
-
-        .day-events{
-            color: white;
-            background-color: $primary-color;
-        }
-    }
-
-    .small-calendar{
-        header{
-            display: flex; 
-            justify-content: space-between; 
-        }
-
-        .grid{
-            display: grid; 
-            grid-template-columns: repeat(7, minmax(0, 1fr)); 
-            grid-template-rows: repeat(6, minmax(0, 1fr));      
-            
-            .hari{
-                padding-top: 0.25rem;
-                padding-bottom: 0.25rem; 
-                font-size: 0.875rem;
-                line-height: 1.25rem; 
-                text-align: center;                                 
-            }
-
-            .btn{
-                padding-top: 0.25rem;
-                padding-bottom: 0.25rem; 
-                width: 100%; 
-
-                span{
-                    font-size: 0.875rem;
-                    line-height: 1.25rem;                                         
-                }
-            }
-
-            .btn-today{
-                background-color: #3B82F6; 
-                color: #ffffff; 
-                border-radius: 9999px; 
-            }
-        }
-    }
-
-    .modal{
-        display: flex; 
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        justify-content: center; 
-        align-items: center; 
-        width: 100%; 
-        height: 100vh; 
-        
-        form{
-            background-color: #ffffff; 
-            width: 500px; 
-            height: 470px;
-            border-radius: 0.5rem; 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);    
-
-            .wrapper-input{
-                padding: 2rem 1.5rem 1rem;
-
-                .kegiatan-input{
-                    width: 400px;
-                    border: none;
-                    border-bottom: 2px solid $primary-color;
-                    outline: none;
-                    font-size: 24px;
-                    margin-left: 2.5rem;
-                    margin-bottom: 1.5rem;
-                }
-
-                .kegiatan-input::placeholder{
-                    color: #9B9B9B;
-                }
-
-                .date{
-                    display: flex;
-                    gap: 1rem;
-                    margin-bottom: 1.5rem;
-
-                    p{
-                        color: #5A6474;
-                    }
-                }
-
-                .description{
-                    display: flex;
-                    align-items: flex-start;
-                    gap: 1rem;
-
-                    textarea{
-                        width: 400px;
-                        height: 100px;
-                        resize: none;
-                        outline: none;
-                        border: none;
-                        background-color: #F3F3F3;
-                        padding: 10px;
-                        font-family: 'poppins';
-                        border-radius: 5px;
-                    }
-
-                    img{
-                        transform: translateY(10px);
-                    }
-                }
-
-                .checkbox-form{
-                    display: flex;
-                    flex-direction: column;
-                    padding-left: 2rem;
-                    margin: 1rem 0 1rem;
-                    gap: 1rem;
-
-                    .wrap-for, .wrap-is-libur{
-                        display: flex;
-                        gap: 1rem;
-                    }
-
-                    .wrap-label-input{
-                        display: flex;
-                    }
-
-                    label{
-                        font-size: 12px;
-                        color: #5A6474;
-                        margin-left: .5rem;
-                    }
-                }
-            }
-            
-            header{
-                display: flex; 
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem; 
-                padding-left: 1.5rem;
-                padding-right: .5rem; 
-                background-color: $primary-color; 
-                justify-content: space-between; 
-                align-items: center; 
-                border-radius: 10px 10px 0px 0px;
-
-                .action{
-                    padding-right: 1rem;
-                    .trash{
-                        margin-right: 1rem;
-                    }
-                }
-
-                h3{
-                    font-weight: 400;
-                    font-size: 14px;
-                    color: #ffffff;
-                }
-            }
-
-            .wrapper-label{
-                display: flex;
-                padding-left: 2rem;
-                margin-top: 2rem;
-                gap: .5rem;
-                
-                .label{
-                    display: flex; 
-                    justify-content: center; 
-                    align-items: center; 
-                    width: 1.5rem; 
-                    height: 1.5rem; 
-                    border-radius: 9999px; 
-                    cursor: pointer;    
-                    
-                    img{
-                        width: 10px;
-                        height: 10px;
-                    }
-                }
-            }
-        
-            footer{
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-                padding-right: 1.5rem;
-
-                .submit{
-                    width: 115px;
-                    height: 40px;
-                    background: $primary-color;
-                    border-radius: 5px;     
-                    color: white;           
-                }
-            }
-
-        }                
-    }
+  }
 }
 
-.wrapper-kalender-add{
-    height: 100vh;
-    width: 1179px;    
-    background-color: $background-color;
-    border-right: 1px solid $secondary-color;
+.wrapper-kalender-add {
+  height: 100vh;
+  width: 1179px;
+  background-color: $background-color;
+  border-right: 1px solid $secondary-color;
 
-    .nav-kalender{
+  .nav-kalender {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $secondary-color;
+    padding: 1rem 2.5rem;
+    width: 100%;
+    background-color: $white;
+
+    .wrapper-back-btn {
+      display: flex;
+      background-color: $white;
+
+      img {
+        cursor: pointer;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: 500;
+        margin-left: 2rem;
+      }
+    }
+
+    .wrapper-action-btn {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        background-color: #ff4530;
+      }
+    }
+  }
+
+  .wrapper-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2.5rem;
+    width: 100%;
+    gap: 3rem;
+
+    h3 {
+      font-weight: 400;
+      font-size: 14px;
+      margin-bottom: 1rem;
+    }
+
+    .input {
+      border: 1px solid #9b9b9b;
+      border-radius: 7.5px;
+      padding-left: 1rem;
+      padding-right: 0.25rem;
+      background-color: $background-color;
+      font-weight: 400;
+      font-size: 12px;
+      height: 35px;
+    }
+
+    .wrapper-form {
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+
+      .input::placeholder {
+        color: $grey;
+      }
+
+      .input-nama-event {
+        height: 60px;
+        font-size: 20px;
+      }
+
+      .checkbox-form {
+        display: flex;
+        gap: 2rem;
+        margin: 1rem 0;
+
+        .wrap-label-radio {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          input {
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+          }
+
+          label {
+            font-size: 12px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .wrapper-time {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid $secondary-color;
-        padding: 1rem 2.5rem;
-        width: 100%;
-        background-color: $white;
-    
-        .wrapper-back-btn{
-            display: flex;
-            background-color: $white;
+        margin: 1rem 0;
 
-            img{
-                cursor: pointer;
-            }
-    
-            h1{
-                font-size: 24px;
-                font-weight: 500;
-                margin-left: 2rem;
-            }
+        input[type="text"] {
+          width: 50%;
         }
 
-        .wrapper-action-btn{
-            display: flex;
-            gap: 1rem;
-
-            button{
-                width: 40px;
-                height: 40px;
-                border-radius: 8px;
-                border: none;
-                cursor: pointer;
-                background-color: #FF4530;
-            }
+        input::placeholder {
+          color: black;
         }
+
+        input[type="time"] {
+          width: 22.5%;
+        }
+
+        input[type="time"]::-webkit-calendar-picker-indicator {
+          background: none;
+          background-image: url(../../assets/icons/arrow-down.svg);
+          background-repeat: no-repeat;
+          background-position: center;
+          cursor: pointer;
+        }
+
+        .line {
+          width: 8px;
+          height: 1px;
+          background-color: black;
+        }
+      }
+
+      .input-deskripsi-event {
+        height: 140px;
+        padding-top: 0.5rem;
+        resize: none;
+      }
     }
 
-    .wrapper-content{
+    .wrapper-partisipasi {
+      width: 40%;
+
+      .wrapper-search-dropdown {
+        position: relative;
+
+        input {
+          width: 100%;
+        }
+
+        .dropdown-container {
+          background-color: $white;
+          border: 1px solid #eceef2;
+          border-radius: 7.5px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          z-index: 999;
+
+          .dropdown-outer-item {
+            width: 100%;
+            border-bottom: 1px solid #eceef2;
+          }
+
+          .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 40px;
+            width: 390px;
+            margin: 0 auto;
+
+            div {
+              display: flex;
+              align-items: center;
+            }
+
+            img {
+              width: 20px;
+              height: 20px;
+              margin-right: 0.5rem;
+            }
+
+            p {
+              font-size: 12px;
+            }
+
+            span {
+              font-size: 10px;
+              color: $grey;
+            }
+
+            button {
+              outline: none;
+              border: none;
+              width: 75px;
+              height: 20px;
+              background-color: $background-color;
+              border-radius: 5px;
+              font-size: 10px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      .wrapper-checkbox {
+        width: 90%;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 0.5rem 0rem;
+        margin: 0.5rem 0 1.5rem;
+
+        .wrapper-checkbox-label {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          label {
+            font-size: 12px;
+            color: #5a6474;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .wrapper-top-list {
         display: flex;
         justify-content: space-between;
-        padding: 2rem 2.5rem;
-        width: 100%;
 
-        .wrapper-form{
+        div {
+          display: flex;
+          align-items: center;
+
+          h4 {
+            font-weight: 400;
+            font-size: 14px;
+            margin-right: 1rem;
+          }
+
+          .count {
+            width: 20px;
+            height: 20px;
+            background-color: rgba(39, 127, 254, 10%);
+            font-weight: 500;
+            font-size: 10px;
             display: flex;
-            flex-direction: column;
-            width: 60%;
+            align-items: center;
+            justify-content: center;
+            color: #277ffe;
+            text-align: center;
+            border-radius: 5px;
+          }
+        }
 
-            h3{
-                font-weight: 400;
+        p {
+          font-weight: 400;
+          font-size: 10px;
+          color: $primary-color;
+          cursor: pointer;
+        }
+      }
+
+      .wrapper-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 0.5rem;
+
+        .wrapper-list {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .list-content-left {
+            display: flex;
+            align-items: center;
+
+            img {
+              height: 35px;
+              width: 35px;
+              border-radius: 50%;
+              margin-right: 1rem;
+            }
+
+            div {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              p {
+                font-weight: 500;
                 font-size: 14px;
-                margin-bottom: 1rem;
-            }
-    
-            .input{
-                border: 1px solid #9B9B9B;
-                border-radius: 7.5px;
-                padding-left: 1rem;
-                padding-right: 0.25rem;
-                background-color: $background-color;
-                font-weight: 400;
-                font-size: 12px;
-                height: 35px;
-            }
-    
-            .input::placeholder{
-                color: $grey;
-            }
-    
-            .input-nama-event{
-                height: 60px;
-                font-size: 20px;
-            }
-    
-            .checkbox-form{
-                display: flex;
-                gap: 2rem;
-                margin: 1rem 0;
-    
-                .wrap-label-radio{
-                    display: flex;
-                    align-items: center;
-                    gap: .5rem;
-    
-                    input{
-                        cursor: pointer;
-                        width: 15px;
-                        height: 15px;
-                    }
-    
-                    label{
-                        font-size: 12px;
-                        cursor: pointer;
-                    }
-                }
-            }
-    
-            .wrapper-time{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin: 1rem 0;
-    
-                input[type="text"]{
-                    width: 50%;
-                }
-    
-                input::placeholder{
-                    color: black;
-                }
-    
-                input[type="time"]{
-                    width: 22.5%;
-                }
-    
-                input[type="time"]::-webkit-calendar-picker-indicator { 
-                    background: none; 
-                    background-image: url(../../assets/icons/arrow-down.svg);
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    cursor: pointer;
-                }
-    
-                .line{
-                    width: 8px;
-                    height: 1px;
-                    background-color: black;
-                }
-            }
-    
-            .input-deskripsi-event{
-                height: 140px;
-                padding-top: .5rem;
-                resize: none;
-            }
-        }
+              }
 
-        .wrapper-partisipasi{
-            width: 40%;
+              span {
+                font-weight: 500;
+                font-size: 10px;
+              }
+            }
+          }
+
+          input {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: var(--form-background);
+
+            width: 24px;
+            height: 24px;
+            border: 2px solid $primary-color;
+            border-radius: 50%;
+
+            display: grid;
+            place-content: center;
+          }
+
+          input::before {
+            content: "";
+            width: 24px;
+            height: 24px;
+            background-image: url("../../assets/icons/check-with-bg.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: scale(0);
+            transform-origin: center;
+            transition: 120ms transform ease-in-out;
+            background-color: white;
+            cursor: pointer;
+          }
+
+          input:checked::before {
+            transform: scale(1);
+          }
         }
+      }
     }
+  }
 }

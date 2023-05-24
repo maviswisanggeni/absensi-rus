@@ -6,36 +6,33 @@ import formatDate from './useFormatCalendar';
 import { useEffect } from 'react';
 
 function CustomCalendar(props) {
-  
+
   const [value, setValue] = useState(new Date());
 
-    const onChange = value =>  {
-      setValue(value)
-    }
+  const onChange = value => {
+    setValue(value)
+  }
 
-    useEffect(() => {
-      props.func(formatDate(value))
-      props.setStartTime(formatDate(value))
-      props.tanggal(value.getDate())
-      props.bulan(value.getMonth() + 1)
-      props.tahun(value.getFullYear())
-    }, [value])
+  useEffect(() => {
+    props.func(formatDate(value))
+    props.setStartTime(formatDate(value))
+    props.tanggal(value.getDate())
+    props.bulan(value.getMonth() + 1)
+    props.tahun(value.getFullYear())
+  }, [value])
 
   return (
-    <div>
-      <Calendar onChange={onChange}
-      value={value} />
-    </div>
+    <Calendar onChange={onChange} value={value} />
   )
 }
 
 CustomCalendar.defaultProps = {
-  func: () => {},
-  tanggal: () => {},
-  bulan: () => {},
-  tahun: () => {},
-  setStartTime: () => {},
-  
+  func: () => { },
+  tanggal: () => { },
+  bulan: () => { },
+  tahun: () => { },
+  setStartTime: () => { },
+
 }
 
 export default CustomCalendar

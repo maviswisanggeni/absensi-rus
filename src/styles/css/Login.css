@@ -49,6 +49,9 @@
   font-size: 10px;
   color: #9b9b9b;
 }
+.login .login__container p.login__validation {
+  color: #ff4530;
+}
 .login .login__container form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -69,7 +72,7 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 8px;
-  border: 1px solid #ECEEF2;
+  border: 1px solid #eceef2;
   border-radius: 8px;
   outline: none;
 }

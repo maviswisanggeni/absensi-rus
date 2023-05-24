@@ -13,9 +13,8 @@
   border: none;
 }
 .kalender .arrow {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  color: #4B5563;
+  margin-right: 0.25rem;
+  color: #4b5563;
   cursor: pointer;
 }
 .kalender .arrow:last-child {
@@ -27,7 +26,7 @@
   display: -ms-flexbox;
   display: flex;
   padding: 1.5rem 0 1.5rem 2rem;
-  border-bottom: 2px solid #ECEEF2;
+  border-bottom: 2px solid #eceef2;
   width: 100%;
 }
 .kalender .header h2 {
@@ -70,8 +69,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border-right: #E5E7EB 1px solid;
-  border-bottom: #E5E7EB 1px solid;
+  border-right: #e5e7eb 1px solid;
+  border-bottom: #e5e7eb 1px solid;
 }
 .kalender .day .handle-add {
   -webkit-box-flex: 1;
@@ -98,10 +97,10 @@
           justify-content: flex-start;
 }
 .kalender .day header .days {
-  border-bottom: 2px solid #ECEEF2;
+  border-bottom: 2px solid #eceef2;
   width: 100%;
   text-align: center;
-  color: #9B9B9B;
+  color: #9b9b9b;
   font-weight: 500;
 }
 .kalender .day header .dd {
@@ -111,14 +110,14 @@
 }
 .kalender .day header h1 {
   margin-right: 2.5rem;
-  color: #6B7280;
+  color: #6b7280;
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
 .kalender .day header .currentDay {
   display: grid;
   place-items: center;
-  background-color: #2563EB;
+  background-color: #2563eb;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -134,7 +133,7 @@
 }
 .kalender .day .day-events {
   color: white;
-  background-color: #3661EB;
+  background-color: #3661eb;
 }
 .kalender .small-calendar header {
   display: -webkit-box;
@@ -166,7 +165,7 @@
   line-height: 1.25rem;
 }
 .kalender .small-calendar .grid .btn-today {
-  background-color: #3B82F6;
+  background-color: #3b82f6;
   color: #ffffff;
   border-radius: 9999px;
 }
@@ -200,26 +199,26 @@
 .kalender .modal form .wrapper-input .kegiatan-input {
   width: 400px;
   border: none;
-  border-bottom: 2px solid #3661EB;
+  border-bottom: 2px solid #3661eb;
   outline: none;
   font-size: 24px;
   margin-left: 2.5rem;
   margin-bottom: 1.5rem;
 }
 .kalender .modal form .wrapper-input .kegiatan-input::-webkit-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .kalender .modal form .wrapper-input .kegiatan-input::-moz-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .kalender .modal form .wrapper-input .kegiatan-input:-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .kalender .modal form .wrapper-input .kegiatan-input::-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .kalender .modal form .wrapper-input .kegiatan-input::placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .kalender .modal form .wrapper-input .date {
   display: -webkit-box;
@@ -229,7 +228,7 @@
   margin-bottom: 1.5rem;
 }
 .kalender .modal form .wrapper-input .date p {
-  color: #5A6474;
+  color: #5a6474;
 }
 .kalender .modal form .wrapper-input .description {
   display: -webkit-box;
@@ -246,7 +245,7 @@
   resize: none;
   outline: none;
   border: none;
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   padding: 10px;
   font-family: "poppins";
   border-radius: 5px;
@@ -267,7 +266,8 @@
   margin: 1rem 0 1rem;
   gap: 1rem;
 }
-.kalender .modal form .wrapper-input .checkbox-form .wrap-for, .kalender .modal form .wrapper-input .checkbox-form .wrap-is-libur {
+.kalender .modal form .wrapper-input .checkbox-form .wrap-for,
+.kalender .modal form .wrapper-input .checkbox-form .wrap-is-libur {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -280,7 +280,7 @@
 }
 .kalender .modal form .wrapper-input .checkbox-form label {
   font-size: 12px;
-  color: #5A6474;
+  color: #5a6474;
   margin-left: 0.5rem;
 }
 .kalender .modal form header {
@@ -291,7 +291,7 @@
   padding-bottom: 0.5rem;
   padding-left: 1.5rem;
   padding-right: 0.5rem;
-  background-color: #3661EB;
+  background-color: #3661eb;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -351,7 +351,7 @@
 .kalender .modal form footer .submit {
   width: 115px;
   height: 40px;
-  background: #3661EB;
+  background: #3661eb;
   border-radius: 5px;
   color: white;
 }
@@ -359,8 +359,8 @@
 .wrapper-kalender-add {
   height: 100vh;
   width: 1179px;
-  background-color: #F9F9F9;
-  border-right: 1px solid #EBF0FE;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ebf0fe;
 }
 .wrapper-kalender-add .nav-kalender {
   display: -webkit-box;
@@ -372,16 +372,16 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  border-bottom: 1px solid #EBF0FE;
+  border-bottom: 1px solid #ebf0fe;
   padding: 1rem 2.5rem;
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 .wrapper-kalender-add .nav-kalender .wrapper-back-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 .wrapper-kalender-add .nav-kalender .wrapper-back-btn img {
   cursor: pointer;
@@ -403,7 +403,7 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  background-color: #FF4530;
+  background-color: #ff4530;
 }
 .wrapper-kalender-add .wrapper-content {
   display: -webkit-box;
@@ -414,6 +414,22 @@
           justify-content: space-between;
   padding: 2rem 2.5rem;
   width: 100%;
+  gap: 3rem;
+}
+.wrapper-kalender-add .wrapper-content h3 {
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+.wrapper-kalender-add .wrapper-content .input {
+  border: 1px solid #9b9b9b;
+  border-radius: 7.5px;
+  padding-left: 1rem;
+  padding-right: 0.25rem;
+  background-color: #f9f9f9;
+  font-weight: 400;
+  font-size: 12px;
+  height: 35px;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form {
   display: -webkit-box;
@@ -425,35 +441,20 @@
           flex-direction: column;
   width: 60%;
 }
-.wrapper-kalender-add .wrapper-content .wrapper-form h3 {
-  font-weight: 400;
-  font-size: 14px;
-  margin-bottom: 1rem;
-}
-.wrapper-kalender-add .wrapper-content .wrapper-form .input {
-  border: 1px solid #9B9B9B;
-  border-radius: 7.5px;
-  padding-left: 1rem;
-  padding-right: 0.25rem;
-  background-color: #F9F9F9;
-  font-weight: 400;
-  font-size: 12px;
-  height: 35px;
-}
 .wrapper-kalender-add .wrapper-content .wrapper-form .input::-webkit-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input::-moz-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input:-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input::-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input::placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input-nama-event {
   height: 60px;
@@ -536,4 +537,225 @@
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi {
   width: 40%;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown {
+  position: relative;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown input {
+  width: 100%;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container {
+  background-color: #ffffff;
+  border: 1px solid #eceef2;
+  border-radius: 7.5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 999;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-outer-item {
+  width: 100%;
+  border-bottom: 1px solid #eceef2;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 40px;
+  width: 390px;
+  margin: 0 auto;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item p {
+  font-size: 12px;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item span {
+  font-size: 10px;
+  color: #9b9b9b;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item button {
+  outline: none;
+  border: none;
+  width: 75px;
+  height: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  font-size: 10px;
+  cursor: pointer;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox {
+  width: 90%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 0.5rem 0rem;
+  margin: 0.5rem 0 1.5rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox .wrapper-checkbox-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox .wrapper-checkbox-label label {
+  font-size: 12px;
+  color: #5a6474;
+  cursor: pointer;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-top-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-top-list div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-top-list div h4 {
+  font-weight: 400;
+  font-size: 14px;
+  margin-right: 1rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-top-list div .count {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(39, 127, 254, 0.1);
+  font-weight: 500;
+  font-size: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #277ffe;
+  text-align: center;
+  border-radius: 5px;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-top-list p {
+  font-weight: 400;
+  font-size: 10px;
+  color: #3661eb;
+  cursor: pointer;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list .list-content-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list .list-content-left img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list .list-content-left div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list .list-content-left div p {
+  font-weight: 500;
+  font-size: 14px;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list .list-content-left div span {
+  font-weight: 500;
+  font-size: 10px;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  background-color: var(--form-background);
+  width: 24px;
+  height: 24px;
+  border: 2px solid #3661eb;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list input::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-image: url("../../assets/icons/check-with-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms transform ease-in-out;
+  transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
+  background-color: white;
+  cursor: pointer;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list input:checked::before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }

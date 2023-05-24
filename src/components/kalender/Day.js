@@ -6,8 +6,8 @@ import { useApiKalender } from '../../contexts/api/kalender/ContextApiKalender';
 export default function Day({ day, rowIdx }) {
 
     const [dayEvents, setDayEvents] = useState([])
-    const {setDaySelected, setShowEventModal, savedEvents, setSelectedEvent, selectedEvent} = useContext(GlobalCalendar)
-    
+    const { setDaySelected, setShowEventModal, savedEvents, setSelectedEvent, selectedEvent } = useContext(GlobalCalendar)
+
     const context = useApiKalender()
 
     useEffect(() => {
@@ -17,30 +17,30 @@ export default function Day({ day, rowIdx }) {
 
     function getCurrentDayClass() {
         return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-          ? 'currentDay'
-          : "";
+            ? 'currentDay'
+            : "";
     }
 
     return (
-    <div className='day'>
-        <header>
-            {rowIdx === 0 && ( 
-                <p className='days'>{day.format('dddd')}</p>
-            )}
-            <p className={'dd ' + getCurrentDayClass()}>{day.format('DD')}</p>
-        </header>
-        <div className='handle-add' onClick={() => {
-            setDaySelected(day)
-            setShowEventModal(true)
-        }}>
-            {dayEvents.map((evt, idx) => (
-                <div key={idx} className='day-events' 
-                style={{backgroundColor: evt?.is_libur === '1' ? "#21D2FF" : '#EA4D90'}} 
-                onClick={() => setSelectedEvent(evt)}>
-                    {context.loading ? evt.judul : 'Loading...'}
-                </div>
-            ))}
+        <div className='day'>
+            <header>
+                {rowIdx === 0 && (
+                    <p className='days'>{day.format('dddd')}</p>
+                )}
+                <p className={'dd ' + getCurrentDayClass()}>{day.format('DD')}</p>
+            </header>
+            <div className='handle-add' onClick={() => {
+                setDaySelected(day)
+                setShowEventModal(true)
+            }}>
+                {dayEvents.map((evt, idx) => (
+                    <div key={idx} className='day-events'
+                        style={{ backgroundColor: evt?.is_libur === '1' ? "#21D2FF" : '#EA4D90' }}
+                        onClick={() => setSelectedEvent(evt)}>
+                        {context.loading ? evt.judul : 'Loading...'}
+                    </div>
+                ))}
+            </div>
         </div>
-    </div>
-  )
+    )
 }

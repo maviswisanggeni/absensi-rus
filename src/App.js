@@ -23,14 +23,14 @@ import NotFound from './components/NotFound';
 import { WrapperAddKaryawanProvider } from './contexts/app/WrapperAddKaryawan';
 import { WrapperEditKaryawanProvider } from './contexts/app/WrapperEditKaryawan';
 import KalenderAdd from './pages/KalenderAdd';
+import Pengaturan from './pages/pengaturan/Pengaturan';
+import ImportUser from './pages/pengaturan/ImportUser';
 
 function App() {
   return (
-    <div className='body'>
-      <Sidebar />
+    <>
       <Routes>
-        {/* <ProfileApiProvider> */}
-        <Route path='/'
+        <Route path='/dashboard'
           element={
             <DashboardApiProvider>
               <DashboardApiStatistikProvider>
@@ -40,7 +40,7 @@ function App() {
           }
         />
 
-        <Route path='/kehadiran'
+        <Route path='/kehadiran/*'
           element={
             <KehadiranJmlKehadiranProvider>
               <KehadiranListProvider>
@@ -52,7 +52,7 @@ function App() {
 
         <Route path='/kehadiran/detail/:id' element={<Detail />} />
 
-        <Route path='/karyawan'
+        <Route path='/karyawan/*'
           element={
             <KaryawanProvider>
               <KaryawanStoreUserProvider>
@@ -92,13 +92,13 @@ function App() {
           </KaryawanUpdateProvider>
         }
         />
-        {/*           
-        </ProfileApiProvider> */}
+
+        <Route path='/pengaturan/*' element={<Pengaturan />} />
 
         <Route path='*' element={<NotFound />} />
         <Route path='/login' element={<Login />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

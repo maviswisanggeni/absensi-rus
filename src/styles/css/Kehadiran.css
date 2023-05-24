@@ -17,7 +17,7 @@
   width: 100%;
   background-color: white;
   padding: 1rem 1.5rem;
-  border: 1px solid #EBF0FE;
+  border: 1px solid #ebf0fe;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   margin-top: 1rem;
@@ -25,11 +25,31 @@
 .kehadiran .search-calendar .search {
   background-position: 5% 50%;
   background-size: 13px;
-  border: 2px solid #EBF0FE;
+  border: 2px solid #ebf0fe;
   width: 60%;
   padding: 0.5rem 2.5rem;
   outline: none;
   font-weight: 400;
+}
+.kehadiran .search-calendar .search::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 10px;
+}
+.kehadiran .search-calendar .search::-moz-placeholder {
+  font-weight: 400;
+  font-size: 10px;
+}
+.kehadiran .search-calendar .search:-ms-input-placeholder {
+  font-weight: 400;
+  font-size: 10px;
+}
+.kehadiran .search-calendar .search::-ms-input-placeholder {
+  font-weight: 400;
+  font-size: 10px;
+}
+.kehadiran .search-calendar .search::placeholder {
+  font-weight: 400;
+  font-size: 10px;
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal {
   display: -webkit-box;
@@ -56,7 +76,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1.5px solid #EBF0FE;
+  border: 1.5px solid #ebf0fe;
   padding: 0.5rem;
   padding-right: 0;
   -webkit-box-orient: vertical;
@@ -76,11 +96,11 @@
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .react-calendar {
   width: 300px;
   position: absolute;
-  border: 1.5px solid #EBF0FE;
+  border: 1.5px solid #ebf0fe;
   padding: 1rem;
   border-radius: 7px;
-  -webkit-transform: translateX(25%);
-          transform: translateX(25%);
+  -webkit-transform: translate(25%, 10%);
+          transform: translate(25%, 10%);
   z-index: 999;
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal img {
@@ -90,7 +110,7 @@
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal p {
   font-size: 10px;
-  color: #A6A6A6;
+  color: #a6a6a6;
 }
 .kehadiran .tabbar-filter {
   display: -webkit-box;
@@ -104,7 +124,7 @@
   padding: 1rem 1.5rem;
   padding-left: 0;
   padding-bottom: 0;
-  border: 1px solid #EBF0FE;
+  border: 1px solid #ebf0fe;
   border-top: none;
 }
 .kehadiran .tabbar-filter .filter-download {
@@ -149,11 +169,11 @@
 }
 
 .valid-masuk {
-  background-color: #04D57D;
+  background-color: #04d57d;
 }
 
 .valid-pulang {
-  background-color: #FF4530;
+  background-color: #ff4530;
 }
 
 .detail {
@@ -163,8 +183,11 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #EBF0FE;
+  border-bottom: 1px solid #ebf0fe;
   padding: 1rem 2.5rem;
+}
+.detail .navigation img {
+  cursor: pointer;
 }
 .detail .navigation a {
   display: -webkit-box;
@@ -226,7 +249,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border: 1px solid #EBF0FE;
+  border: 1px solid #ebf0fe;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .foto-masuk,
 .detail .main .detail-masuk-keluar .masuk-keluar .card .default-foto {
@@ -281,7 +304,7 @@
 .detail .main .detail-masuk-keluar .masuk-keluar .card .note p,
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates p {
   font-size: 10px;
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .note .map-and-status,
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates .map-and-status {
@@ -318,7 +341,7 @@
   font-size: 8px;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -342,7 +365,7 @@
           flex-direction: column;
   width: 35%;
   padding: 2rem 2rem;
-  border-left: 1px solid #EBF0FE;
+  border-left: 1px solid #ebf0fe;
   height: 90vh;
 }
 .detail .main .detail-profile .div-1 {
@@ -376,7 +399,7 @@
 }
 .detail .main .detail-profile .div-1 p {
   font-size: 11px;
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .detail .main .detail-profile .div-2 {
   display: -webkit-box;
@@ -394,20 +417,21 @@
 }
 .detail .main .detail-profile .info p {
   font-size: 12px;
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
-.detail .main .detail-profile a {
+.detail .main .detail-profile .back-btn {
   width: 125px;
   color: white;
   border: none;
   padding: 0.5rem 0;
-  background-color: #3661EB;
+  background-color: #3661eb;
   border-radius: 8px;
   text-align: center;
   margin: 0 auto;
   margin-top: 5rem;
   text-decoration: none;
   font-size: 14px;
+  cursor: pointer;
 }
 .detail .mape {
   width: 40px;
@@ -458,6 +482,9 @@
   z-index: 999;
 }
 
+.sidebar-right .kehadiran-terbaru {
+  padding: 2rem;
+}
 .sidebar-right .kehadiran-terbaru .header-refresh {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -501,7 +528,7 @@
   font-weight: 600;
 }
 .sidebar-right .kehadiran-terbaru ul li div p:nth-child(2) {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .sidebar-right .kehadiran-terbaru ul li img {
   height: 40px;

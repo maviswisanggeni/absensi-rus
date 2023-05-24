@@ -11,7 +11,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  border-bottom: 1px solid #EBF0FE;
+  border-bottom: 1px solid #ebf0fe;
   padding: 1rem 2.5rem;
 }
 .add-karyawan .navigation div {
@@ -38,7 +38,7 @@
 .add-karyawan .navigation .btn-submit {
   width: 125px;
   height: 40px;
-  background-color: #3661EB;
+  background-color: #3661eb;
   border-radius: 8px;
   border: none;
   outline: none;
@@ -182,7 +182,7 @@
   color: #9B9B9B;
 }
 .add-karyawan .form .jabatan-gender .select select:focus {
-  border: 2px solid #3661EB;
+  border: 2px solid #3661eb;
 }
 .add-karyawan .form .jabatan-gender .select select {
   -webkit-appearance: none;
@@ -234,7 +234,7 @@
   border-width: 1px;
   border-radius: 8px;
   border-style: dashed;
-  border-color: #3661EB;
+  border-color: #3661eb;
   background-color: #FAFAFA;
 }
 .add-karyawan .upload-button {

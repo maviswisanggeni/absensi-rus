@@ -1,44 +1,62 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { useApiKaryawan } from '../contexts/api/karyawan/ContextApiKaryawan';
-import { useKehadiranListAbsensi } from '../contexts/api/kehadiran/ContextApiKehadiranListData';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
-function Tabbar({ option1, option2, funcPage, funcKeterangan }) {
-  const contextKaryawan = useApiKaryawan()
+function Tabbar({ funcPage, funcKeterangan, searchParams, path, options, setKategoriId, setCurrentKategori }) {
   const dispatch = useDispatch()
-  const [current, setCurrent] = useState(option1)
-  let location = useLocation();
-  const navigate = useNavigate();
+  let location = useLocation()
+  const [current, setCurrent] = useState(null)
+  const [index, setIndex] = useState(null)
 
-  function handleClick(e) {
-    setCurrent(e.target.innerText)
+  useEffect(() => {
+    if (options.length > 0) {
+      const initialOption = options.find(option => option.kategori === location.pathname.split('/').pop());
+      if (initialOption) {
+        setCurrent(initialOption.kategori);
+        dispatch(setCurrentKategori(initialOption.kategori))
+        setIndex(initialOption.id);
+      }
+    }
+  }, [options, location.pathname]);
+
+  function handleClick(kategori, index) {
+    setCurrent(kategori)
+    setIndex(index)
     funcPage(1)
   }
 
   useEffect(() => {
-    // contextKaryawan.setKeterangan(current === 'Guru' ? true : false)
-    if(current === 'Keluar'){
-      dispatch(funcKeterangan('Pulang'))
-    }else if(current === 'Masuk'){
-      dispatch(funcKeterangan('Masuk'))
-    }else if(current === 'Staff'){
-      dispatch(funcKeterangan(false))
-    }else{
-      dispatch(funcKeterangan(true))
-    }
-  }, [current, location])
+    dispatch(funcKeterangan({ name: 'keterangan', value: current }))
+    dispatch(setKategoriId(index))
+  }, [current])
+
+  const lineWidth = `${100 / options.length}%`;
+  const lineTranslateX = `${options.findIndex(option => option.kategori === current) * 100}%`;
 
   return (
     <div className='tabbar'>
       <div className='tabbar-text'>
-          <div onClick={handleClick} className={current === option1 ? 'active' : ''}>{option1}</div>
-          <div onClick={handleClick} className={current === option2 ? 'active' : ''}>{option2}</div>
+        {options.map((option, index) => {
+          return (
+            <Link to={`${path}/${option.kategori}?${searchParams}`} key={index}>
+              <div onClick={() => handleClick(option.kategori, option.id)} className={current === option.kategori ? 'active' : ''}>{option.kategori}</div>
+            </Link>
+          )
+        })}
       </div>
-      <div className={`line ${current === option1 ? '' : 'active'}`}></div>
-    </div>
+      <div
+        className={`line`}
+        style={{ width: lineWidth, transform: `translate(${lineTranslateX}, 0)` }}
+      >
+      </div>
+    </div >
   )
+}
+
+// option 3 is optional
+Tabbar.defaultProps = {
+  option3: ''
 }
 
 export default Tabbar

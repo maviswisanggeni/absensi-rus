@@ -13,10 +13,8 @@ import apiUrl from '../datas/apiUrl';
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [validation, setValidation] = useState([]);
+  const [validation, setValidation] = useState('');
   const navigate = useNavigate();
-  console.log(apiUrl())
-
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -24,23 +22,22 @@ function Login() {
     const formData = new FormData();
     formData.append('niy', email);
     formData.append('password', password);
-    const url = "https://absensiguru.smkrus.com/api/login";
-    const urlLocal = "http://127.0.0.1:8000/api/";
 
     await axios({
       method: "post",
       url: apiUrl() + 'login',
       data: formData,
-      headers: { 
+      headers: {
         "Content-Type": "multipart/form-data",
       },
     })
       .then((response) => {
         localStorage.setItem('token', response.data.token);
-        navigate('/');
+        navigate('/dashboard');
       })
       .catch((error) => {
-        setValidation(error.response.data);
+        setValidation(error.response.data.messege);
+        console.log(error.response.data.messege)
       })
   }
 
@@ -53,7 +50,9 @@ function Login() {
           <p>Masukkan email dan password untuk mengakses</p>
           <form onSubmit={loginHandler}>
             <Input imgSrc={emailIcon} type="text" placeholder="Masukkan email" value={email} setFunction={setEmail} />
+            {validation === 'user not found' && <p className="login__validation">{'Email tidak ada'}</p>}
             <Input imgSrc={passwordIcon} type="password" placeholder="Masukkan password" value={password} setFunction={setPassword} />
+            {validation === 'wrong pass' && <p className="login__validation">{'Password Salah'}</p>}
             <ButtonSignIn />
           </form>
           <div className="login__forgotPassword">

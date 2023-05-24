@@ -1,6 +1,6 @@
 .dashboard .search {
   background-position: 5% 50%;
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   text-indent: 2rem;
   border: none;
   width: 300px;
@@ -19,7 +19,7 @@
   width: 100%;
   background-color: white;
   padding: 1rem;
-  border: 1px solid #EBF0FE;
+  border: 1px solid #ebf0fe;
   border-radius: 10px;
   margin-top: 1rem;
 }
@@ -47,7 +47,7 @@
   height: 25px;
   padding-left: 12px;
   border: none;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -57,12 +57,12 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  color: #9B9B9B;
+  color: #9b9b9b;
   cursor: pointer;
   padding-right: 0.5rem;
 }
 .dashboard .statistic-chart .div-1 .dropdown button:hover {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content {
   height: auto;
@@ -79,13 +79,13 @@
   font-size: 13px;
   background-color: white;
   width: 90px;
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul li:hover {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul .activeDropdownli {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 .dashboard .statistic-chart .div-2 {
   display: -webkit-box;
@@ -114,18 +114,18 @@
       -ms-flex-align: center;
           align-items: center;
   height: 30px;
-  color: #9B9B9B;
+  color: #9b9b9b;
   font-weight: 500;
   font-size: 12px;
 }
 .dashboard .statistic-chart .div-2 .chartInfo .role div {
   width: 20px;
   height: 20px;
-  background-color: #3661EB;
+  background-color: #3661eb;
   margin-right: 1rem;
 }
 .dashboard .statistic-chart .div-2 .chartInfo .staff div {
-  background-color: #C2D2FF;
+  background-color: #c2d2ff;
 }
 .dashboard .statistic-chart .div-2 .chartInfo .btn-download {
   display: -webkit-box;
@@ -139,7 +139,7 @@
           justify-content: center;
   margin: 0 auto;
   margin-top: auto;
-  background-color: #3661EB;
+  background-color: #3661eb;
   border: none;
   padding: 0.7rem 1rem;
   width: 190px;
@@ -154,9 +154,15 @@
 }
 
 .sidebar-right {
-  border-left: 1px solid #EBF0FE;
-  padding: 2rem;
+  border-left: 1px solid #ebf0fe;
   position: relative;
+}
+.sidebar-right .wrapper-calendar,
+.sidebar-right .jadwal {
+  padding: 0 2rem;
+}
+.sidebar-right .jadwal {
+  margin-top: 2rem;
 }
 .sidebar-right .jadwal .loading::before {
   margin: 2rem 1rem;
@@ -168,7 +174,7 @@
 }
 .sidebar-right .jadwal .card-jadwal {
   width: 100%;
-  border: 1px solid #EBF0FE;
+  border: 1px solid #ebf0fe;
   border-radius: 5px;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -179,7 +185,7 @@
 }
 .sidebar-right .jadwal .card-jadwal p {
   font-size: 12px;
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .sidebar-right .jadwal .card-jadwal span {
   font-weight: 500;

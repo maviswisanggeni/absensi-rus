@@ -1,5 +1,5 @@
 import Pagination from '../Pagination'
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import copy from '../../assets/icons/copy.svg'
 import edit from '../../assets/icons/edit.svg'
@@ -7,34 +7,37 @@ import trash from '../../assets/icons/trashRed.svg'
 import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan';
 import axios from 'axios';
 import defaultUser from '../../assets/images/user-foto.png'
-import { useDispatch, useSelector } from 'react-redux';
-import { getKaryawan } from '../../features/karyawanSlice';
+import { useSelector } from 'react-redux';
 
 let PageSize = 10;
 
 function Table() {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getKaryawan())
-  }, [dispatch])
-
-  const { listPengajar, listStaff, loading, keterangan } = useSelector(state => state.karyawan)
-
-  const context = useApiKaryawan()
+  const { listKaryawan, loading, urutan } = useSelector(state => state.karyawan)
+  const { kategoriId } = useSelector(state => state.kategori)
   const navigate = useNavigate()
+  const context = useApiKaryawan()
   const token = localStorage.getItem("token");
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (context.currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return keterangan ?
-      listPengajar.slice(firstPageIndex, lastPageIndex) :
-      listStaff.slice(firstPageIndex, lastPageIndex)
-  }, [context.currentPage, keterangan, listPengajar, listStaff, context.urutan]);
+    // return listKaryawan.slice(firstPageIndex, lastPageIndex)
+
+    let slicedData;
+    slicedData = listKaryawan?.slice(firstPageIndex, lastPageIndex);
+
+    const sortedData = [...slicedData].sort((a, b) => {
+      if (urutan === 'Sesuai abjad') {
+        return a.nama.localeCompare(b.nama)
+      }
+      return a.niy.localeCompare(b.niy)
+    });
+
+    return sortedData;
+  }, [loading, listKaryawan, kategoriId]);
 
   function handleDetail(id) {
-    // navigate(`/karyawan/detail/${id}`)
+    navigate(`/karyawan/edit/${id}`)
   }
 
   function handleDelete(id) {
@@ -81,7 +84,7 @@ function Table() {
                         <img src={isImgUrl(item?.pf_foto) ? item?.pf_foto : defaultUser} alt="" />
                         {item?.nama}
                       </td>
-                      <td>{item?.jenis_user}</td>
+                      <td>{item?.ktgkaryawan[0].kategori}</td>
                       <td>{item?.no_hp}</td>
                       <td>{item?.email}</td>
                       <td className='action-col'>

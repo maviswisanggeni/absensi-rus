@@ -1,55 +1,86 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/css/Dashboard.css'
 import CircularStatistic from '../components/dashboard/CircularStatistic'
 import masukIcon from '../assets/icons/masuk-icon.svg'
-import keluarIcon from '../assets/icons/keluar-icon.svg'
+import izinIcon from '../assets/icons/izin-icon.svg'
 import absenIcon from '../assets/icons/absen-icon.svg'
 import StatisticChart from '../components/dashboard/StatisticChart'
 import Profile from '../components/Profile';
 import Jadwal from '../components/sidebar-right/Jadwal'
 import Calender from '../components/CustomCalendar'
-import { useApiDashboard } from '../contexts/api/dashboard/ContextApiDashboard'
+import Sidebar from '../components/sidebar/Sidebar'
+import { useDispatch, useSelector } from 'react-redux'
+import { getJmlKehadiran, setJmlKehadiran } from '../features/jmlKehadiranSlice'
+import Pusher from "pusher-js";
 
 function Dashboard() {
-  const context = useApiDashboard()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getJmlKehadiran())
+  }, [dispatch])
+
+  useEffect(() => {
+    Pusher.logToConsole = true;
+
+    const pusher = new Pusher('7b9c2c870e01322901d9', {
+      cluster: 'ap1'
+    });
+
+    const channel = pusher.subscribe('jml-kehadiran-channel');
+    channel.bind('jml-kehadiran-event', function (data) {
+      console.log(data)
+      dispatch(setJmlKehadiran(data))
+    });
+
+    return () => {
+      pusher.unsubscribe('jml-kehadiran-channel')
+    }
+  }, []);
+
+  const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
+
   return (
-    <>
+    <div className='wrapper-dashboard'>
+      <Sidebar />
       <div className='dashboard dashboard-and-kehadiran'>
         <h1>Dashboard</h1>
         <div className='wrapper-circular'>
           <CircularStatistic
-              name="Masuk" 
-              firstValue={context.jmlKehadiran?.jml_masuk}
-              secondValue={context.jmlKehadiran?.jml_karyawan} 
-              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_masuk} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='loading'></div>} 
-              imgSrc={masukIcon}
-            />
-
-          <CircularStatistic 
-            name="Keluar" 
-            firstValue={context.jmlKehadiran?.jml_pulang} 
-            secondValue={context.jmlKehadiran?.jml_karyawan} 
-            uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_pulang} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='loading'></div>} 
-            imgSrc={keluarIcon}
+            name="Masuk"
+            firstValue={jmlKehadiran?.jumlah_masuk}
+            secondValue={jmlKehadiran?.jumlah_karyawan}
+            uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_masuk} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
+            imgSrc={masukIcon}
           />
 
-          <CircularStatistic 
+          <CircularStatistic
+            name="Izin"
+            firstValue={jmlKehadiran?.jumlah_izin}
+            secondValue={jmlKehadiran?.jumlah_karyawan}
+            uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_izin}`} Orang</p> : <div className='dots loading'></div>}
+            imgSrc={izinIcon}
+          />
+
+          <CircularStatistic
             name="Absen"
-            firstValue={context.jmlKehadiran?.jml_absen} 
-            secondValue={context.jmlKehadiran?.jml_karyawan} 
-            uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran  ?.jml_absen}`} Orang</p> : <div className='loading'></div>} 
+            firstValue={jmlKehadiran?.jumlah_absen}
+            secondValue={jmlKehadiran?.jumlah_karyawan}
+            uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_absen}`} Orang</p> : <div className='dots loading'></div>}
             imgSrc={absenIcon}
           />
         </div>
-        <StatisticChart/>
+        <StatisticChart />
       </div>
 
       <div className='sidebar-right'>
-        <Profile/>
-        <Calender func={context.setDate}/>
-        <Jadwal/>
+        <Profile />
+        <div className='wrapper-calendar'>
+          <Calender />
+        </div>
+        <Jadwal />
       </div>
-    </>
+    </div>
   )
 }
 

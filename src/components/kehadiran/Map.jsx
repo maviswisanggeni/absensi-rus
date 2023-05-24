@@ -11,7 +11,7 @@ const iconMarker = new L.Icon({
 
 const redOptions = { color: 'red' }
 
-function Map({latitude, longitude, loading}) {
+function Map({ latitude, longitude, loading }) {
     return (
         <div className='map'>
             <MapContainer center={[-6.753622, 110.843356]} zoom={20} scrollWheelZoom={false}>
@@ -19,11 +19,8 @@ function Map({latitude, longitude, loading}) {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Circle center={[-6.7535586, 110.843736]} pathOptions={redOptions} radius={100}/>
+                <Circle center={[-6.7535586, 110.843736]} pathOptions={redOptions} radius={100} />
                 <Marker position={loading ? [latitude, longitude] : [-6.7535586, 110.843736]} icon={iconMarker}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
                 </Marker>
             </MapContainer>
         </div>

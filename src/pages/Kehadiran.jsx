@@ -1,7 +1,7 @@
 import React from 'react'
 import CircularStatistic from '../components/dashboard/CircularStatistic'
 import masukIcon from '../assets/icons/masuk-icon.svg'
-import keluarIcon from '../assets/icons/keluar-icon.svg'
+import izinIcon from '../assets/icons/izin-icon.svg'
 import absenIcon from '../assets/icons/absen-icon.svg'
 import Profile from '../components/Profile';
 import '../styles/css/Kehadiran.css'
@@ -12,54 +12,75 @@ import Calender from '../components/CustomCalendar'
 import KehadiranTerbaru from '../components/sidebar-right/KehadiranTerbaru'
 import { useKehadiranJmlKehadiran } from '../contexts/api/kehadiran/ContextApiKehadiran'
 import { TanggalKehadiranProvider } from '../contexts/app/ContextTanggalKehadiran'
-import { useKehadiranListAbsensi } from '../contexts/api/kehadiran/ContextApiKehadiranListData'
+import Sidebar from '../components/sidebar/Sidebar'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getJmlKehadiran } from '../features/jmlKehadiranSlice'
+import { Route, Routes } from 'react-router'
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getJmlKehadiran())
+  }, [])
+
+  const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
+
   return (
-    <>
+    <div className='wrapper-kehadiran'>
+      <Sidebar />
       <TanggalKehadiranProvider>
         <div className='kehadiran dashboard-and-kehadiran'>
           <h1>Kehadiran karyawan</h1>
           <div className='wrapper-circular'>
 
             <CircularStatistic
-              name="Masuk"
-              firstValue={context.jmlKehadiran?.jml_masuk}
-              secondValue={context.jmlKehadiran?.jml_karyawan}
-              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_masuk} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
+              name="Kehadiran"
+              firstValue={jmlKehadiran?.jumlah_masuk}
+              secondValue={jmlKehadiran?.jumlah_karyawan}
+              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_masuk} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
               imgSrc={masukIcon}
             />
 
             <CircularStatistic
-              name="Keluar"
-              firstValue={context.jmlKehadiran?.jml_pulang}
-              secondValue={context.jmlKehadiran?.jml_karyawan}
-              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_pulang} / ${context.jmlKehadiran?.jml_karyawan}`}</p> : <div className='dots loading'></div>}
-              imgSrc={keluarIcon}
+              name="Izin"
+              firstValue={jmlKehadiran?.jumlah_izin}
+              secondValue={jmlKehadiran?.jumlah_karyawan}
+              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_izin}`} Orang</p> : <div className='dots loading'></div>}
+              imgSrc={izinIcon}
             />
 
             <CircularStatistic
               name="Absen"
-              firstValue={context.jmlKehadiran?.jml_absen}
-              secondValue={context.jmlKehadiran?.jml_karyawan}
-              uiValue={context.loading ? <p className='p2'>{`${context.jmlKehadiran?.jml_absen}`} Orang</p> : <div className='dots loading'></div>}
+              firstValue={jmlKehadiran?.jumlah_absen}
+              secondValue={jmlKehadiran?.jumlah_karyawan}
+              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_absen}`} Orang</p> : <div className='dots loading'></div>}
               imgSrc={absenIcon}
             />
           </div>
           <SearchAndCalendar />
           <TabbarAndFilter />
-          <Table />
+          <Routes>
+            <Route path='/Masuk' element={<Table />} />
+            <Route path='/Keluar' element={<Table />} />
+            <Route path='/Izin' element={<Table />} />
+          </Routes>
         </div>
         <div className='sidebar-right'>
-          <Profile />
-          <Calender tanggal={context.setTanggal} bulan={context.setBulan} tahun={context.setTahun} 
-            setStartTime={context.setStartTime}
-          />
+          <div className='wrapper-profile'>
+            <Profile />
+          </div>
+          <div className='wrapper-calendar'>
+            <Calender tanggal={context.setTanggal} bulan={context.setBulan} tahun={context.setTahun}
+              setStartTime={context.setStartTime}
+            />
+          </div>
           <KehadiranTerbaru />
         </div>
       </TanggalKehadiranProvider>
-    </>
+    </div>
   )
 }
 

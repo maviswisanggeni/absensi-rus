@@ -78,7 +78,6 @@ function KehadiranListProvider({ children }) {
         if (!token) {
             navigate('/login')
         }
-        console.log(searchParams)
     }, []);
 
 

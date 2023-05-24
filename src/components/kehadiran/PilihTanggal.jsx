@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
 import formatDate from '../useFormatCalendar';
-function PilihTanggal({ setFormattedDate, setText, setStartTime, setEndTime, setDate, text, value }) {
-
+import { useDispatch } from 'react-redux';
+function PilihTanggal({ setFormattedDate, setText, setTime, setDate, text, value }) {
   const [open, setOpen] = useState(false)
   const drop = useRef(null);
   const inputRef = useRef();
+  const dispatch = useDispatch()
 
   function handleClick(e) {
     if (!e.target.closest(`.${drop.current.className}`) && open) {
@@ -16,15 +17,9 @@ function PilihTanggal({ setFormattedDate, setText, setStartTime, setEndTime, set
 
   function change(e) {
     setDate(e)
-    setFormattedDate(formatDate(e))
-    setText(formatDate(e))
-    setStartTime(formatDate(e))
-    setEndTime(formatDate(e))
+    dispatch(setText(formatDate(e)))
+    dispatch(setTime(formatDate(e)))
   }
-
-  // useEffect(() => {
-  //   console.log(text)
-  // }, [text])
 
   return (
     <div className='pilih-tanggal' ref={inputRef}>

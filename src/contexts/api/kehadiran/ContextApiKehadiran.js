@@ -4,11 +4,11 @@ import formatDate from "../../../components/useFormatCalendar";
 
 const ContextApiKehadiranJmlKehadiran = createContext({})
 
-function useKehadiranJmlKehadiran(){
+function useKehadiranJmlKehadiran() {
     return useContext(ContextApiKehadiranJmlKehadiran)
 }
 
-function KehadiranJmlKehadiranProvider ({children}) {
+function KehadiranJmlKehadiranProvider({ children }) {
     const [jmlKehadiran, setJmlKehadiran] = useState(null);
     const [date, setDate] = useState(formatDate(new Date()))
     const [tanggal, setTanggal] = useState(new Date().getDate())
@@ -28,7 +28,7 @@ function KehadiranJmlKehadiranProvider ({children}) {
                 // tahun: tahun,
                 start_time: startTime,
             }
-            axios.get(url, 
+            axios.get(url,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -36,20 +36,20 @@ function KehadiranJmlKehadiranProvider ({children}) {
                     params: request
                 })
                 .then((response) => {
-                    setJmlKehadiran(response.data.data.jml_kehadiran); 
+                    setJmlKehadiran(response.data.data.jml_kehadiran);
                     setLoading(true);
                 }).catch((error) => {
                     console.log(error);
                 })
         }
-        getDataJmlKehadiran();
+        // getDataJmlKehadiran();
     }, [startTime]);
 
     const contextValue = {
         jmlKehadiran,
-        setJmlKehadiran, 
-        date, 
-        setDate,        
+        setJmlKehadiran,
+        date,
+        setDate,
         loading,
         setLoading,
         tahun, setTahun,
@@ -57,11 +57,11 @@ function KehadiranJmlKehadiranProvider ({children}) {
         tanggal, setTanggal,
         startTime, setStartTime,
     }
-    return(
+    return (
         <ContextApiKehadiranJmlKehadiran.Provider value={contextValue}>
             {children}
         </ContextApiKehadiranJmlKehadiran.Provider>
     )
 }
 
-export {ContextApiKehadiranJmlKehadiran, useKehadiranJmlKehadiran, KehadiranJmlKehadiranProvider}
+export { ContextApiKehadiranJmlKehadiran, useKehadiranJmlKehadiran, KehadiranJmlKehadiranProvider }

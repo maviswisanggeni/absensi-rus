@@ -2,65 +2,30 @@ import dayjs from 'dayjs';
 import React from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { useApiDashboardStatistik } from '../../contexts/api/dashboard/ApiDashboardStatistik';
+import { useSelector } from 'react-redux';
 
-function Chart(props) {
+function Chart({ data }) {
   const context = useApiDashboardStatistik()
-  const data = [
-    {
-      name: 'Kamis',
-      karyawan: 302,
-      Staff: 298,
-      amt: 298,
-    },
-    {
-      name: 'Jumat',
-      karyawan: 304,
-      Staff: 302,
-      amt: 302,
-    },
-    {
-      name: 'Sabtu',
-      karyawan: 299,
-      Staff: 297,
-      amt: 297,
-    },
-    {
-      name: 'Senin',
-      karyawan: 301,
-      Staff: 294,
-      amt: 294,
-    },
-    {
-      name: 'Selasa',
-      karyawan: 304,
-      Staff: 293,
-      amt: 293,
-    },
-    {
-      name: 'Rabu',
-      karyawan: 294,
-      Staff: 299,
-      amt: 294,
-    },
-  ];
+
+  const { loading } = useSelector(state => state.statistik)
 
   var lowest = Number.POSITIVE_INFINITY;
   var highest = Number.NEGATIVE_INFINITY;
   var tmp;
-  for (var i = props.data?.length - 1; i >= 0; i--) {
-    tmp = props.data[i]?.count;
+  for (var i = data?.length - 1; i >= 0; i--) {
+    tmp = data[i]?.count;
     if (tmp < lowest) lowest = tmp;
     if (tmp > highest) highest = tmp;
   }
 
-  const updatedData = props.data?.map((item) => {
+  const updatedData = data?.map((item) => {
     return {
       ...item,
       date: dayjs(item.date).format('dddd')
     }
   })
 
-  const loading = [
+  const loadingChart = [
     {
       loading: 'loading'
     }
@@ -68,7 +33,7 @@ function Chart(props) {
 
   return (
     <LineChart
-      data={context.loading ? updatedData : loading}
+      data={loading ? updatedData : loadingChart}
       width={500}
       height={300}
       margin={{
@@ -79,15 +44,24 @@ function Chart(props) {
       }}
     >
       <CartesianGrid strokeDasharray="1" />
-      <XAxis dataKey={context.loading ? 'date' : 'loading'}
-       style={{ fontSize: 12 }} />
-      <YAxis domain={[lowest, highest]} 
-      dataKey="count"
-      tickCount={props.data?.length < 8 ? props.data?.length : 8} 
-      tickFormatter={(tick) => tick.toFixed(0)}
-      padding={{ top: 10 }} tickSize={12} style={{ fontSize: 12 }} />
+      <XAxis
+        dataKey={loading ? 'date' : 'loading'}
+        style={{ fontSize: 10, fill: '#9B9B9B' }}
+        stroke='#F0F0F0'
+      />
+      <YAxis domain={[lowest, highest]}
+        dataKey="count"
+        tickCount={data?.length < 8 ? data?.length : 8}
+        tickFormatter={(tick) => tick.toFixed(0)}
+        padding={{ top: 10 }}
+        tickSize={12}
+        style={{ fontSize: 10, fill: '#9B9B9B' }}
+        stroke='#F0F0F0'
+      />
       <Tooltip />
       <Line type="monotone" dataKey="count" stroke="#C2D2FF" dot={{ strokeWidth: 2, fill: '#C2D2FF', stroke: '#C2D2FF' }} />
+      {/* <Line type="monotone" dataKey="karyawan" stroke="#C2D2FF" strokeWidth={2} dot={{ strokeWidth: 2, fill: '#C2D2FF', stroke: '#C2D2FF' }} /> */}
+      {/* <Line type="monotone" dataKey="Staff" stroke="#3661EB" strokeWidth={2} dot={{ strokeWidth: 2, fill: '#3661EB', stroke: '#3661EB' }} /> */}
     </LineChart>
   )
 }

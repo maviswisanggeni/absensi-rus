@@ -13,7 +13,7 @@ import kalenderLogoBlue from '../../assets/icons/kalender-icon-blue.svg'
 import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 import axios from 'axios'
 
-function Navbar() {
+function Sidebar() {
   let query = useLocation()
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
@@ -32,44 +32,69 @@ function Navbar() {
       });
   };
 
+  const dataSidebar = [
+    {
+      id: 1,
+      path: '/dashboard',
+      img: dashboardLogoGrey,
+      imgActive: dashboardLogoBlue,
+      text: 'Dashboard'
+    },
+    {
+      id: 2,
+      path: '/kehadiran',
+      tabbarPath: '/kehadiran/Masuk',
+      img: kehadiranLogoGrey,
+      imgActive: kehadiranLogoBlue,
+      text: 'Kehadiran'
+    },
+    {
+      id: 3,
+      path: '/karyawan',
+      // tabbarPath: `/karyawan/${keterangan}`,
+      img: karyawanLogoGrey,
+      imgActive: karyawanLogoBlue,
+      text: 'Karyawan'
+    },
+    {
+      id: 4,
+      path: '/kalender',
+      img: kalenderLogoGrey,
+      imgActive: kalenderLogoBlue,
+      text: 'Kalender'
+    },
+    {
+      id: 5,
+      path: 'logout',
+      img: loginLogoGrey,
+      imgActive: loginLogoGrey,
+      text: 'Logout'
+    },
+  ]
 
   return (
     <nav className='nav'>
       <LogoSidebar />
       <ul>
-        <li>
-          <NavLink to='/' className={query.pathname === '/' ? 'active-sidebar' : ''}>
-            <img src={query.pathname === '/' ? dashboardLogoBlue : dashboardLogoGrey} alt="" />
-            Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/kehadiran' className={query.pathname === '/kehadiran' || query.pathname === '/kehadiran/detail- ' ? 'active-sidebar' : ''}>
-            <img src={query.pathname === '/kehadiran' || query.pathname === '/kehadiran/detail' ? kehadiranLogoBlue : kehadiranLogoGrey} alt="" />
-            Kehadiran
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/karyawan' className={query.pathname === '/karyawan' ? 'active-sidebar' : ''}>
-            <img src={query.pathname === '/karyawan' ? karyawanLogoBlue : karyawanLogoGrey} alt="" />
-            karyawan
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/kalender' className={query.pathname === '/kalender' ? 'active-sidebar' : ''}>
-            <img src={query.pathname === '/kalender' ? kalenderLogoBlue : kalenderLogoGrey} alt="" />
-            kalender
-          </NavLink>
-        </li>
-        <li>
-          <a onClick={logoutHanlder} className={query.pathname === '/login' ? 'active-sidebar' : ''}>
-            <img src={query.pathname === '/login' ? loginLogoGrey : loginLogoGrey} alt="" />
-            Logout
-          </a>
-        </li>
+        {dataSidebar.map((item) => (
+          <li key={item.id}>
+            {item.text === 'Logout'
+              ? <a onClick={logoutHanlder} className={query.pathname === '/login' ? 'active-sidebar' : ''}>
+                <img src={query.pathname === '/login' ? loginLogoGrey : loginLogoGrey} alt="" />
+                Logout
+              </a>
+              : <NavLink
+                to={item.tabbarPath || item.path}
+                className={query.pathname.startsWith(item.path) ? 'active-sidebar' : ''}
+              >
+                <img src={query.pathname.startsWith(item.path) ? item.imgActive : item.img} alt="" />
+                {item.text}
+              </NavLink>}
+          </li>
+        ))}
       </ul>
     </nav>
   )
 }
 
-export default Navbar
+export default Sidebar
