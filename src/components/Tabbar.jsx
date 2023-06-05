@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
-function Tabbar({ funcPage, funcKeterangan, searchParams, path, options, setKategoriId, setCurrentKategori }) {
+function Tabbar({ funcPage, funcKeterangan, searchParams, path, options, setKategoriId, setCurrentKategori, loading }) {
   const dispatch = useDispatch()
   let location = useLocation()
   const [current, setCurrent] = useState(null)
@@ -45,18 +45,16 @@ function Tabbar({ funcPage, funcKeterangan, searchParams, path, options, setKate
           )
         })}
       </div>
-      <div
-        className={`line`}
-        style={{ width: lineWidth, transform: `translate(${lineTranslateX}, 0)` }}
-      >
-      </div>
+      {loading &&
+        <div
+          className={`line`}
+          style={{ width: lineWidth, transform: `translate(${current ? lineTranslateX : '0%'}, 0)` }}
+        >
+        </div>
+
+      }
     </div >
   )
-}
-
-// option 3 is optional
-Tabbar.defaultProps = {
-  option3: ''
 }
 
 export default Tabbar

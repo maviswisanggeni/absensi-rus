@@ -15,16 +15,35 @@ import { TanggalKehadiranProvider } from '../contexts/app/ContextTanggalKehadira
 import Sidebar from '../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getJmlKehadiran } from '../features/jmlKehadiranSlice'
+import { getJmlKehadiranKehadiran, setJmlKehadiran } from '../features/jmlKehadiranSlice'
 import { Route, Routes } from 'react-router'
+import Pusher from "pusher-js";
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
+  const { tanggal } = useSelector((state) => state.jmlKehadiran)
 
   useEffect(() => {
-    dispatch(getJmlKehadiran())
+    dispatch(getJmlKehadiranKehadiran(tanggal))
   }, [])
+
+  // useEffect(() => {
+  //   Pusher.logToConsole = true;
+
+  //   const pusher = new Pusher('7b9c2c870e01322901d9', {
+  //     cluster: 'ap1'
+  //   });
+
+  //   const channel = pusher.subscribe(`jml-kehadiran-channel`);
+  //   channel.bind('jml-kehadiran-event', function (data) {
+  //     dispatch(setJmlKehadiran(data))
+  //   });
+
+  //   return () => {
+  //     pusher.unsubscribe('jml-kehadiran-channel')
+  //   }
+  // }, []);
 
   const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
 
@@ -38,9 +57,9 @@ function Kehadiran() {
 
             <CircularStatistic
               name="Kehadiran"
-              firstValue={jmlKehadiran?.jumlah_masuk}
+              firstValue={jmlKehadiran?.jumlah_kehadiran}
               secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_masuk} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
+              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_kehadiran} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
               imgSrc={masukIcon}
             />
 

@@ -24,7 +24,7 @@ function StatisticChart() {
         <BtnDropDown />
       </div>
       <div className='div-2'>
-        <Chart data={statistikData} />
+        <Chart data={statistikData.mingguan} />
         <ChartInfo />
       </div>
     </div>

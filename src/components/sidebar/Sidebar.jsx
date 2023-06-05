@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../../styles/css/Sidebar.css'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import LogoSidebar from './LogoSidebar'
@@ -12,11 +12,19 @@ import kalenderLogoGrey from '../../assets/icons/kalender-icon-grey.svg'
 import kalenderLogoBlue from '../../assets/icons/kalender-icon-blue.svg'
 import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { getKategori } from '../../features/ketegoriSlice'
 
 function Sidebar() {
   let query = useLocation()
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
+  const { listKategori } = useSelector((state) => state.kategori)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getKategori())
+  }, [])
 
   if (query.pathname === "/login") {
     return null
@@ -51,7 +59,7 @@ function Sidebar() {
     {
       id: 3,
       path: '/karyawan',
-      // tabbarPath: `/karyawan/${keterangan}`,
+      tabbarPath: `/karyawan/${listKategori[0]?.kategori}`,
       img: karyawanLogoGrey,
       imgActive: karyawanLogoBlue,
       text: 'Karyawan'

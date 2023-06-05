@@ -57,6 +57,7 @@
       display: flex;
       gap: 2rem;
       margin-bottom: 2rem;
+      width: 100%;
 
       .radius-info {
         display: flex;
@@ -85,10 +86,208 @@
           outline: $primary-color solid 1px;
         }
       }
+
+      button {
+        width: 100px;
+        height: 35px;
+
+        align-self: flex-end;
+        margin-left: auto;
+        justify-self: flex-end;
+
+        border: none;
+        outline: none;
+        background-color: #ffd233;
+        color: black;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      button.active {
+        background-color: #277ffe;
+        color: white;
+      }
     }
   }
 
   .kategori-karyawan {
+    width: 100%;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: 32px;
+      color: #000000;
+      margin-bottom: 2rem;
+    }
+
+    .tambah-kategori {
+      width: 100%;
+      height: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      background-color: #ececec;
+      font-weight: 500;
+      font-size: 16px;
+      color: $grey;
+      cursor: pointer;
+    }
+
+    .container-kategori {
+      width: 100%;
+      height: 48px;
+      border-radius: 5px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      background-color: $white;
+      margin-bottom: 0.5rem;
+      position: relative;
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transform: translate(-25px, 50px);
+        background-color: $white;
+        gap: 0.5rem;
+        border: 1px solid $grey;
+        z-index: 2;
+        border-radius: 5px;
+
+        div {
+          width: 100%;
+          display: flex;
+          background-color: white;
+          cursor: pointer;
+          padding: 0.25rem 1rem;
+
+          img {
+            width: 12px;
+            height: 12px;
+          }
+
+          p {
+            font-size: 14px;
+          }
+        }
+
+        div:hover {
+          background-color: rgba($color: #000000, $alpha: 0.1);
+        }
+      }
+    }
+
+    .modal-kategori {
+      width: 675px;
+      height: 500px;
+      background-color: $white;
+      border-radius: 20px;
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      padding: 2rem 2rem 0;
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      svg {
+        align-self: flex-end;
+        width: 13px;
+        height: 13px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+      }
+
+      h3 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        color: #5a6474;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      p {
+        align-self: start;
+        font-weight: 500;
+        font-size: 12px;
+        color: #5a6474;
+        margin-bottom: 1rem;
+      }
+
+      input {
+        width: 100%;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 1px solid $grey;
+        outline: none;
+        padding-bottom: 1rem;
+      }
+
+      input::placeholder {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: -0.333333px;
+        color: $grey;
+      }
+
+      input:focus {
+        border-bottom: 2px solid $primary-color;
+      }
+
+      button {
+        border: none;
+        outline: none;
+        display: grid;
+        place-items: center;
+        background-color: #277ffe;
+        color: $white;
+        width: 100%;
+        height: 60px;
+        border-radius: 10px;
+        margin-top: 2rem;
+
+        font-weight: 500;
+        font-size: 15px;
+        color: $white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .detail-kategori-karyawan {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -109,6 +308,10 @@
       img {
         margin-left: 1rem;
       }
+    }
+
+    a {
+      text-decoration: none;
     }
 
     .wrapper-kategori {
@@ -180,6 +383,8 @@
         flex-direction: column;
         gap: 1rem;
         margin-top: 0.5rem;
+        overflow-y: scroll;
+        height: 500px;
 
         .wrapper-list {
           display: flex;
@@ -195,6 +400,7 @@
               width: 35px;
               border-radius: 50%;
               margin-right: 1rem;
+              object-fit: cover;
             }
 
             div {
@@ -209,6 +415,7 @@
               span {
                 font-weight: 500;
                 font-size: 10px;
+                color: $grey;
               }
             }
           }
@@ -253,7 +460,7 @@
       width: 100vw;
       height: 100vh;
       background-color: rgba($color: #000000, $alpha: 0.3);
-      position: absolute;
+      position: fixed;
       left: 0;
       right: 0;
       top: 0;
@@ -294,6 +501,77 @@
         .padding {
           width: 100%;
           padding: 0 2rem;
+
+          .wrapper-list {
+            overflow-y: scroll;
+            height: 300px;
+          }
+
+          .dropdown-container {
+            background-color: $white;
+            border-radius: 7.5px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            padding: 0 2rem;
+            z-index: 999;
+            overflow-y: scroll;
+            max-height: 200px;
+
+            .dropdown-outer-item {
+              width: 100%;
+              // border-bottom: 1px solid #eceef2;
+              border: 1px solid #eceef2;
+            }
+
+            .dropdown-item.not-found {
+              div {
+                justify-content: center;
+              }
+            }
+
+            .dropdown-item {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              height: 40px;
+              width: 390px;
+              margin: 0 auto;
+
+              div {
+                display: flex;
+                align-items: center;
+              }
+
+              img {
+                width: 20px;
+                height: 20px;
+                margin-right: 0.5rem;
+                border-radius: 50%;
+              }
+
+              p {
+                font-size: 12px;
+              }
+
+              span {
+                font-size: 10px;
+                color: $grey;
+              }
+
+              button {
+                outline: none;
+                border: none;
+                width: 75px;
+                height: 20px;
+                background-color: $background-color;
+                border-radius: 5px;
+                font-size: 10px;
+                cursor: pointer;
+              }
+            }
+          }
         }
 
         input[type="text"] {
@@ -303,6 +581,7 @@
           background-color: #f3f3f3;
           padding-left: 1rem;
           border: none;
+          outline: none;
         }
 
         p {
@@ -316,12 +595,15 @@
           display: flex;
           align-items: center;
           width: 100%;
+          margin-bottom: 0.5rem;
 
           img {
             width: 25px;
             height: 25px;
             margin-right: 0.5rem;
             margin-left: 1rem;
+            object-fit: cover;
+            border-radius: 50%;
           }
 
           label {
@@ -375,6 +657,70 @@
             background-color: $primary-color;
           }
         }
+      }
+    }
+
+    .alert-modal {
+      width: 350px;
+      height: 225px;
+      background-color: white;
+      border-radius: 10px;
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      padding: 1rem 1rem;
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      h1 {
+        font-weight: 600;
+        font-size: 24px;
+        margin-bottom: 1rem;
+        margin-right: auto;
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 14px;
+        margin-right: auto;
+      }
+
+      div {
+        margin-top: auto;
+        background-color: $background-color;
+        width: 100%;
+        height: 80px;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1rem;
+        padding: 0 1rem;
+      }
+
+      button {
+        width: 120px;
+        height: 40px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:nth-child(1) {
+        background-color: $danger-color;
+      }
+
+      button:nth-child(2) {
+        background-color: $primary-color;
       }
     }
   }

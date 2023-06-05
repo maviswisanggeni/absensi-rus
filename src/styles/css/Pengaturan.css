@@ -63,6 +63,7 @@
   display: flex;
   gap: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 .pengaturan .radius-absen .container-radius .radius-info {
   display: -webkit-box;
@@ -93,7 +94,238 @@
 .pengaturan .radius-absen .container-radius .radius-info input:focus {
   outline: #3661eb solid 1px;
 }
+.pengaturan .radius-absen .container-radius button {
+  width: 100px;
+  height: 35px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-left: auto;
+  justify-self: flex-end;
+  border: none;
+  outline: none;
+  background-color: #ffd233;
+  color: black;
+  cursor: pointer;
+  font-weight: 500;
+}
+.pengaturan .radius-absen .container-radius button.active {
+  background-color: #277ffe;
+  color: white;
+}
 .pengaturan .kategori-karyawan {
+  width: 100%;
+}
+.pengaturan .kategori-karyawan a {
+  text-decoration: none;
+  color: black;
+}
+.pengaturan .kategori-karyawan h1 {
+  font-weight: 500;
+  font-size: 32px;
+  color: #000000;
+  margin-bottom: 2rem;
+}
+.pengaturan .kategori-karyawan .tambah-kategori {
+  width: 100%;
+  height: 48px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  background-color: #ececec;
+  font-weight: 500;
+  font-size: 16px;
+  color: #9b9b9b;
+  cursor: pointer;
+}
+.pengaturan .kategori-karyawan .container-kategori {
+  width: 100%;
+  height: 48px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 2rem;
+  background-color: #ffffff;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.pengaturan .kategori-karyawan .container-kategori div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+}
+.pengaturan .kategori-karyawan .container-kategori img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.pengaturan .kategori-karyawan .container-kategori .dropdown-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: translate(-25px, 50px);
+          transform: translate(-25px, 50px);
+  background-color: #ffffff;
+  gap: 0.5rem;
+  border: 1px solid #9b9b9b;
+  z-index: 2;
+  border-radius: 5px;
+}
+.pengaturan .kategori-karyawan .container-kategori .dropdown-content div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.25rem 1rem;
+}
+.pengaturan .kategori-karyawan .container-kategori .dropdown-content div img {
+  width: 12px;
+  height: 12px;
+}
+.pengaturan .kategori-karyawan .container-kategori .dropdown-content div p {
+  font-size: 14px;
+}
+.pengaturan .kategori-karyawan .container-kategori .dropdown-content div:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.pengaturan .kategori-karyawan .modal-kategori {
+  width: 675px;
+  height: 500px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 2rem 2rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.pengaturan .kategori-karyawan .modal-kategori svg {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  width: 13px;
+  height: 13px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.pengaturan .kategori-karyawan .modal-kategori h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: #5a6474;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+.pengaturan .kategori-karyawan .modal-kategori p {
+  -ms-flex-item-align: start;
+      align-self: start;
+  font-weight: 500;
+  font-size: 12px;
+  color: #5a6474;
+  margin-bottom: 1rem;
+}
+.pengaturan .kategori-karyawan .modal-kategori input {
+  width: 100%;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #9b9b9b;
+  outline: none;
+  padding-bottom: 1rem;
+}
+.pengaturan .kategori-karyawan .modal-kategori input::-webkit-input-placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.333333px;
+  color: #9b9b9b;
+}
+.pengaturan .kategori-karyawan .modal-kategori input::-moz-placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.333333px;
+  color: #9b9b9b;
+}
+.pengaturan .kategori-karyawan .modal-kategori input:-ms-input-placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.333333px;
+  color: #9b9b9b;
+}
+.pengaturan .kategori-karyawan .modal-kategori input::-ms-input-placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.333333px;
+  color: #9b9b9b;
+}
+.pengaturan .kategori-karyawan .modal-kategori input::placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.333333px;
+  color: #9b9b9b;
+}
+.pengaturan .kategori-karyawan .modal-kategori input:focus {
+  border-bottom: 2px solid #3661eb;
+}
+.pengaturan .kategori-karyawan .modal-kategori button {
+  border: none;
+  outline: none;
+  display: grid;
+  place-items: center;
+  background-color: #277ffe;
+  color: #ffffff;
+  width: 100%;
+  height: 60px;
+  border-radius: 10px;
+  margin-top: 2rem;
+  font-weight: 500;
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.pengaturan .detail-kategori-karyawan {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -102,7 +334,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.pengaturan .kategori-karyawan .tambah-kategori {
+.pengaturan .detail-kategori-karyawan .tambah-kategori {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -120,18 +352,21 @@
   font-size: 16px;
   color: #9b9b9b;
 }
-.pengaturan .kategori-karyawan .tambah-kategori img {
+.pengaturan .detail-kategori-karyawan .tambah-kategori img {
   margin-left: 1rem;
 }
-.pengaturan .kategori-karyawan .wrapper-kategori {
+.pengaturan .detail-kategori-karyawan a {
+  text-decoration: none;
+}
+.pengaturan .detail-kategori-karyawan .wrapper-kategori {
   width: 40%;
 }
-.pengaturan .kategori-karyawan .wrapper-kategori h1 {
+.pengaturan .detail-kategori-karyawan .wrapper-kategori h1 {
   font-weight: 500;
   font-size: 24px;
   margin-bottom: 2rem;
 }
-.pengaturan .kategori-karyawan .wrapper-kategori .kategori {
+.pengaturan .detail-kategori-karyawan .wrapper-kategori .kategori {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -151,23 +386,23 @@
   transition: background 300ms ease-in-out;
   cursor: pointer;
 }
-.pengaturan .kategori-karyawan .wrapper-kategori .kategori p {
+.pengaturan .detail-kategori-karyawan .wrapper-kategori .kategori p {
   font-weight: 500;
   font-size: 12px;
   color: #5a6474;
 }
-.pengaturan .kategori-karyawan .wrapper-kategori .kategori span {
+.pengaturan .detail-kategori-karyawan .wrapper-kategori .kategori span {
   font-weight: 500;
   font-size: 14px;
   color: #5a6474;
 }
-.pengaturan .kategori-karyawan .wrapper-kategori .kategori.active {
+.pengaturan .detail-kategori-karyawan .wrapper-kategori .kategori.active {
   background-color: #f3f3f3;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori {
   width: 60%;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-text {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -179,11 +414,11 @@
           justify-content: space-between;
   margin-bottom: 2rem;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-text h1 {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-text h1 {
   font-weight: 500;
   font-size: 20px;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-text h2 {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-text h2 {
   font-weight: 500;
   font-size: 14px;
   color: #3661eb;
@@ -191,7 +426,7 @@
   position: relative;
   z-index: 999;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -201,8 +436,10 @@
           flex-direction: column;
   gap: 1rem;
   margin-top: 0.5rem;
+  overflow-y: scroll;
+  height: 500px;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -213,7 +450,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -221,13 +458,15 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left img {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left img {
   height: 35px;
   width: 35px;
   border-radius: 50%;
   margin-right: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left div {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -239,15 +478,16 @@
       -ms-flex-pack: start;
           justify-content: flex-start;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left div p {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left div p {
   font-weight: 500;
   font-size: 14px;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left div span {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left div span {
   font-weight: 500;
   font-size: 10px;
+  color: #9b9b9b;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list input {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list input {
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
@@ -260,7 +500,7 @@
   display: grid;
   place-content: center;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list input::before {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list input::before {
   content: "";
   width: 24px;
   height: 24px;
@@ -278,15 +518,15 @@
   background-color: white;
   cursor: pointer;
 }
-.pengaturan .kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list input:checked::before {
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list input:checked::before {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
-.pengaturan .kategori-karyawan .bg-modal {
+.pengaturan .detail-kategori-karyawan .bg-modal {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -294,7 +534,7 @@
   margin: auto;
   z-index: 999;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota {
   width: 500px;
   height: 550px;
   background-color: white;
@@ -317,36 +557,107 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota h1 {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota h1 {
   font-weight: 500;
   font-size: 24px;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota h3 {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota h3 {
   font-weight: 500;
   font-size: 14px;
   color: #9b9b9b;
   margin: 1rem 0;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .padding {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding {
   width: 100%;
   padding: 0 2rem;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota input[type=text] {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .wrapper-list {
+  overflow-y: scroll;
+  height: 300px;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container {
+  background-color: #ffffff;
+  border-radius: 7.5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 0 2rem;
+  z-index: 999;
+  overflow-y: scroll;
+  max-height: 200px;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-outer-item {
+  width: 100%;
+  border: 1px solid #eceef2;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-item.not-found div {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 40px;
+  width: 390px;
+  margin: 0 auto;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-item div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-item p {
+  font-size: 12px;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-item span {
+  font-size: 10px;
+  color: #9b9b9b;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container .dropdown-item button {
+  outline: none;
+  border: none;
+  width: 75px;
+  height: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  font-size: 10px;
+  cursor: pointer;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota input[type=text] {
   width: 100%;
   height: 37px;
   border-radius: 5px;
   background-color: #f3f3f3;
   padding-left: 1rem;
   border: none;
+  outline: none;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota p {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota p {
   font-weight: 500;
   font-size: 12px;
   -ms-flex-item-align: start;
       align-self: flex-start;
   margin: 1rem 0;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -354,30 +665,34 @@
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  margin-bottom: 0.5rem;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota img {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota img {
   width: 25px;
   height: 25px;
   margin-right: 0.5rem;
   margin-left: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota label {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota label {
   font-weight: 500;
   font-size: 10px;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota .custom-checkbox {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota .custom-checkbox {
   width: 20px;
   height: 20px;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota .custom-checkbox::after {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota .custom-checkbox::after {
   width: 20px;
   height: 20px;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota .custom-checkbox::before {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota .custom-checkbox::before {
   width: 7.5px;
   height: 7.5px;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn {
   width: 100%;
   height: 80px;
   background-color: #f9f9f9;
@@ -395,7 +710,7 @@
   bottom: 0;
   padding-right: 1rem;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn button {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn button {
   width: 120px;
   height: 40px;
   border: none;
@@ -404,10 +719,78 @@
   color: white;
   cursor: pointer;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn button:nth-child(1) {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn button:nth-child(1) {
   background-color: #ff4530;
 }
-.pengaturan .kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn button:nth-child(2) {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .wrappper-btn button:nth-child(2) {
+  background-color: #3661eb;
+}
+.pengaturan .detail-kategori-karyawan .alert-modal {
+  width: 350px;
+  height: 225px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 1rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.pengaturan .detail-kategori-karyawan .alert-modal h1 {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 1rem;
+  margin-right: auto;
+}
+.pengaturan .detail-kategori-karyawan .alert-modal p {
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: auto;
+}
+.pengaturan .detail-kategori-karyawan .alert-modal div {
+  margin-top: auto;
+  background-color: #f9f9f9;
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+.pengaturan .detail-kategori-karyawan .alert-modal button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.pengaturan .detail-kategori-karyawan .alert-modal button:nth-child(1) {
+  background-color: #ff4530;
+}
+.pengaturan .detail-kategori-karyawan .alert-modal button:nth-child(2) {
   background-color: #3661eb;
 }
 

@@ -574,7 +574,7 @@
   -webkit-transform: translateY(-0.25rem);
           transform: translateY(-0.25rem);
   position: relative;
-  z-index: 999;
+  z-index: 98;
 }
 .filter ul {
   position: absolute;
@@ -656,12 +656,15 @@
       -ms-flex-align: center;
           align-items: center;
   padding: 0.5rem 1.5rem;
+  cursor: pointer;
 }
 .table .row-img img {
   width: 35px;
   height: 35px;
   margin-right: 1rem;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .map {
@@ -804,7 +807,7 @@
 }
 
 .loading-fullscreen {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgb(255, 255, 255);
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -815,6 +818,7 @@
   margin: auto;
   display: grid;
   place-items: center;
+  z-index: 9999;
 }
 .loading-fullscreen .loading:before {
   height: 10px;
@@ -955,4 +959,63 @@
   --form-control-color: var(--form-control-disabled);
   color: var(--form-control-disabled);
   cursor: not-allowed;
+}
+
+.jadwal-absensi {
+  margin-top: 2rem;
+}
+.jadwal-absensi h1 {
+  font-size: 18px;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 0.5rem;
+}
+.jadwal-absensi .container-jadwal {
+  margin-bottom: 0.5rem;
+}
+.jadwal-absensi .container-jadwal,
+.jadwal-absensi .container-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.jadwal-absensi .container-jadwal p,
+.jadwal-absensi .container-time p {
+  font-weight: 400;
+  font-size: 14px;
+  color: #5a6474;
+}
+.jadwal-absensi .container-jadwal .container-time,
+.jadwal-absensi .container-time .container-time {
+  width: 80%;
+}
+.jadwal-absensi .container-jadwal input,
+.jadwal-absensi .container-time input {
+  width: 125px;
+  height: 35px;
+  border: 1px solid #9b9b9b;
+  border-radius: 7.5px;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+}
+.jadwal-absensi .container-jadwal input::-webkit-calendar-picker-indicator,
+.jadwal-absensi .container-time input::-webkit-calendar-picker-indicator {
+  background: none;
+  background-image: url(../../assets/icons/arrow-down.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+.jadwal-absensi .container-jadwal .line,
+.jadwal-absensi .container-time .line {
+  width: 8px;
+  height: 2px;
+  background: #9b9b9b;
+  border-radius: 10px;
 }

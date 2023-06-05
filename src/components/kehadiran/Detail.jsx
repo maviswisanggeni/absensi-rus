@@ -100,6 +100,7 @@ function Detail() {
                     <DetailProfile data={detail} />
                 </div>
             </div>
+            {!loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
         </div>
     )
 }

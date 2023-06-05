@@ -4,24 +4,23 @@ import Label from './Label'
 import Select from './Select'
 import imgIcon from '../../assets/icons/img-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteListItemKtgkaryawan, updateFieldValue } from '../../features/detailKaryawanSlice'
-import close from '../../assets/icons/close.svg'
-import plus from '../../assets/icons/plus.svg'
-import ModalRole from './ModalRole'
+import { listJadwalWeek, updateFieldValue } from '../../features/detailKaryawanSlice'
+import JabatanSelect from './JabatanSelect'
 
 function DetailFotoProfile({ callback }) {
     const dispatch = useDispatch()
     const context = useApiKaryawanUpdate()
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
+    const [weekListJadwal, setWeekListJadwal] = useState([])
     const { nama, niy, linkFoto, listKtgkaryawan, ktgKaryawan, listJadwal } = useSelector(
         (state) => state.detailKaryawanSlice
     );
-    const [modalActive, setModalActive] = useState(false)
 
     const inputRef = useRef(null)
 
     const handleChange = function (e) {
+        console.log(e.target.files[0]);
         if (e.target.files && e.target.files[0]) {
             setImage(URL.createObjectURL(e.target.files[0]));
             setFile(e.target.files[0])
@@ -33,13 +32,8 @@ function DetailFotoProfile({ callback }) {
         callback(file)
     }, [file])
 
-    const handleSelect = function (e) {
-        const { value } = e.target;
-        dispatch(updateFieldValue({ field: 'ktgKaryawan', value }));
-    }
-
     const formatTime = time => {
-        const [hours, minutes] = time.split(':');
+        const [hours, minutes] = time?.split(':');
         const paddedHours = hours.padStart(2, '0'); // Add leading zero if necessary
         return `${paddedHours}:${minutes}`;
     };
@@ -48,7 +42,7 @@ function DetailFotoProfile({ callback }) {
         const { value } = e.target;
 
         // Create a copy of the listJadwal array
-        const updatedListJadwal = [...listJadwal];
+        const updatedListJadwal = [...weekListJadwal];
 
         // Create a copy of the specific item in the listJadwal array
         const updatedItem = { ...updatedListJadwal[index] };
@@ -62,6 +56,48 @@ function DetailFotoProfile({ callback }) {
         // Dispatch the updateFieldValue action with the updated listJadwal
         dispatch(updateFieldValue({ field: 'listJadwal', value: updatedListJadwal }));
     };
+
+    useEffect(() => {
+        let listJadwalWeek = [
+            {
+                hari: 'senin',
+                jam_masuk: '',
+                jam_pulang: ''
+            },
+            {
+                hari: 'selasa',
+                jam_masuk: '',
+                jam_pulang: ''
+            },
+            {
+                hari: 'rabu',
+                jam_masuk: '',
+                jam_pulang: ''
+            },
+            {
+                hari: 'kamis',
+                jam_masuk: '',
+                jam_pulang: ''
+            },
+            {
+                hari: 'jumat',
+                jam_masuk: '',
+                jam_pulang: ''
+            },
+            {
+                hari: 'sabtu',
+                jam_masuk: '',
+                jam_pulang: ''
+            },
+            {
+                hari: 'minggu',
+                jam_masuk: '',
+                jam_pulang: ''
+            }
+        ];
+        var res = listJadwalWeek.map(obj => listJadwal.find(o => o.hari.toLowerCase() === obj.hari.toLowerCase()) || obj);
+        setWeekListJadwal(res)
+    }, [listJadwal])
 
     return (
         <div className='detail-profile'>
@@ -82,22 +118,11 @@ function DetailFotoProfile({ callback }) {
             <div className='wrapper-jabatan'>
                 <div className='select'>
                     <h1 className='select-heading'>Jabatan</h1>
-                    <div className='wrapper-container-jabatan'>
-                        {listKtgkaryawan.map((item, key) => (
-                            <div className='container-jabatan' key={key}>
-                                <p>{item.kategori}</p>
-                                <img src={close} alt="" onClick={() => dispatch(deleteListItemKtgkaryawan({ id: item.id }))} />
-                            </div>
-                        ))}
-                        <div className='container-jabatan btn-plus' onClick={() => setModalActive(true)}>
-                            <img src={plus} alt="" />
-                        </div>
-                        {modalActive && <ModalRole onClose={() => setModalActive(false)} />}
-                    </div>
+                    <JabatanSelect />
                 </div>
                 <div className='jadwal-absensi'>
                     <h1>Jadwal Absensi</h1>
-                    {listJadwal.map((item, key) => {
+                    {weekListJadwal.map((item, key) => {
                         return (
                             <div key={key} className='container-jadwal'>
                                 <p>{item.hari}</p>
@@ -106,7 +131,7 @@ function DetailFotoProfile({ callback }) {
                                         type="time"
                                         name={item.jam_masuk}
                                         className='input'
-                                        value={formatTime(item.jam_masuk)}
+                                        value={formatTime(item?.jam_masuk)}
                                         onChange={e => handleTimeChange(e, key, 'jam_masuk')}
                                     />
                                     <div className='line'></div>
@@ -114,7 +139,7 @@ function DetailFotoProfile({ callback }) {
                                         type="time"
                                         name={item.jam_masuk}
                                         className='input'
-                                        value={formatTime(item.jam_pulang)}
+                                        value={formatTime(item?.jam_pulang)}
                                         onChange={e => handleTimeChange(e, key, 'jam_pulang')}
                                     />
                                 </div>

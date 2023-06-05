@@ -74,7 +74,7 @@ function App() {
           }
         />
 
-        <Route path='/kalender/add' element={<KalenderAdd />} />
+        <Route path='/kalender/add/:date?/:id?' element={<KalenderAdd />} />
 
         <Route path='/karyawan/add' element={
           <KaryawanStoreUserProvider>

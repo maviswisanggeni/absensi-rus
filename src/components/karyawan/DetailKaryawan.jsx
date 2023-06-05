@@ -10,11 +10,12 @@ import { useWrapperEditKaryawan } from '../../contexts/app/WrapperEditKaryawan'
 import { useDispatch, useSelector } from 'react-redux'
 import Sidebar from '../sidebar/Sidebar'
 import { detailKaryawan, updateKaryawan } from '../../features/detailKaryawanSlice'
+import { getKategori } from '../../features/ketegoriSlice'
 
 function DetailKaryawan() {
     let userId = useParams()
     const dispatch = useDispatch()
-    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan } = useSelector((state) => state.detailKaryawanSlice)
+    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading } = useSelector((state) => state.detailKaryawanSlice)
 
     const [file, setFile] = useState(null)
     const callback = payload => {
@@ -23,10 +24,11 @@ function DetailKaryawan() {
 
     useEffect(() => {
         dispatch(detailKaryawan(userId.id))
+        dispatch(getKategori())
     }, [userId])
 
     const [detail, setDetail] = useState([]);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
     const context = useApiKaryawanUpdate()
     const contextValidator = useWrapperEditKaryawan()
@@ -35,7 +37,7 @@ function DetailKaryawan() {
     useEffect(() => {
         async function getData() {
             const url = "https://absensiguru.smkrus.com/api/karyawan/edit/" + userId.id
-            setLoading(false);
+            // setLoading(false);
             axios.get(
                 url,
                 {
@@ -50,7 +52,7 @@ function DetailKaryawan() {
                     context.setAlamat(response.data.user.alamat)
                     context.setnoHp(response.data.user.no_hp)
                     context.setjenisUser(response.data.user.jenis_user)
-                    setLoading(true);
+                    // setLoading(true);
                 }).catch((error) => {
                     console.log(error);
                 })
@@ -60,9 +62,8 @@ function DetailKaryawan() {
 
     function updateUser(e) {
         e.preventDefault();
-        const filteredKategori = listKtgkaryawan.map(item => item.id)
-
-        console.log(filteredKategori);
+        const filteredKategori = Object.values(listKtgkaryawan).map(item => item.id);
+        const filteredListJadwal = listJadwal.filter((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '');
         dispatch(updateKaryawan({
             id: userId.id,
             nama: nama,
@@ -71,12 +72,12 @@ function DetailKaryawan() {
             alamat: alamat,
             no_hp: noHp,
             pf_foto: file,
-            jadwal: listJadwal,
+            jadwal: filteredListJadwal,
             ktg_karyawan: filteredKategori
         }))
-        // context.updateUser().then(() => {
-        //     navigate('/karyawan')
-        // })
+            .then(() => {
+                navigate('/karyawan')
+            })
     }
     return (
         <div className='wrapper-karyawan'>
@@ -102,7 +103,7 @@ function DetailKaryawan() {
                     <EditForm />
                     <DetailFotoProfile callback={callback} />
                 </div>
-                {/* {!loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null} */}
+                {isLoading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
             </form>
         </div>
     )

@@ -13,10 +13,10 @@ function ChartInfo() {
     <div className='chartInfo'>
       <p>
         {loading ?
-          statistikData?.map((item, i) => (
+          statistikData?.mingguan.map((item, i) => (
             <React.Fragment key={i}>
               {i === 0 ? dayjs(item.date).format('DD MMMM YYYY') + ' - ' : ''}
-              {statistikData?.length - 1 === i ? dayjs(item.date).format('DD MMMM YYYY') : ''}
+              {statistikData?.mingguan.length - 1 === i ? dayjs(item.date).format('DD MMMM YYYY') : ''}
             </React.Fragment>
           ))
           : <div>-</div>

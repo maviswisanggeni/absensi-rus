@@ -11,7 +11,6 @@ function Profile() {
   const context = useApiProfile()
   const [active, setActive] = useState()
   let navigate = useNavigate()
-
   return (
     <div className='profile'>
       <div className='wrapper-profile-detail' onClick={() => setActive(!active)}>

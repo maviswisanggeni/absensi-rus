@@ -10,36 +10,34 @@ import Jadwal from '../components/sidebar-right/Jadwal'
 import Calender from '../components/CustomCalendar'
 import Sidebar from '../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
-import { getJmlKehadiran, setJmlKehadiran } from '../features/jmlKehadiranSlice'
+import { getJmlKehadiranDashboard, setJmlKehadiran } from '../features/jmlKehadiranSlice'
 import Pusher from "pusher-js";
 
 function Dashboard() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getJmlKehadiran())
+    dispatch(getJmlKehadiranDashboard())
   }, [dispatch])
 
-  useEffect(() => {
-    Pusher.logToConsole = true;
+  // useEffect(() => {
+  //   Pusher.logToConsole = true;
 
-    const pusher = new Pusher('7b9c2c870e01322901d9', {
-      cluster: 'ap1'
-    });
+  //   const pusher = new Pusher('7b9c2c870e01322901d9', {
+  //     cluster: 'ap1'
+  //   });
 
-    const channel = pusher.subscribe('jml-kehadiran-channel');
-    channel.bind('jml-kehadiran-event', function (data) {
-      console.log(data)
-      dispatch(setJmlKehadiran(data))
-    });
+  //   const channel = pusher.subscribe(`jml-kehadiran-channel`);
+  //   channel.bind('jml-kehadiran-event', function (data) {
+  //     dispatch(setJmlKehadiran(data))
+  //   });
 
-    return () => {
-      pusher.unsubscribe('jml-kehadiran-channel')
-    }
-  }, []);
+  //   return () => {
+  //     pusher.unsubscribe('jml-kehadiran-channel')
+  //   }
+  // }, []);
 
   const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
-
   return (
     <div className='wrapper-dashboard'>
       <Sidebar />

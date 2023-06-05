@@ -39,7 +39,11 @@ const kategoriSlice = createSlice({
         [getKategori.fulfilled]: (state, action) => {
             state.loadingKategori = true
             state.listKategori = action.payload.data
-            state.currentKategori = action.payload.data[0].kategori
+            // state.currentKategori = action.payload.data[0].kategori
+        },
+        [getKategori.rejected]: (state) => {
+            state.loadingKategori = false
+            state.currentKategori = null
         },
     }
 })

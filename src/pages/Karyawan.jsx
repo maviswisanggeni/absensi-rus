@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import Tabbar from '../components/Tabbar'
 import Profile from '../components/Profile'
 import Search from '../components/Search'
@@ -9,17 +9,17 @@ import Table from '../components/karyawan/Table'
 import { useApiKaryawan } from '../contexts/api/karyawan/ContextApiKaryawan'
 import searchIcon from '../assets/icons/search-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterToggle, getKaryawan, updateState } from '../features/karyawanSlice'
+import { updateState } from '../features/karyawanSlice'
 import Sidebar from '../components/sidebar/Sidebar'
 import { useEffect } from 'react'
 import { getKategori, setCurrentKategori, setKategoriId } from '../features/ketegoriSlice'
 import { useState } from 'react'
+import { getKaryawan, updateFieldValue } from '../features/detailKaryawanSlice'
 
 function Karyawan() {
-  const { listKaryawan, loading } = useSelector(state => state.karyawan)
+  const { listKaryawan, isLoading } = useSelector(state => state.detailKaryawanSlice)
   const { listKategori, kategoriId, loadingKategori, currentKategori } = useSelector(state => state.kategori)
   const dispatch = useDispatch()
-  let location = useLocation()
   const navigate = useNavigate()
   const context = useApiKaryawan()
   const [isKategoriUpdated, setIsKategoriUpdated] = useState(false);
@@ -30,49 +30,18 @@ function Karyawan() {
 
   useEffect(() => {
     if (loadingKategori && currentKategori) {
-      navigate(currentKategori);
+      // navigate(currentKategori);
       setIsKategoriUpdated(true)
     }
-  }, [loadingKategori, currentKategori, navigate]);
+  }, [loadingKategori, currentKategori]);
 
   useEffect(() => {
-    if (isKategoriUpdated) {
-      if (kategoriId) {
-        dispatch(getKaryawan({ kategori_id: kategoriId }));
-      }
+    if (isKategoriUpdated && kategoriId) {
+      dispatch(getKaryawan({ kategori_id: kategoriId }));
+      dispatch(updateFieldValue({ field: 'kategoriId', value: kategoriId }));
       setIsKategoriUpdated(false);
     }
-  }, [kategoriId, isKategoriUpdated, dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(getKategori())
-  // }, [])
-
-  // useEffect(() => {
-  //   if (loadingKategori) {
-  //     const currentPath = location.pathname.split('/').pop();
-  //     if (currentPath === 'karyawan') {
-  //       navigate(currentKategori);
-  //     }
-  //   }
-  // }, [loadingKategori, currentKategori, navigate, location.pathname]);
-
-  // useEffect(() => {
-  //   if (loadingKategori) {
-  //     const initialOption = listKategori.find(option => option.kategori === location.pathname.split('/').pop());
-  //     if (initialOption) {
-  //       dispatch(setKategoriId(initialOption.id))
-  //     }
-  //   }
-  //   setIsKategoriUpdated(true);
-  // }, [loadingKategori, location.pathname])
-
-  // useEffect(() => {
-  //   if (isKategoriUpdated) {
-  //     dispatch(getKaryawan({ kategori_id: kategoriId }));
-  //     setIsKategoriUpdated(false);
-  //   }
-  // }, [kategoriId, isKategoriUpdated])
+  }, [kategoriId, isKategoriUpdated]);
 
   return (
     <div className='wrapper-karyawan'>
@@ -105,12 +74,13 @@ function Karyawan() {
             funcPage={context.setCurrentPage}
             funcKeterangan={updateState}
             path='/karyawan'
+            loading={loadingKategori}
           />
           <div className='filter-angka'>
             <Filter option1="Sesuai abjad" option2="Urut NIY"
               setState={updateState}
             />
-            <p>{loading ? listKaryawan.length : 'loading'} Guru</p>
+            <p>{isLoading ? '-' : listKaryawan.length + ' Guru'}</p>
           </div>
         </div>
         <Routes>

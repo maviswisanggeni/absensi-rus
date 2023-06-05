@@ -203,6 +203,20 @@
           flex-direction: column;
           border: 1px solid $secondary-color;
 
+          .wrapper-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 372px;
+
+            p {
+              font-weight: 400;
+              font-size: 14px;
+              margin-top: 1rem;
+            }
+          }
+
           .foto-masuk,
           .default-foto {
             display: grid;
@@ -212,6 +226,11 @@
             object-fit: cover;
             object-position: 100% 0;
             cursor: pointer;
+          }
+
+          .foto-belum-keluar {
+            width: 75px;
+            height: 75px;
           }
 
           .pop-up {

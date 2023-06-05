@@ -5,23 +5,22 @@ import copy from '../../assets/icons/copy.svg'
 import edit from '../../assets/icons/edit.svg'
 import trash from '../../assets/icons/trashRed.svg'
 import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan';
-import axios from 'axios';
 import defaultUser from '../../assets/images/user-foto.png'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteKaryawan, getKaryawan } from '../../features/detailKaryawanSlice';
 
 let PageSize = 10;
 
 function Table() {
-  const { listKaryawan, loading, urutan } = useSelector(state => state.karyawan)
+  const { listKaryawan, isLoading, urutan } = useSelector(state => state.detailKaryawanSlice)
   const { kategoriId } = useSelector(state => state.kategori)
   const navigate = useNavigate()
   const context = useApiKaryawan()
-  const token = localStorage.getItem("token");
+  const dispatch = useDispatch()
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (context.currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    // return listKaryawan.slice(firstPageIndex, lastPageIndex)
 
     let slicedData;
     slicedData = listKaryawan?.slice(firstPageIndex, lastPageIndex);
@@ -34,24 +33,18 @@ function Table() {
     });
 
     return sortedData;
-  }, [loading, listKaryawan, kategoriId]);
+  }, [isLoading, listKaryawan, kategoriId]);
 
   function handleDetail(id) {
     navigate(`/karyawan/edit/${id}`)
   }
 
   function handleDelete(id) {
-    console.log(id);
     if (window.confirm('yakin hapus user?')) {
-      axios.get(
-        `https://absensiguru.smkrus.com/api/karyawan/delete-user/${id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      ).then(() => {
-        console.log('sukses');
-        context.getKaryawan()
-      }).catch((error) => {
-        console.log(error);
-      })
+      dispatch(deleteKaryawan(id))
+        .then(() => {
+          dispatch(getKaryawan({ kategori_id: kategoriId }))
+        })
     }
   }
 
@@ -74,14 +67,14 @@ function Table() {
 
         <tbody>
           {
-            !loading ? <tr className='loading loading-table'><td>loading...</td></tr>
+            isLoading ? <tr className='loading loading-table'><td>loading...</td></tr>
               : currentTableData.length === 0 ? <tr className='loading-table'><td>Data tidak ditemukan</td></tr> :
                 currentTableData?.map((item, key) => {
                   return (
-                    <tr key={key} onClick={() => handleDetail(item.id)}>
+                    <tr key={key}>
                       <td className='niy-col'>{item?.niy}</td>
-                      <td className='row-img'>
-                        <img src={isImgUrl(item?.pf_foto) ? item?.pf_foto : defaultUser} alt="" />
+                      <td className='row-img' onClick={() => handleDetail(item.id)}>
+                        <img src={isImgUrl(item?.link_foto) ? item?.link_foto : defaultUser} alt="" />
                         {item?.nama}
                       </td>
                       <td>{item?.ktgkaryawan[0].kategori}</td>

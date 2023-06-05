@@ -3,25 +3,33 @@ import Download from './Download'
 import Tabbar from '../Tabbar'
 import Filter from '../Filter'
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData'
-import { filterToggle, tabbarToggle } from '../../features/kehadiranSlice'
+import { filterToggle, tabbarToggle, updateStateKehadiran } from '../../features/kehadiranSlice'
 import { useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { setCurrentKategori, setKategoriId } from '../../features/ketegoriSlice'
 
 function TabbarAndFilter() {
   const context = useKehadiranListAbsensi()
   let [searchParams] = useSearchParams();
   const { kehadiranMasuk, kehadiranKeluar, kehadiranIzin } = useSelector(state => state.kehadiran)
+  const { loadingKategori } = useSelector(state => state.kategori)
 
+  const options = [
+    { kategori: 'Masuk', id: 1 },
+    { kategori: 'Keluar', id: 2 },
+    { kategori: 'Izin', id: 3 },
+  ]
   return (
     <div className='tabbar-filter'>
       <Tabbar
-        option1="Masuk"
-        option2="Keluar"
-        option3='Izin'
+        options={options}
+        setKategoriId={setKategoriId}
+        setCurrentKategori={setCurrentKategori}
         funcPage={context.setCurrentPage}
-        funcKeterangan={tabbarToggle}
+        funcKeterangan={updateStateKehadiran}
         searchParams={searchParams.toString()}
         path='/kehadiran'
+        loading={true}
       />
       <div className='filter-download'>
         <Filter option1="Tercepat" option2="Terlambat"

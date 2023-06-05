@@ -1,247 +1,254 @@
 @import "../variables/variables.scss";
 
+.add-karyawan {
+  width: 80%;
 
-.add-karyawan{
-    width: 80%;
+  .unhide {
+    cursor: pointer;
+  }
 
-    .unhide{
-        cursor: pointer;
-    }
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $secondary-color;
+    padding: 1rem 2.5rem;
 
-    .navigation{
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid $secondary-color;
-        padding: 1rem 2.5rem;
+    div {
+      display: flex;
+      align-items: center;
 
-        div{
-            display: flex;
-            align-items: center;
-
-            a{
-                display: flex;
-                align-items: center;
-            }
-    
-            h1{
-                font-size: 24px;
-                font-weight: 500;
-                margin-left: 2rem;
-            }
-        }
-
-        .btn-submit{
-            width: 125px;
-            height: 40px;
-            background-color: $primary-color;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-            color: white;
-            display: grid;
-            place-items: center;
-            cursor: pointer;
-        }
-
-        .btn-submit:disabled{
-            background-color: #5A6474;
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-    }
-
-    .form-foto-profile{
-        display: flex;
-    }
-
-    .form{
-        width: 65%;
-        display: flex;
-        flex-direction: column;
-        padding: 2rem 2.5rem;
-
-        .validator-text{
-            color:  #FF4530;
-            font-size: 12px;
-            margin: .25rem 0rem 0rem;
-        }
-
-        label{
-            font-size: 18px;
-            font-weight: 500;
-            color: black;
-            margin-bottom: 1rem;
-        }
-
-        input{
-            height: 45px;
-            border: 2px solid #ECEEF2;
-            border-radius: 8px;
-            outline: none;
-            font-size: 14px;
-            color: #5A6474;
-            padding: 0 1rem;
-        }
-
-        input::placeholder{
-            color: #9B9B9B;
-        }
-
-        .nama, .niy, .email, .no-hp, .jabatan, .gender, .alamat{
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .nama, .email, .no-hp, .jabatan-gender{
-            margin-bottom: 1rem;
-        }
-
-        .nama{
-            img{
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                margin-bottom: 1rem;
-                position: absolute;
-                right: 0;
-                transform: translate(-50%, 225%);
-                cursor: pointer;
-            }
-        }
-
-        .niy{
-            margin-bottom: 1.5rem;
-
-            .validator-text.pwd{
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                transform: translateY(20px);
-            }
-
-            img{
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                // margin-bottom: 1rem;
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                // transform: translate(-50%, 25%);
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        .jabatan-gender{
-            display: flex;
-            justify-content: space-between;
-            gap: 1.5rem;
-
-            .select{
-                select{
-                    width: 100%;
-                    height: 45px;
-                    border: 2px solid #ECEEF2;
-                    border-radius: 8px;
-                    outline: none;
-                    font-size: 14px;
-                    color: #5A6474;
-                    padding: 0 1rem;
-                }
-
-                select::placeholder{
-                    color: #9B9B9B;
-                }
-
-                select:focus{
-                    border: 2px solid $primary-color;
-                }
-
-                select {
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    appearance: none;
-                    background-image: url(../../assets/icons/arrow-down.svg);
-                    background-repeat: no-repeat;
-                    background-position: right 1rem center;
-                    background-size: 1em;
-                }
-            }
-
-            .jabatan{
-                width: 100%;
-            }
-        }
-    }
-
-    .form-file-upload {
-        max-width: 100%;
-        height: fit-content;
-        text-align: center;
-        position: relative;
-        padding-top: 2rem;
-
-        h1:nth-child(1){
-            font-size: 18px;
-            font-weight: 500;
-            text-align: left;
-            margin-bottom: 1rem;
-        }
-
-        .wrap-text{
-            h1{
-                font-size: 14px;
-                font-weight: 500;
-            }
-        }
-    }
-      
-      #input-file-upload {
-        display: none;
-      }
-      
-      #label-file-upload {
-        height: 100%;
-        height: 193px;
-        width: 386px;
+      a {
         display: flex;
         align-items: center;
-        justify-content: center;
-        border-width: 1px;
-        border-radius: 8px;
-        border-style: dashed;
-        border-color: $primary-color;
-        background-color: #FAFAFA;
-      }
-      
-      .upload-button {
-        cursor: pointer;
-        font-size: 12px;
-        border: none;
-        background-color: #FAFAFA;
-        color: #9B9B9B;
-        line-height: 24px;
-      }
-      
-      .upload-button:hover {
-        text-decoration-line: underline;
       }
 
-      #label-file-upload.drag-active {
-        background-color: #ffffff;
+      h1 {
+        font-size: 24px;
+        font-weight: 500;
+        margin-left: 2rem;
       }
+    }
 
-      #drag-file-element {
+    .btn-submit {
+      width: 125px;
+      height: 40px;
+      background-color: $primary-color;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      color: white;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .btn-submit:disabled {
+      background-color: #5a6474;
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  .form-foto-profile {
+    display: flex;
+  }
+
+  .form {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2.5rem;
+
+    .validator-text {
+      color: #ff4530;
+      font-size: 12px;
+      margin: 0.25rem 0rem 0rem;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: 500;
+      color: black;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      height: 45px;
+      border: 2px solid #eceef2;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      color: #5a6474;
+      padding: 0 1rem;
+    }
+
+    input::placeholder {
+      color: #9b9b9b;
+    }
+
+    .nama,
+    .niy,
+    .email,
+    .no-hp,
+    .jabatan,
+    .gender,
+    .alamat {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .nama,
+    .email,
+    .no-hp,
+    .jabatan-gender {
+      margin-bottom: 1rem;
+    }
+
+    .nama {
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
         position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 1rem;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+        right: 0;
+        transform: translate(-50%, 225%);
+        cursor: pointer;
       }
+    }
+
+    .niy {
+      margin-bottom: 1.5rem;
+
+      .validator-text.pwd {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translateY(20px);
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        // margin-bottom: 1rem;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        // transform: translate(-50%, 25%);
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .jabatan-gender {
+      display: flex;
+      flex-direction: column;
+
+      .select {
+        select {
+          width: 100%;
+          height: 45px;
+          border: 2px solid #eceef2;
+          border-radius: 8px;
+          outline: none;
+          font-size: 14px;
+          color: #5a6474;
+          padding: 0 1rem;
+        }
+
+        select::placeholder {
+          color: #9b9b9b;
+        }
+
+        select:focus {
+          border: 2px solid $primary-color;
+        }
+
+        select {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-image: url(../../assets/icons/arrow-down.svg);
+          background-repeat: no-repeat;
+          background-position: right 1rem center;
+          background-size: 1em;
+        }
+      }
+
+      .jabatan {
+        width: 100%;
+      }
+    }
+  }
+
+  .form-file-upload {
+    max-width: 100%;
+    height: fit-content;
+    text-align: center;
+    position: relative;
+    padding-top: 2rem;
+
+    h1:nth-child(1) {
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .wrap-text {
+      h1 {
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  #input-file-upload {
+    display: none;
+  }
+
+  #label-file-upload {
+    height: 100%;
+    height: 193px;
+    width: 386px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-radius: 8px;
+    border-style: dashed;
+    border-color: $primary-color;
+    background-color: #fafafa;
+  }
+
+  .upload-button {
+    cursor: pointer;
+    font-size: 12px;
+    border: none;
+    background-color: #fafafa;
+    color: #9b9b9b;
+    line-height: 24px;
+  }
+
+  .upload-button:hover {
+    text-decoration-line: underline;
+  }
+
+  #label-file-upload.drag-active {
+    background-color: #ffffff;
+  }
+
+  #drag-file-element {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
 }
 
 input::-webkit-outer-spin-button,
@@ -250,7 +257,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
-    appearance: textfield;
+input[type="number"] {
+  appearance: textfield;
   -moz-appearance: textfield;
 }

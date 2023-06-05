@@ -14,10 +14,6 @@
     gap: 2rem;
   }
 
-  .table tbody tr {
-    cursor: pointer;
-  }
-
   .loading::before {
     margin: 0;
   }
@@ -282,6 +278,10 @@
 
     .wrapper-img {
       position: relative;
+
+      img {
+        object-fit: cover;
+      }
       .edit-img {
         width: 35px;
         height: 35px;
@@ -311,35 +311,6 @@
         font-weight: 500;
         color: black;
         margin-bottom: 0.5rem;
-      }
-      .wrapper-container-jabatan {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-
-        .container-jabatan {
-          width: auto;
-          height: 48px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem;
-          background: $white;
-          border: 1px solid #eceef2;
-          border-radius: 8px;
-
-          p {
-            font-weight: 400;
-            font-size: 14px;
-            color: $grey;
-            margin-right: 1rem;
-          }
-        }
-
-        .btn-plus,
-        img {
-          cursor: pointer;
-        }
       }
 
       select {
@@ -403,73 +374,50 @@
         color: $grey;
       }
     }
+  }
+}
 
-    .jadwal-absensi {
-      margin-top: 2rem;
-      h1 {
-        font-size: 18px;
-        font-weight: 500;
-        color: black;
-        margin-bottom: 0.5rem;
-      }
+.wrapper-container-jabatan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 
-      .container-jadwal {
-        margin-bottom: 0.5rem;
-      }
+  .container-jabatan {
+    width: auto;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: $white;
+    border: 1px solid #eceef2;
+    border-radius: 8px;
 
-      .container-jadwal,
-      .container-time {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        p {
-          font-weight: 400;
-          font-size: 14px;
-          color: #5a6474;
-        }
-
-        .container-time {
-          width: 80%;
-        }
-
-        input {
-          width: 125px;
-          height: 35px;
-          border: 1px solid $grey;
-          border-radius: 7.5px;
-          padding-left: 1rem;
-          padding-right: 0.5rem;
-        }
-
-        input::-webkit-calendar-picker-indicator {
-          background: none;
-          background-image: url(../../assets/icons/arrow-down.svg);
-          background-repeat: no-repeat;
-          background-position: center;
-          cursor: pointer;
-        }
-
-        .line {
-          width: 8px;
-          height: 2px;
-          background: $grey;
-          border-radius: 10px;
-        }
-      }
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      color: $grey;
+      margin-right: 1rem;
     }
   }
+
+  .btn-plus,
+  img {
+    cursor: pointer;
+  }
+}
+
+.modal-open {
+  overflow: hidden;
 }
 
 .bg-modal {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: rgba($color: #000000, $alpha: 0.3);
-  position: absolute;
+  position: fixed;
   left: 0;
-  right: 0;
   top: 0;
-  bottom: 0;
   margin: auto;
   z-index: 999;
 
@@ -513,6 +461,10 @@
       flex-direction: column;
       width: 100%;
       margin-top: 1.5rem;
+
+      span {
+        text-align: center;
+      }
 
       .container-list {
         width: 100%;

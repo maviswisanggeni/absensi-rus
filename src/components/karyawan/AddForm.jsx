@@ -8,6 +8,7 @@ import Label from './Label'
 import Select from './Select'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFieldError, updateFieldValue } from '../../features/detailKaryawanSlice'
+import JabatanSelect from './JabatanSelect'
 
 
 function Form() {
@@ -73,7 +74,6 @@ function Form() {
                     id='niy'
                     onChange={handleInputChange}
                 />
-                {/* <Input className='niy' type='number' placeholder='Masukkan Nomer Induk Yayasan' value={context.niy} func={context.setNiy} setValidator={contextValidator.setValidatorNIY} /> */}
                 <p className='validator-text'>
                     {errors.niy && errors.niy}
                 </p>
@@ -85,10 +85,8 @@ function Form() {
                     id='password'
                     onChange={handleInputChange}
                 />
-                {/* <Input className='password' type={passwordShown ? 'text' : 'password'} placeholder='Password' value={context.password} func={context.setPassword} setValidator={contextValidator.setValidatorPwd} /> */}
                 <img src={eye} onClick={handleUnhide} className='unhide' />
                 <p className='validator-text pwd'>
-                    {/* {context.password.length <= 5 && contextValidator.validatorPwd ? 'Password minimal 6 karakter' : ''} */}
                     {errors.password && errors.password}
                 </p>
             </div>
@@ -103,10 +101,8 @@ function Form() {
                     placeholder='Masukkan Email'
                     onChange={handleInputChange}
                 />
-                {/* <Input className='email' type='email' placeholder='Masukkan Email' value={context.email} func={context.setEmail} setValidator={contextValidator.setValidatorEmail} /> */}
                 <p className='validator-text'>
                     {errors.email && errors.email}
-                    {/* {context.email.length === 0 && contextValidator.validatorEmail ? 'Isi email' : !ValidateEmail(context.email) && contextValidator.validatorEmail ? 'Email tidak valid' : ''} */}
                 </p>
             </div>
 
@@ -120,28 +116,18 @@ function Form() {
                     placeholder='Masukkan Nomer HP'
                     onChange={handleInputChange}
                 />
-                {/* <Input className='no-hp' type='number' placeholder='Masukkan Nomor HP' value={context.noHp} func={context.setnoHp} setValidator={contextValidator.setValidatorNoHP} /> */}
                 <p className='validator-text'>
                     {errors.noHp && errors.noHp}
-                    {/* {context.noHp.length === 0 && contextValidator.validatorNoHP ? 'Isi Nomor HP' : context.noHp.length < 10 && contextValidator.validatorNoHP ? 'Nomor tidak valid' : ''} */}
                 </p>
             </div>
 
             <div className='jabatan-gender'>
-                <div className='jabatan select'>
-                    <select onChange={handleSelect} value={listKategori[0]?.kategori}>
-                        {listKategori.map((item, key) => {
-                            return (
-                                <option key={key} value={item.kategori}>{item.kategori}</option>
-                            )
-                        })}
-                    </select>
-                </div>
+                <Label className='no-hp' label='Jabatan' />
+                <JabatanSelect />
             </div>
 
             <div className='alamat'>
                 <Label className='alamat' label='Alamat' />
-                {/* <Input className='alamat' type='text' placeholder='Alamat Karyawan' value={context.alamat} func={context.setAlamat} setValidator={contextValidator.setValidatorAlamat} /> */}
                 <input
                     className='alamat'
                     type='text'

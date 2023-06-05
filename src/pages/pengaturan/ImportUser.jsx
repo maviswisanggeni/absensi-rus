@@ -99,7 +99,6 @@ function ImportUser({ test }) {
 
     return (
         <div className='import-user'>
-            {test}
             <div className='top-table'>
                 <p>57 Guru, 21 Staff</p>
                 <Button text={'Import Data'} style={{ width: '157px', height: '45px' }} />

@@ -5,6 +5,9 @@ import jmlKehadiranSlice from './features/jmlKehadiranSlice';
 import kehadiranSlice from './features/kehadiranSlice';
 import kategoriSlice from './features/ketegoriSlice';
 import detailKaryawanSlice from './features/detailKaryawanSlice';
+import kalenderSlice from './features/kalenderSlice';
+import pengaturanSlice from './features/pengaturanSlice';
+import koordinatSlice from './features/koordinatSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +17,8 @@ export const store = configureStore({
     kehadiran: kehadiranSlice,
     kategori: kategoriSlice,
     detailKaryawanSlice: detailKaryawanSlice,
+    kalender: kalenderSlice,
+    pengaturan: pengaturanSlice,
+    koordinat: koordinatSlice
   },
 });

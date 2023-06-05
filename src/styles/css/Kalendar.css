@@ -49,9 +49,30 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 0%;
           flex: 1 1 0%;
+}
+.kalender .sidebar-month .container-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 100%;
+  height: 40px;
+}
+.kalender .sidebar-month .container-days .day {
+  display: grid;
+  place-items: center;
+  border-bottom: 2px solid #eceef2;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #9b9b9b;
+  font-weight: 500;
+  font-size: 14px;
 }
 .kalender .month {
   display: grid;
@@ -71,8 +92,10 @@
           flex-direction: column;
   border-right: #e5e7eb 1px solid;
   border-bottom: #e5e7eb 1px solid;
+  padding-left: 0.5rem;
 }
 .kalender .day .handle-add {
+  position: relative;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 0%;
           flex: 1 1 0%;
@@ -80,9 +103,6 @@
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   background-color: rgb(255, 255, 255);
-}
-.kalender .day .handle-add:hover {
-  background-color: rgb(161, 161, 161);
 }
 .kalender .day header {
   display: -webkit-box;
@@ -95,13 +115,6 @@
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-}
-.kalender .day header .days {
-  border-bottom: 2px solid #eceef2;
-  width: 100%;
-  text-align: center;
-  color: #9b9b9b;
-  font-weight: 500;
 }
 .kalender .day header .dd {
   text-align: left;
@@ -132,8 +145,72 @@
   text-align: left;
 }
 .kalender .day .day-events {
-  color: white;
-  background-color: #3661eb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.kalender .day .day-events p {
+  font-weight: 500;
+  font-size: 12px;
+}
+.kalender .day .day-events span {
+  font-weight: 500;
+  font-size: 10px;
+  color: #9b9b9b;
+}
+.kalender .hover-detail-event {
+  position: absolute;
+  width: 400px;
+  border: 2px solid #ebf0fe;
+  border-radius: 10px;
+  z-index: 999;
+  background-color: white;
+  padding: 1rem 1.5rem;
+}
+.kalender .hover-detail-event .wrapper-judul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.kalender .hover-detail-event .wrapper-judul h1 {
+  font-weight: 500;
+  font-size: 14px;
+  color: #21d2ff;
+}
+.kalender .hover-detail-event .wrapper-judul h2 {
+  font-weight: 500;
+  font-size: 10px;
+  color: #3661eb;
+}
+.kalender .hover-detail-event .tanggal,
+.kalender .hover-detail-event .lokasi,
+.kalender .hover-detail-event .deskripsi {
+  font-weight: 500;
+  font-size: 10px;
+  color: #9b9b9b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.kalender .hover-detail-event .tanggal p,
+.kalender .hover-detail-event .lokasi p,
+.kalender .hover-detail-event .deskripsi p {
+  font-weight: 500;
+  font-size: 10px;
+  color: #000000;
+  margin-left: 0.5rem;
+}
+.kalender .hover-detail-event .deskripsi {
+  margin-top: 0.5rem;
 }
 .kalender .small-calendar header {
   display: -webkit-box;
@@ -430,6 +507,7 @@
   font-weight: 400;
   font-size: 12px;
   height: 35px;
+  outline: none;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form {
   display: -webkit-box;
@@ -455,6 +533,9 @@
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input::placeholder {
   color: #9b9b9b;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .input:focus {
+  border: 2px solid #3661eb;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input-nama-event {
   height: 60px;
@@ -543,6 +624,7 @@
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown input {
   width: 100%;
+  outline: #f9f9f9;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container {
   background-color: #ffffff;
@@ -553,10 +635,17 @@
   right: 0;
   margin: 0 auto;
   z-index: 999;
+  overflow-y: scroll;
+  max-height: 200px;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-outer-item {
   width: 100%;
   border-bottom: 1px solid #eceef2;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item.not-found div {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item {
   display: -webkit-box;
@@ -584,6 +673,7 @@
   width: 20px;
   height: 20px;
   margin-right: 0.5rem;
+  border-radius: 50%;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-search-dropdown .dropdown-container .dropdown-item p {
   font-size: 12px;
@@ -604,9 +694,12 @@
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox {
   width: 90%;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 0.5rem 0rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 0.5rem 0;
   margin: 0.5rem 0 1.5rem;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox .wrapper-checkbox-label {
@@ -617,6 +710,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 0.5rem;
+  margin-right: 1rem;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox .wrapper-checkbox-label label {
   font-size: 12px;
@@ -679,6 +773,8 @@
           flex-direction: column;
   gap: 1rem;
   margin-top: 0.5rem;
+  overflow-y: scroll;
+  height: 450px;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list {
   display: -webkit-box;
@@ -704,6 +800,8 @@
   width: 35px;
   border-radius: 50%;
   margin-right: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list .list-content-left div {
   display: -webkit-box;
@@ -730,6 +828,7 @@
   -moz-appearance: none;
        appearance: none;
   background-color: var(--form-background);
+  cursor: pointer;
   width: 24px;
   height: 24px;
   border: 2px solid #3661eb;

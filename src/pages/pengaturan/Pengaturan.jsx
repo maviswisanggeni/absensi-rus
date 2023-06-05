@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router'
 import ImportUser from './ImportUser'
 import KategoriKaryawan from './KategoriKaryawan'
 import RadiusAbsen from './RadiusAbsen'
+import EditKategoriKaryawan from './EditKategoriKaryawan'
 
 function Pengaturan() {
     return (
@@ -15,7 +16,8 @@ function Pengaturan() {
                 <SidebarPengaturan />
                 <Routes>
                     <Route path='/kategori-karyawan' element={<KategoriKaryawan />} />
-                    <Route path='/import-user' element={<ImportUser test='heheh' />} />
+                    <Route path='/kategori-karyawan/:kategori/:id/*' element={<EditKategoriKaryawan />} />
+                    <Route path='/import-user' element={<ImportUser />} />
                     <Route path='/radius-absen' element={<RadiusAbsen />} />
                 </Routes>
             </div>

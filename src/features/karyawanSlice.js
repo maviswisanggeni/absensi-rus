@@ -19,27 +19,6 @@ export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kat
     return response.data
 })
 
-// export const addKaryawan = createAsyncThunk("karyawan/addKaryawan", async({}) => {
-//     const response = await axios.post('http://localhost:5000/products', {
-//         title, 
-//         price
-//     })
-//     return response.data
-// })
-
-// export const deleteProducts = createAsyncThunk("products/deleteProduct", async(id) => {
-//     await axios.delete(`http://localhost:5000/products/${id}`,)
-//     return id
-// })
-
-// export const updateProducts = createAsyncThunk("products/updateProduct", async({id, title, price}) => {
-//     const response = await axios.patch(`http://localhost:5000/products/${id}`, {
-//         title, 
-//         price
-//     })
-//     return response.data
-// })
-
 const karyawanSlice = createSlice({
     name: 'karyawan',
     initialState: {
@@ -56,7 +35,7 @@ const karyawanSlice = createSlice({
         updateState: (state, action) => {
             const { name, value } = action.payload
             state[name] = value
-        }
+        },
     },
     extraReducers: {
         [getKaryawan.pending]: (state) => {
@@ -66,15 +45,6 @@ const karyawanSlice = createSlice({
             state.loading = true
             state.listKaryawan = action.payload.data
         },
-        // [savedProducts.fulfilled]: (state, action) => {
-        //     productEntity.addOne(state, action.payload)
-        // },
-        // [deleteProducts.fulfilled]: (state, action) => {
-        //     productEntity.removeOne(state, action.payload)
-        // },
-        // [updateProducts.fulfilled]: (state, action) => {
-        //     productEntity.updateOne(state, {id: action.payload.id, updates: action.payload})
-        // },
     }
 })
 

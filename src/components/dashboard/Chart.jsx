@@ -24,7 +24,7 @@ function Chart({ data }) {
       date: dayjs(item.date).format('dddd')
     }
   })
-
+  console.log(data);
   const loadingChart = [
     {
       loading: 'loading'

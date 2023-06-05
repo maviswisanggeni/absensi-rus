@@ -4,10 +4,15 @@ import getBaseUrl from "../datas/apiUrl";
 import token from "../datas/tokenAuthorization";
 
 const initialState = {
+    listKaryawan: [],
+    currentPage: 1,
+    keterangan: null,
+    urutan: 'Sesuai abjad',
+
     nama: '',
     niy: '',
     email: '',
-    password: '',
+    password: 'password',
     noHp: '',
     alamat: '',
     linkFoto: '',
@@ -20,10 +25,64 @@ const initialState = {
         alamat: '',
     },
     listKtgkaryawan: [],
+    listJadwal: [
+        {
+            hari: 'senin',
+            jam_masuk: '',
+            jam_pulang: ''
+        },
+        {
+            hari: 'selasa',
+            jam_masuk: '',
+            jam_pulang: ''
+        },
+        {
+            hari: 'rabu',
+            jam_masuk: '',
+            jam_pulang: ''
+        },
+        {
+            hari: 'kamis',
+            jam_masuk: '',
+            jam_pulang: ''
+        },
+        {
+            hari: 'jumat',
+            jam_masuk: '',
+            jam_pulang: ''
+        },
+        {
+            hari: 'sabtu',
+            jam_masuk: '',
+            jam_pulang: ''
+        },
+        {
+            hari: 'minggu',
+            jam_masuk: '',
+            jam_pulang: ''
+        }
+    ],
+
     ktgKaryawan: '',
-    listJadwal: [],
+    kategoriId: null,
     isLoading: false,
 };
+
+export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }) => {
+    const response = await axios.get(
+        getBaseUrl() + 'karyawan',
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
+            params: {
+                kategori_id,
+                search
+            }
+        }
+    )
+    return response.data
+})
 
 export const detailKaryawan = createAsyncThunk("karyawan/detailKaryawan", async (id) => {
     const response = await axios.get(
@@ -37,56 +96,86 @@ export const detailKaryawan = createAsyncThunk("karyawan/detailKaryawan", async 
     return response.data
 });
 
-export const storeKaryawan = createAsyncThunk("karyawan/storeKaryawan", async ({ nama, niy, email, password, alamat, no_hp, pf_foto, jadwal, ktg_karyawan }) => {
-    console.log(pf_foto);
+export const storeKaryawan = createAsyncThunk("karyawan/storeKaryawan", async ({
+    nama, niy, email, password, alamat, no_hp, pf_foto, jadwal, ktg_karyawan
+}) => {
+
+    const formData = new FormData();
+    formData.append('nama', nama);
+    formData.append('niy', niy);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('alamat', alamat);
+    formData.append('no_hp', no_hp);
+    formData.append('pf_foto', pf_foto);
+
+    jadwal.forEach((item, index) => {
+        const prefix = `jadwal[${index}]`;
+        formData.append(`${prefix}[hari]`, item.hari);
+        formData.append(`${prefix}[jam_masuk]`, item.jam_masuk);
+        formData.append(`${prefix}[jam_pulang]`, item.jam_pulang);
+    });
+    ktg_karyawan.forEach((item, index) => {
+        formData.append(`ktg_karyawan[${index}]`, item);
+    });
+
     const response = await axios.post(
         getBaseUrl() + `karyawan/store`,
-        {
-            nama: nama,
-            email: email,
-            password: password,
-            alamat: alamat,
-            no_hp: no_hp,
-            pf_foto: pf_foto,
-            jadwal: jadwal,
-            ktg_karyawan: ktg_karyawan
-        },
+        formData,
         {
             headers: {
                 Authorization: `Bearer ${token()}`,
+                'Content-Type': 'multipart/form-data',
             }
-        }
+        },
     )
     return response.data
 });
 
-export const updateKaryawan = createAsyncThunk("karyawan/editKaryawan", async ({ id, nama, email, password, alamat, no_hp, pf_foto, jadwal, ktg_karyawan }) => {
+export const updateKaryawan = createAsyncThunk("karyawan/editKaryawan", async ({
+    id, nama, email, password, alamat, no_hp, pf_foto, jadwal, ktg_karyawan
+}) => {
+
     const formData = new FormData();
     formData.append('nama', nama);
     formData.append('email', email);
     formData.append('password', password);
     formData.append('alamat', alamat);
     formData.append('no_hp', no_hp);
-    formData.append('pf_foto', pf_foto);
-    formData.append('jadwal', jadwal);
-    formData.append('ktg_karyawan', ktg_karyawan);
+    if (pf_foto) {
+        formData.append('pf_foto', pf_foto);
+    }
+
+    jadwal.forEach((item, index) => {
+        const prefix = `jadwal[${index}]`;
+        formData.append(`${prefix}[hari]`, item.hari);
+        formData.append(`${prefix}[jam_masuk]`, item.jam_masuk);
+        formData.append(`${prefix}[jam_pulang]`, item.jam_pulang);
+    });
+    ktg_karyawan.forEach((item, index) => {
+        formData.append(`ktg_karyawan[${index}]`, item);
+    });
+
     const response = await axios.post(
         getBaseUrl() + `karyawan/update/${id}`,
         formData,
-        // {
-        //     nama: nama,
-        //     email: email,
-        //     password: password,
-        //     alamat: alamat,
-        //     no_hp: no_hp,
-        //     pf_foto: pf_foto,
-        //     jadwal: jadwal,
-        //     ktg_karyawan: ktg_karyawan
-        // },
         {
             headers: {
                 Authorization: `Bearer ${token()}`,
-            }
+                'Content-Type': 'multipart/form-data'
+            },
+        }
+    )
+    return response.data
+});
+
+export const deleteKaryawan = createAsyncThunk("karyawan/deleteKaryawan", async (id) => {
+    const response = await axios.get(
+        getBaseUrl() + `karyawan/delete/${id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
         }
     )
     return response.data
@@ -107,7 +196,6 @@ const validateForm = (state) => {
         return emailRegex.test(email);
     };
 
-    // Perform validation checks on the form fields
     if (state.nama.trim() === '') {
         errors.nama = 'Isi nama';
     }
@@ -133,8 +221,6 @@ const validateForm = (state) => {
     } else if (!isValidEmail(state.email)) {
         errors.email = 'Email tidak valid';
     }
-
-    // Perform more validation checks for other fields...
 
     return errors;
 };
@@ -174,13 +260,62 @@ const detailKaryawanSlice = createSlice({
                 console.log("Item with the same id already exists.");
             }
         },
-        deleteListItemKtgkaryawan: (state, action) => {
+        deleteKategori: (state, action) => {
             const { id } = action.payload;
             state.listKtgkaryawan = state.listKtgkaryawan.filter((item) => item.id !== id);
+        },
+        listJadwalWeek: (state) => {
+            state.listJadwal = [
+                {
+                    hari: 'senin',
+                    jam_masuk: '',
+                    jam_pulang: ''
+                },
+                {
+                    hari: 'selasa',
+                    jam_masuk: '',
+                    jam_pulang: ''
+                },
+                {
+                    hari: 'rabu',
+                    jam_masuk: '',
+                    jam_pulang: ''
+                },
+                {
+                    hari: 'kamis',
+                    jam_masuk: '',
+                    jam_pulang: ''
+                },
+                {
+                    hari: 'jumat',
+                    jam_masuk: '',
+                    jam_pulang: ''
+                },
+                {
+                    hari: 'sabtu',
+                    jam_masuk: '',
+                    jam_pulang: ''
+                },
+                {
+                    hari: 'minggu',
+                    jam_masuk: '',
+                    jam_pulang: ''
+                }
+            ]
         }
     },
     extraReducers: (builder) => {
         builder
+            .addCase(getKaryawan.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getKaryawan.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.listKaryawan = action.payload.data;
+            })
+            .addCase(getKaryawan.rejected, (state) => {
+                state.isLoading = false;
+            })
             .addCase(detailKaryawan.pending, (state) => {
                 state.isLoading = true;
             })
@@ -196,12 +331,43 @@ const detailKaryawanSlice = createSlice({
                 state.listKtgkaryawan = initialData.ktgkaryawan;
                 state.ktgKaryawan = initialData.ktgkaryawan[0].kategori;
                 state.listJadwal = initialData.jadwal;
+                state.errors = validateForm(state);
             })
             .addCase(detailKaryawan.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(storeKaryawan.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(storeKaryawan.fulfilled, (state, action) => {
+                state.isLoading = false;
+            })
+            .addCase(storeKaryawan.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(updateKaryawan.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateKaryawan.fulfilled, (state, action) => {
+                state.isLoading = false;
+            })
+            .addCase(updateKaryawan.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(deleteKaryawan.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteKaryawan.fulfilled, (state, action) => {
+                state.isLoading = false;
+            })
+            .addCase(deleteKaryawan.rejected, (state) => {
                 state.isLoading = false;
             })
     }
 });
 
-export const { updateFieldValue, updateFieldError, resetForm, setFormLoading, resetField, setImgUpload, updateListKtgkaryawan, deleteListItemKtgkaryawan } = detailKaryawanSlice.actions;
+export const {
+    updateFieldValue, updateFieldError, resetForm, setFormLoading, resetField,
+    setImgUpload, updateListKtgkaryawan, deleteKategori, listJadwalWeek
+} = detailKaryawanSlice.actions;
 export default detailKaryawanSlice.reducer;

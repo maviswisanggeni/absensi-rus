@@ -17,9 +17,6 @@
           justify-content: center;
   gap: 2rem;
 }
-.karyawan .table tbody tr {
-  cursor: pointer;
-}
 .karyawan .loading::before {
   margin: 0;
 }
@@ -341,6 +338,10 @@
 .detail-karyawan .detail-profile .wrapper-img {
   position: relative;
 }
+.detail-karyawan .detail-profile .wrapper-img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .detail-karyawan .detail-profile .wrapper-img .edit-img {
   width: 35px;
   height: 35px;
@@ -365,41 +366,6 @@
   font-weight: 500;
   color: black;
   margin-bottom: 0.5rem;
-}
-.detail-karyawan .detail-profile .select .wrapper-container-jabatan {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 1rem;
-}
-.detail-karyawan .detail-profile .select .wrapper-container-jabatan .container-jabatan {
-  width: auto;
-  height: 48px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 1rem;
-  background: #ffffff;
-  border: 1px solid #eceef2;
-  border-radius: 8px;
-}
-.detail-karyawan .detail-profile .select .wrapper-container-jabatan .container-jabatan p {
-  font-weight: 400;
-  font-size: 14px;
-  color: #9b9b9b;
-  margin-right: 1rem;
-}
-.detail-karyawan .detail-profile .select .wrapper-container-jabatan .btn-plus,
-.detail-karyawan .detail-profile .select .wrapper-container-jabatan img {
-  cursor: pointer;
 }
 .detail-karyawan .detail-profile .select select {
   width: 100%;
@@ -473,74 +439,54 @@
   font-size: 11px;
   color: #9b9b9b;
 }
-.detail-karyawan .detail-profile .jadwal-absensi {
-  margin-top: 2rem;
-}
-.detail-karyawan .detail-profile .jadwal-absensi h1 {
-  font-size: 18px;
-  font-weight: 500;
-  color: black;
-  margin-bottom: 0.5rem;
-}
-.detail-karyawan .detail-profile .jadwal-absensi .container-jadwal {
-  margin-bottom: 0.5rem;
-}
-.detail-karyawan .detail-profile .jadwal-absensi .container-jadwal,
-.detail-karyawan .detail-profile .jadwal-absensi .container-time {
+
+.wrapper-container-jabatan {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 1rem;
+}
+.wrapper-container-jabatan .container-jabatan {
+  width: auto;
+  height: 48px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #eceef2;
+  border-radius: 8px;
 }
-.detail-karyawan .detail-profile .jadwal-absensi .container-jadwal p,
-.detail-karyawan .detail-profile .jadwal-absensi .container-time p {
+.wrapper-container-jabatan .container-jabatan p {
   font-weight: 400;
   font-size: 14px;
-  color: #5a6474;
+  color: #9b9b9b;
+  margin-right: 1rem;
 }
-.detail-karyawan .detail-profile .jadwal-absensi .container-jadwal .container-time,
-.detail-karyawan .detail-profile .jadwal-absensi .container-time .container-time {
-  width: 80%;
-}
-.detail-karyawan .detail-profile .jadwal-absensi .container-jadwal input,
-.detail-karyawan .detail-profile .jadwal-absensi .container-time input {
-  width: 125px;
-  height: 35px;
-  border: 1px solid #9b9b9b;
-  border-radius: 7.5px;
-  padding-left: 1rem;
-  padding-right: 0.5rem;
-}
-.detail-karyawan .detail-profile .jadwal-absensi .container-jadwal input::-webkit-calendar-picker-indicator,
-.detail-karyawan .detail-profile .jadwal-absensi .container-time input::-webkit-calendar-picker-indicator {
-  background: none;
-  background-image: url(../../assets/icons/arrow-down.svg);
-  background-repeat: no-repeat;
-  background-position: center;
+.wrapper-container-jabatan .btn-plus,
+.wrapper-container-jabatan img {
   cursor: pointer;
 }
-.detail-karyawan .detail-profile .jadwal-absensi .container-jadwal .line,
-.detail-karyawan .detail-profile .jadwal-absensi .container-time .line {
-  width: 8px;
-  height: 2px;
-  background: #9b9b9b;
-  border-radius: 10px;
+
+.modal-open {
+  overflow: hidden;
 }
 
 .bg-modal {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
+  position: fixed;
   left: 0;
-  right: 0;
   top: 0;
-  bottom: 0;
   margin: auto;
   z-index: 999;
 }
@@ -592,6 +538,9 @@
           flex-direction: column;
   width: 100%;
   margin-top: 1.5rem;
+}
+.bg-modal .modal-container .wrapper-list span {
+  text-align: center;
 }
 .bg-modal .modal-container .wrapper-list .container-list {
   width: 100%;

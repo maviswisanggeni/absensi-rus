@@ -48,7 +48,7 @@
   cursor: pointer;
 }
 .add-karyawan .navigation .btn-submit:disabled {
-  background-color: #5A6474;
+  background-color: #5a6474;
   opacity: 0.7;
   cursor: not-allowed;
 }
@@ -69,7 +69,7 @@
   padding: 2rem 2.5rem;
 }
 .add-karyawan .form .validator-text {
-  color: #FF4530;
+  color: #ff4530;
   font-size: 12px;
   margin: 0.25rem 0rem 0rem;
 }
@@ -81,29 +81,35 @@
 }
 .add-karyawan .form input {
   height: 45px;
-  border: 2px solid #ECEEF2;
+  border: 2px solid #eceef2;
   border-radius: 8px;
   outline: none;
   font-size: 14px;
-  color: #5A6474;
+  color: #5a6474;
   padding: 0 1rem;
 }
 .add-karyawan .form input::-webkit-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form input::-moz-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form input:-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form input::-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form input::placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
-.add-karyawan .form .nama, .add-karyawan .form .niy, .add-karyawan .form .email, .add-karyawan .form .no-hp, .add-karyawan .form .jabatan, .add-karyawan .form .gender, .add-karyawan .form .alamat {
+.add-karyawan .form .nama,
+.add-karyawan .form .niy,
+.add-karyawan .form .email,
+.add-karyawan .form .no-hp,
+.add-karyawan .form .jabatan,
+.add-karyawan .form .gender,
+.add-karyawan .form .alamat {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -113,7 +119,10 @@
           flex-direction: column;
   position: relative;
 }
-.add-karyawan .form .nama, .add-karyawan .form .email, .add-karyawan .form .no-hp, .add-karyawan .form .jabatan-gender {
+.add-karyawan .form .nama,
+.add-karyawan .form .email,
+.add-karyawan .form .no-hp,
+.add-karyawan .form .jabatan-gender {
   margin-bottom: 1rem;
 }
 .add-karyawan .form .nama img {
@@ -151,35 +160,35 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  gap: 1.5rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .add-karyawan .form .jabatan-gender .select select {
   width: 100%;
   height: 45px;
-  border: 2px solid #ECEEF2;
+  border: 2px solid #eceef2;
   border-radius: 8px;
   outline: none;
   font-size: 14px;
-  color: #5A6474;
+  color: #5a6474;
   padding: 0 1rem;
 }
 .add-karyawan .form .jabatan-gender .select select::-webkit-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form .jabatan-gender .select select::-moz-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form .jabatan-gender .select select:-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form .jabatan-gender .select select::-ms-input-placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form .jabatan-gender .select select::placeholder {
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
 .add-karyawan .form .jabatan-gender .select select:focus {
   border: 2px solid #3661eb;
@@ -235,14 +244,14 @@
   border-radius: 8px;
   border-style: dashed;
   border-color: #3661eb;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 .add-karyawan .upload-button {
   cursor: pointer;
   font-size: 12px;
   border: none;
-  background-color: #FAFAFA;
-  color: #9B9B9B;
+  background-color: #fafafa;
+  color: #9b9b9b;
   line-height: 24px;
 }
 .add-karyawan .upload-button:hover {

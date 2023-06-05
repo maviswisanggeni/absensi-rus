@@ -54,24 +54,24 @@ function Table() {
         return sortedData;
     }, [currentPage, keterangan, kehadiranKeluar, kehadiranMasuk, kehadiranIzin, urutan]);
 
-    useEffect(() => {
-        Pusher.logToConsole = true;
+    // useEffect(() => {
+    //     Pusher.logToConsole = true;
 
-        const pusher = new Pusher('7b9c2c870e01322901d9', {
-            cluster: 'ap1'
-        });
+    //     const pusher = new Pusher('7b9c2c870e01322901d9', {
+    //         cluster: 'ap1'
+    //     });
 
-        const channel = pusher.subscribe('kehadiran-channel');
-        channel.bind('kehadiran-event', function (data) {
-            dispatch(setKehadiranMasuk(data.kehadiran))
-            dispatch(setKehadiranKeluar(data.kehadiran))
-            dispatch(setKehadiranIzin(data.kehadiran))
-        });
+    //     const channel = pusher.subscribe('kehadiran-channel');
+    //     channel.bind('kehadiran-event', function (data) {
+    //         dispatch(setKehadiranMasuk(data.kehadiran))
+    //         dispatch(setKehadiranKeluar(data.kehadiran))
+    //         dispatch(setKehadiranIzin(data.kehadiran))
+    //     });
 
-        return () => {
-            pusher.unsubscribe('kehadiran-channel')
-        }
-    }, []);
+    //     return () => {
+    //         pusher.unsubscribe('kehadiran-channel')
+    //     }
+    // }, []);
 
     function checkKeterangan(masuk, pulang) {
         if (keterangan === 'Masuk') {

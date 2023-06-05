@@ -8,7 +8,7 @@ import '../../styles/css/add-karyawan.css'
 import { useWrapperAddKaryawan } from '../../contexts/app/WrapperAddKaryawan'
 import Sidebar from '../sidebar/Sidebar'
 import { useEffect } from 'react'
-import { resetForm } from '../../features/detailKaryawanSlice'
+import { resetForm, listJadwalWeek, storeKaryawan } from '../../features/detailKaryawanSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKategori } from '../../features/ketegoriSlice'
 import { useState } from 'react'
@@ -18,33 +18,42 @@ function AddKaryawan() {
     const contextValidator = useWrapperAddKaryawan()
     let navigate = useNavigate()
     const dispatch = useDispatch()
-    const { errors } = useSelector((state) => state.detailKaryawanSlice)
-    const [file, setFile] = useState({})
+    const {
+        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading
+    } = useSelector((state) => state.detailKaryawanSlice)
+    const [file, setFile] = useState(null)
     const callback = payload => {
         setFile(payload)
     }
 
     useEffect(() => {
         dispatch(resetForm())
+        dispatch(listJadwalWeek())
         dispatch(getKategori())
     }, [])
 
     async function addUser(e) {
-        console.log('ini ke submit')
         e.preventDefault();
-        context.setLoading(false)
-        context.storeUser().then((res) => {
-            if (res.status === 200) {
-                context.setLoading(true)
-                navigate('/karyawan')
-            }
-        })
-            .catch((res) => {
-                console.log(res);
-                if (res.message === 'Request failed with status code 400') {
-                    context.setLoading(true)
-                    alert('Isi semua form')
+        const filteredKategori = Object.values(listKtgkaryawan).map(item => item.id);
+        const filteredListJadwal = listJadwal.filter((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '');
+        dispatch(storeKaryawan({
+            nama: nama,
+            niy: niy,
+            email: email,
+            password: password,
+            alamat: alamat,
+            no_hp: noHp,
+            pf_foto: file,
+            jadwal: filteredListJadwal,
+            ktg_karyawan: filteredKategori
+        }))
+            .then((res) => {
+                if (res.meta.requestStatus === "fulfilled") {
+                    navigate('/karyawan')
                 }
+            })
+            .catch((err) => {
+                console.log(err);
             })
     }
     return (
@@ -60,9 +69,9 @@ function AddKaryawan() {
                     </div>
 
                     <button
-                        disabled={
-                            Object.values(errors).some((error) => error === '') &&
-                            Object.keys(file).length === 0
+                        disabled={false
+                            // Object.values(errors).some((error) => error === '') &&
+                            // Object.keys(file).length === 0
                         }
                         onClick={addUser} className='btn-submit'>Konfirmasi</button>
                 </div>
@@ -70,7 +79,7 @@ function AddKaryawan() {
                     <Form />
                     <FotoProfile callback={callback} />
                 </div>
-                {!context.loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
+                {isLoading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
             </div>
         </div>
     )

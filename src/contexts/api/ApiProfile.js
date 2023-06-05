@@ -2,11 +2,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 const ApiProfile = createContext({})
 
-function useApiProfile(){
+function useApiProfile() {
     return useContext(ApiProfile)
 }
 
-function ProfileApiProvider ({children}) {
+function ProfileApiProvider({ children }) {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
@@ -15,32 +15,32 @@ function ProfileApiProvider ({children}) {
         const url = "https://absensiguru.smkrus.com/api/profile"
         setLoading(false);
         axios.get(
-            url, 
+            url,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             }
-            )
+        )
             .then((response) => {
-            setProfileData(response.data.data);
-            setLoading(true);
-        }).catch((error) => {
-            console.log(error);
-        })
+                setProfileData(response.data.data);
+                setLoading(true);
+            }).catch((error) => {
+                console.log(error);
+            })
     }
-
+    console.log(profileData);
     useEffect(() => {
         getData();
     }, []);
 
-    const contextValue = {profileData, setProfileData, loading, setLoading}
+    const contextValue = { profileData, setProfileData, loading, setLoading }
 
-    return(
+    return (
         <ApiProfile.Provider value={contextValue}>
             {children}
         </ApiProfile.Provider>
     )
 }
 
-export {ApiProfile, ProfileApiProvider, useApiProfile}
+export { ApiProfile, ProfileApiProvider, useApiProfile }
