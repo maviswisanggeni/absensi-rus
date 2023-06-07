@@ -22,7 +22,7 @@ export const updateKoordinat = createAsyncThunk("pengaturan/updateKoordinat", as
     formData.append('radius', radius)
 
     const response = await axios.post(
-        getBaseUrl() + 'setting/kategori/store',
+        getBaseUrl() + 'setting/kordinat/update',
         formData,
         {
             headers: {
@@ -36,8 +36,8 @@ export const updateKoordinat = createAsyncThunk("pengaturan/updateKoordinat", as
 const koordinatSlice = createSlice({
     name: 'koordinat',
     initialState: {
-        latitude: '',
-        longitude: '',
+        latitude: 0,
+        longitude: 0,
         latitudeWhileEdit: '',
         longitudeWhiteEdit: '',
         radius: '',
@@ -48,6 +48,17 @@ const koordinatSlice = createSlice({
             const { name, value } = action.payload
             state[name] = value
         },
+        inputKordinat: (state, action) => {
+            const { name, value } = action.payload
+            const isLatitude = num => isFinite(num) && Math.abs(num) <= 90;
+            const isLongitude = num => isFinite(num) && Math.abs(num) <= 180;
+            state[name] = value
+            if (name === 'latitudeWhileEdit' && isLatitude(value) && value !== '') {
+                state.latitude = state.latitudeWhileEdit
+            } else if (name === 'longitudeWhiteEdit' && isLongitude(value) && value !== '') {
+                state.longitude = state.longitudeWhiteEdit
+            }
+        }
     },
     extraReducers: {
         [getKoordinat.pending]: (state) => {
@@ -77,5 +88,5 @@ const koordinatSlice = createSlice({
     }
 })
 
-export const { updateStateKordinat } = koordinatSlice.actions
+export const { updateStateKordinat, inputKordinat } = koordinatSlice.actions
 export default koordinatSlice.reducer;

@@ -131,12 +131,6 @@ const pengaturanSlice = createSlice({
         setCurrentKategori: (state, action) => {
             state.currentKategori = action.payload
         },
-        updateListKaryawan: (state, action) => {
-            const isIdAlreadyAdded = state.listKaryawan.some((karyawanItem) => karyawanItem.id === action.payload.id)
-            if (!isIdAlreadyAdded) {
-                state.listKaryawanNotFinal.push(action.payload)
-            }
-        },
         deleteKaryawan: (state, action) => {
             const { name, index } = action.payload
             state[name] = state[name].map((item, i) => {
@@ -148,6 +142,18 @@ const pengaturanSlice = createSlice({
                 }
                 return item;
             });
+            state.listSearchKaryawan = state[name]
+        },
+        searchKaryawan: (state, action) => {
+            const { name, value } = action.payload;
+
+            const filteredArray = state[name].filter(item =>
+                item.nama.toLowerCase().includes(value.toLowerCase())
+            );
+            return {
+                ...state,
+                listKaryawanNotFinal: filteredArray
+            };
         }
     },
     extraReducers: {
@@ -196,6 +202,8 @@ const pengaturanSlice = createSlice({
             state.loadingSearch = true
         },
         [getKaryawanPengaturan.fulfilled]: (state, action) => {
+            state.listKaryawanNotFinal = action.payload.data.map((item) => ({ ...item, isChecked: false }));
+            state.listSearchKaryawan = action.payload.data.map((item) => ({ ...item, isChecked: false }));
             if (action.meta.arg && action.meta.arg.search) {
                 state.listSearchKaryawan = action.payload.data.map((item) => ({ ...item, isChecked: true }));;
                 state.loadingSearch = false
@@ -211,7 +219,6 @@ const pengaturanSlice = createSlice({
         [detailKategori.fulfilled]: (state, action) => {
             state.loadingKategori = false
             state.listKaryawan = action.payload.data[0].users.map((item) => ({ ...item, isChecked: true }));
-            state.listKaryawanNotFinal = action.payload.data[0].users.map((item) => ({ ...item, isChecked: true }));
         },
         [detailKategori.rejected]: (state) => {
             state.loadingKategori = false
@@ -228,5 +235,5 @@ const pengaturanSlice = createSlice({
     }
 })
 
-export const { setKategoriId, setCurrentKategori, updateInputPengaturan, updateListKaryawan, deleteKaryawan } = pengaturanSlice.actions
+export const { setKategoriId, setCurrentKategori, updateInputPengaturan, deleteKaryawan, searchKaryawan } = pengaturanSlice.actions
 export default pengaturanSlice.reducer;

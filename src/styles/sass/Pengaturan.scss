@@ -87,25 +87,35 @@
         }
       }
 
-      button {
-        width: 100px;
-        height: 35px;
-
-        align-self: flex-end;
+      .wrapper-btn {
         margin-left: auto;
-        justify-self: flex-end;
+        align-self: end;
 
-        border: none;
-        outline: none;
-        background-color: #ffd233;
-        color: black;
-        cursor: pointer;
-        font-weight: 500;
-      }
+        button {
+          width: 100px;
+          height: 35px;
 
-      button.active {
-        background-color: #277ffe;
-        color: white;
+          align-self: flex-end;
+          margin-left: 1rem;
+          justify-self: flex-end;
+
+          border: none;
+          outline: none;
+          background-color: #ffd233;
+          color: black;
+          cursor: pointer;
+          font-weight: 500;
+        }
+
+        .btn-cancel {
+          background-color: $danger-color;
+          color: white;
+        }
+
+        button.active {
+          background-color: #277ffe;
+          color: white;
+        }
       }
     }
   }
