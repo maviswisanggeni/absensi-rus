@@ -1,8 +1,14 @@
 import React from 'react';
 import classnames from 'classnames';
 import { usePagination, DOTS } from './usePagination';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateStateKehadiran } from '../features/kehadiranSlice';
 const Pagination = props => {
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch()
+
   const {
     onPageChange,
     totalCount,
@@ -50,16 +56,21 @@ const Pagination = props => {
         }
 
         return (
-          <Link key={key} to={`?paginate=${pageNumber}`}>
-            <li key={key}
-              className={classnames('pagination-item', {
-                selected: pageNumber === currentPage
-              })}
-              onClick={() => onPageChange(pageNumber)}
-            >
-              {pageNumber}
-            </li>
-          </Link>
+          <li key={key}
+            className={classnames('pagination-item', {
+              selected: pageNumber === currentPage
+            })}
+            onClick={() => {
+              onPageChange(pageNumber);
+              const newSearchParams = new URLSearchParams(searchParams);
+              newSearchParams.set('paginate', pageNumber);
+
+              setSearchParams(newSearchParams);
+              dispatch(updateStateKehadiran({ name: 'isPaginationClicked', value: true }))
+            }}
+          >
+            {pageNumber}
+          </li>
         );
       })}
       <li
