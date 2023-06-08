@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getBaseUrl from "../datas/apiUrl";
 import token from "../datas/tokenAuthorization";
@@ -53,46 +53,13 @@ const kehadiranSlice = createSlice({
         urutan: 'Tercepat',
         loading: false,
         loadingKehadiranTerbaru: false,
-        kategoriId: null
+        kategoriId: null,
+        isPaginationClicked: false,
     },
     reducers: {
-        setKehadiranMasuk: (state, action) => {
-            state.kehadiranMasuk = state.kehadiranMasuk.concat(action.payload);
-        },
-        setKehadiranKeluar: (state, action) => {
-            state.kehadiranKeluar = state.kehadiranKeluar.concat(action.payload);
-        },
-        setKehadiranIzin: (state, action) => {
-            state.kehadiranIzin = state.kehadiranIzin.concat(action.payload);
-        },
-        tabbarToggle: (state, action) => {
-            state.keterangan = action.payload
-        },
         updateStateKehadiran: (state, action) => {
             const { name, value } = action.payload
             state[name] = value
-        },
-        filterToggle: (state, action) => {
-            state.urutan = action.payload
-        },
-        setStartTIme: (state, action) => {
-            state.startTime = action.payload
-        },
-        setEndTime: (state, action) => {
-            state.endTime = action.payload
-        },
-        setSearch: (state, action) => {
-            state.search = action.payload
-        },
-        setStartText: (state, action) => {
-            state.startText = action.payload
-        },
-        setEndText: (state, action) => {
-            state.endText = action.payload
-        },
-        updateKehadiranState: (state, action) => {
-            const { field, value } = action.payload
-            state[field] = value
         },
     },
     extraReducers: {
@@ -116,8 +83,6 @@ const kehadiranSlice = createSlice({
 })
 
 export const {
-    tabbarToggle, setStartTIme, setEndTime, setSearch, setStartText, setEndText,
-    filterToggle, setKehadiranIzin, setKehadiranKeluar, setKehadiranMasuk, updateKehadiranState,
     updateStateKehadiran
 } = kehadiranSlice.actions
 export default kehadiranSlice.reducer;

@@ -3,22 +3,28 @@ import Download from './Download'
 import Tabbar from '../Tabbar'
 import Filter from '../Filter'
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData'
-import { filterToggle, tabbarToggle, updateStateKehadiran } from '../../features/kehadiranSlice'
+import { updateStateKehadiran } from '../../features/kehadiranSlice'
 import { useSearchParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentKategori, setKategoriId } from '../../features/ketegoriSlice'
+import { useEffect } from 'react'
 
 function TabbarAndFilter() {
   const context = useKehadiranListAbsensi()
   let [searchParams] = useSearchParams();
-  const { kehadiranMasuk, kehadiranKeluar, kehadiranIzin } = useSelector(state => state.kehadiran)
-  const { loadingKategori } = useSelector(state => state.kategori)
+  const { keterangan } = useSelector(state => state.kehadiran)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(updateStateKehadiran({ name: 'currentPage', value: 1 }))
+  }, [keterangan, dispatch])
 
   const options = [
     { kategori: 'Masuk', id: 1 },
     { kategori: 'Keluar', id: 2 },
     { kategori: 'Izin', id: 3 },
   ]
+
   return (
     <div className='tabbar-filter'>
       <Tabbar
@@ -33,7 +39,7 @@ function TabbarAndFilter() {
       />
       <div className='filter-download'>
         <Filter option1="Tercepat" option2="Terlambat"
-          setState={filterToggle}
+          setState={updateStateKehadiran}
         />
         <Download />
       </div>

@@ -94,12 +94,17 @@
 .pengaturan .radius-absen .container-radius .radius-info input:focus {
   outline: #3661eb solid 1px;
 }
-.pengaturan .radius-absen .container-radius button {
+.pengaturan .radius-absen .container-radius .wrapper-btn {
+  margin-left: auto;
+  -ms-flex-item-align: end;
+      align-self: end;
+}
+.pengaturan .radius-absen .container-radius .wrapper-btn button {
   width: 100px;
   height: 35px;
   -ms-flex-item-align: end;
       align-self: flex-end;
-  margin-left: auto;
+  margin-left: 1rem;
   justify-self: flex-end;
   border: none;
   outline: none;
@@ -108,7 +113,11 @@
   cursor: pointer;
   font-weight: 500;
 }
-.pengaturan .radius-absen .container-radius button.active {
+.pengaturan .radius-absen .container-radius .wrapper-btn .btn-cancel {
+  background-color: #ff4530;
+  color: white;
+}
+.pengaturan .radius-absen .container-radius .wrapper-btn button.active {
   background-color: #277ffe;
   color: white;
 }

@@ -15,7 +15,7 @@ import { TanggalKehadiranProvider } from '../contexts/app/ContextTanggalKehadira
 import Sidebar from '../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getJmlKehadiranKehadiran, setJmlKehadiran } from '../features/jmlKehadiranSlice'
+import { getJmlKehadiranKehadiran } from '../features/jmlKehadiranSlice'
 import { Route, Routes } from 'react-router'
 import Pusher from "pusher-js";
 

@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import Pagination from '../Pagination';
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData';
 import { Link } from 'react-router-dom';
 import defaultFoto from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux';
 import Pusher from "pusher-js";
-import { setKehadiranIzin, setKehadiranKeluar, setKehadiranMasuk } from '../../features/kehadiranSlice';
+import { updateStateKehadiran } from '../../features/kehadiranSlice';
 
 let PageSize = 10;
 
@@ -16,16 +16,8 @@ function Table() {
     const {
         kehadiranMasuk, kehadiranKeluar,
         kehadiranIzin, currentPage,
-        keterangan, urutan, startTime, loading
+        keterangan, urutan, loading
     } = useSelector(state => state.kehadiran)
-
-    // const currentTableData = useMemo(() => {
-    //     const firstPageIndex = (currentPage - 1) * PageSize;
-    //     const lastPageIndex = firstPageIndex + PageSize;
-    //     return keterangan === 'Keluar' ? kehadiranKeluar?.slice(firstPageIndex, lastPageIndex)
-    //         : keterangan === 'Masuk' ? kehadiranMasuk?.slice(firstPageIndex, lastPageIndex)
-    //             : kehadiranIzin?.slice(firstPageIndex, lastPageIndex)
-    // }, [currentPage, keterangan, kehadiranKeluar, kehadiranMasuk, kehadiranIzin]);
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -124,9 +116,9 @@ function Table() {
             <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={keterangan === 'Masuk' ? kehadiranMasuk?.length : keterangan === 'Keluar' ? kehadiranKeluar?.length : 0}
+                totalCount={keterangan === 'Masuk' ? kehadiranMasuk?.length : keterangan === 'Keluar' ? kehadiranKeluar?.length : kehadiranIzin?.length}
                 pageSize={PageSize}
-                onPageChange={page => context.setCurrentPage(page)}
+                onPageChange={page => dispatch(updateStateKehadiran({ name: 'currentPage', value: page }))}
             />
         </>
     )

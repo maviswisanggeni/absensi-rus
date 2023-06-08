@@ -232,16 +232,36 @@
                                     "200": {
                                         "value": {
                                             "message": "success",
-                                            "data": [
-                                                {
-                                                    "date": "2023-05-03",
-                                                    "count": 1
-                                                },
-                                                {
-                                                    "date": "2023-05-05",
-                                                    "count": 1
-                                                }
-                                            ]
+                                            "data": {
+                                                "mingguan": [
+                                                    {
+                                                        "date": "2023-05-16",
+                                                        "count": 2
+                                                    },
+                                                    {
+                                                        "date": "2023-05-17",
+                                                        "count": 1
+                                                    },
+                                                    {
+                                                        "date": "2023-05-23",
+                                                        "count": 2
+                                                    }
+                                                ],
+                                                "bulanan": [
+                                                    {
+                                                        "date": "2023-05-16",
+                                                        "count": 2
+                                                    },
+                                                    {
+                                                        "date": "2023-05-17",
+                                                        "count": 1
+                                                    },
+                                                    {
+                                                        "date": "2023-05-23",
+                                                        "count": 2
+                                                    }
+                                                ]
+                                            }
                                         }
                                     }
                                 }
@@ -2359,6 +2379,63 @@
                                             3,
                                             4,
                                             5
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/kategori/unassign": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Kategori"
+                ],
+                "summary": "Unassign Kategori",
+                "description": "unassign kategori ke karyawan, bisa unassign lebih dari satu karyawan",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "unassign": [
+                                            {
+                                                "user_id": 6,
+                                                "kategori_id": 3
+                                            },
+                                            {
+                                                "user_id": 6,
+                                                "kategori_id": 4
+                                            }
                                         ]
                                     }
                                 }

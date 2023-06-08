@@ -3,7 +3,7 @@ import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
 import formatDate from '../useFormatCalendar';
 import { useDispatch } from 'react-redux';
-function PilihTanggal({ setFormattedDate, setText, setTime, setDate, text, value }) {
+function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateText }) {
   const [open, setOpen] = useState(false)
   const drop = useRef(null);
   const inputRef = useRef();
@@ -17,7 +17,8 @@ function PilihTanggal({ setFormattedDate, setText, setTime, setDate, text, value
 
   function change(e) {
     setDate(e)
-    dispatch(setText(formatDate(e)))
+    dispatch(setText({ name: `${stateText}`, value: formatDate(e) }))
+    dispatch(setTime({ name: `${stateTime}`, value: formatDate(e) }))
     dispatch(setTime(formatDate(e)))
   }
 
@@ -27,7 +28,7 @@ function PilihTanggal({ setFormattedDate, setText, setTime, setDate, text, value
         <img src={calenderIcon} alt="" />
         <p>{text}</p>
       </div>
-      {open && <Calendar onChange={change} value={value} />}
+      {open && <Calendar onChange={change} value={date} />}
     </div>
   )
 }

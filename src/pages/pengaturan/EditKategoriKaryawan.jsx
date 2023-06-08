@@ -1,24 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
-import orang from '../../assets/images/orang.png'
 import Checkbox from '../../components/kalender/Checkbox'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { assignKategori, deleteKaryawan, detailKategori, getKaryawanPengaturan, getKategoriPengaturan, setCurrentKategori, setKategoriId, updateInputPengaturan, updateListKaryawan } from '../../features/pengaturanSlice'
+import { assignKategori, deleteKaryawan, detailKategori, getKaryawanPengaturan, getKategoriPengaturan, searchKaryawan, setCurrentKategori, setKategoriId, updateInputPengaturan } from '../../features/pengaturanSlice'
 import { Route, Routes, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useRef } from 'react'
-import useDebounce from '../../hooks/useDebounce'
 
 function EditKategoriKaryawan() {
     const [current, setCurrent] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
-    const [activeDropdown, setActiveDropdown] = useState(false)
-    const [shouldCloseDropdown, setShouldCloseDropdown] = useState(false);
     const [value, setValue] = useState('')
     const dropdownRef = useRef(null);
-    const debounceSearchValue = useDebounce(value, 1000)
 
     const dispatch = useDispatch()
     const { listKategori, loadingKategori, listKaryawan, loadingSearch, listSearchKaryawan, currentKategori, listKaryawanNotFinal, currentKaryawan } = useSelector((state) => state.pengaturan)
@@ -27,6 +22,7 @@ function EditKategoriKaryawan() {
 
     useEffect(() => {
         dispatch(getKategoriPengaturan())
+        dispatch(getKaryawanPengaturan({ search: null }))
         setCurrent(id)
     }, [])
 
@@ -47,19 +43,6 @@ function EditKategoriKaryawan() {
         }
     }, [kategoriIsUpdated, id])
 
-    useEffect(() => {
-        if (shouldCloseDropdown) {
-            setActiveDropdown(false);
-            setShouldCloseDropdown(false);
-        }
-    }, [shouldCloseDropdown]);
-
-    useEffect(() => {
-        if (activeDropdown) {
-            dispatch(getKaryawanPengaturan({ search: debounceSearchValue }));
-        }
-    }, [debounceSearchValue]);
-
     function handleShowModal() {
         setShowModal(prevShowModal => !prevShowModal)
     }
@@ -74,28 +57,17 @@ function EditKategoriKaryawan() {
 
     function handleChange(e) {
         const inputValue = e.target.value;
-        // dispatch(setLoading(true))
         setValue(inputValue);
-        setActiveDropdown(inputValue.length > 0);
+        dispatch(searchKaryawan({ name: 'listSearchKaryawan', value: inputValue }))
     }
 
-    function handleAdd(item) {
-        dispatch(updateListKaryawan(item))
-        setActiveDropdown(false)
-    }
-
-    function handleBlur() {
-        setTimeout(() => {
-            if (!dropdownRef.current.contains(document.activeElement)) {
-                setShouldCloseDropdown(true);
-            }
-        }, 200);
-    }
-
-    function handleChangeCheckbox(index, name, item) {
-        // dispatch(deleteKaryawan({ name, index }))
-        dispatch(updateInputPengaturan({ name: 'currentKaryawan', value: item }))
-        setShowAlert(true)
+    function handleChangeCheckbox(name, item, index) {
+        if (name === 'listKaryawan') {
+            dispatch(updateInputPengaturan({ name: 'currentKaryawan', value: item }))
+            setShowAlert(true)
+        } else {
+            dispatch(deleteKaryawan({ name: 'listKaryawanNotFinal', index }));
+        }
     }
 
     function handleAssignKategori() {
@@ -114,7 +86,21 @@ function EditKategoriKaryawan() {
 
     const handleDelete = () => {
         dispatch(deleteKaryawan({ name: 'listKaryawan', index: currentKaryawan.id }));
+        const filterListKaryawan = listKaryawan.filter(item => item.isChecked)
+        console.log(filterListKaryawan);
         setShowAlert(false)
+
+        // dispatch(assignKategori({
+        //     kategori_id: null,
+        //     karyawan_id: filterListKaryawan
+        // }))
+        //     .then((res) => {
+        //         if (res.meta.requestStatus === "fulfilled") {
+        //             dispatch(detailKategori(id))
+        //             handleShowModal()
+        //             setShowAlert(false)
+        //         }
+        //     })
     };
 
     return (
@@ -156,7 +142,7 @@ function EditKategoriKaryawan() {
                                         type="checkbox"
                                         name='listKaryawan'
                                         checked={item.isChecked}
-                                        onChange={() => handleChangeCheckbox(index, 'listKaryawan', item)}
+                                        onChange={() => handleChangeCheckbox('listKaryawan', item, index)}
                                     />
                                 </div>
                             )
@@ -185,46 +171,7 @@ function EditKategoriKaryawan() {
                                 placeholder='Cari Anggota'
                                 value={value}
                                 onChange={handleChange}
-                                onBlur={handleBlur}
-                                onFocus={() => setActiveDropdown(true)}
                             />
-                            {activeDropdown && (
-                                <div className='dropdown-container'>
-                                    <div className='dropdown-content' ref={dropdownRef}>
-                                        {loadingSearch ? (
-                                            <div className='dropdown-outer-item'>
-                                                <div className='dropdown-item'>
-                                                    <p>Loading...</p>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <>
-                                                {listSearchKaryawan.length === 0 ? (
-                                                    <div className='dropdown-outer-item'>
-                                                        <div className='dropdown-item not-found'>
-                                                            <div>
-                                                                <p>Data tidak ada</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ) : (
-                                                    listSearchKaryawan.map((item, index) => (
-                                                        <div className='dropdown-outer-item' key={index}>
-                                                            <div className='dropdown-item'>
-                                                                <div>
-                                                                    <img src={item.link_foto} alt='' />
-                                                                    <p>{item.nama}</p>
-                                                                </div>
-                                                                <button onClick={() => handleAdd(item)}>Tambahkan</button>
-                                                            </div>
-                                                        </div>
-                                                    ))
-                                                )}
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
                             <p>Anggota</p>
                             <div className='wrapper-list'>
                                 {listKaryawanNotFinal.map((item, index) => (
@@ -232,7 +179,7 @@ function EditKategoriKaryawan() {
                                         <Checkbox
                                             name='listKaryawanNotFinal'
                                             control={index}
-                                            onChange={() => handleChangeCheckbox(index, 'listKaryawanNotFinal')}
+                                            onChange={() => handleChangeCheckbox('listKaryawanNotFinal', item, item.id)}
                                             checked={item.isChecked}
                                         />
                                         <img src={item.link_foto} alt="" />
