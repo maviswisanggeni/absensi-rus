@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Checkbox from '../../components/kalender/Checkbox'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { assignKategori, deleteKaryawan, detailKategori, getKaryawanPengaturan, getKategoriPengaturan, searchKaryawan, setCurrentKategori, setKategoriId, updateInputPengaturan } from '../../features/pengaturanSlice'
+import { assignKategori, deleteKaryawan, detailKategori, getKaryawanPengaturan, getKategoriPengaturan, searchKaryawan, setCurrentKategori, setKategoriId, unassignKategori, updateInputPengaturan } from '../../features/pengaturanSlice'
 import { Route, Routes, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useRef } from 'react'
@@ -16,7 +16,9 @@ function EditKategoriKaryawan() {
     const dropdownRef = useRef(null);
 
     const dispatch = useDispatch()
-    const { listKategori, loadingKategori, listKaryawan, loadingSearch, listSearchKaryawan, currentKategori, listKaryawanNotFinal, currentKaryawan } = useSelector((state) => state.pengaturan)
+    const { listKategori, loadingKategori, listKaryawan, loadingSearch, listSearchKaryawan,
+        currentKategori, listKaryawanNotFinal, currentKaryawan, kategoriId
+    } = useSelector((state) => state.pengaturan)
     const { kategori, id } = useParams()
     const [kategoriIsUpdated, setKategoriIsUpdated] = useState(false)
 
@@ -86,21 +88,18 @@ function EditKategoriKaryawan() {
 
     const handleDelete = () => {
         dispatch(deleteKaryawan({ name: 'listKaryawan', index: currentKaryawan.id }));
-        const filterListKaryawan = listKaryawan.filter(item => item.isChecked)
-        console.log(filterListKaryawan);
-        setShowAlert(false)
-
-        // dispatch(assignKategori({
-        //     kategori_id: null,
-        //     karyawan_id: filterListKaryawan
-        // }))
-        //     .then((res) => {
-        //         if (res.meta.requestStatus === "fulfilled") {
-        //             dispatch(detailKategori(id))
-        //             handleShowModal()
-        //             setShowAlert(false)
-        //         }
-        //     })
+        console.log(currentKaryawan);
+        dispatch(unassignKategori({
+            kategori_id: kategoriId,
+            user_id: currentKaryawan.id
+        }))
+            .then((res) => {
+                if (res.meta.requestStatus === "fulfilled") {
+                    dispatch(detailKategori(id))
+                    handleShowModal()
+                    setShowAlert(false)
+                }
+            })
     };
 
     return (

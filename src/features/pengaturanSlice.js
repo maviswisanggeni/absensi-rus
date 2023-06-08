@@ -102,6 +102,27 @@ export const assignKategori = createAsyncThunk("pengaturan/assignKategori", asyn
     return response.data
 })
 
+export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", async ({ kategori_id, user_id }) => {
+    const reqBody = JSON.stringify({
+        "unassign": [
+            {
+                "user_id": user_id,
+                "kategori_id": kategori_id
+            }
+        ]
+    })
+
+    const response = await axios.post(
+        getBaseUrl() + `setting/kategori/unassign`,
+        {
+            headers: {
+                Authorization: `Bearer ${token()}`,
+            },
+        },
+    )
+    return response.data
+})
+
 const pengaturanSlice = createSlice({
     name: 'pengaturan',
     initialState: {
@@ -164,7 +185,6 @@ const pengaturanSlice = createSlice({
         [getKategoriPengaturan.fulfilled]: (state, action) => {
             state.loadingKategori = false
             state.listKategori = action.payload.data
-            // state.currentKategori = action.payload.data[0].kategori
         },
         [getKategoriPengaturan.rejected]: (state) => {
             state.loadingKategori = false
@@ -230,6 +250,15 @@ const pengaturanSlice = createSlice({
             state.loadingKategori = false
         },
         [assignKategori.rejected]: (state) => {
+            state.loadingKategori = false
+        },
+        [unassignKategori.pending]: (state) => {
+            state.loadingKategori = true
+        },
+        [unassignKategori.fulfilled]: (state) => {
+            state.loadingKategori = false
+        },
+        [unassignKategori.rejected]: (state) => {
             state.loadingKategori = false
         },
     }
