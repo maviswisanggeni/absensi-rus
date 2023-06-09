@@ -4,7 +4,7 @@ import Label from './Label'
 import Select from './Select'
 import imgIcon from '../../assets/icons/img-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { listJadwalWeek, updateFieldValue } from '../../features/detailKaryawanSlice'
+import { listJadwalWeek, updateFieldValue } from '../../features/karyawanSlice'
 import JabatanSelect from './JabatanSelect'
 
 function DetailFotoProfile({ callback }) {
@@ -14,7 +14,7 @@ function DetailFotoProfile({ callback }) {
     const [file, setFile] = useState(null)
     const [weekListJadwal, setWeekListJadwal] = useState([])
     const { nama, niy, linkFoto, listKtgkaryawan, ktgKaryawan, listJadwal } = useSelector(
-        (state) => state.detailKaryawanSlice
+        (state) => state.karyawan
     );
 
     const inputRef = useRef(null)

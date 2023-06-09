@@ -7,13 +7,13 @@ import Input from './Input'
 import Label from './Label'
 import Select from './Select'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFieldError, updateFieldValue } from '../../features/detailKaryawanSlice'
+import { updateFieldError, updateFieldValue } from '../../features/karyawanSlice'
 import JabatanSelect from './JabatanSelect'
 
 
 function Form() {
     const dispatch = useDispatch()
-    const { errors, nama, niy, password, email, noHp, alamat } = useSelector((state) => state.detailKaryawanSlice)
+    const { errors, nama, niy, password, email, noHp, alamat, listKtgkaryawan } = useSelector((state) => state.karyawan)
     const { listKategori } = useSelector((state) => state.kategori)
 
     const context = useApiKaryawanStoreUser()
@@ -124,6 +124,9 @@ function Form() {
             <div className='jabatan-gender'>
                 <Label className='no-hp' label='Jabatan' />
                 <JabatanSelect />
+                <p className='validator-text'>
+                    {listKtgkaryawan.length === 0 ? 'Isi kategori' : null}
+                </p>
             </div>
 
             <div className='alamat'>

@@ -53,7 +53,7 @@ function DetailCard({
                         <p>{checkNull(lokasi)}</p>
                     </div>
                     <div className='map-and-status'>
-                        {popUpMap &&
+                        {popUpMap && latitude && longitude &&
                             <>
                                 <Map latitude={latitude} longitude={longitude} loading={loading} />
                                 <div className='wrapper-close'>
@@ -63,8 +63,17 @@ function DetailCard({
                         }
                         <img className='mape' src={map} onClick={() => setPopUpMap(popUpMap ? false : true)} />
                         <div className='wrapper-status'>
-                            <div className={`valid-masuk-pulang ${is_valid === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
-                            <p className='status'>{checkNull(is_valid === '1' ? 'Di dalam sekolah' : 'Di luar sekolah')}</p>
+                            <div
+                                className={`valid-masuk-pulang 
+                                    ${is_valid === '1' ? 'valid-masuk' : is_valid === null ? '' : 'valid-pulang'}
+                                `}
+                            >
+                            </div>
+                            <p
+                                className='status'
+                            >
+                                {checkNull(is_valid) === '-' ? '-' : is_valid === '1' ? 'Di dalam sekolah' : 'Di luar sekolah'}
+                            </p>
                         </div>
                     </div>
                 </div>

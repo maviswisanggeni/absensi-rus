@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ModalRole from './ModalRole';
-import { deleteKategori } from '../../features/detailKaryawanSlice';
+import { deleteKategori } from '../../features/karyawanSlice';
 import close from '../../assets/icons/close.svg'
 import plus from '../../assets/icons/plus.svg'
 import { useState } from 'react';
@@ -10,7 +10,7 @@ function JabatanSelect() {
     const dispatch = useDispatch()
     const [modalActive, setModalActive] = useState(false)
     const { listKtgkaryawan } = useSelector(
-        (state) => state.detailKaryawanSlice
+        (state) => state.karyawan
     );
 
     return (

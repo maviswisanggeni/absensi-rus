@@ -102,15 +102,8 @@
   font-weight: 400;
   font-size: 14px;
   text-decoration: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  display: grid;
+  place-items: center;
 }
 .karyawan .tabbar-filter {
   display: -webkit-box;
@@ -154,6 +147,9 @@
 .karyawan .action-col a {
   margin: 0 1rem;
 }
+.karyawan .dropdown-container {
+  height: 100px;
+}
 
 .detail-karyawan {
   width: 80%;
@@ -168,7 +164,7 @@
   border-bottom: 1px solid #ebf0fe;
   padding: 1rem 2.5rem;
 }
-.detail-karyawan .navigation div {
+.detail-karyawan .navigation div:nth-child(1) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -176,10 +172,10 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.detail-karyawan .navigation div img {
+.detail-karyawan .navigation div:nth-child(1) img {
   cursor: pointer;
 }
-.detail-karyawan .navigation div h1 {
+.detail-karyawan .navigation div:nth-child(1) h1 {
   font-size: 24px;
   font-weight: 500;
   margin-left: 2rem;

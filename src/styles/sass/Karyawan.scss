@@ -74,9 +74,8 @@
       font-weight: 400;
       font-size: 14px;
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
     }
   }
 
@@ -121,6 +120,10 @@
       margin: 0 1rem;
     }
   }
+
+  .dropdown-container {
+    height: 100px;
+  }
 }
 
 .detail-karyawan {
@@ -132,7 +135,7 @@
     border-bottom: 1px solid $secondary-color;
     padding: 1rem 2.5rem;
 
-    div {
+    div:nth-child(1) {
       display: flex;
       align-items: center;
 
