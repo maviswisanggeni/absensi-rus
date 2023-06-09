@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import arrowLeft from '../../assets/icons/arrow-left.svg'
 import Form from './AddForm'
 import FotoProfile from './AddFotoProfile'
@@ -8,10 +8,11 @@ import '../../styles/css/add-karyawan.css'
 import { useWrapperAddKaryawan } from '../../contexts/app/WrapperAddKaryawan'
 import Sidebar from '../sidebar/Sidebar'
 import { useEffect } from 'react'
-import { resetForm, listJadwalWeek, storeKaryawan } from '../../features/detailKaryawanSlice'
+import { resetForm, listJadwalWeek, storeKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKategori } from '../../features/ketegoriSlice'
 import { useState } from 'react'
+import InfoBox from '../InfoBox'
 
 function AddKaryawan() {
     const context = useApiKaryawanStoreUser()
@@ -19,8 +20,8 @@ function AddKaryawan() {
     let navigate = useNavigate()
     const dispatch = useDispatch()
     const {
-        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading
-    } = useSelector((state) => state.detailKaryawanSlice)
+        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage
+    } = useSelector((state) => state.karyawan)
     const [file, setFile] = useState(null)
     const callback = payload => {
         setFile(payload)
@@ -49,31 +50,60 @@ function AddKaryawan() {
         }))
             .then((res) => {
                 if (res.meta.requestStatus === "fulfilled") {
-                    navigate('/karyawan')
+                    navigate(-1)
                 }
             })
             .catch((err) => {
                 console.log(err);
             })
     }
+
+    function validateDisabled() {
+        const hasNonEmptyJadwal = listJadwal.some((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '');
+        if (
+            errors.nama === "" &&
+            errors.niy === "" &&
+            errors.email === "" &&
+            errors.password === "" &&
+            errors.noHp === "" &&
+            errors.alamat === "" &&
+            listKtgkaryawan.length !== 0 &&
+            hasNonEmptyJadwal
+        ) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     return (
         <div className='wrapper-karyawan'>
             <Sidebar />
             <div className='add-karyawan'>
+                {isDisplayMessage &&
+                    <InfoBox
+                        message={messageResApi}
+                        status={statusResApi}
+                        isDisplay={isDisplayMessage}
+                        setIsDisplay={updateStateKaryawan}
+                        stateName='isDisplayMessage'
+                    />
+                }
                 <div className='navigation'>
                     <div>
-                        <Link to={'/karyawan'}>
+                        <div className='wrapper-img' onClick={() => navigate(-1)}>
                             <img src={arrowLeft} alt="" />
-                        </Link>
+                        </div>
                         <h1>Tambah Karyawan</h1>
                     </div>
 
                     <button
-                        disabled={false
-                            // Object.values(errors).some((error) => error === '') &&
-                            // Object.keys(file).length === 0
-                        }
-                        onClick={addUser} className='btn-submit'>Konfirmasi</button>
+                        // disabled={validateDisabled()}
+                        onClick={addUser}
+                        className='btn-submit'
+                    >
+                        Konfirmasi
+                    </button>
                 </div>
                 <div className='form-foto-profile'>
                     <Form />

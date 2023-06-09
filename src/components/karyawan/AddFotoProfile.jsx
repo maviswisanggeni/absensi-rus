@@ -3,12 +3,12 @@ import { useState } from 'react';
 import uploadClour from '../../assets/icons/cloud-upload.svg'
 import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFieldValue } from '../../features/detailKaryawanSlice';
+import { updateFieldValue } from '../../features/karyawanSlice';
 
 function FotoProfile({ callback }) {
     const context = useApiKaryawanStoreUser()
     const { listJadwal } = useSelector(
-        (state) => state.detailKaryawanSlice
+        (state) => state.karyawan
     );
     const dispatch = useDispatch()
     const [file, setFile] = useState({});
@@ -33,7 +33,6 @@ function FotoProfile({ callback }) {
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
             // at least one file has been dropped so do something
             // handleFiles(e.dataTransfer.files);
-            console.log(e.dataTransfer.files);
             setFile(e.dataTransfer.files[0]);
             context.setFoto(e.dataTransfer.files[0]);
         }

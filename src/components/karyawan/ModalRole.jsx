@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from '../Search';
 import { getKategori } from '../../features/ketegoriSlice';
-import { updateListKtgkaryawan } from '../../features/detailKaryawanSlice';
+import { updateListKtgkaryawan } from '../../features/karyawanSlice';
 import { useState } from 'react';
 
 function ModalRole({ onClose }) {

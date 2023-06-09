@@ -2,20 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import arrowLeft from '../../assets/icons/arrow-left.svg'
 import '../../styles/css/Karyawan.css'
-import EditForm from './EditForm'
+import DetailForm from './DetailForm'
 import DetailFotoProfile from './DetailFotoProfile'
-import axios from 'axios'
-import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
-import { useWrapperEditKaryawan } from '../../contexts/app/WrapperEditKaryawan'
 import { useDispatch, useSelector } from 'react-redux'
 import Sidebar from '../sidebar/Sidebar'
-import { detailKaryawan, updateKaryawan } from '../../features/detailKaryawanSlice'
+import { detailKaryawan, resetListKaryawan, updateKaryawan } from '../../features/karyawanSlice'
 import { getKategori } from '../../features/ketegoriSlice'
 
 function DetailKaryawan() {
     let userId = useParams()
     const dispatch = useDispatch()
-    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading } = useSelector((state) => state.detailKaryawanSlice)
+    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading
+    } = useSelector((state) => state.karyawan)
+    let navigate = useNavigate()
 
     const [file, setFile] = useState(null)
     const callback = payload => {
@@ -25,40 +24,8 @@ function DetailKaryawan() {
     useEffect(() => {
         dispatch(detailKaryawan(userId.id))
         dispatch(getKategori())
+        dispatch(resetListKaryawan())
     }, [userId])
-
-    const [detail, setDetail] = useState([]);
-    // const [loading, setLoading] = useState(false);
-    const token = localStorage.getItem("token");
-    const context = useApiKaryawanUpdate()
-    const contextValidator = useWrapperEditKaryawan()
-    let navigate = useNavigate()
-
-    useEffect(() => {
-        async function getData() {
-            const url = "https://absensiguru.smkrus.com/api/karyawan/edit/" + userId.id
-            // setLoading(false);
-            axios.get(
-                url,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then((response) => {
-                    setDetail(response.data.user);
-                    context.setNama(response.data.user.nama)
-                    context.setEmail(response.data.user.email)
-                    context.setAlamat(response.data.user.alamat)
-                    context.setnoHp(response.data.user.no_hp)
-                    context.setjenisUser(response.data.user.jenis_user)
-                    // setLoading(true);
-                }).catch((error) => {
-                    console.log(error);
-                })
-        }
-        // getData();
-    }, [userId]);
 
     function updateUser(e) {
         e.preventDefault();
@@ -76,9 +43,10 @@ function DetailKaryawan() {
             ktg_karyawan: filteredKategori
         }))
             .then(() => {
-                navigate('/karyawan')
+                navigate(-1)
             })
     }
+
     return (
         <div className='wrapper-karyawan'>
             <Sidebar />
@@ -100,7 +68,7 @@ function DetailKaryawan() {
                         type="submit" value='Konfirmasi' className='btn-submit' />
                 </div>
                 <div className='detail-form'>
-                    <EditForm />
+                    <DetailForm />
                     <DetailFotoProfile callback={callback} />
                 </div>
                 {isLoading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}

@@ -1,7 +1,7 @@
 import Sidebar from './components/sidebar/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Kehadiran from './pages/Kehadiran';
-import Karyawan from './pages/Karyawan';
+import Karyawan from './pages/karyawan/Karyawan';
 import Kalender from './pages/Kalender';
 import './styles/css/App.css';
 import Login from './pages/Login';

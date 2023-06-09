@@ -49,7 +49,7 @@ function Detail() {
     function checkNull(data) {
         return data ? data : '-'
     }
-
+    console.log(detail);
     return (
         <div className='wrapper-detail'>
             <Sidebar />

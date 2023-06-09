@@ -7,12 +7,12 @@ import trash from '../../assets/icons/trashRed.svg'
 import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan';
 import defaultUser from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteKaryawan, getKaryawan } from '../../features/detailKaryawanSlice';
+import { deleteKaryawan, getKaryawan } from '../../features/karyawanSlice';
 
 let PageSize = 10;
 
 function Table() {
-  const { listKaryawan, isLoading, urutan } = useSelector(state => state.detailKaryawanSlice)
+  const { listKaryawan, isLoading, urutan } = useSelector(state => state.karyawan)
   const { kategoriId } = useSelector(state => state.kategori)
   const navigate = useNavigate()
   const context = useApiKaryawan()
@@ -28,12 +28,13 @@ function Table() {
     const sortedData = [...slicedData].sort((a, b) => {
       if (urutan === 'Sesuai abjad') {
         return a.nama.localeCompare(b.nama)
+      } else {
+        return parseInt(a.niy) - parseInt(b.niy)
       }
-      return a.niy.localeCompare(b.niy)
     });
 
     return sortedData;
-  }, [isLoading, listKaryawan, kategoriId]);
+  }, [isLoading, listKaryawan, kategoriId, urutan]);
 
   function handleDetail(id) {
     navigate(`/karyawan/edit/${id}`)

@@ -22,13 +22,12 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.add-karyawan .navigation div a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.add-karyawan .navigation div .wrapper-img {
+  width: 24px;
+  height: 24px;
+}
+.add-karyawan .navigation div .wrapper-img img {
+  cursor: pointer;
 }
 .add-karyawan .navigation div h1 {
   font-size: 24px;

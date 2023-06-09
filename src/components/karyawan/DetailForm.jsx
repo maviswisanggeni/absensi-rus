@@ -4,12 +4,12 @@ import eye from '../../assets/icons/eye.svg'
 import at from '../../assets/icons/at.svg'
 import Label from './Label'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetField, updateFieldError, updateFieldValue } from '../../features/detailKaryawanSlice'
+import { resetField, updateFieldError, updateFieldValue } from '../../features/karyawanSlice'
 
-function EditForm() {
+function DetailForm() {
     const dispatch = useDispatch()
     const { nama, email, password, noHp, alamat, errors } = useSelector(
-        (state) => state.detailKaryawanSlice
+        (state) => state.karyawan
     );
 
     const [passwordShown, setPasswordShown] = useState(false);
@@ -164,4 +164,4 @@ function EditForm() {
     )
 }
 
-export default EditForm
+export default DetailForm
