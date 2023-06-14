@@ -22,7 +22,6 @@ function SearchAndCalendar() {
 
   useEffect(() => {
     if (!isPaginationClicked) {
-      console.log(isPaginationClicked);
       // Step 2: Update startTime, endTime, and search based on searchParams
       const startTime = searchParams.get('start_time') ? searchParams.get('start_time') : formatDate(new Date());
       const endTime = searchParams.get('end_time') === 'null' ? null : searchParams.get('end_time');

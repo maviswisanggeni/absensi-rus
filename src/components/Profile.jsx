@@ -5,14 +5,31 @@ import { useApiProfile } from '../contexts/api/ApiProfile'
 import defaultfoto from '../assets/images/user-foto.png'
 import { useState } from 'react'
 import setting from '../assets/icons/setting.svg'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
 function Profile() {
   const context = useApiProfile()
   const [active, setActive] = useState()
-  let navigate = useNavigate()
+  const drop = useRef()
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (drop.current && !drop.current.contains(event.target)) {
+        setActive(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [])
+
   return (
-    <div className='profile'>
+    <div className='profile' ref={drop}>
       <div className='wrapper-profile-detail' onClick={() => setActive(!active)}>
         <div className='profile-detail'>
           <img src={context.profileData?.foto ? context.profileData?.foto : defaultfoto} alt="" />

@@ -5,14 +5,11 @@ import formatDate from '../useFormatCalendar';
 import { useDispatch } from 'react-redux';
 function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateText }) {
   const [open, setOpen] = useState(false)
-  const drop = useRef(null);
-  const inputRef = useRef();
+  const calendarRef = useRef();
   const dispatch = useDispatch()
 
-  function handleClick(e) {
-    if (!e.target.closest(`.${drop.current.className}`) && open) {
-      setOpen(false);
-    }
+  function handleClick() {
+    setOpen(!open);
   }
 
   function change(e) {
@@ -22,13 +19,38 @@ function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateT
     dispatch(setTime(formatDate(e)))
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        calendarRef.current
+        && !calendarRef.current.contains(event.target)
+        && !event.target.classList.contains('react-calendar__tile')
+        && event.target.tagName !== "ABBR"
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className='pilih-tanggal' ref={inputRef}>
-      <div className='btn-pilih-tanggal' onClick={() => setOpen(open => !open)}>
+    <div className='pilih-tanggal' ref={calendarRef}>
+      <div className='btn-pilih-tanggal' onClick={handleClick}>
         <img src={calenderIcon} alt="" />
         <p>{text}</p>
       </div>
-      {open && <Calendar onChange={change} value={date} />}
+      {open &&
+        <Calendar
+          onChange={change}
+          value={date}
+        />
+      }
+
     </div>
   )
 }
