@@ -3,12 +3,12 @@ import close from '../../assets/icons/close.svg'
 import eye from '../../assets/icons/eye.svg'
 import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser'
 import { useWrapperAddKaryawan } from '../../contexts/app/WrapperAddKaryawan'
-import Input from './Input'
-import Label from './Label'
-import Select from './Select'
+import Input from '../../components/karyawan/Input'
+import Label from '../../components/karyawan/Label'
+import Select from '../../components/karyawan/Select'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFieldError, updateFieldValue } from '../../features/karyawanSlice'
-import JabatanSelect from './JabatanSelect'
+import { updateFieldValue } from '../../features/karyawanSlice'
+import JabatanSelect from '../../components/karyawan/JabatanSelect'
 
 
 function Form() {
@@ -86,9 +86,9 @@ function Form() {
                     onChange={handleInputChange}
                 />
                 <img src={eye} onClick={handleUnhide} className='unhide' />
-                <p className='validator-text pwd'>
+                {/* <p className='validator-text pwd'>
                     {errors.password && errors.password}
-                </p>
+                </p> */}
             </div>
 
             <div className='email'>

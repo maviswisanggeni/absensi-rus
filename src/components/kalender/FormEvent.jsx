@@ -1,17 +1,31 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFieldKalender } from '../../features/kalenderSlice'
+import { updateFieldKalender, updateStateKalender } from '../../features/kalenderSlice'
 import dayjs from 'dayjs'
+import { useState } from 'react'
+import { useRef } from 'react'
+import { Calendar } from 'react-calendar'
+import { useEffect } from 'react'
 
 function FormEvent() {
     const dispatch = useDispatch()
-    const { judul, kategoriEvent, lokasi, waktuMulai, waktuSelesai, deskripsi, daySelected } = useSelector((state) => state.kalender)
+    const { judul, kategoriEvent, lokasi, waktuMulai, waktuSelesai, deskripsi, daySelected, errors, waktuMulaiLibur, waktuSelesaiLibur
+    } = useSelector((state) => state.kalender)
+    const [isCalendarOpen1, setCalendarOpen1] = useState(false);
+    const [isCalendarOpen2, setCalendarOpen2] = useState(false);
+    const inputRef1 = useRef();
+    const inputRef2 = useRef();
 
-    const formatTime = time => {
-        const [hours, minutes] = time.split(':');
-        const paddedHours = hours.padStart(2, '0'); // Add leading zero if necessary
-        return `${paddedHours}:${minutes}`;
-    };
+    useEffect(() => {
+        dispatch(updateFieldKalender({
+            name: 'waktuMulaiLibur',
+            value: daySelected
+        }))
+        dispatch(updateFieldKalender({
+            name: 'waktuSelesaiLibur',
+            value: daySelected
+        }))
+    }, [])
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -24,6 +38,57 @@ function FormEvent() {
         }
     }
 
+    function handleChangeCalendar1(value) {
+        dispatch(updateFieldKalender({
+            name: 'waktuMulaiLibur',
+            value: dayjs(value).format('DD MMMM YYYY')
+        }));
+    }
+
+    function handleChangeCalendar2(value) {
+        dispatch(updateFieldKalender({
+            name: 'waktuSelesaiLibur',
+            value: dayjs(value).format('DD MMMM YYYY')
+        }));
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                inputRef1.current
+                && !inputRef1.current.contains(event.target)
+                && !event.target.classList.contains('react-calendar__tile')
+                && event.target.tagName !== "ABBR"
+            ) {
+                setCalendarOpen1(false);
+            }
+            if (
+                inputRef2.current
+                && !inputRef2.current.contains(event.target)
+                && !event.target.classList.contains('react-calendar__tile')
+                && event.target.tagName !== "ABBR"
+            ) {
+                setCalendarOpen2(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    const handleAddClick1 = (event) => {
+        event.stopPropagation();
+        setCalendarOpen1(!isCalendarOpen1);
+    };
+
+    const handleAddClick2 = (event) => {
+        event.stopPropagation();
+        setCalendarOpen2(!isCalendarOpen2);
+    };
+
     return (
         <div className='wrapper-form'>
             <h3>Detail Event</h3>
@@ -31,6 +96,9 @@ function FormEvent() {
                 value={judul}
                 onChange={handleChange}
             />
+            <p className='validator-text'>
+                {errors.judul && errors.judul}
+            </p>
             <div className='checkbox-form'>
                 <div className='wrap-label-radio'>
                     <input type='radio' id='event' className='input'
@@ -52,23 +120,78 @@ function FormEvent() {
                     <label htmlFor='libur'>Libur</label>
                 </div>
             </div>
-            <input type="text" placeholder='Lokasi' className='input input-lokasi' name='lokasi'
-                value={lokasi}
-                onChange={handleChange}
-            />
+            {kategoriEvent === 'event' &&
+                <>
+                    <input type="text" placeholder='Lokasi' className='input input-lokasi' name='lokasi'
+                        value={lokasi}
+                        onChange={handleChange}
+                    />
+                    <p className='validator-text'>
+                        {errors.lokasi && errors.lokasi}
+                    </p>
+                </>
+            }
+
             <div className='wrapper-time'>
-                <input type="text" placeholder={daySelected} className='input' disabled />
-                <input type="time" className='input'
-                    name='waktuMulai'
-                    value={formatTime(waktuMulai.slice(-8))}
-                    onChange={handleChange}
-                />
-                <div className='line'></div>
-                <input type="time" className='input'
-                    name='waktuSelesai'
-                    value={formatTime(waktuSelesai.slice(-8))}
-                    onChange={handleChange}
-                />
+                <div className='time'>
+                    {kategoriEvent === 'event' &&
+                        <>
+                            <input
+                                type="text"
+                                placeholder={daySelected}
+                                className='input'
+                                disabled
+                            />
+                            <input type="time" className='input'
+                                name='waktuMulai'
+                                value={waktuMulai.slice(-8)}
+                                onChange={handleChange}
+                            />
+                            <div className='line'></div>
+                            <input type="time" className='input'
+                                name='waktuSelesai'
+                                value={waktuSelesai.slice(-8)}
+                                onChange={handleChange}
+                            />
+                        </>
+                    }
+
+                    {kategoriEvent === 'libur' &&
+                        <>
+                            <div className={`waktu waktu__mulai ${isCalendarOpen1 ? 'active' : null}`} onClick={handleAddClick1}>
+                                {dayjs(waktuMulaiLibur).format('DD MMMM YYYY')}
+                            </div>
+                            {isCalendarOpen1 &&
+                                <Calendar
+                                    className='first-calendar'
+                                    inputRef={inputRef1}
+                                    onChange={handleChangeCalendar1}
+                                    value={new Date(waktuMulaiLibur)}
+                                />
+                            }
+                            <div className='line'></div>
+                            <div className={`waktu waktu__selesai ${isCalendarOpen2 ? 'active' : null}`} onClick={handleAddClick2}>
+                                {dayjs(waktuSelesaiLibur).format('DD MMMM YYYY')}
+                            </div>
+                            {isCalendarOpen2 &&
+                                <Calendar
+                                    className='second-calendar'
+                                    inputRef={inputRef2}
+                                    onChange={handleChangeCalendar2}
+                                    value={new Date(waktuSelesaiLibur)}
+                                />
+                            }
+                        </>
+                    }
+                </div>
+                <div className='wrapper-error'>
+                    <p className='validator-text' style={{}}>
+                        {errors.waktuMulai}
+                    </p>
+                    <p className='validator-text'>
+                        {errors.waktuSelesai && errors.waktuSelesai}
+                    </p>
+                </div>
             </div>
 
             <textarea
@@ -80,6 +203,9 @@ function FormEvent() {
                 value={deskripsi}
             >
             </textarea>
+            <p className='validator-text'>
+                {errors.deskripsi && errors.deskripsi}
+            </p>
         </div>
     )
 }

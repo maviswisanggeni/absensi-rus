@@ -20,7 +20,14 @@ function ListPartisipasi() {
                         <img src={item.link_foto} alt="" />
                         <div>
                             <p>{item.nama}</p>
-                            <span>{item.ktgkaryawan.map(item => item.kategori)}</span>
+                            <span>
+                                {item.ktgkaryawan.map((itemKategori, index) => (
+                                    <React.Fragment key={itemKategori.id}>
+                                        {itemKategori.kategori}
+                                        {index !== item.ktgkaryawan.length - 1 && ','}{' '}
+                                    </React.Fragment>
+                                ))}
+                            </span>
                         </div>
                     </div>
                     <input type='checkbox' checked={item.isChecked} onChange={() => handleCheckboxChange(index)} />

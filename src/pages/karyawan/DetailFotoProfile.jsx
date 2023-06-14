@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
-import Label from './Label'
-import Select from './Select'
+import Label from '../../components/karyawan/Label'
+import Select from '../../components/karyawan/Select'
 import imgIcon from '../../assets/icons/img-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { listJadwalWeek, updateFieldValue } from '../../features/karyawanSlice'
-import JabatanSelect from './JabatanSelect'
+import JabatanSelect from '../../components/karyawan/JabatanSelect'
 
 function DetailFotoProfile({ callback }) {
     const dispatch = useDispatch()

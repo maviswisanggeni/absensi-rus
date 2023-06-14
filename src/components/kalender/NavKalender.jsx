@@ -9,7 +9,8 @@ import dayjs from 'dayjs'
 function NavKalender() {
   let navigate = useNavigate()
   let id = useParams()
-  const { isAddPage, judul, kategoriEvent, lokasi, waktuMulai, waktuSelesai, deskripsi, peserta, loading } = useSelector((state) => state.kalender)
+  const { isAddPage, judul, kategoriEvent, lokasi, waktuMulai, waktuSelesai, deskripsi, peserta, loading, waktuMulaiLibur, waktuSelesaiLibur
+  } = useSelector((state) => state.kalender)
   const dispatch = useDispatch()
 
   function handleSubmit() {
@@ -20,8 +21,8 @@ function NavKalender() {
         judul,
         lokasi,
         kategori_event: kategoriEvent,
-        waktu_mulai: waktuMulai,
-        waktu_selesai: waktuSelesai,
+        waktu_mulai: kategoriEvent === 'libur' ? dayjs(waktuMulaiLibur).format('YYYY-MM-DD') : waktuMulai,
+        waktu_selesai: kategoriEvent === 'libur' ? dayjs(waktuSelesaiLibur).format('YYYY-MM-DD') : waktuSelesai,
         deskripsi,
         peserta: filteredPeserta,
       }))
@@ -40,8 +41,8 @@ function NavKalender() {
         judul,
         lokasi,
         kategori_event: kategoriEvent,
-        waktu_mulai: waktuMulai,
-        waktu_selesai: waktuSelesai,
+        waktu_mulai: kategoriEvent === 'libur' ? dayjs(waktuMulaiLibur).format('YYYY-MM-DD') : waktuMulai,
+        waktu_selesai: kategoriEvent === 'libur' ? dayjs(waktuSelesaiLibur).format('YYYY-MM-DD') : waktuSelesai,
         deskripsi,
         peserta: filteredPeserta,
       }))
@@ -68,6 +69,26 @@ function NavKalender() {
       })
   }
 
+  function validateBtnEvent() {
+    return judul.trim() !== '' &&
+      lokasi?.trim() !== '' &&
+      lokasi !== null &&
+      kategoriEvent.trim() !== '' &&
+      waktuMulai.trim() !== '' &&
+      waktuSelesai.trim() !== '' &&
+      deskripsi.trim() !== '' &&
+      peserta.length !== 0
+      ? false : true
+  }
+
+  function validateBtnLibur() {
+    return judul.trim() !== '' &&
+      kategoriEvent.trim() !== '' &&
+      deskripsi.trim() !== '' &&
+      peserta.length !== 0
+      ? false : true
+  }
+
   return (
     <div className='nav-kalender'>
       <div className='wrapper-back-btn'>
@@ -86,6 +107,11 @@ function NavKalender() {
           value='Konfirmasi'
           className='btn-submit'
           onClick={handleSubmit}
+          disabled={
+            kategoriEvent === 'event'
+              ? validateBtnEvent()
+              : validateBtnLibur()
+          }
         />
       </div>
       {loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}

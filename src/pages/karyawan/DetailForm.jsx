@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import close from '../../assets/icons/close.svg'
 import eye from '../../assets/icons/eye.svg'
 import at from '../../assets/icons/at.svg'
-import Label from './Label'
+import Label from '../../components/karyawan/Label'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetField, updateFieldError, updateFieldValue } from '../../features/karyawanSlice'
 

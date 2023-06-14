@@ -3,6 +3,40 @@ import axios from "axios";
 import getBaseUrl from "../datas/apiUrl";
 import token from "../datas/tokenAuthorization";
 
+const initialState = {
+    listEvent: [],
+    daySelected: null,
+    listSearchPeserta: [],
+    isAddPage: true,
+
+    judul: '',
+    kategoriEvent: 'event',
+    lokasi: '',
+    waktuMulai: '',
+    waktuSelesai: '',
+    waktuMulaiLibur: '',
+    waktuSelesaiLibur: '',
+    deskripsi: '',
+    peserta: [],
+    errors: {
+        judul: '',
+        kategoriEvent: '',
+        lokasi: '',
+        waktuMulai: '',
+        waktuSelesai: '',
+        deskripsi: '',
+        peserta: []
+    },
+
+    statusResApi: '',
+    messageResApi: '',
+    isDisplayMessage: false,
+
+    loading: false,
+    loadngGetKaryawan: false,
+    loadingSearch: false
+}
+
 export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan) => {
     const response = await axios.get(
         getBaseUrl() + 'kalender',
@@ -49,7 +83,9 @@ export const getKaryawanKalender = createAsyncThunk("kalender/getKaryawanKalende
 export const storeKalender = createAsyncThunk("kalender/store", async ({ judul, lokasi, kategori_event, waktu_mulai, waktu_selesai, deskripsi, peserta }) => {
     const formData = new FormData()
     formData.append('judul', judul)
-    formData.append('lokasi', lokasi)
+    if (kategori_event === 'event') {
+        formData.append('lokasi', lokasi)
+    }
     formData.append('kategori_event', kategori_event)
     formData.append('waktu_mulai', waktu_mulai)
     formData.append('waktu_selesai', waktu_selesai)
@@ -72,7 +108,9 @@ export const storeKalender = createAsyncThunk("kalender/store", async ({ judul, 
 export const updateKalender = createAsyncThunk("kalender/update", async ({ id, judul, lokasi, kategori_event, waktu_mulai, waktu_selesai, deskripsi, peserta }) => {
     const formData = new FormData()
     formData.append('judul', judul)
-    formData.append('lokasi', lokasi)
+    if (kategori_event === 'event') {
+        formData.append('lokasi', lokasi)
+    }
     formData.append('kategori_event', kategori_event)
     formData.append('waktu_mulai', waktu_mulai)
     formData.append('waktu_selesai', waktu_selesai)
@@ -106,30 +144,38 @@ export const deleteKalender = createAsyncThunk("kalender/delete", async (id) => 
 
 const kalenderSlice = createSlice({
     name: 'kalender',
-    initialState: {
-        listEvent: [],
-        daySelected: null,
-        listSearchPeserta: [],
-        isAddPage: true,
-
-        judul: '',
-        kategoriEvent: '',
-        lokasi: '',
-        waktuMulai: '',
-        waktuSelesai: '',
-        deskripsi: '',
-        peserta: [],
-
-        loading: false,
-        loadngGetKaryawan: false,
-        loadingSearch: false
-    },
+    initialState,
     reducers: {
         updateFieldKalender: (state, action) => {
             const { name, value } = action.payload
             state[name] = value
+            if (state.judul.trim() === '' && name === 'judul') {
+                state.errors.judul = 'Isi Judul';
+            } else if (state.kategoriEvent.trim() === '' && name === 'kategoriEvent') {
+                state.errors.kategoriEvent = 'Pilih Kategori event';
+            } else if (state.lokasi?.trim() === '' && name === 'lokasi') {
+                state.errors.lokasi = 'Isi lokasi';
+            } else if (state.waktuMulai.slice(11) === ':00' && name === 'waktuMulai') {
+                state.errors.waktuMulai = 'Isi waktu mulai';
+            } else if (state.waktuSelesai.slice(11) === ':00' && name === 'waktuSelesai') {
+                state.errors.waktuSelesai = 'Isi waktu selesai';
+            } else if (state.deskripsi.trim() === '' && name === 'deskripsi') {
+                state.errors.deskripsi = 'Isi deskripsi';
+            } else if (state.peserta.length === 0 && name === 'peserta') {
+                state.errors.peserta = 'Isi peseta';
+            } else {
+                state.errors[name] = '';
+            }
         },
-        updateListPeserta: (state, action) => {
+        updateFieldError: (state, action) => {
+            const { field, error } = action.payload;
+            state.errors[field] = error;
+        },
+        updateStateKalender: (state, action) => {
+            const { name, value } = action.payload
+            state[name] = value
+            // state.errors = validateForm(state)
+        }, updateListPeserta: (state, action) => {
             const isIdAlreadyAdded = state.peserta.some((pesertaItem) => pesertaItem.id === action.payload.id)
             if (!isIdAlreadyAdded) {
                 state.peserta.push(action.payload)
@@ -150,7 +196,7 @@ const kalenderSlice = createSlice({
         },
         resetFieldKalender: (state) => {
             state.judul = ''
-            state.kategoriEvent = ''
+            state.kategoriEvent = 'event'
             state.lokasi = ''
             state.waktuMulai = ''
             state.waktuSelesai = ''
@@ -175,6 +221,8 @@ const kalenderSlice = createSlice({
         [getKalender.rejected]: (state) => {
             state.loading = false
         },
+
+
         [getDetailKalender.pending]: (state) => {
             state.loading = true
         },
@@ -185,6 +233,8 @@ const kalenderSlice = createSlice({
             state.lokasi = action.payload.data.lokasi
             state.waktuMulai = action.payload.data.waktu_mulai
             state.waktuSelesai = action.payload.data.waktu_selesai
+            state.waktuMulaiLibur = action.payload.data.waktu_mulai
+            state.waktuSelesaiLibur = action.payload.data.waktu_selesai
             state.deskripsi = action.payload.data.deskripsi
             state.peserta = action.payload.data.peserta.map((participant) => ({
                 ...participant,
@@ -194,6 +244,8 @@ const kalenderSlice = createSlice({
         [getDetailKalender.rejected]: (state) => {
             state.loading = false
         },
+
+
         [getKaryawanKalender.pending]: (state, action) => {
             state.loadngGetKaryawan = true
             if (action.meta.arg && action.meta.arg.search) {
@@ -221,36 +273,62 @@ const kalenderSlice = createSlice({
             state.loadngGetKaryawan = false
             state.loadingSearch = false
         },
+
+
         [storeKalender.pending]: (state) => {
             state.loading = true
         },
         [storeKalender.fulfilled]: (state) => {
             state.loading = false
+            state.statusResApi = 'success'
+            state.messageResApi = 'Kalender berhasil ditambahkan'
+            state.isDisplayMessage = true
         },
-        [storeKalender.rejected]: (state) => {
+        [storeKalender.rejected]: (state, action) => {
             state.loading = false
+            state.statusResApi = action.error.code
+            state.messageResApi = action.error.message
+            state.isDisplayMessage = true
         },
+
+
         [updateKalender.pending]: (state) => {
             state.loading = true
         },
         [updateKalender.fulfilled]: (state) => {
             state.loading = false
+            state.statusResApi = 'success'
+            state.messageResApi = 'Kalender berhasil diedit'
+            state.isDisplayMessage = true
         },
-        [updateKalender.rejected]: (state) => {
+        [updateKalender.rejected]: (state, action) => {
             state.loading = false
+            state.statusResApi = action.error.code
+            state.messageResApi = action.error.message
+            state.isDisplayMessage = true
         },
+
+
         [deleteKalender.pending]: (state) => {
             state.loading = true
         },
         [deleteKalender.fulfilled]: (state) => {
             state.loading = false
+            state.statusResApi = 'success'
+            state.messageResApi = 'Kalender berhasil dihapus'
+            state.isDisplayMessage = true
         },
-        [deleteKalender.rejected]: (state) => {
+        [deleteKalender.rejected]: (state, action) => {
             state.loading = false
+            state.statusResApi = action.error.code
+            state.messageResApi = action.error.message
+            state.isDisplayMessage = true
         },
     }
 })
 
 // export const karyawanSelectors = karyawanEntity.getSelectors(state => state.karyawan)
-export const { updateFieldKalender, updateListPeserta, deletePesertaByKategori, resetePeserta, setLoading, checkIsAddPage, resetFieldKalender, deletePeserta } = kalenderSlice.actions
+export const { updateFieldKalender, updateListPeserta, deletePesertaByKategori,
+    resetePeserta, setLoading, checkIsAddPage, resetFieldKalender, deletePeserta, updateStateKalender
+} = kalenderSlice.actions
 export default kalenderSlice.reducer;
