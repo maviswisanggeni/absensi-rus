@@ -82,6 +82,12 @@
           font-size: 10px;
           color: $light-grey;
         }
+
+        .full-screen {
+          position: absolute;
+          width: 100vw;
+          height: 100vh;
+        }
       }
     }
   }
