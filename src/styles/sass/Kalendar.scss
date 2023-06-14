@@ -137,6 +137,7 @@
       flex-direction: column;
       position: relative;
       margin-bottom: 1rem;
+      cursor: default;
 
       p {
         font-weight: 500;
@@ -154,11 +155,16 @@
   .hover-detail-event {
     position: absolute;
     width: 400px;
+    max-height: 250px;
     border: 2px solid #ebf0fe;
     border-radius: 10px;
     z-index: 999;
     background-color: white;
     padding: 1rem 1.5rem;
+    top: -25px;
+    left: 150px;
+    cursor: default;
+    overflow-y: scroll;
 
     .wrapper-judul {
       display: flex;
@@ -174,6 +180,7 @@
         font-weight: 500;
         font-size: 10px;
         color: $primary-color;
+        cursor: pointer;
       }
     }
 
@@ -434,6 +441,12 @@
         cursor: pointer;
         background-color: #ff4530;
       }
+
+      .btn-submit:disabled {
+        background-color: #5a6474;
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -441,7 +454,7 @@
     display: flex;
     justify-content: space-between;
     padding: 2rem 2.5rem;
-    width: 100%;
+    width: 1179px;
     gap: 3rem;
 
     h3 {
@@ -460,6 +473,10 @@
       font-size: 12px;
       height: 35px;
       outline: none;
+    }
+
+    .input-lokasi {
+      margin-bottom: 1rem;
     }
 
     .wrapper-form {
@@ -504,10 +521,48 @@
       }
 
       .wrapper-time {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 1rem 0;
+        margin-bottom: 1rem;
+
+        .time {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.5rem;
+        }
+
+        .react-calendar {
+          z-index: 1;
+          position: absolute;
+          padding: 1rem;
+        }
+
+        .first-calendar {
+          transform: translate(-2%, 56%);
+        }
+
+        .second-calendar {
+          transform: translate(108%, 56%);
+        }
+
+        .waktu {
+          width: 50%;
+          border: 1px solid #9b9b9b;
+          border-radius: 7.5px;
+          background-color: $background-color;
+          font-weight: 400;
+          font-size: 12px;
+          height: 35px;
+          outline: none;
+          padding: 0.5rem 1rem;
+        }
+
+        .waktu__mulai.active {
+          border: 2px solid $primary-color;
+        }
+
+        .waktu__selesai.active {
+          border: 2px solid $primary-color;
+        }
 
         input[type="text"] {
           width: 50%;
@@ -533,6 +588,19 @@
           width: 8px;
           height: 1px;
           background-color: black;
+        }
+
+        .wrapper-error {
+          display: flex;
+          justify-content: space-between;
+          gap: 2rem;
+          width: 49%;
+          margin-left: auto;
+
+          p {
+            width: 50%;
+            text-align: center;
+          }
         }
       }
 
@@ -714,6 +782,7 @@
               span {
                 font-weight: 500;
                 font-size: 10px;
+                color: $grey;
               }
             }
           }

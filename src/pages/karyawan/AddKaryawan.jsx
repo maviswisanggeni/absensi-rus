@@ -3,20 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import arrowLeft from '../../assets/icons/arrow-left.svg'
 import Form from './AddForm'
 import FotoProfile from './AddFotoProfile'
-import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser'
 import '../../styles/css/add-karyawan.css'
-import { useWrapperAddKaryawan } from '../../contexts/app/WrapperAddKaryawan'
-import Sidebar from '../sidebar/Sidebar'
+import Sidebar from '../../components/sidebar/Sidebar'
 import { useEffect } from 'react'
 import { resetForm, listJadwalWeek, storeKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKategori } from '../../features/ketegoriSlice'
 import { useState } from 'react'
-import InfoBox from '../InfoBox'
+import InfoBox from '../../components/InfoBox'
 
 function AddKaryawan() {
-    const context = useApiKaryawanStoreUser()
-    const contextValidator = useWrapperAddKaryawan()
     let navigate = useNavigate()
     const dispatch = useDispatch()
     const {

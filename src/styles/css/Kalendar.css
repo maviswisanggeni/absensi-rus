@@ -154,6 +154,7 @@
           flex-direction: column;
   position: relative;
   margin-bottom: 1rem;
+  cursor: default;
 }
 .kalender .day .day-events p {
   font-weight: 500;
@@ -167,11 +168,16 @@
 .kalender .hover-detail-event {
   position: absolute;
   width: 400px;
+  max-height: 250px;
   border: 2px solid #ebf0fe;
   border-radius: 10px;
   z-index: 999;
   background-color: white;
   padding: 1rem 1.5rem;
+  top: -25px;
+  left: 150px;
+  cursor: default;
+  overflow-y: scroll;
 }
 .kalender .hover-detail-event .wrapper-judul {
   display: -webkit-box;
@@ -190,6 +196,7 @@
   font-weight: 500;
   font-size: 10px;
   color: #3661eb;
+  cursor: pointer;
 }
 .kalender .hover-detail-event .tanggal,
 .kalender .hover-detail-event .lokasi,
@@ -482,6 +489,11 @@
   cursor: pointer;
   background-color: #ff4530;
 }
+.wrapper-kalender-add .nav-kalender .wrapper-action-btn .btn-submit:disabled {
+  background-color: #5a6474;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 .wrapper-kalender-add .wrapper-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -490,7 +502,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 2rem 2.5rem;
-  width: 100%;
+  width: 1179px;
   gap: 3rem;
 }
 .wrapper-kalender-add .wrapper-content h3 {
@@ -508,6 +520,9 @@
   font-size: 12px;
   height: 35px;
   outline: none;
+}
+.wrapper-kalender-add .wrapper-content .input-lokasi {
+  margin-bottom: 1rem;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form {
   display: -webkit-box;
@@ -567,6 +582,9 @@
   cursor: pointer;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time {
+  margin-bottom: 1rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .time {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -576,7 +594,37 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 1rem 0;
+  gap: 0.5rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .react-calendar {
+  z-index: 1;
+  position: absolute;
+  padding: 1rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .first-calendar {
+  -webkit-transform: translate(-2%, 56%);
+          transform: translate(-2%, 56%);
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .second-calendar {
+  -webkit-transform: translate(108%, 56%);
+          transform: translate(108%, 56%);
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu {
+  width: 50%;
+  border: 1px solid #9b9b9b;
+  border-radius: 7.5px;
+  background-color: #f9f9f9;
+  font-weight: 400;
+  font-size: 12px;
+  height: 35px;
+  outline: none;
+  padding: 0.5rem 1rem;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu__mulai.active {
+  border: 2px solid #3661eb;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu__selesai.active {
+  border: 2px solid #3661eb;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time input[type=text] {
   width: 50%;
@@ -610,6 +658,21 @@
   width: 8px;
   height: 1px;
   background-color: black;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .wrapper-error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 2rem;
+  width: 49%;
+  margin-left: auto;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .wrapper-error p {
+  width: 50%;
+  text-align: center;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .input-deskripsi-event {
   height: 140px;
@@ -822,6 +885,7 @@
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list .list-content-left div span {
   font-weight: 500;
   font-size: 10px;
+  color: #9b9b9b;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list input {
   -webkit-appearance: none;

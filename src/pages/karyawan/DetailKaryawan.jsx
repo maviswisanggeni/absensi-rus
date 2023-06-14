@@ -5,7 +5,7 @@ import '../../styles/css/Karyawan.css'
 import DetailForm from './DetailForm'
 import DetailFotoProfile from './DetailFotoProfile'
 import { useDispatch, useSelector } from 'react-redux'
-import Sidebar from '../sidebar/Sidebar'
+import Sidebar from '../../components/sidebar/Sidebar'
 import { detailKaryawan, resetListKaryawan, updateKaryawan } from '../../features/karyawanSlice'
 import { getKategori } from '../../features/ketegoriSlice'
 

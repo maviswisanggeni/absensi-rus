@@ -367,11 +367,17 @@ const karyawanSlice = createSlice({
             .addCase(updateKaryawan.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(updateKaryawan.fulfilled, (state, action) => {
+            .addCase(updateKaryawan.fulfilled, (state) => {
                 state.isLoading = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Karyawan berhasil diedit'
+                state.isDisplayMessage = true
             })
-            .addCase(updateKaryawan.rejected, (state) => {
+            .addCase(updateKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
+                state.statusResApi = action.error.code
+                state.messageResApi = action.error.message
+                state.isDisplayMessage = true
             })
             .addCase(deleteKaryawan.pending, (state) => {
                 state.isLoading = true;
