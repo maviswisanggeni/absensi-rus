@@ -53,6 +53,10 @@ function Table() {
     return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
   }
 
+  function handleCopyNiy(niy) {
+    navigator.clipboard.writeText(niy)
+  }
+
   return (
     <>
       <table className='table'>
@@ -82,7 +86,7 @@ function Table() {
                       <td>{item?.no_hp}</td>
                       <td>{item?.email}</td>
                       <td className='action-col'>
-                        <img src={copy} alt='' />
+                        <img src={copy} alt='' onClick={() => handleCopyNiy(item?.niy)} />
                         <Link to={`/karyawan/edit/${item?.id}`}>
                           <img src={edit} alt="" />
                         </Link>

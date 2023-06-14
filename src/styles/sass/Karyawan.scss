@@ -113,6 +113,10 @@
   }
 
   .action-col {
+    // display: flex;
+    // place-items: center;
+    height: 100%;
+
     img {
       cursor: pointer;
     }
