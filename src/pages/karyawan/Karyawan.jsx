@@ -17,7 +17,7 @@ import { getKaryawan, updateFieldValue, updateStateKaryawan } from '../../featur
 import InfoBox from '../../components/InfoBox'
 
 function Karyawan() {
-  const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage } = useSelector(state => state.karyawan)
+  const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search } = useSelector(state => state.karyawan)
   const { listKategori, kategoriId, loadingKategori, currentKategori } = useSelector(state => state.kategori)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -36,12 +36,15 @@ function Karyawan() {
 
   useEffect(() => {
     if (isKategoriUpdated && kategoriId) {
-      console.log('this useEffect is rendering');
       dispatch(getKaryawan({ kategori_id: kategoriId }));
       dispatch(updateFieldValue({ field: 'kategoriId', value: kategoriId }));
       setIsKategoriUpdated(false);
     }
   }, [kategoriId, isKategoriUpdated]);
+
+  function handleSearch() {
+    dispatch(getKaryawan({ kategori_id: kategoriId, search }))
+  }
 
   return (
     <div className='wrapper-karyawan'>
@@ -58,11 +61,14 @@ function Karyawan() {
         }
         <div className='search-and-profile'>
           <div className='wrap-search'>
-            <Search placeholder='Cari guru / karyawan'
-            // setSearch={setSearch} 
+            <Search
+              placeholder='Cari guru / karyawan'
+              value={search}
+              setSearch={updateStateKaryawan}
             />
-            <button className='btn-search'
-            // onClick={searchKaryawan}
+            <button
+              className='btn-search'
+              onClick={handleSearch}
             >
               <img src={searchIcon} alt="" /></button>
           </div>

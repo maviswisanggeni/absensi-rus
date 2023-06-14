@@ -568,6 +568,7 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  position: relative;
 }
 .tabbar a {
   text-decoration: none;

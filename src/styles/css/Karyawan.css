@@ -141,6 +141,9 @@
   color: #3661eb;
   font-weight: 500;
 }
+.karyawan .action-col {
+  height: 100%;
+}
 .karyawan .action-col img {
   cursor: pointer;
 }

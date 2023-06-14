@@ -52,6 +52,7 @@ const initialState = {
     currentPage: 1,
     keterangan: null,
     urutan: 'Sesuai abjad',
+    search: '',
 
     nama: '',
     niy: '',
