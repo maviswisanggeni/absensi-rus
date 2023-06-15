@@ -50,15 +50,13 @@ function Karyawan() {
     <div className='wrapper-karyawan'>
       <Sidebar />
       <div className='karyawan'>
-        {isDisplayMessage &&
-          <InfoBox
-            message={messageResApi}
-            status={statusResApi}
-            isDisplay={isDisplayMessage}
-            setIsDisplay={updateStateKaryawan}
-            stateName='isDisplayMessage'
-          />
-        }
+        <InfoBox
+          message={messageResApi}
+          status={statusResApi}
+          isDisplay={isDisplayMessage}
+          setIsDisplay={updateStateKaryawan}
+          stateName='isDisplayMessage'
+        />
         <div className='search-and-profile'>
           <div className='wrap-search'>
             <Search

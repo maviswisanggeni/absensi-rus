@@ -6,10 +6,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getKoordinat, inputKordinat, updateKoordinat, updateStateKordinat } from '../../features/koordinatSlice';
 import { useRef } from 'react';
+import InfoBox from '../../components/InfoBox';
 
 function RadiusAbsen() {
     const dispatch = useDispatch()
-    const { latitude, longitude, radius, loading, longitudeWhiteEdit, latitudeWhileEdit } = useSelector((state) => state.koordinat)
+    const { latitude, longitude, radius, loading, longitudeWhiteEdit, latitudeWhileEdit, statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.koordinat)
     const [isEditing, setIsEditing] = useState(false);
     const btnEdit = useRef()
 
@@ -156,6 +157,14 @@ function RadiusAbsen() {
                     </MapContainer>
                 }
             </div>
+
+            <InfoBox
+                message={messageResApi}
+                status={statusResApi}
+                isDisplay={isDisplayMessage}
+                setIsDisplay={updateStateKordinat}
+                stateName='isDisplayMessage'
+            />
         </div>
     )
 }

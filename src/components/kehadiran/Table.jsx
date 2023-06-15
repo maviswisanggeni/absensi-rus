@@ -1,23 +1,35 @@
 import React, { useMemo } from 'react'
 import Pagination from '../Pagination';
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import defaultFoto from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux';
 import Pusher from "pusher-js";
 import { updateStateKehadiran } from '../../features/kehadiranSlice';
+import { useEffect } from 'react';
 
 let PageSize = 10;
 
 function Table() {
     const context = useKehadiranListAbsensi()
     const dispatch = useDispatch()
+    let [searchParams] = useSearchParams();
+    const location = useLocation()
 
     const {
         kehadiranMasuk, kehadiranKeluar,
         kehadiranIzin, currentPage,
         keterangan, urutan, loading
     } = useSelector(state => state.kehadiran)
+
+    useEffect(() => {
+        dispatch(updateStateKehadiran({ name: 'currentPage', value: 1 }))
+    }, [location.pathname.split('/').pop()]);
+
+    useEffect(() => {
+        const currentPageParams = searchParams.get('paginate') ? searchParams.get('paginate') : 1;
+        dispatch(updateStateKehadiran({ name: 'currentPage', value: parseInt(currentPageParams) }))
+    }, [searchParams, dispatch]);
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -72,6 +84,7 @@ function Table() {
             return pulang
         }
     }
+
     return (
         <>
             <table className='table'>
@@ -88,7 +101,7 @@ function Table() {
 
                 <tbody>
                     {
-                        !loading ? <tr className='loading loading-table'><td>Loading...</td></tr>
+                        loading ? <tr className='loading loading-table'><td>Loading...</td></tr>
                             : currentTableData.length === 0 ? <tr className='loading-table'><td>Data tidak ditemukan </td></tr>
                                 :
                                 currentTableData?.map((item, key) => {
@@ -118,7 +131,8 @@ function Table() {
                 currentPage={currentPage}
                 totalCount={keterangan === 'Masuk' ? kehadiranMasuk?.length : keterangan === 'Keluar' ? kehadiranKeluar?.length : kehadiranIzin?.length}
                 pageSize={PageSize}
-                onPageChange={page => dispatch(updateStateKehadiran({ name: 'currentPage', value: page }))}
+                onPageChange={
+                    page => dispatch(updateStateKehadiran({ name: 'currentPage', value: page }))}
             />
         </>
     )

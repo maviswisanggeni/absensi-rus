@@ -10,15 +10,17 @@ import Jadwal from '../components/sidebar-right/Jadwal'
 import Calender from '../components/CustomCalendar'
 import Sidebar from '../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
-import { getJmlKehadiranDashboard, setJmlKehadiran } from '../features/jmlKehadiranSlice'
+import { getJmlKehadiranDashboard, setJmlKehadiran, updateStateJmlKehadiran } from '../features/jmlKehadiranSlice'
 import Pusher from "pusher-js";
+import InfoBox from '../components/InfoBox'
 
 function Dashboard() {
   const dispatch = useDispatch()
+  const { statusResApi, messageResApi, isDisplayMessage } = useSelector(state => state.jmlKehadiran)
 
   useEffect(() => {
     dispatch(getJmlKehadiranDashboard())
-  }, [dispatch])
+  }, [])
 
   // useEffect(() => {
   //   Pusher.logToConsole = true;
@@ -78,6 +80,14 @@ function Dashboard() {
         </div>
         <Jadwal />
       </div>
+
+      <InfoBox
+        message={messageResApi}
+        status={statusResApi}
+        isDisplay={isDisplayMessage}
+        setIsDisplay={updateStateJmlKehadiran}
+        stateName='isDisplayMessage'
+      />
     </div>
   )
 }

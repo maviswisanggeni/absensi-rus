@@ -15,14 +15,16 @@ import { TanggalKehadiranProvider } from '../contexts/app/ContextTanggalKehadira
 import Sidebar from '../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getJmlKehadiranKehadiran } from '../features/jmlKehadiranSlice'
+import { getJmlKehadiranKehadiran, updateStateJmlKehadiran } from '../features/jmlKehadiranSlice'
 import { Route, Routes } from 'react-router'
 import Pusher from "pusher-js";
+import InfoBox from '../components/InfoBox'
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
   const { tanggal } = useSelector((state) => state.jmlKehadiran)
+  const { statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.kehadiran)
 
   useEffect(() => {
     dispatch(getJmlKehadiranKehadiran(tanggal))
@@ -98,6 +100,14 @@ function Kehadiran() {
           </div>
           <KehadiranTerbaru />
         </div>
+
+        <InfoBox
+          message={messageResApi}
+          status={statusResApi}
+          isDisplay={isDisplayMessage}
+          setIsDisplay={updateStateJmlKehadiran}
+          stateName='isDisplayMessage'
+        />
       </TanggalKehadiranProvider>
     </div>
   )

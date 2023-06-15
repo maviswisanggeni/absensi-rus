@@ -3,34 +3,61 @@ import axios from "axios";
 import getBaseUrl from "../datas/apiUrl";
 import token from "../datas/tokenAuthorization";
 
-export const getKoordinat = createAsyncThunk("pengaturan/getKoordinat", async () => {
-    const response = await axios.get(
-        getBaseUrl() + 'setting/kordinat',
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
+export const getKoordinat = createAsyncThunk("pengaturan/getKoordinat", async (_, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + 'setting/kordinat',
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
-export const updateKoordinat = createAsyncThunk("pengaturan/updateKoordinat", async ({ latitude, longitude, radius }) => {
+export const updateKoordinat = createAsyncThunk("pengaturan/updateKoordinat", async ({ latitude, longitude, radius }, { rejectWithValue }) => {
     const formData = new FormData()
     formData.append('latitude', latitude)
     formData.append('longitude', longitude)
     formData.append('radius', radius)
 
-    const response = await axios.post(
-        getBaseUrl() + 'setting/kordinat/update',
-        formData,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
+    try {
+        const response = await axios.post(
+            getBaseUrl() + 'setting/kordinat/update',
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
             }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
 const koordinatSlice = createSlice({
@@ -41,7 +68,11 @@ const koordinatSlice = createSlice({
         latitudeWhileEdit: '',
         longitudeWhiteEdit: '',
         radius: '',
-        loading: false
+        loading: false,
+
+        statusResApi: '',
+        messageResApi: '',
+        isDisplayMessage: false,
     },
     reducers: {
         updateStateKordinat: (state, action) => {
@@ -60,31 +91,39 @@ const koordinatSlice = createSlice({
             }
         }
     },
-    extraReducers: {
-        [getKoordinat.pending]: (state) => {
-            state.loading = true
-        },
-        [getKoordinat.fulfilled]: (state, action) => {
-            state.loading = false
-            state.latitude = action.payload.data[1].value
-            state.longitude = action.payload.data[0].value
-            state.latitudeWhileEdit = action.payload.data[1].value
-            state.longitudeWhiteEdit = action.payload.data[0].value
-            state.radius = action.payload.data[2].value
-        },
-        [getKoordinat.rejected]: (state) => {
-            state.loading = false
-        },
-        [updateKoordinat.pending]: (state) => {
-            state.loading = true
-        },
-        [updateKoordinat.fulfilled]: (state) => {
-            state.loading = false
-        },
-        [updateKoordinat.rejected]: (state) => {
-            state.loading = false
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getKoordinat.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getKoordinat.fulfilled, (state, action) => {
+                state.loading = false;
+                state.latitude = action.payload.data[1].value;
+                state.longitude = action.payload.data[0].value;
+                state.latitudeWhileEdit = action.payload.data[1].value;
+                state.longitudeWhiteEdit = action.payload.data[0].value;
+                state.radius = action.payload.data[2].value;
+            })
+            .addCase(getKoordinat.rejected, (state, action) => {
+                state.loading = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
 
+
+            .addCase(updateKoordinat.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(updateKoordinat.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(updateKoordinat.rejected, (state, action) => {
+                state.loading = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            });
     }
 })
 

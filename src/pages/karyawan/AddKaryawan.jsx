@@ -94,7 +94,7 @@ function AddKaryawan() {
                     </div>
 
                     <button
-                        // disabled={validateDisabled()}
+                        disabled={validateDisabled()}
                         onClick={addUser}
                         className='btn-submit'
                     >

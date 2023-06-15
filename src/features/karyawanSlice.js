@@ -118,37 +118,62 @@ const initialState = {
     isLoading: false,
 };
 
-export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }) => {
-    const response = await axios.get(
-        getBaseUrl() + 'karyawan',
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
-            params: {
-                kategori_id,
-                search
+export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + 'karyawan',
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                params: {
+                    kategori_id,
+                    search
+                },
+                timeout: 20000
             }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
-export const detailKaryawan = createAsyncThunk("karyawan/detailKaryawan", async (id) => {
-    const response = await axios.get(
-        getBaseUrl() + `karyawan/detail/${id}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
+export const detailKaryawan = createAsyncThunk("karyawan/detailKaryawan", async (id, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + `karyawan/detail/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
             }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+        return rejectWithValue(error.code)
+    }
 });
 
 export const storeKaryawan = createAsyncThunk("karyawan/storeKaryawan", async ({
     nama, niy, email, password, alamat, no_hp, pf_foto, jadwal, ktg_karyawan
-}) => {
+}, { rejectWithValue }) => {
 
     const formData = new FormData();
     formData.append('nama', nama);
@@ -169,22 +194,36 @@ export const storeKaryawan = createAsyncThunk("karyawan/storeKaryawan", async ({
         formData.append(`ktg_karyawan[${index}]`, item);
     });
 
-    const response = await axios.post(
-        getBaseUrl() + `karyawan/store`,
-        formData,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-                'Content-Type': 'multipart/form-data',
-            }
-        },
-    )
-    return response.data
+    try {
+        const response = await axios.post(
+            getBaseUrl() + `karyawan/store`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+                timeout: 20000
+            },
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
+        }
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code);
+    }
+
 });
 
 export const updateKaryawan = createAsyncThunk("karyawan/editKaryawan", async ({
     id, nama, email, password, alamat, no_hp, pf_foto, jadwal, ktg_karyawan
-}) => {
+}, { rejectWithValue }) => {
 
     const formData = new FormData();
     formData.append('nama', nama);
@@ -206,29 +245,55 @@ export const updateKaryawan = createAsyncThunk("karyawan/editKaryawan", async ({
         formData.append(`ktg_karyawan[${index}]`, item);
     });
 
-    const response = await axios.post(
-        getBaseUrl() + `karyawan/update/${id}`,
-        formData,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-                'Content-Type': 'multipart/form-data'
-            },
+    try {
+        const response = await axios.post(
+            getBaseUrl() + `karyawan/update/${id}`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                    'Content-Type': 'multipart/form-data'
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code);
+    }
+
 });
 
-export const deleteKaryawan = createAsyncThunk("karyawan/deleteKaryawan", async (id) => {
-    const response = await axios.get(
-        getBaseUrl() + `karyawan/delete/${id}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
+export const deleteKaryawan = createAsyncThunk("karyawan/deleteKaryawan", async (id, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + `karyawan/delete/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+        return rejectWithValue(error.code)
+    }
 });
 
 const karyawanSlice = createSlice({
@@ -327,9 +392,15 @@ const karyawanSlice = createSlice({
                 state.listKaryawan = action.payload.data;
                 state.isInitialGet = true
             })
-            .addCase(getKaryawan.rejected, (state) => {
+            .addCase(getKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
+                console.log(action);
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
             })
+
+
             .addCase(detailKaryawan.pending, (state) => {
                 state.isLoading = true;
             })
@@ -347,9 +418,14 @@ const karyawanSlice = createSlice({
                 state.listJadwal = initialData.jadwal;
                 state.errors = validateForm(state);
             })
-            .addCase(detailKaryawan.rejected, (state) => {
+            .addCase(detailKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
             })
+
+
             .addCase(storeKaryawan.pending, (state) => {
                 state.isLoading = true;
             })
@@ -361,10 +437,13 @@ const karyawanSlice = createSlice({
             })
             .addCase(storeKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
-                state.statusResApi = action.error.code
-                state.messageResApi = action.error.message
+                console.log(action);
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
                 state.isDisplayMessage = true
             })
+
+
             .addCase(updateKaryawan.pending, (state) => {
                 state.isLoading = true;
             })
@@ -376,10 +455,12 @@ const karyawanSlice = createSlice({
             })
             .addCase(updateKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
-                state.statusResApi = action.error.code
-                state.messageResApi = action.error.message
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
                 state.isDisplayMessage = true
             })
+
+
             .addCase(deleteKaryawan.pending, (state) => {
                 state.isLoading = true;
             })
@@ -391,8 +472,8 @@ const karyawanSlice = createSlice({
             })
             .addCase(deleteKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
-                state.statusResApi = action.error.code
-                state.messageResApi = action.error.message
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
                 state.isDisplayMessage = true
             })
     }

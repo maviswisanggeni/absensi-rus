@@ -7,6 +7,7 @@ import editIcons from '../../assets/icons/edit.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteKategori, getKategoriPengaturan, storeKategori, updateInputPengaturan, updateKategori } from '../../features/pengaturanSlice'
 import { Link } from 'react-router-dom'
+import InfoBox from '../../components/InfoBox'
 
 function KategoriKaryawan() {
     const [showModalAddKategori, setShowModalAddKategori] = useState(false)
@@ -16,7 +17,7 @@ function KategoriKaryawan() {
     const [id, setId] = useState(null)
 
     const dispatch = useDispatch()
-    const { listKategori, kategoriInput } = useSelector((state) => state.pengaturan)
+    const { listKategori, kategoriInput, statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.pengaturan)
     const more = useRef(null)
 
     useEffect(() => {
@@ -168,6 +169,13 @@ function KategoriKaryawan() {
                         </div>
                     </div>
                 }
+                <InfoBox
+                    message={messageResApi}
+                    status={statusResApi}
+                    isDisplay={isDisplayMessage}
+                    setIsDisplay={updateInputPengaturan}
+                    stateName='isDisplayMessage'
+                />
             </div>
         </>
     )
