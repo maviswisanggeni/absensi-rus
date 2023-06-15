@@ -12,7 +12,7 @@ function InfoBox({ status, message, isDisplay, setIsDisplay, stateName }) {
         if (isDisplay) {
             const timer = setTimeout(() => {
                 dispatch(setIsDisplay({ name: stateName, value: false }));
-            }, 5000);
+            }, 30000);
 
             return () => {
                 clearTimeout(timer);

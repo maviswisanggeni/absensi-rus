@@ -37,50 +37,92 @@ const initialState = {
     loadingSearch: false
 }
 
-export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan) => {
-    const response = await axios.get(
-        getBaseUrl() + 'kalender',
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
-            params: {
-                bulan: bulan
+export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + 'kalender',
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                params: {
+                    bulan: bulan
+                },
+                timeout: 20000
             }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
-export const getDetailKalender = createAsyncThunk("kalender/detailKalender", async (id) => {
-    const response = await axios.get(
-        getBaseUrl() + `kalender/detail/${id}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
-        }
-    )
-    return response.data
-})
-
-export const getKaryawanKalender = createAsyncThunk("kalender/getKaryawanKalender", async ({ kategori_id, search }) => {
-    const response = await axios.get(
-        getBaseUrl() + `kalender/get-karyawan`,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
-            params: {
-                kategori_id: kategori_id,
-                search: search
+export const getDetailKalender = createAsyncThunk("kalender/detailKalender", async (id, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + `kalender/detail/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
             }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
-export const storeKalender = createAsyncThunk("kalender/store", async ({ judul, lokasi, kategori_event, waktu_mulai, waktu_selesai, deskripsi, peserta }) => {
+export const getKaryawanKalender = createAsyncThunk("kalender/getKaryawanKalender", async ({ kategori_id, search }, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + `kalender/get-karyawan`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                params: {
+                    kategori_id: kategori_id,
+                    search: search
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
+        }
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
+})
+
+export const storeKalender = createAsyncThunk("kalender/store", async ({
+    judul, lokasi, kategori_event, waktu_mulai, waktu_selesai, deskripsi, peserta
+}, { rejectWithValue }) => {
+
     const formData = new FormData()
     formData.append('judul', judul)
     if (kategori_event === 'event') {
@@ -93,19 +135,36 @@ export const storeKalender = createAsyncThunk("kalender/store", async ({ judul, 
     peserta.forEach((item, index) => {
         formData.append(`peserta[${index}]`, item.id)
     })
-    const response = await axios.post(
-        getBaseUrl() + `kalender/create`,
-        formData,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
+
+    try {
+        const response = await axios.post(
+            getBaseUrl() + `kalender/create`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
-export const updateKalender = createAsyncThunk("kalender/update", async ({ id, judul, lokasi, kategori_event, waktu_mulai, waktu_selesai, deskripsi, peserta }) => {
+export const updateKalender = createAsyncThunk("kalender/update", async (
+    { id, judul, lokasi, kategori_event, waktu_mulai, waktu_selesai, deskripsi, peserta },
+    { rejectWithValue }
+) => {
     const formData = new FormData()
     formData.append('judul', judul)
     if (kategori_event === 'event') {
@@ -118,28 +177,56 @@ export const updateKalender = createAsyncThunk("kalender/update", async ({ id, j
     peserta.forEach((item, index) => {
         formData.append(`peserta[${index}]`, item.id)
     })
-    const response = await axios.post(
-        getBaseUrl() + `kalender/update/${id}`,
-        formData,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
+
+    try {
+        const response = await axios.post(
+            getBaseUrl() + `kalender/update/${id}`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
-export const deleteKalender = createAsyncThunk("kalender/delete", async (id) => {
-    const response = await axios.get(
-        getBaseUrl() + `kalender/destroy/${id}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
+export const deleteKalender = createAsyncThunk("kalender/delete", async (id, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + `kalender/destroy/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+            }
+        )
+        return response.data
+
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
 const kalenderSlice = createSlice({
@@ -210,120 +297,130 @@ const kalenderSlice = createSlice({
             state.isAddPage = action.payload === undefined ? true : false;
         }
     },
-    extraReducers: {
-        [getKalender.pending]: (state) => {
-            state.loading = true
-        },
-        [getKalender.fulfilled]: (state, action) => {
-            state.loading = false
-            state.listEvent = action.payload.data
-        },
-        [getKalender.rejected]: (state) => {
-            state.loading = false
-        },
+    extraReducers: builder => {
+        builder
+            .addCase(getKalender.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(getKalender.fulfilled, (state, action) => {
+                state.loading = false
+                state.listEvent = action.payload.data
+            })
+            .addCase(getKalender.rejected, (state, action) => {
+                state.loading = false
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
 
 
-        [getDetailKalender.pending]: (state) => {
-            state.loading = true
-        },
-        [getDetailKalender.fulfilled]: (state, action) => {
-            state.loading = false
-            state.judul = action.payload.data.judul
-            state.kategoriEvent = action.payload.data.kategori_event
-            state.lokasi = action.payload.data.lokasi
-            state.waktuMulai = action.payload.data.waktu_mulai
-            state.waktuSelesai = action.payload.data.waktu_selesai
-            state.waktuMulaiLibur = action.payload.data.waktu_mulai
-            state.waktuSelesaiLibur = action.payload.data.waktu_selesai
-            state.deskripsi = action.payload.data.deskripsi
-            state.peserta = action.payload.data.peserta.map((participant) => ({
-                ...participant,
-                isChecked: true,
-            }));
-        },
-        [getDetailKalender.rejected]: (state) => {
-            state.loading = false
-        },
+            .addCase(getDetailKalender.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(getDetailKalender.fulfilled, (state, action) => {
+                state.loading = false
+                state.judul = action.payload.data.judul
+                state.kategoriEvent = action.payload.data.kategori_event
+                state.lokasi = action.payload.data.lokasi
+                state.waktuMulai = action.payload.data.waktu_mulai
+                state.waktuSelesai = action.payload.data.waktu_selesai
+                state.waktuMulaiLibur = action.payload.data.waktu_mulai
+                state.waktuSelesaiLibur = action.payload.data.waktu_selesai
+                state.deskripsi = action.payload.data.deskripsi
+                state.peserta = action.payload.data.peserta.map((participant) => ({
+                    ...participant,
+                    isChecked: true,
+                }));
+            })
+            .addCase(getDetailKalender.rejected, (state, action) => {
+                state.loading = false
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
 
 
-        [getKaryawanKalender.pending]: (state, action) => {
-            state.loadngGetKaryawan = true
-            if (action.meta.arg && action.meta.arg.search) {
-                state.loadingSearch = true
-            }
-        },
-        [getKaryawanKalender.fulfilled]: (state, action) => {
-            state.loadngGetKaryawan = false
-            if (action.meta.arg && action.meta.arg.kategori_id) {
-                const newItems = action.payload.data.filter((payloadItem) =>
-                    !state.peserta.some((pesertaItem) => pesertaItem.id === payloadItem.id)
-                );
-                state.peserta.push(...newItems.map((item) => ({ ...item, isChecked: true })));
-            } else if (action.meta.arg && action.meta.arg.search) {
-                state.listSearchPeserta = action.payload.data.map((item) => ({ ...item, isChecked: true }));
+            .addCase(getKaryawanKalender.pending, (state, action) => {
+                state.loadngGetKaryawan = true
+                if (action.meta.arg && action.meta.arg.search) {
+                    state.loadingSearch = true
+                }
+            })
+            .addCase(getKaryawanKalender.fulfilled, (state, action) => {
+                state.loadngGetKaryawan = false
+                if (action.meta.arg && action.meta.arg.kategori_id) {
+                    const newItems = action.payload.data.filter((payloadItem) =>
+                        !state.peserta.some((pesertaItem) => pesertaItem.id === payloadItem.id)
+                    );
+                    state.peserta.push(...newItems.map((item) => ({ ...item, isChecked: true })));
+                } else if (action.meta.arg && action.meta.arg.search) {
+                    state.listSearchPeserta = action.payload.data.map((item) => ({ ...item, isChecked: true }));
+                    state.loadingSearch = false
+                } else {
+                    const newItems = action.payload.data.filter((payloadItem) =>
+                        !state.peserta.some((pesertaItem) => pesertaItem.id === payloadItem.id)
+                    );
+                    state.peserta.push(...newItems.map((item) => ({ ...item, isChecked: true })));
+                }
+            })
+            .addCase(getKaryawanKalender.rejected, (state, action) => {
+                state.loadngGetKaryawan = false
                 state.loadingSearch = false
-            } else {
-                const newItems = action.payload.data.filter((payloadItem) =>
-                    !state.peserta.some((pesertaItem) => pesertaItem.id === payloadItem.id)
-                );
-                state.peserta.push(...newItems.map((item) => ({ ...item, isChecked: true })));
-            }
-        },
-        [getKaryawanKalender.rejected]: (state) => {
-            state.loadngGetKaryawan = false
-            state.loadingSearch = false
-        },
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
 
 
-        [storeKalender.pending]: (state) => {
-            state.loading = true
-        },
-        [storeKalender.fulfilled]: (state) => {
-            state.loading = false
-            state.statusResApi = 'success'
-            state.messageResApi = 'Kalender berhasil ditambahkan'
-            state.isDisplayMessage = true
-        },
-        [storeKalender.rejected]: (state, action) => {
-            state.loading = false
-            state.statusResApi = action.error.code
-            state.messageResApi = action.error.message
-            state.isDisplayMessage = true
-        },
+            .addCase(storeKalender.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(storeKalender.fulfilled, (state) => {
+                state.loading = false
+                state.statusResApi = 'success'
+                state.messageResApi = 'Kalender berhasil ditambahkan'
+                state.isDisplayMessage = true
+            })
+            .addCase(storeKalender.rejected, (state, action) => {
+                state.loading = false
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
 
 
-        [updateKalender.pending]: (state) => {
-            state.loading = true
-        },
-        [updateKalender.fulfilled]: (state) => {
-            state.loading = false
-            state.statusResApi = 'success'
-            state.messageResApi = 'Kalender berhasil diedit'
-            state.isDisplayMessage = true
-        },
-        [updateKalender.rejected]: (state, action) => {
-            state.loading = false
-            state.statusResApi = action.error.code
-            state.messageResApi = action.error.message
-            state.isDisplayMessage = true
-        },
+            .addCase(updateKalender.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(updateKalender.fulfilled, (state) => {
+                state.loading = false
+                state.statusResApi = 'success'
+                state.messageResApi = 'Kalender berhasil diedit'
+                state.isDisplayMessage = true
+            })
+            .addCase(updateKalender.rejected, (state, action) => {
+                state.loading = false
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
 
 
-        [deleteKalender.pending]: (state) => {
-            state.loading = true
-        },
-        [deleteKalender.fulfilled]: (state) => {
-            state.loading = false
-            state.statusResApi = 'success'
-            state.messageResApi = 'Kalender berhasil dihapus'
-            state.isDisplayMessage = true
-        },
-        [deleteKalender.rejected]: (state, action) => {
-            state.loading = false
-            state.statusResApi = action.error.code
-            state.messageResApi = action.error.message
-            state.isDisplayMessage = true
-        },
+            .addCase(deleteKalender.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(deleteKalender.fulfilled, (state) => {
+                state.loading = false
+                state.statusResApi = 'success'
+                state.messageResApi = 'Kalender berhasil dihapus'
+                state.isDisplayMessage = true
+            })
+            .addCase(deleteKalender.rejected, (state, action) => {
+                state.loading = false
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
     }
 })
 

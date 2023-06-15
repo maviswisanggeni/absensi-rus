@@ -17,12 +17,10 @@ function SearchAndCalendar() {
   const { startTime, endTime, search, startText, endText, isPaginationClicked } = useSelector(state => state.kehadiran)
   let [searchParams, setSearchParams] = useSearchParams();
 
-  // Step 1: Define additional state
   const [isParamsUpdated, setIsParamsUpdated] = useState(false);
 
   useEffect(() => {
     if (!isPaginationClicked) {
-      // Step 2: Update startTime, endTime, and search based on searchParams
       const startTime = searchParams.get('start_time') ? searchParams.get('start_time') : formatDate(new Date());
       const endTime = searchParams.get('end_time') === 'null' ? null : searchParams.get('end_time');
       const search = searchParams.get('search') ? searchParams.get('search') : '';
@@ -38,17 +36,15 @@ function SearchAndCalendar() {
       dispatch(updateStateKehadiran({ name: 'startText', value: startText }));
       dispatch(updateStateKehadiran({ name: 'endText', value: endText }));
 
-      // Set the flag to indicate that parameters have been updated
       setIsParamsUpdated(true);
       dispatch(updateStateKehadiran({ name: 'isPaginationClicked', value: false }))
     }
   }, [searchParams, isPaginationClicked, dispatch]);
 
   useEffect(() => {
-    // Step 3: Call getKehadiran when searchParams change and parameters are updated
     if (isParamsUpdated) {
       dispatch(getKehadiran({ start_time: startTime, end_time: endTime, search: search }));
-      setIsParamsUpdated(false); // Reset the flag
+      setIsParamsUpdated(false);
     }
   }, [searchParams.toString(), isParamsUpdated, dispatch]);
 

@@ -6,13 +6,14 @@ import DetailForm from './DetailForm'
 import DetailFotoProfile from './DetailFotoProfile'
 import { useDispatch, useSelector } from 'react-redux'
 import Sidebar from '../../components/sidebar/Sidebar'
-import { detailKaryawan, resetListKaryawan, updateKaryawan } from '../../features/karyawanSlice'
+import { detailKaryawan, resetListKaryawan, updateKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
 import { getKategori } from '../../features/ketegoriSlice'
+import InfoBox from '../../components/InfoBox'
 
 function DetailKaryawan() {
     let userId = useParams()
     const dispatch = useDispatch()
-    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading
+    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage
     } = useSelector((state) => state.karyawan)
     let navigate = useNavigate()
 
@@ -73,6 +74,13 @@ function DetailKaryawan() {
                 </div>
                 {isLoading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
             </form>
+            <InfoBox
+                message={messageResApi}
+                status={statusResApi}
+                isDisplay={isDisplayMessage}
+                setIsDisplay={updateStateKaryawan}
+                stateName='isDisplayMessage'
+            />
         </div>
     )
 }

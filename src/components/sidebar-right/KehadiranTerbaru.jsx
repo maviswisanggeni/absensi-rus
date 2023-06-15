@@ -28,7 +28,7 @@ function KehadiranTerbaru() {
 
       <ul>
         {
-          !loadingKehadiranTerbaru ? <div className='loading'></div>
+          loadingKehadiranTerbaru ? <div className='loading'></div>
             : kehadiranTerbaru?.length === 0 ? <div className='no-data'>Tidak ada data</div>
               : kehadiranTerbaru?.map((item, index) => (
                 <li key={index}>
