@@ -83,12 +83,14 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    min-height: 50px;
     background-color: white;
     padding: 1rem 1.5rem;
     padding-left: 0;
     padding-bottom: 0;
     border: 1px solid #eceef2;
     border-radius: 10px;
+    position: relative;
 
     .filter-angka {
       display: flex;
@@ -99,6 +101,19 @@
         color: $grey;
         font-size: 14px;
       }
+    }
+
+    .wrapper-loading {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: 40px;
+      width: 100%;
+      display: grid;
+      place-items: center;
     }
   }
 

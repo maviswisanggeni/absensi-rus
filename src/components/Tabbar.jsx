@@ -45,7 +45,7 @@ function Tabbar({ funcPage, funcKeterangan, searchParams, path, options, setKate
           )
         })}
       </div>
-      {loading &&
+      {!loading &&
         <div
           className={`line`}
           style={{ width: lineWidth, transform: `translate(${current ? lineTranslateX : '0%'}, 0)` }}

@@ -95,7 +95,7 @@ function PartisipasiEvent() {
           />
           <label htmlFor='Semua Karyawan'>Semua Karyawan</label>
         </div>
-        {!loadingKategori ? <p>Loading...</p>
+        {loadingKategori ? <p>Loading...</p>
           : listKategori.map((item, index) => (
             <div key={index} className='wrapper-checkbox-label'>
               <input

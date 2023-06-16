@@ -27,7 +27,7 @@ function TabbarAndFilter() {
         funcKeterangan={updateStateKehadiran}
         searchParams={searchParams.toString()}
         path='/kehadiran'
-        loading={true}
+        loading={false}
       />
       <div className='filter-download'>
         <Filter option1="Tercepat" option2="Terlambat"

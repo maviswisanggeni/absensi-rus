@@ -35,19 +35,23 @@ const kategoriSlice = createSlice({
         listKategori: [],
         currentKategori: null,
         kategoriId: null,
-        loadingKategori: false,
+        loadingKategori: true,
+        isInitialPage: true
 
         statusResApi: '',
         messageResApi: '',
         isDisplayMessage: false,
     },
     reducers: {
+        setIsInitial: (state, action) => {
+            state.isInitialPage = action.payload
+        },
         setKategoriId: (state, action) => {
             state.kategoriId = action.payload
         },
         setCurrentKategori: (state, action) => {
             state.currentKategori = action.payload
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -69,5 +73,5 @@ const kategoriSlice = createSlice({
     }
 })
 
-export const { setKategoriId, setCurrentKategori } = kategoriSlice.actions
+export const { setKategoriId, setCurrentKategori, setIsInitial } = kategoriSlice.actions
 export default kategoriSlice.reducer;
