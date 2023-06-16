@@ -13,7 +13,7 @@ let PageSize = 10;
 
 function Table() {
   const { listKaryawan, isLoading, urutan } = useSelector(state => state.karyawan)
-  const { kategoriId } = useSelector(state => state.kategori)
+  const { kategoriId, loadingKategori } = useSelector(state => state.kategori)
   const navigate = useNavigate()
   const context = useApiKaryawan()
   const dispatch = useDispatch()
@@ -56,6 +56,8 @@ function Table() {
   function handleCopyNiy(niy) {
     navigator.clipboard.writeText(niy)
   }
+  console.log(currentTableData);
+  console.log('loading ' + isLoading);
 
   return (
     <>
@@ -82,7 +84,14 @@ function Table() {
                         <img src={isImgUrl(item?.link_foto) ? item?.link_foto : defaultUser} alt="" />
                         {item?.nama}
                       </td>
-                      <td>{item?.ktgkaryawan[0].kategori}</td>
+                      <td>
+                        {item.ktgkaryawan.map((itemKategori, index) => (
+                          <React.Fragment key={itemKategori.id}>
+                            {itemKategori.kategori}
+                            {index !== item.ktgkaryawan.length - 1 && ','}{' '}
+                          </React.Fragment>
+                        ))}
+                      </td>
                       <td>{item?.no_hp}</td>
                       <td>{item?.email}</td>
                       <td className='action-col'>

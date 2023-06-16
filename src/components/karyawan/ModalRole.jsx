@@ -50,7 +50,7 @@ function ModalRole({ onClose }) {
                 <h1>Tambah Jabatan</h1>
                 <Search placeholder='Jabatan' />
                 <div className='wrapper-list'>
-                    {loadingKategori
+                    {!loadingKategori
                         ? listKategori.map((item, index) => (
                             <div className='container-list' key={index} onClick={() => handleAdd(item.kategori, item.id)}>
                                 <p>{item.kategori}</p>

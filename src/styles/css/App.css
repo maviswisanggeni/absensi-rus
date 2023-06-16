@@ -745,7 +745,7 @@
   font-weight: 600;
   border-radius: 7px;
 }
-.pagination-container .pagination-item.dloadingots:hover {
+.pagination-container .pagination-item.dots:hover {
   background-color: transparent;
   cursor: default;
 }

@@ -6,7 +6,7 @@ import FotoProfile from './AddFotoProfile'
 import '../../styles/css/add-karyawan.css'
 import Sidebar from '../../components/sidebar/Sidebar'
 import { useEffect } from 'react'
-import { resetForm, listJadwalWeek, storeKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
+import { resetForm, storeKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKategori } from '../../features/ketegoriSlice'
 import { useState } from 'react'
@@ -16,8 +16,10 @@ function AddKaryawan() {
     let navigate = useNavigate()
     const dispatch = useDispatch()
     const {
-        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage
+        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading,
+        statusResApi, messageResApi, isDisplayMessage
     } = useSelector((state) => state.karyawan)
+    const { loadingKategori } = useSelector((state) => state.kategori)
     const [file, setFile] = useState(null)
     const callback = payload => {
         setFile(payload)
@@ -25,7 +27,6 @@ function AddKaryawan() {
 
     useEffect(() => {
         dispatch(resetForm())
-        dispatch(listJadwalWeek())
         dispatch(getKategori())
     }, [])
 
@@ -105,7 +106,7 @@ function AddKaryawan() {
                     <Form />
                     <FotoProfile callback={callback} />
                 </div>
-                {isLoading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
+                {loadingKategori ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
             </div>
         </div>
     )

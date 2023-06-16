@@ -113,12 +113,14 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
+  min-height: 50px;
   background-color: white;
   padding: 1rem 1.5rem;
   padding-left: 0;
   padding-bottom: 0;
   border: 1px solid #eceef2;
   border-radius: 10px;
+  position: relative;
 }
 .karyawan .tabbar-filter .filter-angka {
   display: -webkit-box;
@@ -132,6 +134,18 @@
 .karyawan .tabbar-filter .filter-angka p {
   color: #9b9b9b;
   font-size: 14px;
+}
+.karyawan .tabbar-filter .wrapper-loading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 40px;
+  width: 100%;
+  display: grid;
+  place-items: center;
 }
 .karyawan .row-img {
   padding: 0.5rem 0;

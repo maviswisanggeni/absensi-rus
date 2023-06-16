@@ -115,7 +115,7 @@ const initialState = {
 
     ktgKaryawan: '',
     kategoriId: null,
-    isLoading: false,
+    isLoading: true,
 };
 
 export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }) => {
@@ -274,47 +274,12 @@ const karyawanSlice = createSlice({
             const { id } = action.payload;
             state.listKtgkaryawan = state.listKtgkaryawan.filter((item) => item.id !== id);
         },
-        listJadwalWeek: (state) => {
-            state.listJadwal = [
-                {
-                    hari: 'senin',
-                    jam_masuk: '',
-                    jam_pulang: ''
-                },
-                {
-                    hari: 'selasa',
-                    jam_masuk: '',
-                    jam_pulang: ''
-                },
-                {
-                    hari: 'rabu',
-                    jam_masuk: '',
-                    jam_pulang: ''
-                },
-                {
-                    hari: 'kamis',
-                    jam_masuk: '',
-                    jam_pulang: ''
-                },
-                {
-                    hari: 'jumat',
-                    jam_masuk: '',
-                    jam_pulang: ''
-                },
-                {
-                    hari: 'sabtu',
-                    jam_masuk: '',
-                    jam_pulang: ''
-                },
-                {
-                    hari: 'minggu',
-                    jam_masuk: '',
-                    jam_pulang: ''
-                }
-            ]
-        },
         resetListKaryawan: (state) => {
             state.listKaryawan = []
+        },
+        resetTable: (state) => {
+            state.listKaryawan = []
+            state.isLoading = true
         }
     },
     extraReducers: (builder) => {
@@ -399,7 +364,7 @@ const karyawanSlice = createSlice({
 });
 
 export const {
-    updateFieldValue, updateFieldError, resetForm, setFormLoading, resetField,
-    setImgUpload, updateListKtgkaryawan, deleteKategori, listJadwalWeek, updateStateKaryawan, resetListKaryawan
+    updateFieldValue, updateFieldError, resetForm, setFormLoading, resetField, resetTable,
+    setImgUpload, updateListKtgkaryawan, deleteKategori, updateStateKaryawan, resetListKaryawan
 } = karyawanSlice.actions;
 export default karyawanSlice.reducer;
