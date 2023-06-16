@@ -3,16 +3,30 @@ import axios from "axios";
 import getBaseUrl from "../datas/apiUrl";
 import token from "../datas/tokenAuthorization";
 
-export const getKategori = createAsyncThunk("karyawan/getKategori", async () => {
-    const response = await axios.get(
-        getBaseUrl() + 'karyawan/kategori',
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
+export const getKategori = createAsyncThunk("karyawan/getKategori", async (test, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + 'karyawan/kategori',
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
 const kategoriSlice = createSlice({
@@ -23,6 +37,10 @@ const kategoriSlice = createSlice({
         kategoriId: null,
         loadingKategori: true,
         isInitialPage: true
+
+        statusResApi: '',
+        messageResApi: '',
+        isDisplayMessage: false,
     },
     reducers: {
         setIsInitial: (state, action) => {
@@ -35,20 +53,23 @@ const kategoriSlice = createSlice({
             state.currentKategori = action.payload
         }
     },
-    extraReducers: {
-        [getKategori.pending]: (state) => {
-            state.loadingKategori = true
-            state.currentKategori = null
-        },
-        [getKategori.fulfilled]: (state, action) => {
-            state.loadingKategori = false
-            state.listKategori = action.payload.data
-            // state.currentKategori = action.payload.data[0].kategori
-        },
-        [getKategori.rejected]: (state) => {
-            state.loadingKategori = false
-            state.currentKategori = null
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getKategori.pending, (state) => {
+                state.loadingKategori = false;
+                state.currentKategori = null;
+            })
+            .addCase(getKategori.fulfilled, (state, action) => {
+                state.loadingKategori = true;
+                state.listKategori = action.payload.data;
+            })
+            .addCase(getKategori.rejected, (state, action) => {
+                state.loadingKategori = false;
+                state.currentKategori = null;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            });
     }
 })
 

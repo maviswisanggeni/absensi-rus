@@ -5,19 +5,11 @@ import Filter from '../Filter'
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData'
 import { updateStateKehadiran } from '../../features/kehadiranSlice'
 import { useSearchParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentKategori, setKategoriId } from '../../features/ketegoriSlice'
-import { useEffect } from 'react'
 
 function TabbarAndFilter() {
   const context = useKehadiranListAbsensi()
   let [searchParams] = useSearchParams();
-  const { keterangan } = useSelector(state => state.kehadiran)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(updateStateKehadiran({ name: 'currentPage', value: 1 }))
-  }, [keterangan, dispatch])
 
   const options = [
     { kategori: 'Masuk', id: 1 },

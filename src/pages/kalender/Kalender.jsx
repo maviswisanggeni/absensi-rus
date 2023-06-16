@@ -24,15 +24,13 @@ function Kalender() {
     <div className='wrapper-kalender'>
       <Sidebar />
       <div className='kalender'>
-        {isDisplayMessage &&
-          <InfoBox
-            message={messageResApi}
-            status={statusResApi}
-            isDisplay={isDisplayMessage}
-            setIsDisplay={updateStateKalender}
-            stateName='isDisplayMessage'
-          />
-        }
+        <InfoBox
+          message={messageResApi}
+          status={statusResApi}
+          isDisplay={isDisplayMessage}
+          setIsDisplay={updateStateKalender}
+          stateName='isDisplayMessage'
+        />
         <CalendarHeader />
         <div className='sidebar-month'>
           <div className='container-days'>

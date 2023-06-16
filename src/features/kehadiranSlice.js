@@ -4,36 +4,62 @@ import getBaseUrl from "../datas/apiUrl";
 import token from "../datas/tokenAuthorization";
 import formatDate from "../components/useFormatCalendar";
 
-export const getKehadiran = createAsyncThunk("kehadiran/getKehadiran", async ({ start_time, end_time, search }) => {
-    const response = await axios.get(
-        getBaseUrl() + 'kehadiran',
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
-            params: {
-                start_time,
-                end_time,
-                search
+export const getKehadiran = createAsyncThunk("kehadiran/getKehadiran", async ({ start_time, end_time, search }, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + 'kehadiran',
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                params: {
+                    start_time,
+                    end_time,
+                    search
+                },
+                timeout: 20000
             }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
-export const getKehadiranTerbaru = createAsyncThunk("kehadiran/getKehadiranTerbaru", async ({ start_time }) => {
-    const response = await axios.get(
-        getBaseUrl() + 'kehadiran',
-        {
-            headers: {
-                Authorization: `Bearer ${token()}`,
-            },
-            params: {
-                start_time,
+export const getKehadiranTerbaru = createAsyncThunk("kehadiran/getKehadiranTerbaru", async ({ start_time }, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + 'kehadiran',
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                params: {
+                    start_time,
+                },
+                timeout: 20000
             }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
         }
-    )
-    return response.data
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
 })
 
 const kehadiranSlice = createSlice({
@@ -55,6 +81,10 @@ const kehadiranSlice = createSlice({
         loadingKehadiranTerbaru: false,
         kategoriId: null,
         isPaginationClicked: false,
+
+        statusResApi: '',
+        messageResApi: '',
+        isDisplayMessage: false,
     },
     reducers: {
         updateStateKehadiran: (state, action) => {
@@ -62,23 +92,38 @@ const kehadiranSlice = createSlice({
             state[name] = value
         },
     },
-    extraReducers: {
-        [getKehadiran.pending]: (state) => {
-            state.loading = false
-        },
-        [getKehadiran.fulfilled]: (state, action) => {
-            state.loading = true
-            state.kehadiranMasuk = action.payload.data.masuk
-            state.kehadiranKeluar = action.payload.data.pulang
-            state.kehadiranIzin = action.payload.data.izin
-        },
-        [getKehadiranTerbaru.pending]: (state) => {
-            state.loadingKehadiranTerbaru = false
-        },
-        [getKehadiranTerbaru.fulfilled]: (state, action) => {
-            state.loadingKehadiranTerbaru = true
-            state.kehadiranTerbaru = action.payload.data.masuk
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(getKehadiran.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getKehadiran.fulfilled, (state, action) => {
+                state.loading = false;
+                state.kehadiranMasuk = action.payload.data.masuk;
+                state.kehadiranKeluar = action.payload.data.pulang;
+                state.kehadiranIzin = action.payload.data.izin;
+            })
+            .addCase(getKehadiran.rejected, (state, action) => {
+                state.loading = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
+
+
+            .addCase(getKehadiranTerbaru.pending, (state) => {
+                state.loadingKehadiranTerbaru = true;
+            })
+            .addCase(getKehadiranTerbaru.fulfilled, (state, action) => {
+                state.loadingKehadiranTerbaru = false;
+                state.kehadiranTerbaru = action.payload.data.masuk;
+            })
+            .addCase(getKehadiranTerbaru.rejected, (state, action) => {
+                state.loadingKehadiranTerbaru = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            });
     }
 })
 
