@@ -36,7 +36,7 @@ const kategoriSlice = createSlice({
         currentKategori: null,
         kategoriId: null,
         loadingKategori: true,
-        isInitialPage: true
+        isInitialPage: true,
 
         statusResApi: '',
         messageResApi: '',
@@ -56,11 +56,11 @@ const kategoriSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getKategori.pending, (state) => {
-                state.loadingKategori = false;
+                state.loadingKategori = true;
                 state.currentKategori = null;
             })
             .addCase(getKategori.fulfilled, (state, action) => {
-                state.loadingKategori = true;
+                state.loadingKategori = false;
                 state.listKategori = action.payload.data;
             })
             .addCase(getKategori.rejected, (state, action) => {
