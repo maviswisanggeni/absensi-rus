@@ -5,7 +5,7 @@ import Karyawan from './pages/karyawan/Karyawan';
 import Kalender from './pages/kalender/Kalender';
 import './styles/css/App.css';
 import Login from './pages/Login';
-import Detail from './components/kehadiran/Detail';
+import Detail from './pages/kehadiran/Detail';
 import { KehadiranJmlKehadiranProvider } from './contexts/api/kehadiran/ContextApiKehadiran';
 import { KehadiranListProvider } from './contexts/api/kehadiran/ContextApiKehadiranListData';
 import { DashboardApiProvider } from './contexts/api/dashboard/ContextApiDashboard';

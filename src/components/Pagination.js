@@ -31,10 +31,20 @@ const Pagination = props => {
 
   const onNext = () => {
     onPageChange(currentPage + 1);
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('paginate', currentPage + 1);
+
+    setSearchParams(newSearchParams);
+    dispatch(updateStateKehadiran({ name: 'isPaginationClicked', value: true }))
   };
 
   const onPrevious = () => {
     onPageChange(currentPage - 1);
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('paginate', currentPage - 1);
+
+    setSearchParams(newSearchParams);
+    dispatch(updateStateKehadiran({ name: 'isPaginationClicked', value: true }))
   };
 
   let lastPage = paginationRange[paginationRange.length - 1];
