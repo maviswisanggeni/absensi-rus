@@ -24,7 +24,14 @@ function DetailProfile({ data }) {
             <div className='div-2'>
                 <div className='info'>
                     <h3>Jabatan</h3>
-                    <p>{data?.user.ktgkaryawan.map(item => item.kategori)}</p>
+                    <p>
+                        {data?.user.ktgkaryawan.map((itemKategori, index) => (
+                            <React.Fragment key={itemKategori.id}>
+                                {itemKategori.kategori}
+                                {index !== data?.user.ktgkaryawan.length - 1 && ','}{' '}
+                            </React.Fragment>
+                        ))}
+                    </p>
                 </div>
                 <div className='info'>
                     <h3>Nomer HP</h3>

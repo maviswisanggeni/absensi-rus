@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import Sidebar from '../sidebar/Sidebar'
+import Sidebar from '../../components/sidebar/Sidebar'
 import DetailCard from './DetailCard'
 
 function Detail() {
@@ -49,7 +49,7 @@ function Detail() {
     function checkNull(data) {
         return data ? data : '-'
     }
-    console.log(detail);
+
     return (
         <div className='wrapper-detail'>
             <Sidebar />

@@ -12,8 +12,7 @@ function KehadiranTerbaru() {
   const { startTime, loadingKehadiranTerbaru, kehadiranTerbaru } = useSelector(state => state.kehadiran)
 
   function handleRefresh() {
-    context.getDataJmlKehadiran()
-    dispatch(getKehadiranTerbaru({ start_time: startTime }))
+    dispatch(getKehadiranTerbaru({ start_time: null }))
   }
 
   useEffect(() => {
@@ -24,7 +23,6 @@ function KehadiranTerbaru() {
     const currentTime = moment();
     const formattedTime = moment(time, 'HH:mm:ss');
 
-    // Calculate the difference in minutes between the current time and the provided time
     const diffInMinutes = currentTime.diff(formattedTime, 'minutes');
     const diffInHours = currentTime.diff(formattedTime, 'hours');
 

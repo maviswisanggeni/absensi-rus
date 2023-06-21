@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import React from 'react'
-import Map from './Map'
+import Map from '../../components/kehadiran/Map'
 import map from '../../assets/images/map.png'
 import close from '../../assets/icons/close.svg'
 import folderImg from '../../assets/icons/folder.svg'
