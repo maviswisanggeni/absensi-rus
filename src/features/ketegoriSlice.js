@@ -75,6 +75,7 @@ const kategoriSlice = createSlice({
             .addCase(getKategori.fulfilled, (state, action) => {
                 state.loadingKategori = false;
                 state.listKategori = action.payload.data;
+                state.searchedKategori = action.payload.data;
             })
             .addCase(getKategori.rejected, (state, action) => {
                 state.loadingKategori = false;
