@@ -1,10 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-function Search({ placeholder, setSearch, value }) {
+function Search({ placeholder, setSearch, value, stateName }) {
   const dispatch = useDispatch()
   function handleChange(e) {
-    dispatch(setSearch({ name: 'search', value: e.target.value }))
+    dispatch(setSearch({ name: stateName, value: e.target.value }))
   }
 
   return (

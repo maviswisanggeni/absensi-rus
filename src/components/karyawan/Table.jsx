@@ -107,15 +107,18 @@ function Table() {
         </tbody>
 
       </table>
-      <Pagination
-        className="pagination-bar"
-        currentPage={currentPage}
-        totalCount={listKaryawan?.length}
-        pageSize={PageSize}
-        onPageChange={page =>
-          dispatch(updateStateKaryawan({ name: 'currentPage', value: page }))
-        }
-      />
+
+      {!isLoading &&
+        <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={listKaryawan?.length}
+          pageSize={PageSize}
+          onPageChange={page =>
+            dispatch(updateStateKaryawan({ name: 'currentPage', value: page }))
+          }
+        />
+      }
     </>
   )
 }

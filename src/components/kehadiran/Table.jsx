@@ -133,14 +133,17 @@ function Table() {
                 </tbody>
 
             </table>
-            <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={keterangan === 'Masuk' ? kehadiranMasuk?.length : keterangan === 'Keluar' ? kehadiranKeluar?.length : kehadiranIzin?.length}
-                pageSize={PageSize}
-                onPageChange={
-                    page => dispatch(updateStateKehadiran({ name: 'currentPage', value: page }))}
-            />
+
+            {!loading &&
+                <Pagination
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={keterangan === 'Masuk' ? kehadiranMasuk?.length : keterangan === 'Keluar' ? kehadiranKeluar?.length : kehadiranIzin?.length}
+                    pageSize={PageSize}
+                    onPageChange={
+                        page => dispatch(updateStateKehadiran({ name: 'currentPage', value: page }))}
+                />
+            }
         </>
     )
 }

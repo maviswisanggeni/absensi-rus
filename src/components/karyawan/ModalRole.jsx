@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from '../Search';
-import { getKategori } from '../../features/ketegoriSlice';
-import { updateListKtgkaryawan } from '../../features/karyawanSlice';
+import { getKategori, updateStateKategori } from '../../features/ketegoriSlice';
+import { updateListKtgkaryawan, updateStateKaryawan } from '../../features/karyawanSlice';
 import { useState } from 'react';
 
 function ModalRole({ onClose }) {
-    const { listKategori, loadingKategori } = useSelector(
+    const { loadingKategori, search, searchedKategori } = useSelector(
         (state) => state.kategori
     );
     const dispatch = useDispatch()
@@ -48,10 +48,10 @@ function ModalRole({ onClose }) {
         <div className='bg-modal'>
             <div className='modal-container' ref={modalRef}>
                 <h1>Tambah Jabatan</h1>
-                <Search placeholder='Jabatan' />
+                <Search placeholder='Jabatan' value={search} setSearch={updateStateKategori} stateName='search' />
                 <div className='wrapper-list'>
                     {!loadingKategori
-                        ? listKategori.map((item, index) => (
+                        ? searchedKategori.map((item, index) => (
                             <div className='container-list' key={index} onClick={() => handleAdd(item.kategori, item.id)}>
                                 <p>{item.kategori}</p>
                                 <p>+</p>

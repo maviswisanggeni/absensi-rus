@@ -346,7 +346,7 @@ const karyawanSlice = createSlice({
         resetTable: (state) => {
             state.listKaryawan = []
             state.isLoading = true
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
