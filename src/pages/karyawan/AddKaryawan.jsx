@@ -16,7 +16,7 @@ function AddKaryawan() {
     let navigate = useNavigate()
     const dispatch = useDispatch()
     const {
-        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading,
+        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, loadingStore,
         statusResApi, messageResApi, isDisplayMessage
     } = useSelector((state) => state.karyawan)
     const { loadingKategori } = useSelector((state) => state.kategori)
@@ -95,7 +95,7 @@ function AddKaryawan() {
                     </div>
 
                     <button
-                        disabled={validateDisabled()}
+                        // disabled={validateDisabled()}
                         onClick={addUser}
                         className='btn-submit'
                     >
@@ -106,7 +106,7 @@ function AddKaryawan() {
                     <Form />
                     <FotoProfile callback={callback} />
                 </div>
-                {loadingKategori ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
+                {loadingStore ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
             </div>
         </div>
     )

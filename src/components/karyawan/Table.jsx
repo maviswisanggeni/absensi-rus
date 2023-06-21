@@ -1,25 +1,26 @@
 import Pagination from '../Pagination'
-import React, { useMemo } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import copy from '../../assets/icons/copy.svg'
 import edit from '../../assets/icons/edit.svg'
 import trash from '../../assets/icons/trashRed.svg'
 import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan';
 import defaultUser from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteKaryawan, getKaryawan } from '../../features/karyawanSlice';
+import { deleteKaryawan, getKaryawan, updateStateKaryawan } from '../../features/karyawanSlice';
 
 let PageSize = 10;
 
 function Table() {
-  const { listKaryawan, isLoading, urutan } = useSelector(state => state.karyawan)
-  const { kategoriId, loadingKategori } = useSelector(state => state.kategori)
+  const { listKaryawan, isLoading, urutan, currentPage } = useSelector(state => state.karyawan)
+  const { kategoriId } = useSelector(state => state.kategori)
   const navigate = useNavigate()
   const context = useApiKaryawan()
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (context.currentPage - 1) * PageSize;
+    const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
 
     let slicedData;
@@ -34,7 +35,7 @@ function Table() {
     });
 
     return sortedData;
-  }, [isLoading, listKaryawan, kategoriId, urutan]);
+  }, [isLoading, listKaryawan, kategoriId, urutan, currentPage]);
 
   function handleDetail(id) {
     navigate(`/karyawan/edit/${id}`)
@@ -56,8 +57,6 @@ function Table() {
   function handleCopyNiy(niy) {
     navigator.clipboard.writeText(niy)
   }
-  console.log(currentTableData);
-  console.log('loading ' + isLoading);
 
   return (
     <>
@@ -110,13 +109,11 @@ function Table() {
       </table>
       <Pagination
         className="pagination-bar"
-        currentPage={context.currentPage}
-        totalCount={context.keterangan ? context.listPengajar?.length : context?.keterangan ? context.listStaff?.length : 0}
+        currentPage={currentPage}
+        totalCount={listKaryawan?.length}
         pageSize={PageSize}
         onPageChange={page =>
-          context.setCurrentPage(page)
-
-          // console.log(page)
+          dispatch(updateStateKaryawan({ name: 'currentPage', value: page }))
         }
       />
     </>

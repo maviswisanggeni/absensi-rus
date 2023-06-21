@@ -239,6 +239,12 @@
     text-decoration-line: underline;
   }
 
+  .preview__img {
+    // width: 100%;
+    height: 100%;
+    object-fit: center;
+  }
+
   #label-file-upload.drag-active {
     background-color: #ffffff;
   }

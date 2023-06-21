@@ -86,9 +86,9 @@ function Form() {
                     onChange={handleInputChange}
                 />
                 <img src={eye} onClick={handleUnhide} className='unhide' />
-                {/* <p className='validator-text pwd'>
+                <p className='validator-text pwd'>
                     {errors.password && errors.password}
-                </p> */}
+                </p>
             </div>
 
             <div className='email'>

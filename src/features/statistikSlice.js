@@ -33,11 +33,17 @@ const statistikSlice = createSlice({
     name: 'statistik',
     initialState: {
         statistikData: [],
+        kategori: 'Minggu',
         loading: false,
 
         statusResApi: '',
         messageResApi: '',
         isDisplayMessage: false,
+    },
+    reducers: {
+        setKategoriStatistik: (state, action) => {
+            state.kategori = action.payload
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -57,4 +63,5 @@ const statistikSlice = createSlice({
     }
 })
 
+export const { setKategoriStatistik } = statistikSlice.actions
 export default statistikSlice.reducer

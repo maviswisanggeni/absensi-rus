@@ -1,6 +1,6 @@
 import Sidebar from './components/sidebar/Sidebar';
 import Dashboard from './pages/Dashboard';
-import Kehadiran from './pages/Kehadiran';
+import Kehadiran from './pages/kehadiran/Kehadiran';
 import Karyawan from './pages/karyawan/Karyawan';
 import Kalender from './pages/kalender/Kalender';
 import './styles/css/App.css';

@@ -2586,6 +2586,103 @@
                     }
                 }
             }
+        },
+        "/setting/batas-waktu": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Batas Waktu"
+                ],
+                "summary": "Get Batas Waktu",
+                "description": "get data batas waktu",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "batas_waktu_absen_masuk": "02:00:00",
+                                                "batas_waktu_absen_pulang": "02:00:00"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/setting/batas-waktu/update": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Setting - Batas Waktu"
+                ],
+                "summary": "Update Batas Waktu",
+                "description": "update data batas waktu",
+                "requestBody": {
+                    "description": "contoh batas waktu minimal absen masuk 2 jam sebelum waktu yg di jadwal, dan batas maksimal absen pulang 2 jam dari waktu yg di jadwal",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "waktu_masuk": "02:00:00",
+                                        "waktu_pulang": "02:00:00"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                },
+                                "examples": {
+                                    "200": {
+                                        "value": {
+                                            "message": "success",
+                                            "data": {
+                                                "waktu_masuk": {
+                                                    "key": "batas_waktu_absen_masuk",
+                                                    "value": "02:00:00"
+                                                },
+                                                "waktu_pulang": {
+                                                    "key": "batas_waktu_absen_pulang",
+                                                    "value": "02:00:00"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {

@@ -12,6 +12,7 @@ function FotoProfile({ callback }) {
     );
     const dispatch = useDispatch()
     const [file, setFile] = useState({});
+    const [previewImg, setPreviewImg] = useState(null)
     const inputRef = useRef(null);
     // drag state
     const [dragActive, setDragActive] = useState(false);
@@ -34,7 +35,7 @@ function FotoProfile({ callback }) {
             // at least one file has been dropped so do something
             // handleFiles(e.dataTransfer.files);
             setFile(e.dataTransfer.files[0]);
-            context.setFoto(e.dataTransfer.files[0]);
+            setPreviewImg(URL.createObjectURL(e.dataTransfer.files[0]))
         }
     };
 
@@ -44,6 +45,7 @@ function FotoProfile({ callback }) {
             // at least one file has been selected so do something
             // handleFiles(e.target.files);
             setFile(e.target.files[0]);
+            setPreviewImg(URL.createObjectURL(e.target.files[0]))
             context.setFoto(e.target?.files[0])
             console.log(e.target.files);
         }
@@ -88,12 +90,14 @@ function FotoProfile({ callback }) {
                 <h1>Foto Profile</h1>
                 <input ref={inputRef} type="file" id="input-file-upload" multiple={true} onChange={handleChange} />
                 <label id="label-file-upload" htmlFor="input-file-upload" className={dragActive ? "drag-active" : ""}>
-                    <div className='wrap-text'>
-                        <img src={uploadClour} alt="" />
-                        <h1>{file.name === undefined ? 'Tambahkan Foto' : file?.name}</h1>
-                        {/* <h1></h1> */}
-                        <button className="upload-button" onClick={onButtonClick}>Upload dari Komputer atau drag-n-drop image <br />ber format .png or .jpg</button>
-                    </div>
+                    {!previewImg ?
+                        <div className='wrap-text'>
+                            <img src={uploadClour} alt="" />
+                            <h1>{file.name === undefined ? 'Tambahkan Foto' : file?.name}</h1>
+                            <button className="upload-button" onClick={onButtonClick}>Upload dari Komputer atau drag-n-drop image <br />ber format .png or .jpg</button>
+                        </div>
+                        : <img className='preview__img' src={previewImg} alt="" />
+                    }
                 </label>
                 {dragActive && <div id="drag-file-element" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}
             </div>
