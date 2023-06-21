@@ -37,6 +37,8 @@ const kategoriSlice = createSlice({
         kategoriId: null,
         loadingKategori: true,
         isInitialPage: true,
+        searchedKategori: [],
+        search: '',
 
         statusResApi: '',
         messageResApi: '',
@@ -51,7 +53,18 @@ const kategoriSlice = createSlice({
         },
         setCurrentKategori: (state, action) => {
             state.currentKategori = action.payload
-        }
+        },
+        updateStateKategori: (state, action) => {
+            const { name, value } = action.payload
+            state[name] = value
+            if (name === 'search') {
+                const filteredList = state.listKategori.filter((item) =>
+                    item.kategori.toLowerCase().includes(state.search.toLowerCase())
+                );
+                state.searchedKategori = filteredList;
+            }
+        },
+
     },
     extraReducers: (builder) => {
         builder
@@ -73,5 +86,5 @@ const kategoriSlice = createSlice({
     }
 })
 
-export const { setKategoriId, setCurrentKategori, setIsInitial } = kategoriSlice.actions
+export const { setKategoriId, setCurrentKategori, setIsInitial, updateStateKategori } = kategoriSlice.actions
 export default kategoriSlice.reducer;

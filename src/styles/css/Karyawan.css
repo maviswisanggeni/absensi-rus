@@ -1,6 +1,7 @@
 .karyawan {
   width: 82%;
   padding: 0 2rem;
+  padding-bottom: 2rem;
 }
 .karyawan .loading-table {
   position: absolute;

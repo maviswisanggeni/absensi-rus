@@ -32,20 +32,41 @@ function Karyawan() {
   }, []);
 
   useEffect(() => {
-    if (location.pathname.split('/').pop() === '') {
-      dispatch(setIsInitial(true))
+    const currentPath = location.pathname;
+
+    if (currentPath === '/karyawan/') {
+      const defaultPath = `/karyawan/${listKategori[0]?.kategori}`;
+      navigate(defaultPath);
     }
 
-    if (isInitialPage && !loadingKategori) {
-      dispatch(setCurrentKategori(listKategori[0]?.kategori))
-      dispatch(setKategoriId(listKategori[0]?.id))
-      navigate(`/karyawan/${listKategori[0]?.kategori}`)
-      if (searchParams.get('paginate')) {
-        dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(searchParams.get('paginate')) }))
-        setSearchParams({ 'paginate': parseInt(searchParams.get('paginate')) })
-      }
+    if (searchParams.get('paginate')) {
+      dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(searchParams.get('paginate')) }));
+      setSearchParams({ 'paginate': parseInt(searchParams.get('paginate')) });
     }
-  }, [loadingKategori])
+  }, [location.pathname, listKategori, navigate, searchParams]);
+
+  // useEffect(() => {
+  //   if (location.pathname.split('/').pop() === '') {
+  //     dispatch(setIsInitial(true));
+  //   }
+
+  //   if (isInitialPage && !loadingKategori) {
+  //     dispatch(setCurrentKategori(listKategori[0]?.kategori));
+  //     dispatch(setKategoriId(listKategori[0]?.id));
+
+  //     // Check if the current location matches the default path
+  //     const currentPath = location.pathname.split('/').pop();
+  //     const defaultPath = `/karyawan/${listKategori[0]?.kategori}`;
+  //     if (currentPath !== defaultPath) {
+  //       navigate(currentPath);
+  //     }
+
+  //     if (searchParams.get('paginate')) {
+  //       dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(searchParams.get('paginate')) }));
+  //       setSearchParams({ 'paginate': parseInt(searchParams.get('paginate')) });
+  //     }
+  //   }
+  // }, [location.pathname, loadingKategori]);
 
   useEffect(() => {
     if (!loadingKategori && currentKategori) {
@@ -122,9 +143,11 @@ function Karyawan() {
           }
 
           {loadingKategori &&
-            <div className='wrapper-loading'>
-              <div className='dots loading'></div>
-            </div>
+            <>
+              <div className='wrapper-loading'>
+                <div className='dots loading'></div>
+              </div>
+            </>
           }
 
           {!isLoading &&
