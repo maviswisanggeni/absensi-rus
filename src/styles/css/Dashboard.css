@@ -67,6 +67,7 @@
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content {
   height: auto;
   position: absolute;
+  z-index: 9999;
 }
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul {
   margin-top: 0.5rem;

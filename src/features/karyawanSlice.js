@@ -22,12 +22,12 @@ const validateForm = (state) => {
         errors.nama = 'Isi nama';
     }
 
-    if (state.niy.trim() === '') {
-        errors.niy = 'NIY is required.';
+    if (state.niy.trim() === '' || state.niy.length < 8) {
+        errors.niy = 'Isi NIY minimal 8 digit.';
     }
 
-    if (state.password.trim() === '' || state.password.length < 8) {
-        errors.password = 'Isi password minimal 8 karakter';
+    if (state.password.trim() === '' || state.password.length < 6) {
+        errors.password = 'Isi password minimal 6 karakter';
     }
 
     if (state.noHp.trim() === '' || state.noHp.length < 10) {
@@ -116,6 +116,7 @@ const initialState = {
     ktgKaryawan: '',
     kategoriId: null,
     isLoading: true,
+    loadingStore: false
 };
 
 export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }, { rejectWithValue }) => {
@@ -392,17 +393,16 @@ const karyawanSlice = createSlice({
 
 
             .addCase(storeKaryawan.pending, (state) => {
-                state.isLoading = true;
+                state.loadingStore = true;
             })
             .addCase(storeKaryawan.fulfilled, (state) => {
-                state.isLoading = false;
+                state.loadingStore = false;
                 state.statusResApi = 'success'
                 state.messageResApi = 'Karyawan berhasil ditambahkan'
                 state.isDisplayMessage = true
             })
             .addCase(storeKaryawan.rejected, (state, action) => {
-                state.isLoading = false;
-                console.log(action);
+                state.loadingStore = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true

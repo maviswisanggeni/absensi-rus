@@ -109,11 +109,18 @@ function Table() {
                                         <tr key={key}>
                                             <td className='row-img'>
                                                 <div className={`valid-masuk-pulang ${checkKeterangan(item?.is_valid_masuk, item?.is_valid_pulang) === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
-                                                <img src={item?.pf_foto ? item?.pf_foto : defaultFoto} alt="" />
+                                                <img src={item?.user?.link_foto ? item?.user?.link_foto : defaultFoto} alt="" />
                                                 {item?.user?.nama}
                                             </td>
                                             <td>{item?.user?.niy}</td>
-                                            <td>{item?.user?.ktgkaryawan.map(item => item.kategori)}</td>
+                                            <td>
+                                                {item.user?.ktgkaryawan?.map((itemKategori, index) => (
+                                                    <React.Fragment key={itemKategori?.id}>
+                                                        {itemKategori?.kategori}
+                                                        {index !== item.user?.ktgkaryawan?.length - 1 && ','}{' '}
+                                                    </React.Fragment>
+                                                ))}
+                                            </td>
                                             <td>{checkKeterangan(item?.tanggal_masuk, item?.tanggal_pulang)}</td>
                                             <td>{item?.waktu_masuk?.slice(0, 5)}</td>
                                             <td>

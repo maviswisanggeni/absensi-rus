@@ -420,6 +420,8 @@
   width: 124px;
   height: 124px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .detail .main .detail-profile .div-1 h3 {
   font-size: 14px;

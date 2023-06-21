@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import Tabbar from '../../components/Tabbar'
 import Profile from '../../components/Profile'
 import Search from '../../components/Search'
@@ -17,13 +17,14 @@ import { getKaryawan, resetTable, updateFieldValue, updateStateKaryawan } from '
 import InfoBox from '../../components/InfoBox'
 
 function Karyawan() {
-  const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search } = useSelector(state => state.karyawan)
+  const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search, currentPage } = useSelector(state => state.karyawan)
   const { listKategori, kategoriId, loadingKategori, currentKategori, isInitialPage } = useSelector(state => state.kategori)
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
   const context = useApiKaryawan()
   const [isKategoriUpdated, setIsKategoriUpdated] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     dispatch(resetTable())
@@ -39,6 +40,10 @@ function Karyawan() {
       dispatch(setCurrentKategori(listKategori[0]?.kategori))
       dispatch(setKategoriId(listKategori[0]?.id))
       navigate(`/karyawan/${listKategori[0]?.kategori}`)
+      if (searchParams.get('paginate')) {
+        dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(searchParams.get('paginate')) }))
+        setSearchParams({ 'paginate': parseInt(searchParams.get('paginate')) })
+      }
     }
   }, [loadingKategori])
 
@@ -57,8 +62,17 @@ function Karyawan() {
     }
   }, [kategoriId, isKategoriUpdated]);
 
+  useEffect(() => {
+    dispatch(updateStateKaryawan({ name: 'currentPage', value: 1 }))
+  }, [location.pathname.split('/').pop()]);
+
+  // useEffect(() => {
+  //   const currentPageParams = searchParams.get('paginate') ? searchParams.get('paginate') : 1;
+  //   dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(currentPageParams) }))
+  // }, [searchParams, dispatch]);
+
   function handleSearch() {
-    dispatch(getKaryawan({ kategori_id: kategoriId, search }))
+    dispatch(getKaryawan({ search }))
   }
 
   return (

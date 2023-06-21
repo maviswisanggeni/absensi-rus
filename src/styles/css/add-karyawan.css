@@ -256,6 +256,11 @@
 .add-karyawan .upload-button:hover {
   text-decoration-line: underline;
 }
+.add-karyawan .preview__img {
+  height: 100%;
+  -o-object-fit: center;
+     object-fit: center;
+}
 .add-karyawan #label-file-upload.drag-active {
   background-color: #ffffff;
 }

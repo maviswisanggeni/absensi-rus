@@ -25,7 +25,7 @@ function StatisticChart() {
       </div>
       <div className='div-2'>
         <Chart data={statistikData.mingguan} />
-        <ChartInfo />
+        {/* <ChartInfo /> */}
       </div>
     </div>
   )

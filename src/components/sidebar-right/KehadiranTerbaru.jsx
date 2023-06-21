@@ -4,6 +4,7 @@ import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApi
 import userFoto from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiranTerbaru } from '../../features/kehadiranSlice'
+import moment from 'moment/moment'
 
 function KehadiranTerbaru() {
   const context = useKehadiranListAbsensi()
@@ -19,6 +20,25 @@ function KehadiranTerbaru() {
     dispatch(getKehadiranTerbaru({ start_time: null }))
   }, [])
 
+  function formatTime(time) {
+    const currentTime = moment();
+    const formattedTime = moment(time, 'HH:mm:ss');
+
+    // Calculate the difference in minutes between the current time and the provided time
+    const diffInMinutes = currentTime.diff(formattedTime, 'minutes');
+    const diffInHours = currentTime.diff(formattedTime, 'hours');
+
+    if (diffInMinutes <= 1) {
+      return 'Just now';
+    } else if (diffInMinutes < 60) {
+      return `${diffInMinutes} menit yang lalu`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours} jam yang lalu`;
+    } else {
+      return formattedTime.format('HH:mm:ss');
+    }
+  }
+
   return (
     <div className='kehadiran-terbaru'>
       <div className='header-refresh'>
@@ -32,10 +52,10 @@ function KehadiranTerbaru() {
             : kehadiranTerbaru?.length === 0 ? <div className='no-data'>Tidak ada data</div>
               : kehadiranTerbaru?.map((item, index) => (
                 <li key={index}>
-                  <img src={item?.pf_foto ? item?.pf_foto : userFoto} alt="" />
+                  <img src={item?.user?.link_foto ? item?.user?.link_foto : userFoto} alt="" />
                   <div>
                     <p>{item.user?.nama}</p>
-                    <p>{item?.waktu_masuk}</p>
+                    <p>{formatTime(item?.waktu_masuk)}</p>
                   </div>
                 </li>
               ))

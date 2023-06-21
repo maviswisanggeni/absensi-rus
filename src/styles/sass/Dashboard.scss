@@ -63,6 +63,7 @@
         .drop-down-content {
           height: auto;
           position: absolute;
+          z-index: 9999;
 
           ul {
             margin-top: 0.5rem;
