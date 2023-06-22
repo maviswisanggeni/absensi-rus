@@ -34,7 +34,7 @@ function Karyawan() {
   useEffect(() => {
     const currentPath = location.pathname;
 
-    if (currentPath === '/karyawan/') {
+    if (currentPath === '/karyawan/' && listKategori.length > 0) {
       const defaultPath = `/karyawan/${listKategori[0]?.kategori}`;
       navigate(defaultPath);
     }
