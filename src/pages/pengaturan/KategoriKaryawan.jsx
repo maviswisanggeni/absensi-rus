@@ -17,7 +17,7 @@ function KategoriKaryawan() {
     const [id, setId] = useState(null)
 
     const dispatch = useDispatch()
-    const { listKategori, kategoriInput, statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.pengaturan)
+    const { listKategori, kategoriInput, statusResApi, messageResApi, isDisplayMessage, loadingKategori } = useSelector((state) => state.pengaturan)
     const more = useRef(null)
 
     useEffect(() => {
@@ -114,35 +114,36 @@ function KategoriKaryawan() {
                     <img src={plusIcon} alt="" />
                 </div>
 
-                {listKategori.map((item, index) => (
-                    <div className='container-kategori' key={index}>
-                        <Link to={`${item.kategori}/${item.id}`}>
-                            <div>
-                                <p>{item.kategori}</p>
-                                <span>| &nbsp; &nbsp;{item.jumlah} Guru</span>
-                            </div>
-                        </Link>
-                        <div ref={more} className='more'>
-                            <img
-                                src={dotIcon}
-                                onClick={() => handleMore(index)}
-                            />
-                            {currentMore === index ?
-                                <div className='dropdown-content'>
-                                    <div onClick={() => handleDelete(item.id, item.kategori)}>
-                                        <img src={trashIcons} alt="" />
-                                        <p>Delete</p>
-                                    </div>
-                                    <div onClick={() => handleUpdate(item.id, item.kategori)}>
-                                        <img src={editIcons} alt="" />
-                                        <p>Edit</p>
-                                    </div>
+                {loadingKategori ? <div className='loading dots'><p>Loading...</p></div>
+                    : listKategori.map((item, index) => (
+                        <div className='container-kategori' key={index}>
+                            <Link to={`${item.kategori}/${item.id}`}>
+                                <div>
+                                    <p>{item.kategori}</p>
+                                    <span>| &nbsp; &nbsp;{item.jumlah} Guru</span>
                                 </div>
-                                : null
-                            }
+                            </Link>
+                            <div ref={more} className='more'>
+                                <img
+                                    src={dotIcon}
+                                    onClick={() => handleMore(index)}
+                                />
+                                {currentMore === index ?
+                                    <div className='dropdown-content'>
+                                        <div onClick={() => handleDelete(item.id, item.kategori)}>
+                                            <img src={trashIcons} alt="" />
+                                            <p>Delete</p>
+                                        </div>
+                                        <div onClick={() => handleUpdate(item.id, item.kategori)}>
+                                            <img src={editIcons} alt="" />
+                                            <p>Edit</p>
+                                        </div>
+                                    </div>
+                                    : null
+                                }
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
 
                 {showModalAddKategori &&
                     <div className='bg-modal'>

@@ -15,6 +15,19 @@
   display: flex;
   gap: 3rem;
 
+  .loading {
+    width: 100% !important;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    p {
+      font-size: 14px;
+    }
+  }
+
   .import-user {
     width: 100%;
 
@@ -395,6 +408,7 @@
         margin-top: 0.5rem;
         overflow-y: scroll;
         height: 500px;
+        padding-right: 0.5rem;
 
         .wrapper-list {
           display: flex;

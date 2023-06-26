@@ -125,8 +125,8 @@ function EditKategoriKaryawan() {
                     <h2 onClick={() => handleShowModal()}>Tambahkan Karyawan</h2>
                 </div>
                 <div className='wrapper-column'>
-                    {loadingKategori ? 'loading' :
-                        listKaryawan.map((item, index) => {
+                    {loadingKategori ? <div className='loading dots'><p>Loading...</p></div>
+                        : listKaryawan.map((item, index) => {
                             if (!item.isChecked) return null;
                             return (
                                 <div className='wrapper-list' key={index}>

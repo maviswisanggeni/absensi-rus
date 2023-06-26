@@ -16,7 +16,7 @@ function KehadiranTerbaru() {
   }
 
   useEffect(() => {
-    dispatch(getKehadiranTerbaru({ start_time: null }))
+    // dispatch(getKehadiranTerbaru({ start_time: null }))
   }, [])
 
   function formatTime(time) {

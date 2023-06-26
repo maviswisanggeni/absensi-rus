@@ -28,13 +28,16 @@ export const getJmlKehadiranDashboard = createAsyncThunk("dashboard/jmlKehadiran
     }
 })
 
-export const getJmlKehadiranKehadiran = createAsyncThunk("kehadiran/jmlKehadiran", async (tanggal, { rejectWithValue }) => {
+export const getJmlKehadiranKehadiran = createAsyncThunk("kehadiran/jmlKehadiran", async ({ start_time, end_time }, { rejectWithValue }) => {
     try {
         const response = await axios.get(getBaseUrl() + 'kehadiran/jml-kehadiran', {
             headers: {
                 Authorization: `Bearer ${token()}`,
             },
-            params: { tanggal: formatDate(new Date()) },
+            params: {
+                start_time,
+                end_time
+            },
             timeout: 20000,
         });
 

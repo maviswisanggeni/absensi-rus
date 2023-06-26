@@ -14,6 +14,23 @@
   display: flex;
   gap: 3rem;
 }
+.pengaturan .loading {
+  width: 100% !important;
+  height: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 2rem;
+}
+.pengaturan .loading p {
+  font-size: 14px;
+}
 .pengaturan .import-user {
   width: 100%;
 }
@@ -447,6 +464,7 @@
   margin-top: 0.5rem;
   overflow-y: scroll;
   height: 500px;
+  padding-right: 0.5rem;
 }
 .pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list {
   display: -webkit-box;
