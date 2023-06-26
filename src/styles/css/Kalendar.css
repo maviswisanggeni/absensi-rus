@@ -93,9 +93,12 @@
   border-right: #e5e7eb 1px solid;
   border-bottom: #e5e7eb 1px solid;
   padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  height: 148px;
+  width: 168px;
+  position: relative;
 }
 .kalender .day .handle-add {
-  position: relative;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 0%;
           flex: 1 1 0%;
@@ -103,6 +106,7 @@
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   background-color: rgb(255, 255, 255);
+  overflow-y: scroll;
 }
 .kalender .day header {
   display: -webkit-box;
@@ -174,7 +178,7 @@
   z-index: 999;
   background-color: white;
   padding: 1rem 1.5rem;
-  top: -25px;
+  top: 20px;
   left: 150px;
   cursor: default;
   overflow-y: scroll;

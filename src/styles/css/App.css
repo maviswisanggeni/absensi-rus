@@ -15,8 +15,26 @@
   overflow: hidden;
 }
 
-::-webkit-scrollbar {
-  display: none;
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c2d2ff #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c2d2ff;
+  border-radius: 10px;
+  border: 0px solid #ffffff;
 }
 
 .dashboard,

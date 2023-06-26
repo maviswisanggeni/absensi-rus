@@ -116,7 +116,8 @@ const initialState = {
     ktgKaryawan: '',
     kategoriId: null,
     isLoading: true,
-    loadingStore: false
+    loadingStore: false,
+    loadingEdit: false
 };
 
 export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }, { rejectWithValue }) => {
@@ -369,9 +370,11 @@ const karyawanSlice = createSlice({
 
             .addCase(detailKaryawan.pending, (state) => {
                 state.isLoading = true;
+                state.loadingEdit = true;
             })
             .addCase(detailKaryawan.fulfilled, (state, action) => {
                 state.isLoading = false;
+                state.loadingEdit = false;
                 const initialData = action.payload.user;
                 state.nama = initialData.nama;
                 state.niy = initialData.niy;
@@ -386,6 +389,7 @@ const karyawanSlice = createSlice({
             })
             .addCase(detailKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
+                state.loadingEdit = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true
@@ -411,15 +415,18 @@ const karyawanSlice = createSlice({
 
             .addCase(updateKaryawan.pending, (state) => {
                 state.isLoading = true;
+                state.loadingEdit = true;
             })
             .addCase(updateKaryawan.fulfilled, (state) => {
                 state.isLoading = false;
+                state.loadingEdit = false;
                 state.statusResApi = 'success'
                 state.messageResApi = 'Karyawan berhasil diedit'
                 state.isDisplayMessage = true
             })
             .addCase(updateKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
+                state.loadingEdit = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true

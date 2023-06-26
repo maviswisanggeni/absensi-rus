@@ -165,6 +165,7 @@ export const updateKalender = createAsyncThunk("kalender/update", async (
     { id, judul, lokasi, kategori_event, waktu_mulai, waktu_selesai, deskripsi, peserta },
     { rejectWithValue }
 ) => {
+    console.log(waktu_mulai, waktu_selesai);
     const formData = new FormData()
     formData.append('judul', judul)
     if (kategori_event === 'event') {

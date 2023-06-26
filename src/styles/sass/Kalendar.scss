@@ -84,13 +84,19 @@
     border-right: #e5e7eb 1px solid;
     border-bottom: #e5e7eb 1px solid;
     padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    height: 148px;
+    width: 168px;
+    position: relative;
+    // z-index: -1;
 
     .handle-add {
-      position: relative;
+      // position: relative;
       flex: 1 1 0%;
       cursor: pointer;
       transition: all 0.2s ease;
       background-color: rgb(255, 255, 255);
+      overflow-y: scroll;
     }
 
     header {
@@ -161,8 +167,9 @@
     z-index: 999;
     background-color: white;
     padding: 1rem 1.5rem;
-    top: -25px;
+    top: 20px;
     left: 150px;
+    // transform: translate(150px, -100px);
     cursor: default;
     overflow-y: scroll;
 

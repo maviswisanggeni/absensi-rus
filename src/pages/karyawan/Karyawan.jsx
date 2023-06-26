@@ -113,6 +113,7 @@ function Karyawan() {
               placeholder='Cari guru / karyawan'
               value={search}
               setSearch={updateStateKaryawan}
+              stateName={'search'}
             />
             <button
               className='btn-search'
