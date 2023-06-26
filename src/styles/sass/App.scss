@@ -17,7 +17,29 @@
 
 // remove scrollbar
 ::-webkit-scrollbar {
-  display: none;
+  // display: none;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $blue-light #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $blue-light;
+  border-radius: 10px;
+  border: 0px solid #ffffff;
 }
 
 .dashboard,

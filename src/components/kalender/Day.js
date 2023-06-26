@@ -73,53 +73,55 @@ export default function Day({ day, rowIdx }) {
                                 : null
                             }
                         </div>
-                        {modalActive === idx ?
-                            <div
-                                ref={modalRef}
-                                className='hover-detail-event'
-                                onMouseLeave={() => setModalActive(null)}
-                                onMouseOver={() => setModalActive(idx)}
-                                onClick={(e) => e.stopPropagation()}
-                                key={idx + 1}
-                                style={
-                                    day.format('dddd') === 'Friday' || day.format('dddd') === 'Saturday' || day.format('dddd') === 'Thursday' ?
-                                        { left: -400 }
-                                        : null
-                                }
-                            >
-                                <div className='wrapper-judul'>
-                                    <h1 style={{ color: evt?.kategori_event === 'event' ? "#21D2FF" : '#EA4D90' }}>{evt.judul}</h1>
-                                    <h2 onClick={(event) => handleEventClick(event, evt)}>Edit</h2>
-                                </div>
-                                <p className='tanggal'>
-                                    {evt?.kategori_event === 'event'
-                                        ? <>
-                                            {dayjs(evt.waktu_mulai).format('DD MMMM YYYY')}
-                                            <p className='jam'>{dayjs(evt.waktu_mulai).format('HH:mm') + ' - ' + dayjs(evt.waktu_selesai).format('HH:mm')}</p>
-                                        </>
-                                        : <>
-                                            {dayjs(evt.waktu_mulai).format('DD MMMM YYYY') !== dayjs(evt.waktu_selesai).format('DD MMMM YYYY')
-                                                ? <>
-                                                    {dayjs(evt.waktu_mulai).format('DD MMMM YYYY')}
-                                                    &nbsp; - &nbsp;
-                                                    {dayjs(evt.waktu_selesai).format('DD MMMM YYYY')}
-                                                </>
-                                                : dayjs(evt.waktu_mulai).format('DD MMMM YYYY')
-
-                                            }
-                                        </>
+                        <div className='wrapper-modal'>
+                            {modalActive === idx ?
+                                <div
+                                    ref={modalRef}
+                                    className='hover-detail-event'
+                                    onMouseLeave={() => setModalActive(null)}
+                                    onMouseOver={() => setModalActive(idx)}
+                                    onClick={(e) => e.stopPropagation()}
+                                    key={idx + 1}
+                                    style={
+                                        day.format('dddd') === 'Friday' || day.format('dddd') === 'Saturday' || day.format('dddd') === 'Thursday' ?
+                                            { left: -395 }
+                                            : null
                                     }
-                                </p>
+                                >
+                                    <div className='wrapper-judul'>
+                                        <h1 style={{ color: evt?.kategori_event === 'event' ? "#21D2FF" : '#EA4D90' }}>{evt.judul}</h1>
+                                        <h2 onClick={(event) => handleEventClick(event, evt)}>Edit</h2>
+                                    </div>
+                                    <p className='tanggal'>
+                                        {evt?.kategori_event === 'event'
+                                            ? <>
+                                                {dayjs(evt.waktu_mulai).format('DD MMMM YYYY')}
+                                                <p className='jam'>{dayjs(evt.waktu_mulai).format('HH:mm') + ' - ' + dayjs(evt.waktu_selesai).format('HH:mm')}</p>
+                                            </>
+                                            : <>
+                                                {dayjs(evt.waktu_mulai).format('DD MMMM YYYY') !== dayjs(evt.waktu_selesai).format('DD MMMM YYYY')
+                                                    ? <>
+                                                        {dayjs(evt.waktu_mulai).format('DD MMMM YYYY')}
+                                                        &nbsp; - &nbsp;
+                                                        {dayjs(evt.waktu_selesai).format('DD MMMM YYYY')}
+                                                    </>
+                                                    : dayjs(evt.waktu_mulai).format('DD MMMM YYYY')
 
-                                {evt?.kategori_event === 'event' &&
-                                    <span className='lokasi'>
-                                        Lokasi: {evt.lokasi}
-                                    </span>
+                                                }
+                                            </>
+                                        }
+                                    </p>
 
-                                }
-                                <p className='deskripsi'>{evt.deskripsi}</p>
-                            </div>
-                            : null}
+                                    {evt?.kategori_event === 'event' &&
+                                        <span className='lokasi'>
+                                            Lokasi: {evt.lokasi}
+                                        </span>
+
+                                    }
+                                    <p className='deskripsi'>{evt.deskripsi}</p>
+                                </div>
+                                : null}
+                        </div>
                     </>
                 ))}
             </div>

@@ -52,6 +52,14 @@ function FormEvent() {
         }));
     }
 
+    const handleAddClick1 = () => {
+        setCalendarOpen1(!isCalendarOpen1);
+    };
+
+    const handleAddClick2 = () => {
+        setCalendarOpen2(!isCalendarOpen2);
+    };
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -78,16 +86,6 @@ function FormEvent() {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
-
-    const handleAddClick1 = (event) => {
-        event.stopPropagation();
-        setCalendarOpen1(!isCalendarOpen1);
-    };
-
-    const handleAddClick2 = (event) => {
-        event.stopPropagation();
-        setCalendarOpen2(!isCalendarOpen2);
-    };
 
     return (
         <div className='wrapper-form'>
@@ -158,25 +156,37 @@ function FormEvent() {
 
                     {kategoriEvent === 'libur' &&
                         <>
-                            <div className={`waktu waktu__mulai ${isCalendarOpen1 ? 'active' : null}`} onClick={handleAddClick1}>
+                            <div
+                                className={`waktu waktu__mulai ${isCalendarOpen1 ? 'active' : null}`}
+                                onClick={handleAddClick1}
+                                ref={inputRef1}
+                            >
                                 {dayjs(waktuMulaiLibur).format('DD MMMM YYYY')}
                             </div>
+
                             {isCalendarOpen1 &&
                                 <Calendar
                                     className='first-calendar'
-                                    inputRef={inputRef1}
+                                    // inputRef={inputRef1}
                                     onChange={handleChangeCalendar1}
                                     value={new Date(waktuMulaiLibur)}
                                 />
                             }
+
                             <div className='line'></div>
-                            <div className={`waktu waktu__selesai ${isCalendarOpen2 ? 'active' : null}`} onClick={handleAddClick2}>
+
+                            <div
+                                className={`waktu waktu__selesai ${isCalendarOpen2 ? 'active' : null}`}
+                                onClick={handleAddClick2}
+                                ref={inputRef2}
+                            >
                                 {dayjs(waktuSelesaiLibur).format('DD MMMM YYYY')}
                             </div>
+
                             {isCalendarOpen2 &&
                                 <Calendar
                                     className='second-calendar'
-                                    inputRef={inputRef2}
+                                    // inputRef={inputRef2}
                                     onChange={handleChangeCalendar2}
                                     value={new Date(waktuSelesaiLibur)}
                                 />

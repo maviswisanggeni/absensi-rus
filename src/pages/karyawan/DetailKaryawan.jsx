@@ -13,7 +13,7 @@ import InfoBox from '../../components/InfoBox'
 function DetailKaryawan() {
     let userId = useParams()
     const dispatch = useDispatch()
-    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage
+    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, loadingEdit
     } = useSelector((state) => state.karyawan)
     let navigate = useNavigate()
 
@@ -72,7 +72,7 @@ function DetailKaryawan() {
                     <DetailForm />
                     <DetailFotoProfile callback={callback} />
                 </div>
-                {isLoading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
+                {loadingEdit ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
             </form>
             <InfoBox
                 message={messageResApi}
