@@ -24,10 +24,11 @@ function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
   const { tanggal } = useSelector((state) => state.jmlKehadiran)
-  const { statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.kehadiran)
+  const { statusResApi, messageResApi, isDisplayMessage, startTime, endTime } = useSelector((state) => state.kehadiran)
+  const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
 
   useEffect(() => {
-    dispatch(getJmlKehadiranKehadiran(tanggal))
+    // dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
   }, [])
 
   // useEffect(() => {
@@ -46,8 +47,6 @@ function Kehadiran() {
   //     pusher.unsubscribe('jml-kehadiran-channel')
   //   }
   // }, []);
-
-  const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
 
   return (
     <div className='wrapper-kehadiran'>

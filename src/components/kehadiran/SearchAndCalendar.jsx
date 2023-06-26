@@ -8,6 +8,7 @@ import formatDate from '../useFormatCalendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiran, updateStateKehadiran } from '../../features/kehadiranSlice'
 import { useSearchParams } from 'react-router-dom'
+import { getJmlKehadiranKehadiran } from '../../features/jmlKehadiranSlice'
 
 function SearchAndCalendar() {
   const [startDate, setStartDate] = useState(new Date())
@@ -20,7 +21,12 @@ function SearchAndCalendar() {
   const [isParamsUpdated, setIsParamsUpdated] = useState(false);
 
   useEffect(() => {
+    dispatch(updateStateKehadiran({ name: 'isPaginationClicked', value: false }))
+  }, [])
+
+  useEffect(() => {
     if (!isPaginationClicked) {
+      console.log('this effect is called');
       const startTime = searchParams.get('start_time') ? searchParams.get('start_time') : formatDate(new Date());
       const endTime = searchParams.get('end_time') === 'null' ? null : searchParams.get('end_time');
       const search = searchParams.get('search') ? searchParams.get('search') : '';
@@ -44,6 +50,7 @@ function SearchAndCalendar() {
   useEffect(() => {
     if (isParamsUpdated) {
       dispatch(getKehadiran({ start_time: startTime, end_time: endTime, search: search }));
+      dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
       setIsParamsUpdated(false);
     }
   }, [searchParams.toString(), isParamsUpdated, dispatch]);
@@ -51,6 +58,7 @@ function SearchAndCalendar() {
   async function handleSearch(e) {
     e.preventDefault()
     dispatch(getKehadiran({ start_time: startTime, end_time: endTime, search: search }))
+    dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
     setSearchParams({
       'search': search,
       'start_time': startTime,

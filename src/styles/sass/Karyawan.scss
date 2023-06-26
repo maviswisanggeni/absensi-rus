@@ -5,6 +5,19 @@
   padding: 0 2rem;
   padding-bottom: 2rem;
 
+  .loading {
+    width: 100% !important;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    p {
+      font-size: 14px;
+    }
+  }
+
   .loading-table {
     position: absolute;
     width: 100% !important;
@@ -111,7 +124,7 @@
       top: 0;
       bottom: 0;
       margin: auto;
-      height: 40px;
+      height: 76px;
       width: 100%;
       display: grid;
       place-items: center;

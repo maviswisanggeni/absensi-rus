@@ -130,8 +130,11 @@ function Karyawan() {
         </div>
 
         <div className='tabbar-filter'>
-          {!loadingKategori &&
-            <Tabbar
+          {loadingKategori ?
+            <div className='wrapper-loading'>
+              <div className='dots loading'><p>Loading...</p></div>
+            </div>
+            : <Tabbar
               options={listKategori}
               setKategoriId={setKategoriId}
               setCurrentKategori={setCurrentKategori}
@@ -141,14 +144,6 @@ function Karyawan() {
               path='/karyawan'
               loading={loadingKategori}
             />
-          }
-
-          {loadingKategori &&
-            <>
-              <div className='wrapper-loading'>
-                <div className='dots loading'></div>
-              </div>
-            </>
           }
 
           {!isLoading &&
