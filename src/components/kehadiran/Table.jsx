@@ -1,12 +1,13 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import Pagination from '../Pagination';
 import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import defaultFoto from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux';
 import Pusher from "pusher-js";
 import { updateStateKehadiran } from '../../features/kehadiranSlice';
 import { useEffect } from 'react';
+import useImgError from '../../hooks/useImgError';
+import DisplayKategoriList from '../DisplayKategoriList';
 
 let PageSize = 10;
 
@@ -14,6 +15,7 @@ function Table() {
     const context = useKehadiranListAbsensi()
     const dispatch = useDispatch()
     let [searchParams] = useSearchParams();
+    const [imgExist, setImgExist] = useState(null)
     const location = useLocation()
 
     const {
@@ -109,17 +111,13 @@ function Table() {
                                         <tr key={key}>
                                             <td className='row-img'>
                                                 <div className={`valid-masuk-pulang ${checkKeterangan(item?.is_valid_masuk, item?.is_valid_pulang) === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
-                                                <img src={item?.user?.link_foto ? item?.user?.link_foto : defaultFoto} alt="" />
+                                                <img src={item?.user?.link_foto} onError={useImgError} alt={item.user?.nama} />
+
                                                 {item?.user?.nama}
                                             </td>
                                             <td>{item?.user?.niy}</td>
                                             <td>
-                                                {item.user?.ktgkaryawan?.map((itemKategori, index) => (
-                                                    <React.Fragment key={itemKategori?.id}>
-                                                        {itemKategori?.kategori}
-                                                        {index !== item.user?.ktgkaryawan?.length - 1 && ','}{' '}
-                                                    </React.Fragment>
-                                                ))}
+                                                <DisplayKategoriList list={item.user?.ktgkaryawan} />
                                             </td>
                                             <td>{checkKeterangan(item?.tanggal_masuk, item?.tanggal_pulang)}</td>
                                             <td>{item?.waktu_masuk?.slice(0, 5)}</td>

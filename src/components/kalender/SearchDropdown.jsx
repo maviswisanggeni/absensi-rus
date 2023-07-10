@@ -5,6 +5,8 @@ import { getKaryawanKalender, setLoading, updateListPeserta } from '../../featur
 import useDebounce from '../../hooks/useDebounce'
 import { useEffect } from 'react'
 import { useRef } from 'react'
+import useImgError from '../../hooks/useImgError'
+import DisplayKategoriList from '../DisplayKategoriList'
 
 function SearchDropdown() {
     const [activeDropdown, setActiveDropdown] = useState(false)
@@ -83,9 +85,12 @@ function SearchDropdown() {
                                         <div className='dropdown-outer-item' key={index}>
                                             <div className='dropdown-item'>
                                                 <div>
-                                                    <img src={item.link_foto} alt='' />
+                                                    <img src={item.link_foto} onError={useImgError} alt='' />
                                                     <p>{item.nama}</p>
-                                                    <span>/ {item.ktgkaryawan.map((item) => item.kategori)}</span>
+                                                    <span>
+                                                        /
+                                                        <DisplayKategoriList list={item.ktgkaryawan} />
+                                                    </span>
                                                 </div>
                                                 <button onClick={() => handleAdd(item)}>Tambahkan</button>
                                             </div>

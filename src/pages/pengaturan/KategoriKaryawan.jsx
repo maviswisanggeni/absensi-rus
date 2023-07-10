@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteKategori, getKategoriPengaturan, storeKategori, updateInputPengaturan, updateKategori } from '../../features/pengaturanSlice'
 import { Link } from 'react-router-dom'
 import InfoBox from '../../components/InfoBox'
+import LoadingFullscreen from '../../components/LoadingFullscreen'
 
 function KategoriKaryawan() {
     const [showModalAddKategori, setShowModalAddKategori] = useState(false)
@@ -17,7 +18,7 @@ function KategoriKaryawan() {
     const [id, setId] = useState(null)
 
     const dispatch = useDispatch()
-    const { listKategori, kategoriInput, statusResApi, messageResApi, isDisplayMessage, loadingKategori } = useSelector((state) => state.pengaturan)
+    const { listKategori, kategoriInput, loadingKategori, loadingCUD } = useSelector((state) => state.pengaturan)
     const more = useRef(null)
 
     useEffect(() => {
@@ -109,7 +110,10 @@ function KategoriKaryawan() {
         <>
             <div className='kategori-karyawan'>
                 <h1>Kategori Karyawan</h1>
-                <div className='tambah-kategori' onClick={() => setShowModalAddKategori(true)}>
+                <div className='tambah-kategori' onClick={() => {
+                    setShowModalAddKategori(true)
+                    setIsAdd(true)
+                }}>
                     Tambah Kategori
                     <img src={plusIcon} alt="" />
                 </div>
@@ -157,7 +161,7 @@ function KategoriKaryawan() {
                                 <path fillRule="evenodd" clipRule="evenodd" d="M8.03194 6.50013L12.6826 1.84948C13.1062 1.42591 13.1062 0.741255 12.6826 0.317681C12.259 -0.105894 11.5744 -0.105894 11.1508 0.317681L6.50013 4.96833L1.84948 0.317681C1.42591 -0.105894 0.741255 -0.105894 0.317681 0.317681C-0.105894 0.741255 -0.105894 1.42591 0.317681 1.84948L4.96833 6.50013L0.317681 11.1508C-0.105894 11.5744 -0.105894 12.259 0.317681 12.6826C0.528926 12.8938 0.806254 13 1.08358 13C1.36091 13 1.63824 12.8938 1.84948 12.6826L6.50013 8.03194L11.1508 12.6826C11.362 12.8938 11.6394 13 11.9167 13C12.194 13 12.4713 12.8938 12.6826 12.6826C13.1062 12.259 13.1062 11.5744 12.6826 11.1508L8.03194 6.50013Z" fill="#5A6474" />
                             </svg>
                             <img src={kategoriImg} alt="" />
-                            <h3>Tambah Kategori Karyawan</h3>
+                            <h3>{isAdd ? "Tambah " : 'Edit '} Kategori Karyawan</h3>
                             <p>Nama Kategori</p>
                             <input
                                 type="text"
@@ -166,18 +170,15 @@ function KategoriKaryawan() {
                                 value={kategoriInput}
                                 onChange={handleChange}
                             />
-                            <button onClick={handleSubmit}>Tambahkan Kategori</button>
+                            <button onClick={handleSubmit}>
+                                {isAdd ? "Tambahkan " : 'Edit '}
+                                Kategori
+                            </button>
                         </div>
                     </div>
                 }
-                <InfoBox
-                    message={messageResApi}
-                    status={statusResApi}
-                    isDisplay={isDisplayMessage}
-                    setIsDisplay={updateInputPengaturan}
-                    stateName='isDisplayMessage'
-                />
             </div>
+            <LoadingFullscreen loading={loadingCUD} />
         </>
     )
 }

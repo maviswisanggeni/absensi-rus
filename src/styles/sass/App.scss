@@ -639,6 +639,16 @@
       object-fit: cover;
     }
   }
+
+  .loading-table {
+    position: absolute;
+    width: 100% !important;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
 }
 
 .map {

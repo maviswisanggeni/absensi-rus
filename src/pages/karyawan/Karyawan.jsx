@@ -45,29 +45,6 @@ function Karyawan() {
     }
   }, [location.pathname, listKategori, navigate, searchParams]);
 
-  // useEffect(() => {
-  //   if (location.pathname.split('/').pop() === '') {
-  //     dispatch(setIsInitial(true));
-  //   }
-
-  //   if (isInitialPage && !loadingKategori) {
-  //     dispatch(setCurrentKategori(listKategori[0]?.kategori));
-  //     dispatch(setKategoriId(listKategori[0]?.id));
-
-  //     // Check if the current location matches the default path
-  //     const currentPath = location.pathname.split('/').pop();
-  //     const defaultPath = `/karyawan/${listKategori[0]?.kategori}`;
-  //     if (currentPath !== defaultPath) {
-  //       navigate(currentPath);
-  //     }
-
-  //     if (searchParams.get('paginate')) {
-  //       dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(searchParams.get('paginate')) }));
-  //       setSearchParams({ 'paginate': parseInt(searchParams.get('paginate')) });
-  //     }
-  //   }
-  // }, [location.pathname, loadingKategori]);
-
   useEffect(() => {
     if (!loadingKategori && currentKategori) {
       setIsKategoriUpdated(true)
@@ -86,11 +63,6 @@ function Karyawan() {
   useEffect(() => {
     dispatch(updateStateKaryawan({ name: 'currentPage', value: 1 }))
   }, [location.pathname.split('/').pop()]);
-
-  // useEffect(() => {
-  //   const currentPageParams = searchParams.get('paginate') ? searchParams.get('paginate') : 1;
-  //   dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(currentPageParams) }))
-  // }, [searchParams, dispatch]);
 
   function handleSearch() {
     dispatch(getKaryawan({ search }))
@@ -139,8 +111,7 @@ function Karyawan() {
               setKategoriId={setKategoriId}
               setCurrentKategori={setCurrentKategori}
               searchParams={''}
-              funcPage={context.setCurrentPage}
-              funcKeterangan={updateStateKaryawan}
+              setKeterangan={updateStateKaryawan}
               path='/karyawan'
               loading={loadingKategori}
             />

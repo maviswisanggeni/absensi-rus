@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
-function Tabbar({ funcPage, funcKeterangan, searchParams, path, options, setKategoriId, setCurrentKategori, loading }) {
+function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, setCurrentKategori, loading }) {
   const dispatch = useDispatch()
   let location = useLocation()
   const [current, setCurrent] = useState(null)
@@ -23,11 +23,10 @@ function Tabbar({ funcPage, funcKeterangan, searchParams, path, options, setKate
   function handleClick(kategori, index) {
     setCurrent(kategori)
     setIndex(index)
-    funcPage(1)
   }
 
   useEffect(() => {
-    dispatch(funcKeterangan({ name: 'keterangan', value: current }))
+    dispatch(setKeterangan({ name: 'keterangan', value: current }))
     dispatch(setKategoriId(index))
   }, [current])
 

@@ -50,6 +50,70 @@
   font-size: 14px;
   color: #5a6474;
 }
+.pengaturan .import-user .top-table input {
+  display: none;
+}
+.pengaturan .import-user .top-table .modal-konfirm {
+  width: 500px;
+  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 1rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.pengaturan .import-user .top-table svg {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  width: 13px;
+  height: 13px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.pengaturan .import-user .top-table h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: #5a6474;
+  margin: 2rem 0;
+}
+.pengaturan .import-user .top-table p {
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-weight: 500;
+  font-size: 12px;
+  color: #5a6474;
+}
+.pengaturan .import-user .top-table button {
+  border: none;
+  outline: none;
+  display: grid;
+  place-items: center;
+  background-color: #3661eb;
+  color: #ffffff;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  margin-top: 2rem;
+  font-weight: 500;
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
+}
 .pengaturan .import-user .wrapper-tabbar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,6 +128,13 @@
   padding-bottom: 0;
   border: 1px solid #ebf0fe;
   border-top: none;
+  margin-top: 2rem;
+}
+.pengaturan .import-user .pagination-container {
+  padding-bottom: 2rem;
+}
+.pengaturan .import-user .wrapper-loading {
+  background-color: white;
   margin-top: 2rem;
 }
 .pengaturan .radius-absen {
@@ -129,13 +200,14 @@
   color: black;
   cursor: pointer;
   font-weight: 500;
+  border-radius: 5px;
 }
 .pengaturan .radius-absen .container-radius .wrapper-btn .btn-cancel {
   background-color: #ff4530;
   color: white;
 }
 .pengaturan .radius-absen .container-radius .wrapper-btn button.active {
-  background-color: #277ffe;
+  background-color: #3661eb;
   color: white;
 }
 .pengaturan .kategori-karyawan {
@@ -600,7 +672,12 @@
 }
 .pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .wrapper-list {
   overflow-y: scroll;
-  height: 300px;
+  height: 250px;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .wrapper-list .empty {
+  text-align: center;
+  width: auto;
+  font-size: 12px;
 }
 .pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container {
   background-color: #ffffff;
@@ -677,7 +754,7 @@
   border: none;
   outline: none;
 }
-.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota p {
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota h4 {
   font-weight: 500;
   font-size: 12px;
   -ms-flex-item-align: start;
@@ -693,6 +770,7 @@
           align-items: center;
   width: 100%;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 .pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota img {
   width: 25px;
@@ -819,6 +897,72 @@
 }
 .pengaturan .detail-kategori-karyawan .alert-modal button:nth-child(2) {
   background-color: #3661eb;
+}
+.pengaturan .batas-waktu {
+  width: 100%;
+  height: 50%;
+  position: relative;
+}
+.pengaturan .batas-waktu h1 {
+  font-weight: 500;
+  font-size: 32px;
+  margin-bottom: 2rem;
+}
+.pengaturan .batas-waktu .containers-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+.pengaturan .batas-waktu .containers-input .container-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+.pengaturan .batas-waktu .containers-input .container-input input {
+  width: 187px;
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #eceef2;
+  border-radius: 8px;
+  outline: none;
+  padding: 1rem;
+  font-weight: 400;
+  font-size: 14px;
+  color: #5a6474;
+}
+.pengaturan .batas-waktu .wrapper-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.pengaturan .batas-waktu .wrapper-btn button {
+  width: 125px;
+  height: 40px;
+  cursor: pointer;
+}
+.pengaturan .batas-waktu .wrapper-btn .edit-btn {
+  background-color: #ffd233;
+  color: black;
+}
+.pengaturan .batas-waktu .wrapper-btn .simpan-btn {
+  background-color: #3661eb;
+  color: white;
+}
+.pengaturan .batas-waktu .wrapper-btn .batal-btn {
+  background-color: #ff4530;
+  color: white;
 }
 
 .bg-navbar {
