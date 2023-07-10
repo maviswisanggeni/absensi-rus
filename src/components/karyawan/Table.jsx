@@ -8,6 +8,8 @@ import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan';
 import defaultUser from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteKaryawan, getKaryawan, updateStateKaryawan } from '../../features/karyawanSlice';
+import DisplayKategoriList from '../DisplayKategoriList';
+import useImgError from '../../hooks/useImgError';
 
 let PageSize = 10;
 
@@ -80,16 +82,11 @@ function Table() {
                     <tr key={key}>
                       <td className='niy-col'>{item?.niy}</td>
                       <td className='row-img' onClick={() => handleDetail(item.id)}>
-                        <img src={isImgUrl(item?.link_foto) ? item?.link_foto : defaultUser} alt="" />
+                        <img src={isImgUrl(item?.link_foto) ? item?.link_foto : defaultUser} onError={useImgError} alt="" />
                         {item?.nama}
                       </td>
                       <td>
-                        {item.ktgkaryawan.map((itemKategori, index) => (
-                          <React.Fragment key={itemKategori.id}>
-                            {itemKategori.kategori}
-                            {index !== item.ktgkaryawan.length - 1 && ','}{' '}
-                          </React.Fragment>
-                        ))}
+                        <DisplayKategoriList list={item.ktgkaryawan} />
                       </td>
                       <td>{item?.no_hp}</td>
                       <td>{item?.email}</td>

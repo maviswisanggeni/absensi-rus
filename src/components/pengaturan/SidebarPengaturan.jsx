@@ -3,6 +3,7 @@ import kategoriIcon from '../../assets/icons/kategori-icon.svg'
 import fileIcon from '../../assets/icons/file-icon.svg'
 import radiusIcon from '../../assets/icons/radius-icon.svg'
 import logoutIcon from '../../assets/icons/logout-icon-red.svg'
+import waktuIcon from '../../assets/icons/timer.svg'
 import { NavLink } from 'react-router-dom'
 
 function SidebarPengaturan() {
@@ -21,6 +22,11 @@ function SidebarPengaturan() {
             icon: radiusIcon,
             nama: 'Radius Absen',
             link: 'radius-absen'
+        },
+        {
+            icon: waktuIcon,
+            nama: 'Batas Waktu',
+            link: 'batas-waktu'
         }
     ]
 

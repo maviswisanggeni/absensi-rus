@@ -15,7 +15,7 @@ function SearchAndCalendar() {
   const [endDate, setEndDate] = useState(null)
   const context = useTanggalKehadiran()
   const dispatch = useDispatch()
-  const { startTime, endTime, search, startText, endText, isPaginationClicked } = useSelector(state => state.kehadiran)
+  const { startTime, endTime, search, startText, endText, isPaginationClicked, keterangan } = useSelector(state => state.kehadiran)
   let [searchParams, setSearchParams] = useSearchParams();
 
   const [isParamsUpdated, setIsParamsUpdated] = useState(false);
@@ -26,7 +26,6 @@ function SearchAndCalendar() {
 
   useEffect(() => {
     if (!isPaginationClicked) {
-      console.log('this effect is called');
       const startTime = searchParams.get('start_time') ? searchParams.get('start_time') : formatDate(new Date());
       const endTime = searchParams.get('end_time') === 'null' ? null : searchParams.get('end_time');
       const search = searchParams.get('search') ? searchParams.get('search') : '';
@@ -54,6 +53,12 @@ function SearchAndCalendar() {
       setIsParamsUpdated(false);
     }
   }, [searchParams.toString(), isParamsUpdated, dispatch]);
+
+  useEffect(() => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('paginate', 1);
+    setSearchParams(newSearchParams)
+  }, [keterangan])
 
   async function handleSearch(e) {
     e.preventDefault()

@@ -23,8 +23,7 @@ function TabbarAndFilter() {
         options={options}
         setKategoriId={setKategoriId}
         setCurrentKategori={setCurrentKategori}
-        funcPage={context.setCurrentPage}
-        funcKeterangan={updateStateKehadiran}
+        setKeterangan={updateStateKehadiran}
         searchParams={searchParams.toString()}
         path='/kehadiran'
         loading={false}

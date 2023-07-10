@@ -139,16 +139,23 @@ export const deleteKategori = createAsyncThunk("pengaturan/deleteKategori", asyn
     }
 })
 
-export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", async ({ search }, { rejectWithValue }) => {
+export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", async ({ search, kategori_id, route }, { rejectWithValue }) => {
+    let url;
+    if (route === 'setting') {
+        url = 'setting/kategori/get-karyawan'
+    } else if (route === 'karyawan') {
+        url = 'karyawan'
+    }
     try {
         const response = await axios.get(
-            getBaseUrl() + `setting/kategori/get-karyawan`,
+            getBaseUrl() + url,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
                 },
                 params: {
-                    search
+                    search,
+                    kategori_id
                 },
                 timeout: 20000
             }
@@ -168,10 +175,10 @@ export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", 
     }
 })
 
-export const assignKategori = createAsyncThunk("pengaturan/assignKategori", async ({ kategori_id, karyawan_id }, { rejectWithValue }) => {
+export const assignKategori = createAsyncThunk("pengaturan/assignKategori", async ({ kategori_id, karyawan }, { rejectWithValue }) => {
     const formData = new FormData()
     formData.append('kategori_id', kategori_id)
-    karyawan_id.forEach((item, index) => {
+    karyawan.forEach((item, index) => {
         formData.append(`karyawan_id[${index}]`, item.id)
     })
 
@@ -202,18 +209,15 @@ export const assignKategori = createAsyncThunk("pengaturan/assignKategori", asyn
 })
 
 export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", async ({ kategori_id, user_id }, { rejectWithValue }) => {
-    const reqBody = JSON.stringify({
-        "unassign": [
-            {
-                "user_id": user_id,
-                "kategori_id": kategori_id
-            }
-        ]
-    })
+    const formData = new FormData()
+    const prefix = `unassign[${0}]`;
+    formData.append(`${prefix}[kategori_id]`, kategori_id)
+    formData.append(`${prefix}[user_id]`, user_id)
 
     try {
         const response = await axios.post(
             getBaseUrl() + `setting/kategori/unassign`,
+            formData,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -222,6 +226,93 @@ export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", 
             },
         )
         return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
+        }
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
+})
+
+export const getBatasWaktu = createAsyncThunk("pengaturan/getBatasWaktu", async (_, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl() + `setting/batas-waktu`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            },
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
+        }
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
+})
+
+export const updateBatasWaktu = createAsyncThunk("pengaturan/updateBatasWaktu", async ({ waktu_masuk, waktu_pulang }, { rejectWithValue }) => {
+
+    const formData = new FormData()
+    formData.append('waktu_masuk', waktu_masuk)
+    formData.append('waktu_pulang', waktu_pulang)
+
+    try {
+        const response = await axios.post(
+            getBaseUrl() + `setting/batas-waktu/update`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            },
+        )
+        return response.data
+
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
+        }
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        }
+
+        return rejectWithValue(error.code)
+    }
+})
+
+export const importKaryawan = createAsyncThunk("pengaturan/importKaryawan", async ({ file }, { rejectWithValue }) => {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+        const response = await axios.post(
+            getBaseUrl() + `karyawan/import`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            },
+        )
+        return response.data
+
     } catch (error) {
         if (axios.isCancel(error)) {
             throw new Error('Request canceled');
@@ -246,10 +337,17 @@ const pengaturanSlice = createSlice({
         currentKaryawan: null,
         currentKategori: null,
         kategoriId: null,
+        currentPage: 1,
+
+        batasWaktuMasuk: '',
+        batasWaktuPulang: '',
 
         loadingKategori: true,
         loadingKaryawan: true,
         loadingSearch: true,
+        loadingImport: false,
+        loadingAssign: false,
+        loadingCUD: false,
 
         kategoriInput: '',
 
@@ -279,7 +377,6 @@ const pengaturanSlice = createSlice({
                 }
                 return item;
             });
-            state.listSearchKaryawan = state[name]
         },
         searchKaryawan: (state, action) => {
             const { name, value } = action.payload;
@@ -287,10 +384,15 @@ const pengaturanSlice = createSlice({
             const filteredArray = state[name].filter(item =>
                 item.nama.toLowerCase().includes(value.toLowerCase())
             );
+
             return {
                 ...state,
                 listKaryawanNotFinal: filteredArray
             };
+        },
+        emptyKaryawan: (state, action) => {
+            state.listKaryawan = []
+            state.loadingKaryawan = true
         }
     },
     extraReducers: (builder) => {
@@ -313,13 +415,16 @@ const pengaturanSlice = createSlice({
 
 
             .addCase(storeKategori.pending, (state) => {
-                state.loadingKategori = true;
+                state.loadingCUD = true;
             })
             .addCase(storeKategori.fulfilled, (state) => {
-                state.loadingKategori = false;
+                state.loadingCUD = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Kategori berhasil ditambah'
+                state.isDisplayMessage = true
             })
             .addCase(storeKategori.rejected, (state, action) => {
-                state.loadingKategori = false;
+                state.loadingCUD = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true
@@ -327,13 +432,16 @@ const pengaturanSlice = createSlice({
 
 
             .addCase(deleteKategori.pending, (state) => {
-                state.loadingKategori = true;
+                state.loadingCUD = true;
             })
             .addCase(deleteKategori.fulfilled, (state) => {
-                state.loadingKategori = false;
+                state.loadingCUD = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Kategori berhasil dihapus'
+                state.isDisplayMessage = true
             })
             .addCase(deleteKategori.rejected, (state, action) => {
-                state.loadingKategori = false;
+                state.loadingCUD = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true
@@ -341,13 +449,16 @@ const pengaturanSlice = createSlice({
 
 
             .addCase(updateKategori.pending, (state) => {
-                state.loadingKategori = true;
+                state.loadingCUD = true;
             })
             .addCase(updateKategori.fulfilled, (state) => {
-                state.loadingKategori = false;
+                state.loadingCUD = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Kategori berhasil diupdate'
+                state.isDisplayMessage = true
             })
             .addCase(updateKategori.rejected, (state, action) => {
-                state.loadingKategori = false;
+                state.loadingCUD = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true
@@ -359,6 +470,7 @@ const pengaturanSlice = createSlice({
                 state.loadingSearch = true;
             })
             .addCase(getKaryawanPengaturan.fulfilled, (state, action) => {
+                state.loadingKaryawan = false
                 state.listKaryawanNotFinal = action.payload.data.map((item) => ({
                     ...item,
                     isChecked: false,
@@ -367,12 +479,8 @@ const pengaturanSlice = createSlice({
                     ...item,
                     isChecked: false,
                 }));
-                if (action.meta.arg && action.meta.arg.search) {
-                    state.listSearchKaryawan = action.payload.data.map((item) => ({
-                        ...item,
-                        isChecked: true,
-                    }));
-                    state.loadingSearch = false;
+                if (action.meta.arg.kategori_id) {
+                    state.listKaryawan = action.payload.data
                 }
             })
             .addCase(getKaryawanPengaturan.rejected, (state, action) => {
@@ -403,14 +511,17 @@ const pengaturanSlice = createSlice({
 
 
             .addCase(assignKategori.pending, (state) => {
-                state.loadingKategori = true;
+                state.loadingAssign = true;
             })
             .addCase(assignKategori.fulfilled, (state) => {
-                state.loadingKategori = false;
+                state.loadingAssign = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Karyawan berhasil ditambahkan'
+                state.isDisplayMessage = true
             })
 
             .addCase(assignKategori.rejected, (state, action) => {
-                state.loadingKategori = false;
+                state.loadingAssign = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true
@@ -418,19 +529,70 @@ const pengaturanSlice = createSlice({
 
 
             .addCase(unassignKategori.pending, (state) => {
-                state.loadingKategori = true;
+                state.loadingAssign = true;
             })
             .addCase(unassignKategori.fulfilled, (state) => {
-                state.loadingKategori = false;
+                state.loadingAssign = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Karyawan berhasil dihapus'
+                state.isDisplayMessage = true
             })
             .addCase(unassignKategori.rejected, (state, action) => {
+                state.loadingAssign = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
+
+
+            .addCase(getBatasWaktu.pending, (state) => {
+                state.loadingKategori = true;
+            })
+            .addCase(getBatasWaktu.fulfilled, (state, action) => {
+                state.loadingKategori = false;
+                state.batasWaktuMasuk = action.payload.data.batas_waktu_absen_masuk.slice(0, -3)
+                state.batasWaktuPulang = action.payload.data.batas_waktu_absen_pulang.slice(0, -3)
+            })
+            .addCase(getBatasWaktu.rejected, (state, action) => {
                 state.loadingKategori = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true
-            });
+            })
+
+
+            .addCase(updateBatasWaktu.pending, (state) => {
+                state.loadingKategori = true;
+            })
+            .addCase(updateBatasWaktu.fulfilled, (state) => {
+                state.loadingKategori = false;
+            })
+
+            .addCase(updateBatasWaktu.rejected, (state, action) => {
+                state.loadingKategori = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
+
+
+            .addCase(importKaryawan.pending, (state) => {
+                state.loadingImport = true;
+            })
+            .addCase(importKaryawan.fulfilled, (state) => {
+                state.loadingImport = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Karyawan berhasil diimport'
+                state.isDisplayMessage = true
+            })
+            .addCase(importKaryawan.rejected, (state, action) => {
+                state.loadingImport = false;
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
     }
 })
 
-export const { setKategoriId, setCurrentKategori, updateInputPengaturan, deleteKaryawan, searchKaryawan } = pengaturanSlice.actions
+export const { setKategoriId, setCurrentKategori, updateInputPengaturan, deleteKaryawan, searchKaryawan, emptyKaryawan } = pengaturanSlice.actions
 export default pengaturanSlice.reducer;

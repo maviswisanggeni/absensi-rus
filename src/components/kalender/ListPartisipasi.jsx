@@ -1,8 +1,8 @@
 import React from 'react'
-import orang from '../../assets/images/orang.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import { deletePeserta } from '../../features/kalenderSlice'
+import useImgError from '../../hooks/useImgError'
+import DisplayKategoriList from '../DisplayKategoriList'
 
 function ListPartisipasi() {
     const { peserta, loadngGetKaryawan } = useSelector((state) => state.kalender)
@@ -17,16 +17,11 @@ function ListPartisipasi() {
             {peserta.map((item, index) => (
                 <div className='wrapper-list' key={index}>
                     <div className='list-content-left'>
-                        <img src={item.link_foto} alt="" />
+                        <img src={item.link_foto} onError={useImgError} alt="" />
                         <div>
                             <p>{item.nama}</p>
                             <span>
-                                {item.ktgkaryawan.map((itemKategori, index) => (
-                                    <React.Fragment key={itemKategori.id}>
-                                        {itemKategori.kategori}
-                                        {index !== item.ktgkaryawan.length - 1 && ','}{' '}
-                                    </React.Fragment>
-                                ))}
+                                <DisplayKategoriList list={item.ktgkaryawan} />
                             </span>
                         </div>
                     </div>
