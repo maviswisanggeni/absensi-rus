@@ -5,9 +5,9 @@ import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiK
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFieldValue } from '../../features/karyawanSlice';
 
-function FotoProfile({ callback }) {
+function FotoProfile({ callbackFile, callbackIsLoad }) {
     const context = useApiKaryawanStoreUser()
-    const { listJadwal } = useSelector(
+    const { listJadwal, errors, isFormErrorShown } = useSelector(
         (state) => state.karyawan
     );
     const dispatch = useDispatch()
@@ -35,6 +35,7 @@ function FotoProfile({ callback }) {
             // at least one file has been dropped so do something
             // handleFiles(e.dataTransfer.files);
             setFile(e.dataTransfer.files[0]);
+            callbackIsLoad(true)
             setPreviewImg(URL.createObjectURL(e.dataTransfer.files[0]))
         }
     };
@@ -45,9 +46,9 @@ function FotoProfile({ callback }) {
             // at least one file has been selected so do something
             // handleFiles(e.target.files);
             setFile(e.target.files[0]);
+            callbackIsLoad(true)
             setPreviewImg(URL.createObjectURL(e.target.files[0]))
             context.setFoto(e.target?.files[0])
-            console.log(e.target.files);
         }
     };
 
@@ -56,7 +57,7 @@ function FotoProfile({ callback }) {
     };
 
     useEffect(() => {
-        callback(file)
+        callbackFile(file)
     }, [file])
 
     const formatTime = time => {
@@ -88,7 +89,7 @@ function FotoProfile({ callback }) {
         <div>
             <div onDragEnter={handleDrag} className='form-file-upload'>
                 <h1>Foto Profile</h1>
-                <input ref={inputRef} type="file" id="input-file-upload" multiple={true} onChange={handleChange} />
+                <input ref={inputRef} type="file" id="input-file-upload" onChange={handleChange} accept="image/png, image/gif, image/jpeg" />
                 <label id="label-file-upload" htmlFor="input-file-upload" className={dragActive ? "drag-active" : ""}>
                     {!previewImg ?
                         <div className='wrap-text'>
@@ -101,6 +102,11 @@ function FotoProfile({ callback }) {
                 </label>
                 {dragActive && <div id="drag-file-element" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}
             </div>
+
+            {!isFormErrorShown ? null
+                : <p className='validator-text'>Isi Foto</p>
+            }
+
             <div className='jadwal-absensi'>
                 <h1>Jadwal Absensi</h1>
                 {listJadwal.map((item, key) => {
@@ -127,6 +133,9 @@ function FotoProfile({ callback }) {
                         </div>
                     )
                 })}
+                <p className='validator-text'>
+                    {errors.jadwal && errors.jadwal}
+                </p>
             </div>
         </div>
     )

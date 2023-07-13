@@ -1,6 +1,6 @@
 .karyawan {
   width: 82%;
-  padding: 0 2rem;
+  padding-left: 2rem;
   padding-bottom: 2rem;
 }
 .karyawan .loading {
@@ -48,6 +48,7 @@
   background-color: #f3f3f3;
   background-size: 21px;
   padding: 0 3rem;
+  color: black;
 }
 .karyawan .search-and-profile .wrap-search .search::-webkit-input-placeholder {
   font-weight: 400;
@@ -78,7 +79,8 @@
   height: 48px;
 }
 .karyawan .search-and-profile .profile {
-  width: 25%;
+  width: 350px;
+  border: 1px solid #eceef2;
 }
 .karyawan .title-btn {
   display: -webkit-box;
@@ -107,6 +109,47 @@
   text-decoration: none;
   display: grid;
   place-items: center;
+}
+.karyawan .table .th-niy {
+  width: 120px;
+}
+.karyawan .table .th-name {
+  width: 243px;
+}
+.karyawan .table .th-jabatan {
+  width: 197px;
+}
+.karyawan .table .th-nohp {
+  width: 126px;
+}
+.karyawan .table .th-email {
+  width: 228px;
+}
+.karyawan .table .action-col {
+  padding-right: 3rem;
+}
+.karyawan .table .action-col div {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.karyawan .table .action-col img {
+  cursor: pointer;
+}
+.karyawan .table .action-col a {
+  margin: 0 1rem;
+}
+.karyawan .table .row-img {
+  padding: 0.5rem 0;
+}
+.karyawan .table .niy-col {
+  padding-left: 1.5rem;
+  color: #3661eb;
+  font-weight: 500;
 }
 .karyawan .tabbar-filter {
   display: -webkit-box;
@@ -149,23 +192,6 @@
   width: 100%;
   display: grid;
   place-items: center;
-}
-.karyawan .row-img {
-  padding: 0.5rem 0;
-}
-.karyawan .niy-col {
-  padding-left: 1.5rem;
-  color: #3661eb;
-  font-weight: 500;
-}
-.karyawan .action-col {
-  height: 100%;
-}
-.karyawan .action-col img {
-  cursor: pointer;
-}
-.karyawan .action-col a {
-  margin: 0 1rem;
 }
 .karyawan .dropdown-container {
   height: 100px;
@@ -302,43 +328,6 @@
   resize: none;
   font-family: "Poppins";
 }
-.detail-karyawan .form .select select {
-  width: 100%;
-  height: 45px;
-  border: 2px solid #eceef2;
-  border-radius: 8px;
-  outline: none;
-  font-size: 14px;
-  color: #5a6474;
-  padding: 0 1rem;
-}
-.detail-karyawan .form .select select::-webkit-input-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .form .select select::-moz-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .form .select select:-ms-input-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .form .select select::-ms-input-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .form .select select::placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .form .select select:focus {
-  border: 2px solid #3661eb;
-}
-.detail-karyawan .form .select select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url(../../assets/icons/arrow-down.svg);
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1em;
-}
 .detail-karyawan .detail-profile {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -383,42 +372,11 @@
   color: black;
   margin-bottom: 0.5rem;
 }
-.detail-karyawan .detail-profile .select select {
-  width: 100%;
-  height: 45px;
-  border: 2px solid #eceef2;
-  border-radius: 8px;
-  outline: none;
+.detail-karyawan .detail-profile .select h3 {
   font-size: 14px;
+  font-weight: 400;
   color: #5a6474;
-  padding: 0 1rem;
-}
-.detail-karyawan .detail-profile .select select::-webkit-input-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .detail-profile .select select::-moz-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .detail-profile .select select:-ms-input-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .detail-profile .select select::-ms-input-placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .detail-profile .select select::placeholder {
-  color: #9b9b9b;
-}
-.detail-karyawan .detail-profile .select select:focus {
-  border: 2px solid #3661eb;
-}
-.detail-karyawan .detail-profile .select select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url(../../assets/icons/arrow-down.svg);
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1em;
+  margin: 1rem 0;
 }
 .detail-karyawan .detail-profile .div-1 {
   display: -webkit-box;

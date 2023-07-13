@@ -61,14 +61,16 @@ const initialState = {
     noHp: '',
     alamat: '',
     linkFoto: '',
-    errors: validateForm({
+    errors: {
         nama: '',
         niy: '',
         email: '',
         password: '',
         noHp: '',
         alamat: '',
-    }),
+        listKtgkaryawan: '',
+        jadwal: '',
+    },
     listKtgkaryawan: [],
     listJadwal: [
         {
@@ -107,6 +109,8 @@ const initialState = {
             jam_pulang: ''
         }
     ],
+    isFormValid: false,
+    isFormErrorShown: false,
 
     isInitialGet: false,
     statusResApi: '',
@@ -285,6 +289,7 @@ export const deleteKaryawan = createAsyncThunk("karyawan/deleteKaryawan", async 
                 timeout: 20000
             }
         )
+
         return response.data
     } catch (error) {
         if (axios.isCancel(error)) {
@@ -348,6 +353,48 @@ const karyawanSlice = createSlice({
             state.listKaryawan = []
             state.isLoading = true
         },
+        showFormError: (state) => {
+            const isValidEmail = (email) => {
+                const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                return emailRegex.test(email);
+            };
+
+            if (state.nama.trim() === '') {
+                state.errors.nama = 'Isi nama';
+            }
+
+            if (state.niy.trim() === '' || state.niy.length < 8) {
+                state.errors.niy = 'Isi NIY minimal 8 digit.';
+            }
+
+            if (state.password.trim() === '' || state.password.length < 6) {
+                state.errors.password = 'Isi password minimal 6 karakter';
+            }
+
+            if (state.noHp.trim() === '' || state.noHp.length < 10) {
+                state.errors.noHp = 'Nomor tidak valid';
+            }
+
+            if (state.listKtgkaryawan.length === 0) {
+                state.errors.listKtgkaryawan = 'Isi Kategori Karyawan';
+            }
+
+            if (state.alamat.trim() === '') {
+                state.errors.alamat = 'Isi Alamat';
+            }
+
+            if (state.email.trim() === '') {
+                state.errors.email = 'Email is required.';
+            } else if (!isValidEmail(state.email)) {
+                state.errors.email = 'Email tidak valid';
+            }
+
+            if (!state.listJadwal.some((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '')) {
+                state.errors.jadwal = 'Isi Jadwal karyawan';
+            }
+
+            state.isFormErrorShown = true;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -383,7 +430,7 @@ const karyawanSlice = createSlice({
                 state.alamat = initialData.alamat;
                 state.linkFoto = initialData.link_foto;
                 state.listKtgkaryawan = initialData.ktgkaryawan;
-                state.ktgKaryawan = initialData.ktgkaryawan[0].kategori;
+                state.ktgKaryawan = initialData.ktgkaryawan[0]?.kategori;
                 state.listJadwal = initialData.jadwal;
                 state.errors = validateForm(state);
             })
@@ -453,6 +500,6 @@ const karyawanSlice = createSlice({
 
 export const {
     updateFieldValue, updateFieldError, resetForm, setFormLoading, resetField, resetTable,
-    setImgUpload, updateListKtgkaryawan, deleteKategori, updateStateKaryawan, resetListKaryawan
+    setImgUpload, updateListKtgkaryawan, deleteKategori, updateStateKaryawan, resetListKaryawan, showFormError
 } = karyawanSlice.actions;
 export default karyawanSlice.reducer;

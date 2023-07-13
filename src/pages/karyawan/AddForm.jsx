@@ -125,7 +125,7 @@ function Form() {
                 <Label className='no-hp' label='Jabatan' />
                 <JabatanSelect />
                 <p className='validator-text'>
-                    {listKtgkaryawan.length === 0 ? 'Isi kategori' : null}
+                    {errors.listKtgkaryawan && errors.listKtgkaryawan}
                 </p>
             </div>
 

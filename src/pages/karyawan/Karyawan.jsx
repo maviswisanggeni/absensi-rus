@@ -6,7 +6,6 @@ import Search from '../../components/Search'
 import '../../styles/css/Karyawan.css'
 import Filter from '../../components/Filter'
 import Table from '../../components/karyawan/Table'
-import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan'
 import searchIcon from '../../assets/icons/search-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import Sidebar from '../../components/sidebar/Sidebar'
@@ -22,7 +21,6 @@ function Karyawan() {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
-  const context = useApiKaryawan()
   const [isKategoriUpdated, setIsKategoriUpdated] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -41,9 +39,15 @@ function Karyawan() {
 
     if (searchParams.get('paginate')) {
       dispatch(updateStateKaryawan({ name: 'currentPage', value: parseInt(searchParams.get('paginate')) }));
-      setSearchParams({ 'paginate': parseInt(searchParams.get('paginate')) });
     }
   }, [location.pathname, listKategori, navigate, searchParams]);
+
+  useEffect(() => {
+    if (searchParams.get('search') && !loadingKategori) {
+      dispatch(updateStateKaryawan({ name: 'search', value: searchParams.get('paginate') }));
+      dispatch(getKaryawan({ search: searchParams.get('search') }))
+    }
+  }, [loadingKategori])
 
   useEffect(() => {
     if (!loadingKategori && currentKategori) {
@@ -53,7 +57,7 @@ function Karyawan() {
   }, [loadingKategori, currentKategori]);
 
   useEffect(() => {
-    if (isKategoriUpdated && kategoriId) {
+    if (isKategoriUpdated && kategoriId && !searchParams.get('search')) {
       dispatch(getKaryawan({ kategori_id: kategoriId }));
       dispatch(updateFieldValue({ field: 'kategoriId', value: kategoriId }));
       setIsKategoriUpdated(false);
@@ -66,6 +70,10 @@ function Karyawan() {
 
   function handleSearch() {
     dispatch(getKaryawan({ search }))
+    dispatch(updateStateKaryawan({ name: 'currentPage', value: 1 }))
+    setSearchParams({
+      'search': search
+    })
   }
 
   return (

@@ -9,6 +9,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import { detailKaryawan, resetListKaryawan, updateKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
 import { getKategori } from '../../features/ketegoriSlice'
 import InfoBox from '../../components/InfoBox'
+import LoadingFullscreen from '../../components/LoadingFullscreen'
 
 function DetailKaryawan() {
     let userId = useParams()
@@ -72,7 +73,7 @@ function DetailKaryawan() {
                     <DetailForm />
                     <DetailFotoProfile callback={callback} />
                 </div>
-                {loadingEdit ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
+                <LoadingFullscreen loading={loadingEdit} />
             </form>
             <InfoBox
                 message={messageResApi}
