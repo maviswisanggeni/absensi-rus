@@ -6,23 +6,30 @@ import FotoProfile from './AddFotoProfile'
 import '../../styles/css/add-karyawan.css'
 import Sidebar from '../../components/sidebar/Sidebar'
 import { useEffect } from 'react'
-import { resetForm, storeKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
+import { resetForm, showFormError, storeKaryawan, updateStateKaryawan } from '../../features/karyawanSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKategori } from '../../features/ketegoriSlice'
 import { useState } from 'react'
 import InfoBox from '../../components/InfoBox'
+import LoadingFullscreen from '../../components/LoadingFullscreen'
 
 function AddKaryawan() {
     let navigate = useNavigate()
     const dispatch = useDispatch()
     const {
         nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, loadingStore,
-        statusResApi, messageResApi, isDisplayMessage
+        statusResApi, messageResApi, isDisplayMessage, isFormValid
     } = useSelector((state) => state.karyawan)
     const { loadingKategori } = useSelector((state) => state.kategori)
-    const [file, setFile] = useState(null)
-    const callback = payload => {
+    const [file, setFile] = useState({})
+    const [isFileLoad, setIsFileLoad] = useState(false)
+
+    const callbackFile = payload => {
         setFile(payload)
+    }
+
+    const callbackIsLoad = payload => {
+        setIsFileLoad(payload)
     }
 
     useEffect(() => {
@@ -32,27 +39,32 @@ function AddKaryawan() {
 
     async function addUser(e) {
         e.preventDefault();
-        const filteredKategori = Object.values(listKtgkaryawan).map(item => item.id);
-        const filteredListJadwal = listJadwal.filter((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '');
-        dispatch(storeKaryawan({
-            nama: nama,
-            niy: niy,
-            email: email,
-            password: password,
-            alamat: alamat,
-            no_hp: noHp,
-            pf_foto: file,
-            jadwal: filteredListJadwal,
-            ktg_karyawan: filteredKategori
-        }))
-            .then((res) => {
-                if (res.meta.requestStatus === "fulfilled") {
-                    navigate(-1)
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        dispatch(showFormError())
+
+
+        if (isFormValid) {
+            const filteredKategori = Object.values(listKtgkaryawan).map(item => item.id);
+            const filteredListJadwal = listJadwal.filter((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '');
+            dispatch(storeKaryawan({
+                nama: nama,
+                niy: niy,
+                email: email,
+                password: password,
+                alamat: alamat,
+                no_hp: noHp,
+                pf_foto: file,
+                jadwal: filteredListJadwal,
+                ktg_karyawan: filteredKategori
+            }))
+                .then((res) => {
+                    if (res.meta.requestStatus === "fulfilled") {
+                        navigate(-1)
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
     }
 
     function validateDisabled() {
@@ -65,13 +77,19 @@ function AddKaryawan() {
             errors.noHp === "" &&
             errors.alamat === "" &&
             listKtgkaryawan.length !== 0 &&
-            hasNonEmptyJadwal
+            hasNonEmptyJadwal &&
+            isFileLoad
         ) {
             return false
         } else {
             return true
         }
     }
+
+    useEffect(() => {
+        dispatch(updateStateKaryawan({ name: 'isFormValid', value: !validateDisabled() }))
+        console.log(!validateDisabled());
+    }, [errors, validateDisabled(), file])
 
     return (
         <div className='wrapper-karyawan'>
@@ -95,7 +113,6 @@ function AddKaryawan() {
                     </div>
 
                     <button
-                        disabled={validateDisabled()}
                         onClick={addUser}
                         className='btn-submit'
                     >
@@ -104,9 +121,9 @@ function AddKaryawan() {
                 </div>
                 <div className='form-foto-profile'>
                     <Form />
-                    <FotoProfile callback={callback} />
+                    <FotoProfile callbackFile={callbackFile} callbackIsLoad={callbackIsLoad} />
                 </div>
-                {loadingStore ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
+                <LoadingFullscreen loading={loadingStore} />
             </div>
         </div>
     )

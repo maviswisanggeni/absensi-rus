@@ -118,6 +118,7 @@ function DetailFotoProfile({ callback }) {
             <div className='wrapper-jabatan'>
                 <div className='select'>
                     <h1 className='select-heading'>Jabatan</h1>
+                    <h3>{listKtgkaryawan.length < 1 ? 'Karyawan tidak punya kategori' : null}</h3>
                     <JabatanSelect />
                 </div>
                 <div className='jadwal-absensi'>
