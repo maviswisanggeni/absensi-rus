@@ -1,38 +1,33 @@
 import React from 'react'
-import Calendar from 'react-calendar';
 import { useState } from 'react';
 import '../styles/css/App.css'
 import formatDate from './useFormatCalendar';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Calendar } from 'react-calendar';
 
-function CustomCalendar(props) {
+function CustomCalendar({ tanggal, setTanggal, setNonSerializableTanggal }) {
 
   const [value, setValue] = useState(new Date());
+  const dispatch = useDispatch()
 
-  const onChange = value => {
+  const handleChange = value => {
     setValue(value)
+    setTanggal(value)
+    dispatch(
+      setNonSerializableTanggal({
+        name: 'tanggal', value: formatDate(value)
+      })
+    )
   }
 
   useEffect(() => {
-    props.func(formatDate(value))
-    props.setStartTime(formatDate(value))
-    props.tanggal(value.getDate())
-    props.bulan(value.getMonth() + 1)
-    props.tahun(value.getFullYear())
+    setTanggal(value)
   }, [value])
 
   return (
-    <Calendar onChange={onChange} value={value} />
+    <Calendar onChange={handleChange} value={tanggal} />
   )
-}
-
-CustomCalendar.defaultProps = {
-  func: () => { },
-  tanggal: () => { },
-  bulan: () => { },
-  tahun: () => { },
-  setStartTime: () => { },
-
 }
 
 export default CustomCalendar

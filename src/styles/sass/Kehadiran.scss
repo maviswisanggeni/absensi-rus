@@ -132,6 +132,34 @@
     .loading::before {
       margin: 0;
     }
+
+    .th-name {
+      width: 227px;
+    }
+
+    .th-niy {
+      width: 105px;
+    }
+
+    .th-jabatan {
+      width: 201px;
+    }
+
+    .th-tanggal {
+      width: 100px;
+    }
+
+    .th-tanggal.izin {
+      width: 175px;
+    }
+
+    .th-waktu {
+      width: 115px;
+    }
+
+    .th-action {
+      width: 109px;
+    }
   }
 }
 
@@ -491,5 +519,10 @@
         }
       }
     }
+  }
+
+  .profile {
+    border: 1px solid #eceef2;
+    border-left: none;
   }
 }

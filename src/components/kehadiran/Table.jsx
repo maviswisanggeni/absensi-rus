@@ -87,17 +87,25 @@ function Table() {
         }
     }
 
+    function isIzin() {
+        if (keterangan === 'Izin') {
+            return true
+        } else {
+            return false
+        }
+    }
+
     return (
         <>
             <table className='table'>
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>NIY</th>
-                        <th>Jabatan</th>
-                        <th>Tanggal</th>
-                        <th>Waktu</th>
-                        <th>Action</th>
+                        <th className='th-name'>Nama</th>
+                        <th className='th-niy'>NIY</th>
+                        <th className='th-jabatan'>Jabatan</th>
+                        <th className={`th-tanggal ${isIzin() ? 'izin' : ''}`}>Tanggal</th>
+                        {!isIzin() && <th className='th-waktu'>Waktu</th>}
+                        <th className='th-action'>Action</th>
                     </tr>
                 </thead>
 
@@ -119,8 +127,16 @@ function Table() {
                                             <td>
                                                 <DisplayKategoriList list={item.user?.ktgkaryawan} />
                                             </td>
-                                            <td>{checkKeterangan(item?.tanggal_masuk, item?.tanggal_pulang)}</td>
-                                            <td>{item?.waktu_masuk?.slice(0, 5)}</td>
+                                            <td>
+                                                {checkKeterangan(item?.tanggal_masuk, item?.tanggal_pulang)}
+                                                {keterangan === 'Izin' && `${item?.mulai_izin} - ${item?.selesai_izin}`}
+                                            </td>
+                                            {isIzin() ? null
+                                                : <td>
+                                                    {item?.waktu_masuk?.slice(0, 5)}
+                                                </td>
+                                            }
+
                                             <td>
                                                 <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
                                             </td>
