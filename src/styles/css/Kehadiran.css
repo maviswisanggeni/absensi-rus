@@ -165,6 +165,27 @@
 .kehadiran table .loading::before {
   margin: 0;
 }
+.kehadiran table .th-name {
+  width: 227px;
+}
+.kehadiran table .th-niy {
+  width: 105px;
+}
+.kehadiran table .th-jabatan {
+  width: 201px;
+}
+.kehadiran table .th-tanggal {
+  width: 100px;
+}
+.kehadiran table .th-tanggal.izin {
+  width: 175px;
+}
+.kehadiran table .th-waktu {
+  width: 115px;
+}
+.kehadiran table .th-action {
+  width: 109px;
+}
 
 .valid-masuk-pulang {
   width: 5px;
@@ -567,4 +588,8 @@
   width: 40px;
   border-radius: 50%;
   margin-right: 1.5rem;
+}
+.sidebar-right .profile {
+  border: 1px solid #eceef2;
+  border-left: none;
 }

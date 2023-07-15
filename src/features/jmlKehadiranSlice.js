@@ -36,7 +36,7 @@ export const getJmlKehadiranKehadiran = createAsyncThunk("kehadiran/jmlKehadiran
             },
             params: {
                 start_time,
-                end_time
+                // end_time
             },
             timeout: 20000,
         });

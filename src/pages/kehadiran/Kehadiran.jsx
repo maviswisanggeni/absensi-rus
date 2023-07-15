@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CircularStatistic from '../../components/dashboard/CircularStatistic'
 import masukIcon from '../../assets/icons/masuk-icon.svg'
 import izinIcon from '../../assets/icons/izin-icon.svg'
@@ -8,7 +8,6 @@ import '../../styles/css/Kehadiran.css'
 import SearchAndCalendar from '../../components/kehadiran/SearchAndCalendar'
 import TabbarAndFilter from '../../components/kehadiran/TabbarAndFilter'
 import Table from '../../components/kehadiran/Table'
-import Calender from '../../components/CustomCalendar'
 import KehadiranTerbaru from '../../components/sidebar-right/KehadiranTerbaru'
 import { useKehadiranJmlKehadiran } from '../../contexts/api/kehadiran/ContextApiKehadiran'
 import { TanggalKehadiranProvider } from '../../contexts/app/ContextTanggalKehadiran'
@@ -19,17 +18,18 @@ import { getJmlKehadiranKehadiran, updateStateJmlKehadiran } from '../../feature
 import { Route, Routes } from 'react-router'
 import Pusher from "pusher-js";
 import InfoBox from '../../components/InfoBox'
+import CustomCalendar from '../../components/CustomCalendar'
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
-  const { tanggal } = useSelector((state) => state.jmlKehadiran)
   const { statusResApi, messageResApi, isDisplayMessage, startTime, endTime } = useSelector((state) => state.kehadiran)
-  const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
+  const { jmlKehadiran, loading, tanggal } = useSelector(state => state.jmlKehadiran)
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    // dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
-  }, [])
+    dispatch(getJmlKehadiranKehadiran({ start_time: tanggal }))
+  }, [tanggal])
 
   // useEffect(() => {
   //   Pusher.logToConsole = true;
@@ -55,7 +55,6 @@ function Kehadiran() {
         <div className='kehadiran dashboard-and-kehadiran'>
           <h1>Kehadiran karyawan</h1>
           <div className='wrapper-circular'>
-
             <CircularStatistic
               name="Kehadiran"
               firstValue={jmlKehadiran?.jumlah_kehadiran}
@@ -93,8 +92,11 @@ function Kehadiran() {
             <Profile />
           </div>
           <div className='wrapper-calendar'>
-            <Calender tanggal={context.setTanggal} bulan={context.setBulan} tahun={context.setTahun}
-              setStartTime={context.setStartTime}
+            <CustomCalendar
+              tanggal={date}
+              setTanggal={setDate}
+
+              setNonSerializableTanggal={updateStateJmlKehadiran}
             />
           </div>
           <KehadiranTerbaru />

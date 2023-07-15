@@ -18,7 +18,7 @@ function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, set
         setIndex(initialOption.id);
       }
     }
-  }, [options, location.pathname]);
+  }, [location.pathname]);
 
   function handleClick(kategori, index) {
     setCurrent(kategori)

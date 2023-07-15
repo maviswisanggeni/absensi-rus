@@ -49,7 +49,7 @@ function SearchAndCalendar() {
   useEffect(() => {
     if (isParamsUpdated) {
       dispatch(getKehadiran({ start_time: startTime, end_time: endTime, search: search }));
-      dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
+      // dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
       setIsParamsUpdated(false);
     }
   }, [searchParams.toString(), isParamsUpdated, dispatch]);
@@ -63,7 +63,7 @@ function SearchAndCalendar() {
   async function handleSearch(e) {
     e.preventDefault()
     dispatch(getKehadiran({ start_time: startTime, end_time: endTime, search: search }))
-    dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
+    // dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
     setSearchParams({
       'search': search,
       'start_time': startTime,
@@ -73,7 +73,7 @@ function SearchAndCalendar() {
 
   return (
     <form className='search-calendar'>
-      <Search placeholder='Cari guru atau karyawan' value={search}
+      <Search placeholder='Cari guru atau karyawan' value={search} stateName={'search'}
         setSearch={updateStateKehadiran}
       />
       <div className='wrapper-pilih-tanggal'>

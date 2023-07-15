@@ -218,7 +218,7 @@
 .sidebar-right {
   border-left: 1px solid #ebf0fe;
   border-right: 1px solid #ebf0fe;
-  width: 342px;
+  width: 350px;
   position: relative;
 }
 
@@ -301,7 +301,6 @@
   position: absolute;
   z-index: -1;
   top: 0;
-  z-index: 99;
 }
 .profile .dropdown-container .dropdown-list {
   display: -webkit-box;
@@ -352,9 +351,8 @@
           transform: translateY(100px);
   border-bottom: 1px solid #eceef2;
 }
-
-.sidebar-right {
-  width: 342px;
+.profile .dropdown-container.active {
+  z-index: 99;
 }
 
 .react-calendar {
@@ -363,7 +361,6 @@
   background: white;
   line-height: 1.125em;
   position: relative;
-  z-index: -999;
 }
 
 .react-calendar--doubleView {
