@@ -19,17 +19,28 @@ import { Route, Routes } from 'react-router'
 import Pusher from "pusher-js";
 import InfoBox from '../../components/InfoBox'
 import CustomCalendar from '../../components/CustomCalendar'
+import formatDate from '../../components/useFormatCalendar'
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
   const { statusResApi, messageResApi, isDisplayMessage, startTime, endTime } = useSelector((state) => state.kehadiran)
-  const { jmlKehadiran, loading, tanggal } = useSelector(state => state.jmlKehadiran)
+  const { jmlKehadiran, loading, tanggalKehadiran } = useSelector(state => state.jmlKehadiran)
   const [date, setDate] = useState(new Date());
+  const [isResetState, setIsResetState] = useState(false)
 
   useEffect(() => {
-    dispatch(getJmlKehadiranKehadiran({ start_time: tanggal }))
-  }, [tanggal])
+    dispatch(updateStateJmlKehadiran({
+      name: 'tanggalKehadiran', value: formatDate(new Date())
+    }))
+    setIsResetState(true)
+  }, [])
+
+  useEffect(() => {
+    if (isResetState) {
+      dispatch(getJmlKehadiranKehadiran({ start_time: tanggalKehadiran }))
+    }
+  }, [tanggalKehadiran, isResetState])
 
   // useEffect(() => {
   //   Pusher.logToConsole = true;
@@ -95,7 +106,7 @@ function Kehadiran() {
             <CustomCalendar
               tanggal={date}
               setTanggal={setDate}
-
+              stateName={'tanggalKehadiran'}
               setNonSerializableTanggal={updateStateJmlKehadiran}
             />
           </div>

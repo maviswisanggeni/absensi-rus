@@ -10,21 +10,15 @@ export const statistikDummyData = {
             { date: "2023-05-22", count: getRandomCount() },
         ],
         bulanan: [
-            { date: "Januari", count: getRandomCountMonth() },
-            { date: "Februari", count: getRandomCountMonth() },
-            { date: "Maret", count: getRandomCountMonth() },
-            { date: "April", count: getRandomCountMonth() },
-            { date: "Mei", count: getRandomCountMonth() },
-            { date: "Juni", count: getRandomCountMonth() },
-            { date: "Juli", count: getRandomCountMonth() },
-            { date: "Agustus", count: getRandomCountMonth() },
-            { date: "September", count: getRandomCountMonth() },
-            { date: "Oktober", count: getRandomCountMonth() },
-            { date: "November", count: getRandomCountMonth() },
-            { date: "Desember", count: getRandomCountMonth() },
         ],
     },
 };
+
+for (let i = 0; i < 100; i++) {
+    const randomDate = new Date(2023, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
+    const dateString = randomDate.toISOString().split("T")[0];
+    statistikDummyData.data.bulanan.push({ date: dateString, count: getRandomCountMonth() });
+}
 
 function getRandomCount() {
     return Math.floor(Math.random() * 101) + 206;

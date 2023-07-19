@@ -825,41 +825,28 @@
   }
 }
 
-.shimmer {
-  position: relative;
-  background-repeat: no-repeat;
-  background: $background-color;
-}
-
-.shimmer::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(
-    -60deg,
-    $background-color 0%,
-    $background-color 35%,
-    rgba(232, 232, 232, 1) 50%,
-    $background-color 65%,
-    $background-color 100%
-  );
-  animation-name: shimmer;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  background-repeat: no-repeat;
-}
-
-@keyframes shimmer {
+@keyframes skeleton-loading {
   0% {
-    background-position: -300px 0%;
+    background-position: -200% 0;
   }
+
   100% {
-    background-position: 300px 0%;
+    background-position: 200% 0;
   }
+}
+
+.skeleton__loading {
+  border-radius: 20px;
+  width: 100%;
+  background: #f5f5f5;
+  background-image: linear-gradient(
+    90deg,
+    #f5f5f5 25%,
+    #e8e8e8 37%,
+    #f5f5f5 63%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite linear;
 }
 
 .custom-checkbox {

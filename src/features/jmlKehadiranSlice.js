@@ -10,7 +10,7 @@ export const getJmlKehadiranDashboard = createAsyncThunk("dashboard/jmlKehadiran
             headers: {
                 Authorization: `Bearer ${token()}`,
             },
-            params: { tanggal: formatDate(new Date()) },
+            params: { tanggal: tanggal },
             timeout: 20000,
         });
 
@@ -59,7 +59,8 @@ const jmlKehadiranSlice = createSlice({
     name: 'jmlKehadiran',
     initialState: {
         jmlKehadiran: {},
-        tanggal: formatDate(new Date()),
+        tanggalDashboard: formatDate(new Date()),
+        tanggalKehadiran: formatDate(new Date()),
         loading: false,
 
         statusResApi: '',

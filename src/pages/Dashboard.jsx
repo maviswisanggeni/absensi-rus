@@ -13,14 +13,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getJmlKehadiranDashboard, setJmlKehadiran, updateStateJmlKehadiran } from '../features/jmlKehadiranSlice'
 import Pusher from "pusher-js";
 import InfoBox from '../components/InfoBox'
+import formatDate from '../components/useFormatCalendar'
 
 function Dashboard() {
   const dispatch = useDispatch()
-  const { statusResApi, messageResApi, isDisplayMessage } = useSelector(state => state.jmlKehadiran)
+  const { statusResApi, messageResApi, isDisplayMessage, tanggalDashboard } = useSelector(state => state.jmlKehadiran)
+  const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
+  const [date, setDate] = useState(new Date())
 
   useEffect(() => {
-    dispatch(getJmlKehadiranDashboard())
+    dispatch(updateStateJmlKehadiran({
+      name: 'tanggalDashboard', value: formatDate(new Date())
+    }))
   }, [])
+
+  useEffect(() => {
+    dispatch(getJmlKehadiranDashboard(tanggalDashboard))
+  }, [tanggalDashboard])
 
   // useEffect(() => {
   //   Pusher.logToConsole = true;
@@ -39,7 +48,6 @@ function Dashboard() {
   //   }
   // }, []);
 
-  const { jmlKehadiran, loading } = useSelector(state => state.jmlKehadiran)
   return (
     <div className='wrapper-dashboard'>
       <Sidebar />
@@ -76,7 +84,12 @@ function Dashboard() {
       <div className='sidebar-right'>
         <Profile />
         <div className='wrapper-calendar'>
-          <Calender />
+          <Calender
+            tanggal={date}
+            setTanggal={setDate}
+            stateName={'tanggalDashboard'}
+            setNonSerializableTanggal={updateStateJmlKehadiran}
+          />
         </div>
         <Jadwal />
       </div>
