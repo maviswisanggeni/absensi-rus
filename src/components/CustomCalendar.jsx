@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Calendar } from 'react-calendar';
 
-function CustomCalendar({ tanggal, setTanggal, setNonSerializableTanggal }) {
+function CustomCalendar({ tanggal, setTanggal, setNonSerializableTanggal, stateName }) {
 
   const [value, setValue] = useState(new Date());
   const dispatch = useDispatch()
@@ -16,7 +16,7 @@ function CustomCalendar({ tanggal, setTanggal, setNonSerializableTanggal }) {
     setTanggal(value)
     dispatch(
       setNonSerializableTanggal({
-        name: 'tanggal', value: formatDate(value)
+        name: stateName, value: formatDate(value)
       })
     )
   }

@@ -1,39 +1,78 @@
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useApiDashboardStatistik } from '../../contexts/api/dashboard/ApiDashboardStatistik';
 import { useSelector } from 'react-redux';
-import { statistikDummyData } from '../../datas/statistikDummyData';
+import 'dayjs/locale/id';
 
-function Chart({ data }) {
-  const context = useApiDashboardStatistik()
-  const [updatedData, setUpdatedData] = useState(null)
-  const { loading, kategori } = useSelector(state => state.statistik)
-
-  const mingguanData = statistikDummyData.data.mingguan;
-  const bulananData = statistikDummyData.data.bulanan;
-
+function Chart() {
+  const [updatedData, setUpdatedData] = useState([])
+  const { loading, kategori, statistikData } = useSelector(state => state.statistik)
   var lowest = Number.POSITIVE_INFINITY;
   var highest = Number.NEGATIVE_INFINITY;
-  var tmp;
 
   useEffect(() => {
-    let currentStatistik;
+    dayjs.locale('id');
+
+    const monthOrder = Array.from({ length: 12 }, (_, monthIndex) =>
+      dayjs().month(monthIndex).format('MMMM')
+    );
+
+    const filteredBulanan = Object?.values(statistikData.bulanan || {})
+      .reduce((acc, entry) => {
+        const dateParts = entry.date.split("-");
+        const month = parseInt(dateParts[1], 10);
+        const monthName = dayjs().month(month - 1).format('MMMM');
+
+        if (acc[monthName]) {
+          acc[monthName].count += entry.count;
+        } else {
+          acc[monthName] = { date: monthName, count: entry.count };
+        }
+        return acc;
+      }, {});
+
+    const sortedBulanan = monthOrder.map((monthName) => {
+      const count = filteredBulanan[monthName] ? filteredBulanan[monthName].count : 0;
+      return { date: monthName, count };
+    });
+
+    let currentStatistik = [];
+
     if (kategori === 'Minggu') {
-      currentStatistik = mingguanData
+      let weekTemplate = [
+        { date: "Senin", count: 0 },
+        { date: "Selasa", count: 0 },
+        { date: "Rabu", count: 0 },
+        { date: "Kamis", count: 0 },
+        { date: "Jumat", count: 0 },
+        { date: "Sabtu", count: 0 },
+        { date: "Minggu", count: 0 },
+      ]
+
+      currentStatistik = weekTemplate.map((item) => {
+        const count = statistikData.mingguan?.find((data) => dayjs(data.date).format('dddd') === item.date)?.count || 0
+        console.log(count);
+        return {
+          date: item.date,
+          count
+        }
+      })
+
     } else {
-      currentStatistik = bulananData
+      currentStatistik = sortedBulanan
     }
 
     setUpdatedData(currentStatistik?.map((item) => {
       return {
-        ...item,
-        date: kategori === 'Minggu' ? dayjs(item.date).format('dddd') : item.date
+        jumlah: item.count,
+        date: item.date,
       }
     }))
-  }, [kategori])
+  }, [kategori, statistikData])
 
   useEffect(() => {
+    var tmp;
+
     for (var i = updatedData?.length - 1; i >= 0; i--) {
       tmp = updatedData[i]?.count;
       if (tmp < lowest) lowest = tmp;
@@ -41,50 +80,45 @@ function Chart({ data }) {
     }
   }, [updatedData])
 
-  const loadingChart = [
-    {
-      loading: 'loading'
-    }
-  ]
-
   return (
-    <ResponsiveContainer width='100%' height={300}>
-      <LineChart
-        // data={loading ? updatedData : loadingChart}
-        data={updatedData}
-        // width={500}
-        // height={300}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 0,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="1" />
-        <XAxis
-          dataKey={loading ? 'date' : 'loading'}
-          style={{ fontSize: 10, fill: '#9B9B9B' }}
-          stroke='#F0F0F0'
-        />
+    <>
+      {loading ? <div className='empty__container loading__statistik skeleton__loading'>Loading...</div>
+        : updatedData?.length < 1 || updatedData == undefined ? <div className='empty__container'>Data tidak ada</div>
+          : <ResponsiveContainer width='100%' height={300}>
+            <LineChart
+              data={updatedData}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 0,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="1" />
+              <XAxis
+                dataKey={'date'}
+                style={{ fontSize: 10, fill: '#9B9B9B' }}
+                stroke='#F0F0F0'
+              />
 
-        <YAxis domain={[lowest, highest]}
-          dataKey="count"
-          // tickCount={data?.length < 8 ? data?.length : 8}
-          tickCount={updatedData?.length < 8 ? updatedData?.length : 8}
-          tickFormatter={(tick) => tick.toFixed(0)}
-          padding={{ top: 10 }}
-          tickSize={12}
-          style={{ fontSize: 10, fill: '#9B9B9B' }}
-          stroke='#F0F0F0'
-        />
+              <YAxis domain={[lowest, highest]}
+                dataKey="jumlah"
+                tickCount={
+                  Math.max(...updatedData.map((item) => (item.jumlah < 7 ? item.jumlah : 8)))
+                }
+                tickFormatter={(tick) => tick.toFixed(0)}
+                padding={{ top: 10 }}
+                tickSize={12}
+                style={{ fontSize: 10, fill: '#9B9B9B' }}
+                stroke='#F0F0F0'
+              />
 
-        <Tooltip />
-        <Line type="monotone" dataKey="count" stroke="#3661EB" dot={{ strokeWidth: 3, fill: '#3661EB', stroke: '#3661EB' }} />
-        {/* <Line type="monotone" dataKey="karyawan" stroke="#C2D2FF" strokeWidth={2} dot={{ strokeWidth: 2, fill: '#C2D2FF', stroke: '#C2D2FF' }} /> */}
-        {/* <Line type="monotone" dataKey="Staff" stroke="#3661EB" strokeWidth={2} dot={{ strokeWidth: 2, fill: '#3661EB', stroke: '#3661EB' }} /> */}
-      </LineChart>
-    </ResponsiveContainer>
+              <Tooltip />
+              <Line type="monotone" dataKey="jumlah" stroke="#3661EB" strokeWidth='2px' dot={{ strokeWidth: 2, fill: '#3661EB', stroke: '#3661EB' }} />
+            </LineChart>
+          </ResponsiveContainer>
+      }
+    </>
   )
 }
 

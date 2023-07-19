@@ -9,14 +9,14 @@ import moment from 'moment/moment'
 function KehadiranTerbaru() {
   const context = useKehadiranListAbsensi()
   const dispatch = useDispatch()
-  const { startTime, loadingKehadiranTerbaru, kehadiranTerbaru } = useSelector(state => state.kehadiran)
+  const { loadingKehadiranTerbaru, kehadiranTerbaru } = useSelector(state => state.kehadiran)
 
   function handleRefresh() {
     dispatch(getKehadiranTerbaru({ start_time: null }))
   }
 
   useEffect(() => {
-    // dispatch(getKehadiranTerbaru({ start_time: null }))
+    dispatch(getKehadiranTerbaru({ start_time: null }))
   }, [])
 
   function formatTime(time) {

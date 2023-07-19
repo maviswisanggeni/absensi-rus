@@ -48,14 +48,14 @@ const statistikSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getStatistik.pending, (state) => {
-                state.loading = false;
+                state.loading = true;
             })
             .addCase(getStatistik.fulfilled, (state, action) => {
-                state.loading = true;
+                state.loading = false;
                 state.statistikData = action.payload.data;
             })
             .addCase(getStatistik.rejected, (state, action) => {
-                state.loading = true;
+                state.loading = false;
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true

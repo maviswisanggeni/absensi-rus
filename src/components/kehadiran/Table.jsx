@@ -8,6 +8,7 @@ import { updateStateKehadiran } from '../../features/kehadiranSlice';
 import { useEffect } from 'react';
 import useImgError from '../../hooks/useImgError';
 import DisplayKategoriList from '../DisplayKategoriList';
+import dayjs from 'dayjs';
 
 let PageSize = 10;
 
@@ -33,6 +34,8 @@ function Table() {
         dispatch(updateStateKehadiran({ name: 'currentPage', value: parseInt(currentPageParams) }))
     }, [searchParams, dispatch]);
 
+
+
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
@@ -40,9 +43,15 @@ function Table() {
         let slicedData;
 
         if (keterangan === 'Keluar') {
-            slicedData = kehadiranKeluar?.slice(firstPageIndex, lastPageIndex);
+            const filteredKeluar = kehadiranKeluar.filter((item) =>
+                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk)
+            );
+            slicedData = filteredKeluar?.slice(firstPageIndex, lastPageIndex);
         } else if (keterangan === 'Masuk') {
-            slicedData = kehadiranMasuk?.slice(firstPageIndex, lastPageIndex);
+            const filteredMasuk = kehadiranMasuk.filter((item) =>
+                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk)
+            );
+            slicedData = filteredMasuk?.slice(firstPageIndex, lastPageIndex);
         } else {
             slicedData = kehadiranIzin?.slice(firstPageIndex, lastPageIndex);
         }
