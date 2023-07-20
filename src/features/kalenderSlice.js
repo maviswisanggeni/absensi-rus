@@ -12,8 +12,10 @@ const initialState = {
     judul: '',
     kategoriEvent: 'event',
     lokasi: '',
-    waktuMulai: '',
-    waktuSelesai: '',
+    tanggalMulai: '',
+    jamMulai: '',
+    tanggalSelesai: '',
+    jamSelesai: '',
     waktuMulaiLibur: '',
     waktuSelesaiLibur: '',
     deskripsi: '',
@@ -22,11 +24,13 @@ const initialState = {
         judul: '',
         kategoriEvent: '',
         lokasi: '',
-        waktuMulai: '',
-        waktuSelesai: '',
+        jamMulai: '',
+        jamSelesai: '',
         deskripsi: '',
         peserta: []
     },
+    isFormValid: false,
+    isFormShow: false,
 
     statusResApi: '',
     messageResApi: '',
@@ -237,23 +241,6 @@ const kalenderSlice = createSlice({
         updateFieldKalender: (state, action) => {
             const { name, value } = action.payload
             state[name] = value
-            if (state.judul.trim() === '' && name === 'judul') {
-                state.errors.judul = 'Isi Judul';
-            } else if (state.kategoriEvent.trim() === '' && name === 'kategoriEvent') {
-                state.errors.kategoriEvent = 'Pilih Kategori event';
-            } else if (state.lokasi?.trim() === '' && name === 'lokasi') {
-                state.errors.lokasi = 'Isi lokasi';
-            } else if (state.waktuMulai.slice(11) === ':00' && name === 'waktuMulai') {
-                state.errors.waktuMulai = 'Isi waktu mulai';
-            } else if (state.waktuSelesai.slice(11) === ':00' && name === 'waktuSelesai') {
-                state.errors.waktuSelesai = 'Isi waktu selesai';
-            } else if (state.deskripsi.trim() === '' && name === 'deskripsi') {
-                state.errors.deskripsi = 'Isi deskripsi';
-            } else if (state.peserta.length === 0 && name === 'peserta') {
-                state.errors.peserta = 'Isi peseta';
-            } else {
-                state.errors[name] = '';
-            }
         },
         updateFieldError: (state, action) => {
             const { field, error } = action.payload;
@@ -262,7 +249,6 @@ const kalenderSlice = createSlice({
         updateStateKalender: (state, action) => {
             const { name, value } = action.payload
             state[name] = value
-            // state.errors = validateForm(state)
         }, updateListPeserta: (state, action) => {
             const isIdAlreadyAdded = state.peserta.some((pesertaItem) => pesertaItem.id === action.payload.id)
             if (!isIdAlreadyAdded) {
@@ -286,8 +272,10 @@ const kalenderSlice = createSlice({
             state.judul = ''
             state.kategoriEvent = 'event'
             state.lokasi = ''
-            state.waktuMulai = ''
-            state.waktuSelesai = ''
+            state.tanggalMulai = ''
+            state.jamMulai = ''
+            state.tanggalSelesai = ''
+            state.jamSelesai = ''
             state.deskripsi = ''
             state.peserta = []
         },
@@ -296,6 +284,37 @@ const kalenderSlice = createSlice({
         },
         checkIsAddPage: (state, action) => {
             state.isAddPage = action.payload === undefined ? true : false;
+        },
+        showFormError: (state) => {
+            if (state.judul.trim() === '') {
+                state.errors.judul = 'Isi Judul';
+            }
+
+            if (state.kategoriEvent.trim() === '') {
+                state.errors.kategoriEvent = 'Pilih Kategori event';
+            }
+
+            if (state.lokasi?.trim() === '' || state.lokasi === null) {
+                state.errors.lokasi = 'Isi lokasi';
+            }
+
+            if (state.jamMulai.trim() === '') {
+                state.errors.jamMulai = 'Isi jam';
+            }
+
+            if (state.jamSelesai.trim() === '') {
+                state.errors.jamSelesai = 'Isi jam';
+            }
+
+            if (state.deskripsi.trim() === '') {
+                state.errors.deskripsi = 'Isi deskripsi';
+            }
+
+            if (state.peserta.length === 0) {
+                state.errors.peserta = 'Isi peseta';
+            }
+
+            state.isFormShow = true
         }
     },
     extraReducers: builder => {
@@ -323,8 +342,10 @@ const kalenderSlice = createSlice({
                 state.judul = action.payload.data.judul
                 state.kategoriEvent = action.payload.data.kategori_event
                 state.lokasi = action.payload.data.lokasi
-                state.waktuMulai = action.payload.data.waktu_mulai
-                state.waktuSelesai = action.payload.data.waktu_selesai
+                state.tanggalMulai = action.payload.data.waktu_mulai.slice(0, 10)
+                state.jamMulai = action.payload.data.waktu_mulai.slice(-8)
+                state.tanggalSelesai = action.payload.data.waktu_selesai.slice(0, 10)
+                state.jamSelesai = action.payload.data.waktu_selesai.slice(-8)
                 state.waktuMulaiLibur = action.payload.data.waktu_mulai
                 state.waktuSelesaiLibur = action.payload.data.waktu_selesai
                 state.deskripsi = action.payload.data.deskripsi
@@ -426,7 +447,7 @@ const kalenderSlice = createSlice({
 })
 
 // export const karyawanSelectors = karyawanEntity.getSelectors(state => state.karyawan)
-export const { updateFieldKalender, updateListPeserta, deletePesertaByKategori,
+export const { updateFieldKalender, updateListPeserta, deletePesertaByKategori, showFormError, updateFieldError,
     resetePeserta, setLoading, checkIsAddPage, resetFieldKalender, deletePeserta, updateStateKalender
 } = kalenderSlice.actions
 export default kalenderSlice.reducer;

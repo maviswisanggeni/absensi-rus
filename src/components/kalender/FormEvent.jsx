@@ -1,91 +1,32 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFieldKalender, updateStateKalender } from '../../features/kalenderSlice'
-import dayjs from 'dayjs'
-import { useState } from 'react'
-import { useRef } from 'react'
-import { Calendar } from 'react-calendar'
-import { useEffect } from 'react'
+import { showFormError, updateFieldError, updateFieldKalender, updateStateKalender } from '../../features/kalenderSlice'
+import BtnCalendar from '../BtnCalendar'
 
 function FormEvent() {
     const dispatch = useDispatch()
-    const { judul, kategoriEvent, lokasi, waktuMulai, waktuSelesai, deskripsi, daySelected, errors, waktuMulaiLibur, waktuSelesaiLibur
+    const { judul, kategoriEvent, lokasi, deskripsi, daySelected, errors,
+        waktuMulaiLibur, waktuSelesaiLibur, jamMulai, jamSelesai, tanggalMulai, tanggalSelesai
     } = useSelector((state) => state.kalender)
-    const [isCalendarOpen1, setCalendarOpen1] = useState(false);
-    const [isCalendarOpen2, setCalendarOpen2] = useState(false);
-    const inputRef1 = useRef();
-    const inputRef2 = useRef();
-
-    useEffect(() => {
-        dispatch(updateFieldKalender({
-            name: 'waktuMulaiLibur',
-            value: daySelected
-        }))
-        dispatch(updateFieldKalender({
-            name: 'waktuSelesaiLibur',
-            value: daySelected
-        }))
-    }, [])
 
     function handleChange(e) {
         const { name, value } = e.target;
-        dispatch(updateFieldKalender({ name, value }));
-        if (name === 'waktuMulai' || name === 'waktuSelesai') {
+        if (name === 'jamMulai' || name === 'jamSelesai') {
             dispatch(updateFieldKalender({
                 name,
-                value: `${dayjs(daySelected).format('YYYY-MM-DD')} ${value}:00`
+                value: `${value}`
             }));
+        } else {
+            dispatch(updateFieldKalender({ name, value }));
+        }
+
+        if (value.trim() !== '') {
+            dispatch(updateFieldError({
+                field: name,
+                value: ''
+            }))
         }
     }
-
-    function handleChangeCalendar1(value) {
-        dispatch(updateFieldKalender({
-            name: 'waktuMulaiLibur',
-            value: dayjs(value).format('DD MMMM YYYY')
-        }));
-    }
-
-    function handleChangeCalendar2(value) {
-        dispatch(updateFieldKalender({
-            name: 'waktuSelesaiLibur',
-            value: dayjs(value).format('DD MMMM YYYY')
-        }));
-    }
-
-    const handleAddClick1 = () => {
-        setCalendarOpen1(!isCalendarOpen1);
-    };
-
-    const handleAddClick2 = () => {
-        setCalendarOpen2(!isCalendarOpen2);
-    };
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                inputRef1.current
-                && !inputRef1.current.contains(event.target)
-                && !event.target.classList.contains('react-calendar__tile')
-                && event.target.tagName !== "ABBR"
-            ) {
-                setCalendarOpen1(false);
-            }
-            if (
-                inputRef2.current
-                && !inputRef2.current.contains(event.target)
-                && !event.target.classList.contains('react-calendar__tile')
-                && event.target.tagName !== "ABBR"
-            ) {
-                setCalendarOpen2(false);
-            }
-        };
-
-        document.addEventListener('click', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
 
     return (
         <div className='wrapper-form'>
@@ -134,21 +75,27 @@ function FormEvent() {
                 <div className='time'>
                     {kategoriEvent === 'event' &&
                         <>
-                            <input
-                                type="text"
-                                placeholder={daySelected}
-                                className='input'
-                                disabled
+                            <BtnCalendar
+                                value={tanggalMulai}
+                                setState={updateStateKalender}
+                                stateName={'tanggalMulai'}
                             />
+
+                            <BtnCalendar
+                                value={tanggalSelesai}
+                                setState={updateStateKalender}
+                                stateName={'tanggalSelesai'}
+                            />
+
                             <input type="time" className='input'
-                                name='waktuMulai'
-                                value={waktuMulai.slice(-8)}
+                                name='jamMulai'
+                                value={jamMulai.slice(0, 5)}
                                 onChange={handleChange}
                             />
                             <div className='line'></div>
                             <input type="time" className='input'
-                                name='waktuSelesai'
-                                value={waktuSelesai.slice(-8)}
+                                name='jamSelesai'
+                                value={jamSelesai.slice(0, 5)}
                                 onChange={handleChange}
                             />
                         </>
@@ -156,52 +103,25 @@ function FormEvent() {
 
                     {kategoriEvent === 'libur' &&
                         <>
-                            <div
-                                className={`waktu waktu__mulai ${isCalendarOpen1 ? 'active' : null}`}
-                                onClick={handleAddClick1}
-                                ref={inputRef1}
-                            >
-                                {dayjs(waktuMulaiLibur).format('DD MMMM YYYY')}
-                            </div>
-
-                            {isCalendarOpen1 &&
-                                <Calendar
-                                    className='first-calendar'
-                                    // inputRef={inputRef1}
-                                    onChange={handleChangeCalendar1}
-                                    value={new Date(waktuMulaiLibur)}
-                                />
-                            }
+                            <BtnCalendar
+                                value={waktuMulaiLibur}
+                                stateName='waktuMulaiLibur'
+                                setState={updateStateKalender}
+                            />
 
                             <div className='line'></div>
 
-                            <div
-                                className={`waktu waktu__selesai ${isCalendarOpen2 ? 'active' : null}`}
-                                onClick={handleAddClick2}
-                                ref={inputRef2}
-                            >
-                                {dayjs(waktuSelesaiLibur).format('DD MMMM YYYY')}
-                            </div>
-
-                            {isCalendarOpen2 &&
-                                <Calendar
-                                    className='second-calendar'
-                                    // inputRef={inputRef2}
-                                    onChange={handleChangeCalendar2}
-                                    value={new Date(waktuSelesaiLibur)}
-                                />
-                            }
+                            <BtnCalendar
+                                value={waktuSelesaiLibur}
+                                stateName='waktuSelesaiLibur'
+                                setState={updateStateKalender}
+                            />
                         </>
                     }
                 </div>
-                <div className='wrapper-error'>
-                    <p className='validator-text' style={{}}>
-                        {errors.waktuMulai}
-                    </p>
-                    <p className='validator-text'>
-                        {errors.waktuSelesai && errors.waktuSelesai}
-                    </p>
-                </div>
+                <p className='validator-text'>
+                    {errors.jamMulai ? errors.jamMulai : errors.jamSelesai ? errors.jamSelesai : null}
+                </p>
             </div>
 
             <textarea

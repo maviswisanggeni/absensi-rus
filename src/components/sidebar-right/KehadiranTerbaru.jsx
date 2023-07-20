@@ -27,7 +27,7 @@ function KehadiranTerbaru() {
     const diffInHours = currentTime.diff(formattedTime, 'hours');
 
     if (diffInMinutes <= 1) {
-      return 'Just now';
+      return 'Baru Saja';
     } else if (diffInMinutes < 60) {
       return `${diffInMinutes} menit yang lalu`;
     } else if (diffInHours < 24) {

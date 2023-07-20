@@ -76,6 +76,7 @@
     flex: 1 1 0%;
     grid-template-columns: repeat(7, minmax(0, 1fr));
     grid-template-rows: repeat(5, minmax(0, 1fr));
+    max-height: 740px;
   }
 
   .day {
@@ -483,7 +484,7 @@
     }
 
     .input-lokasi {
-      margin-bottom: 1rem;
+      // margin-bottom: 1rem;
     }
 
     .wrapper-form {
@@ -528,23 +529,23 @@
       }
 
       .wrapper-time {
-        margin-bottom: 1rem;
+        margin: 1rem 0;
 
         .time {
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 0.5rem;
+          cursor: pointer;
         }
 
         .react-calendar {
           z-index: 1;
           position: absolute;
           padding: 1rem;
-        }
-
-        .first-calendar {
-          transform: translate(-2%, 56%);
+          max-width: inherit;
+          top: 40px;
+          left: 0;
         }
 
         .second-calendar {
@@ -553,7 +554,7 @@
 
         .waktu {
           width: 50%;
-          border: 1px solid #9b9b9b;
+          border: 1px solid $grey;
           border-radius: 7.5px;
           background-color: $background-color;
           font-weight: 400;
@@ -561,9 +562,27 @@
           height: 35px;
           outline: none;
           padding: 0.5rem 1rem;
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .arrow__down {
+            background-color: $grey;
+            -webkit-mask: url(../../assets/icons/arrow-down.svg) no-repeat
+              center;
+            width: 10px;
+            height: 10px;
+            mask: url(../../assets/icons/arrow-down.svg) no-repeat center;
+            transition: ease-in-out 0.3s transform;
+          }
+
+          .arrow__down.active {
+            transform: rotate(180deg);
+          }
         }
 
-        .waktu__mulai.active {
+        .waktu.active {
           border: 2px solid $primary-color;
         }
 
@@ -608,6 +627,10 @@
             width: 50%;
             text-align: center;
           }
+        }
+
+        .jam__mulai__err {
+          // position: absolute;
         }
       }
 
@@ -759,6 +782,7 @@
         margin-top: 0.5rem;
         overflow-y: scroll;
         height: 450px;
+        padding-right: 1rem;
 
         .wrapper-list {
           display: flex;

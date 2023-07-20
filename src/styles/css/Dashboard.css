@@ -62,6 +62,14 @@
   padding-right: 0.5rem;
   border-radius: 5px;
 }
+.dashboard .statistic-chart .div-1 .dropdown button img {
+  -webkit-transition: ease-in-out 0.3s transform;
+  transition: ease-in-out 0.3s transform;
+}
+.dashboard .statistic-chart .div-1 .dropdown button img.active {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
 .dashboard .statistic-chart .div-1 .dropdown button:hover {
   background-color: #f3f3f3;
 }
@@ -73,15 +81,24 @@
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul {
   margin-top: 0.5rem;
   padding-left: 0;
+  outline: 1px solid #eceef2;
+  border-radius: 5px;
 }
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul li {
-  padding: 0.5rem;
+  width: 90px;
+  height: 25px;
   padding-left: 12px;
   list-style: none;
   font-size: 13px;
   background-color: white;
   width: 90px;
   color: #9b9b9b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .dashboard .statistic-chart .div-1 .dropdown .drop-down-content ul li:hover {
   background-color: #f3f3f3;
@@ -162,6 +179,7 @@
   place-items: center;
   font-size: 12px;
 }
+
 .sidebar-right {
   border-left: 1px solid #ebf0fe;
   position: relative;

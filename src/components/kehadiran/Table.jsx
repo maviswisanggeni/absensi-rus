@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import useImgError from '../../hooks/useImgError';
 import DisplayKategoriList from '../DisplayKategoriList';
 import dayjs from 'dayjs';
+import 'dayjs/locale/id';
 
 let PageSize = 10;
 
@@ -16,14 +17,19 @@ function Table() {
     const context = useKehadiranListAbsensi()
     const dispatch = useDispatch()
     let [searchParams] = useSearchParams();
-    const [imgExist, setImgExist] = useState(null)
     const location = useLocation()
+    const [filteredKehadiranKeluar, setFilteredKehadiranKeluar] = useState([])
+    const [filteredKehadiranMasuk, setFilteredKehadiranMasuk] = useState([])
 
     const {
         kehadiranMasuk, kehadiranKeluar,
         kehadiranIzin, currentPage,
         keterangan, urutan, loading
     } = useSelector(state => state.kehadiran)
+
+    useEffect(() => {
+        dayjs.locale('id');
+    }, [])
 
     useEffect(() => {
         dispatch(updateStateKehadiran({ name: 'currentPage', value: 1 }))
@@ -34,31 +40,43 @@ function Table() {
         dispatch(updateStateKehadiran({ name: 'currentPage', value: parseInt(currentPageParams) }))
     }, [searchParams, dispatch]);
 
-
-
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
 
         let slicedData;
+        let selectedData;
 
         if (keterangan === 'Keluar') {
             const filteredKeluar = kehadiranKeluar.filter((item) =>
                 !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk)
             );
-            slicedData = filteredKeluar?.slice(firstPageIndex, lastPageIndex);
+            setFilteredKehadiranKeluar(filteredKeluar)
+            selectedData = filteredKeluar
         } else if (keterangan === 'Masuk') {
             const filteredMasuk = kehadiranMasuk.filter((item) =>
                 !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk)
             );
-            slicedData = filteredMasuk?.slice(firstPageIndex, lastPageIndex);
+            setFilteredKehadiranMasuk(filteredMasuk)
+            selectedData = filteredMasuk;
         } else {
-            slicedData = kehadiranIzin?.slice(firstPageIndex, lastPageIndex);
+            selectedData = kehadiranIzin;
         }
 
-        const sortedData = [...slicedData].sort((a, b) => {
-            const time1 = new Date(`2000-01-01T${a.waktu_masuk}`);
-            const time2 = new Date(`2000-01-01T${b.waktu_masuk}`);
+        const sortedData = [...selectedData].sort((a, b) => {
+            let tanggalMasukA;
+            let tanggalMasukB;
+
+            if (keterangan === 'Izin') {
+                tanggalMasukA = a.mulai_izin
+                tanggalMasukB = b.mulai_izin
+            } else {
+                tanggalMasukA = `${a.tanggal_masuk} ${a.waktu_masuk}`
+                tanggalMasukB = `${b.tanggal_masuk} ${b.waktu_masuk}`
+            }
+
+            const time1 = new Date(`${tanggalMasukA}`);
+            const time2 = new Date(`${tanggalMasukB}`);
             if (urutan === 'Tercepat') {
                 return time2 - time1;
             } else {
@@ -66,7 +84,7 @@ function Table() {
             }
         });
 
-        return sortedData;
+        return sortedData.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, keterangan, kehadiranKeluar, kehadiranMasuk, kehadiranIzin, urutan]);
 
     // useEffect(() => {
@@ -127,7 +145,13 @@ function Table() {
                                     return (
                                         <tr key={key}>
                                             <td className='row-img'>
-                                                <div className={`valid-masuk-pulang ${checkKeterangan(item?.is_valid_masuk, item?.is_valid_pulang) === '1' ? 'valid-masuk' : 'valid-pulang'}`}></div>
+                                                <div
+                                                    className={`valid-masuk-pulang 
+                                                    ${checkKeterangan(item?.is_valid_masuk, item?.is_valid_pulang) === '1' && checkKeterangan(item?.isvld_wkt_masuk, item?.isvld_wkt_pulang) === '1'
+                                                            ? 'valid-masuk' : 'valid-pulang'
+                                                        }`}
+                                                >
+                                                </div>
                                                 <img src={item?.user?.link_foto} onError={useImgError} alt={item.user?.nama} />
 
                                                 {item?.user?.nama}
@@ -137,12 +161,20 @@ function Table() {
                                                 <DisplayKategoriList list={item.user?.ktgkaryawan} />
                                             </td>
                                             <td>
-                                                {checkKeterangan(item?.tanggal_masuk, item?.tanggal_pulang)}
+                                                {checkKeterangan(dayjs(item?.tanggal_masuk).format('ddd DD MMM YYYY'), dayjs(item?.tanggal_pulang).format('ddd DD MMM YYYY'))}
                                                 {keterangan === 'Izin' && `${item?.mulai_izin} - ${item?.selesai_izin}`}
                                             </td>
                                             {isIzin() ? null
                                                 : <td>
-                                                    {item?.waktu_masuk?.slice(0, 5)}
+                                                    <p
+                                                        className={`row__jam 
+                                                        ${checkKeterangan(item?.isvld_wkt_masuk, item?.isvld_wkt_pulang) === '1'
+                                                                ? 'valid-masuk-text' : 'valid-pulang-text'
+                                                            }`}
+                                                    >
+
+                                                        {checkKeterangan(item?.waktu_masuk?.slice(0, 5), item?.waktu_pulang?.slice(0, 5))} WIB
+                                                    </p>
                                                 </td>
                                             }
 
@@ -161,7 +193,11 @@ function Table() {
                 <Pagination
                     className="pagination-bar"
                     currentPage={currentPage}
-                    totalCount={keterangan === 'Masuk' ? kehadiranMasuk?.length : keterangan === 'Keluar' ? kehadiranKeluar?.length : kehadiranIzin?.length}
+                    totalCount={
+                        keterangan === 'Masuk' ? filteredKehadiranMasuk?.length
+                            : keterangan === 'Keluar' ? filteredKehadiranKeluar?.length
+                                : kehadiranIzin?.length
+                    }
                     pageSize={PageSize}
                     onPageChange={
                         page => dispatch(updateStateKehadiran({ name: 'currentPage', value: page }))}
