@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    // gap: 0.5rem;
     width: 100%;
     background-color: white;
     padding: 1rem 1.5rem;
@@ -23,11 +23,13 @@
     .search {
       background-position: 5% 50%;
       background-size: 13px;
-      border: 2px solid $secondary-color;
-      width: 60%;
+      border: 1px solid $border-color;
+      width: 375px;
+      height: 35px;
       padding: 0.5rem 2.5rem;
       outline: none;
       font-weight: 400;
+      border-radius: 3px;
     }
 
     .search::placeholder {
@@ -39,8 +41,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      width: 40%;
+      // gap: 0.5rem;
+      width: 280px;
+      height: 35px;
 
       img {
         width: 14px;
@@ -49,16 +52,20 @@
 
       .pilih-tanggal {
         width: 125px;
+        height: 100%;
         display: flex;
         align-items: center;
-        border: 1.5px solid $secondary-color;
-        padding: 0.5rem;
-        padding-right: 0;
+        border: 1px solid $border-color;
         flex-direction: column;
+        border-radius: 3px;
 
         .btn-pilih-tanggal {
           display: flex;
           align-items: center;
+          justify-content: space-between;
+          padding: 0.5rem;
+          padding-right: 0;
+          width: 100%;
           cursor: pointer;
         }
 
@@ -72,10 +79,15 @@
           z-index: 999;
         }
 
+        .wrap-text {
+          width: 100%;
+          display: grid;
+          place-items: center;
+        }
+
         img {
           width: 13px;
           height: 13px;
-          margin-right: 0.5rem;
         }
 
         p {
@@ -89,6 +101,11 @@
           height: 100vh;
         }
       }
+    }
+
+    .btn-search {
+      border: 1px solid $border-color;
+      width: 50px;
     }
   }
 
@@ -146,7 +163,7 @@
     }
 
     .th-tanggal {
-      width: 100px;
+      width: 120px;
     }
 
     .th-tanggal.izin {
@@ -171,11 +188,19 @@
 }
 
 .valid-masuk {
-  background-color: #04d57d;
+  background-color: $succes-color;
 }
 
 .valid-pulang {
-  background-color: #ff4530;
+  background-color: $danger-color;
+}
+
+.valid-masuk-text {
+  color: $succes-color;
+}
+
+.valid-pulang-text {
+  color: $danger-color;
 }
 
 .detail {

@@ -55,6 +55,14 @@
           cursor: pointer;
           padding-right: 0.5rem;
           border-radius: 5px;
+
+          img {
+            transition: ease-in-out 0.3s transform;
+          }
+
+          img.active {
+            transform: rotate(180deg);
+          }
         }
 
         button:hover {
@@ -69,15 +77,21 @@
           ul {
             margin-top: 0.5rem;
             padding-left: 0;
+            outline: 1px solid #eceef2;
+            border-radius: 5px;
 
             li {
-              padding: 0.5rem;
+              // border-radius: 5px;
+              width: 90px;
+              height: 25px;
               padding-left: 12px;
               list-style: none;
               font-size: 13px;
               background-color: white;
               width: 90px;
               color: $grey;
+              display: flex;
+              align-items: center;
             }
 
             li:hover {
@@ -156,9 +170,6 @@
         display: grid;
         place-items: center;
         font-size: 12px;
-      }
-
-      .loading__statistik {
       }
     }
   }

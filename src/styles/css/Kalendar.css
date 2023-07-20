@@ -81,6 +81,7 @@
           flex: 1 1 0%;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
+  max-height: 740px;
 }
 .kalender .day {
   display: -webkit-box;
@@ -525,9 +526,6 @@
   height: 35px;
   outline: none;
 }
-.wrapper-kalender-add .wrapper-content .input-lokasi {
-  margin-bottom: 1rem;
-}
 .wrapper-kalender-add .wrapper-content .wrapper-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -586,7 +584,7 @@
   cursor: pointer;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .time {
   display: -webkit-box;
@@ -599,15 +597,15 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   gap: 0.5rem;
+  cursor: pointer;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .react-calendar {
   z-index: 1;
   position: absolute;
   padding: 1rem;
-}
-.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .first-calendar {
-  -webkit-transform: translate(-2%, 56%);
-          transform: translate(-2%, 56%);
+  max-width: inherit;
+  top: 40px;
+  left: 0;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .second-calendar {
   -webkit-transform: translate(108%, 56%);
@@ -623,8 +621,32 @@
   height: 35px;
   outline: none;
   padding: 0.5rem 1rem;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
-.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu__mulai.active {
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu .arrow__down {
+  background-color: #9b9b9b;
+  -webkit-mask: url(../../assets/icons/arrow-down.svg) no-repeat center;
+  width: 10px;
+  height: 10px;
+  -webkit-mask: url(../../assets/icons/arrow-down.svg) no-repeat center;
+          mask: url(../../assets/icons/arrow-down.svg) no-repeat center;
+  -webkit-transition: ease-in-out 0.3s transform;
+  transition: ease-in-out 0.3s transform;
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu .arrow__down.active {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu.active {
   border: 2px solid #3661eb;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-form .wrapper-time .waktu__selesai.active {
@@ -842,6 +864,7 @@
   margin-top: 0.5rem;
   overflow-y: scroll;
   height: 450px;
+  padding-right: 1rem;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-column .wrapper-list {
   display: -webkit-box;

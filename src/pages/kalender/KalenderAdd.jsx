@@ -6,14 +6,15 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { checkIsAddPage, getDetailKalender, resetFieldKalender, updateStateKalender } from '../../features/kalenderSlice'
+import { checkIsAddPage, getDetailKalender, resetFieldKalender, updateFieldKalender, updateStateKalender } from '../../features/kalenderSlice'
 import { getKategori } from '../../features/ketegoriSlice'
 import InfoBox from '../../components/InfoBox'
+import dayjs from 'dayjs'
 
 function KalenderAdd() {
   let id = useParams()
   const dispatch = useDispatch()
-  const { statusResApi, messageResApi, isDisplayMessage } = useSelector(state => state.kalender)
+  const { statusResApi, messageResApi, isDisplayMessage, daySelected } = useSelector(state => state.kalender)
 
   useEffect(() => {
     dispatch(getKategori())
@@ -24,6 +25,26 @@ function KalenderAdd() {
       dispatch(getDetailKalender(id.id))
     }
   }, [])
+
+  useEffect(() => {
+    dispatch(updateFieldKalender({
+      name: 'waktuMulaiLibur',
+      value: daySelected
+    }))
+    dispatch(updateFieldKalender({
+      name: 'waktuSelesaiLibur',
+      value: daySelected
+    }))
+
+    dispatch(updateFieldKalender({
+      name: 'tanggalMulai',
+      value: `${dayjs(daySelected).format('YYYY-MM-DD')}`
+    }))
+    dispatch(updateFieldKalender({
+      name: 'tanggalSelesai',
+      value: `${dayjs(daySelected).format('YYYY-MM-DD')}`
+    }))
+  }, [daySelected])
 
   return (
     <div className='wrapper-kalender'>

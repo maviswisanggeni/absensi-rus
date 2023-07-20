@@ -49,7 +49,6 @@ function SearchAndCalendar() {
   useEffect(() => {
     if (isParamsUpdated) {
       dispatch(getKehadiran({ start_time: startTime, end_time: endTime, search: search }));
-      // dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
       setIsParamsUpdated(false);
     }
   }, [searchParams.toString(), isParamsUpdated, dispatch]);
@@ -63,7 +62,6 @@ function SearchAndCalendar() {
   async function handleSearch(e) {
     e.preventDefault()
     dispatch(getKehadiran({ start_time: startTime, end_time: endTime, search: search }))
-    // dispatch(getJmlKehadiranKehadiran({ start_time: startTime, end_time: endTime }))
     setSearchParams({
       'search': search,
       'start_time': startTime,

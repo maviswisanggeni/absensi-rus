@@ -13,7 +13,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 0.5rem;
   width: 100%;
   background-color: white;
   padding: 1rem 1.5rem;
@@ -25,11 +24,13 @@
 .kehadiran .search-calendar .search {
   background-position: 5% 50%;
   background-size: 13px;
-  border: 2px solid #ebf0fe;
-  width: 60%;
+  border: 1px solid #eceef2;
+  width: 375px;
+  height: 35px;
   padding: 0.5rem 2.5rem;
   outline: none;
   font-weight: 400;
+  border-radius: 3px;
 }
 .kehadiran .search-calendar .search::-webkit-input-placeholder {
   font-weight: 400;
@@ -61,8 +62,8 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  gap: 1rem;
-  width: 40%;
+  width: 280px;
+  height: 35px;
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal img {
   width: 14px;
@@ -70,19 +71,19 @@
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal {
   width: 125px;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1.5px solid #ebf0fe;
-  padding: 0.5rem;
-  padding-right: 0;
+  border: 1px solid #eceef2;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  border-radius: 3px;
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .btn-pilih-tanggal {
   display: -webkit-box;
@@ -91,6 +92,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.5rem;
+  padding-right: 0;
+  width: 100%;
   cursor: pointer;
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .react-calendar {
@@ -103,10 +110,14 @@
           transform: translate(25%, 10%);
   z-index: 999;
 }
+.kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal .wrap-text {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal img {
   width: 13px;
   height: 13px;
-  margin-right: 0.5rem;
 }
 .kehadiran .search-calendar .wrapper-pilih-tanggal .pilih-tanggal p {
   font-size: 10px;
@@ -116,6 +127,10 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
+}
+.kehadiran .search-calendar .btn-search {
+  border: 1px solid #eceef2;
+  width: 50px;
 }
 .kehadiran .tabbar-filter {
   display: -webkit-box;
@@ -175,7 +190,7 @@
   width: 201px;
 }
 .kehadiran table .th-tanggal {
-  width: 100px;
+  width: 120px;
 }
 .kehadiran table .th-tanggal.izin {
   width: 175px;
@@ -200,6 +215,14 @@
 
 .valid-pulang {
   background-color: #ff4530;
+}
+
+.valid-masuk-text {
+  color: #04d57d;
+}
+
+.valid-pulang-text {
+  color: #ff4530;
 }
 
 .detail {

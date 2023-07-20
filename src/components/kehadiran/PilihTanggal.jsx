@@ -3,6 +3,7 @@ import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
 import formatDate from '../useFormatCalendar';
 import { useDispatch } from 'react-redux';
+import dayjs from 'dayjs';
 function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateText }) {
   const [open, setOpen] = useState(false)
   const calendarRef = useRef();
@@ -42,7 +43,10 @@ function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateT
     <div className='pilih-tanggal' ref={calendarRef}>
       <div className='btn-pilih-tanggal' onClick={handleClick}>
         <img src={calenderIcon} alt="" />
-        <p>{text}</p>
+        <div className='wrap-text'>
+          <p>{dayjs(text).format('DD MMM YYYY') === 'Invalid Date' ? text : dayjs(text).format('DD MMM YYYY')}</p>
+          {/* <p>{text}</p> */}
+        </div>
       </div>
       {open &&
         <Calendar

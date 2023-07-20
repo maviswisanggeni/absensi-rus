@@ -83,7 +83,7 @@ export default function Day({ day, rowIdx }) {
                                     onClick={(e) => e.stopPropagation()}
                                     key={idx + 1}
                                     style={
-                                        day.format('dddd') === 'Friday' || day.format('dddd') === 'Saturday' || day.format('dddd') === 'Thursday' ?
+                                        day.format('dddd') === 'Jumat' || day.format('dddd') === 'Sabtu' || day.format('dddd') === 'Kamis' ?
                                             { left: -395 }
                                             : null
                                     }
@@ -95,7 +95,9 @@ export default function Day({ day, rowIdx }) {
                                     <p className='tanggal'>
                                         {evt?.kategori_event === 'event'
                                             ? <>
-                                                {dayjs(evt.waktu_mulai).format('DD MMMM YYYY')}
+                                                {dayjs(evt.waktu_mulai).format('DD MMMM YYYY') === dayjs(evt.waktu_selesai).format('DD MMMM YYYY') ? dayjs(evt.waktu_mulai).format('DD MMMM YYYY')
+                                                    : dayjs(evt.waktu_mulai).format('DD MMMM YYYY') + ' - ' + dayjs(evt.waktu_selesai).format('DD MMMM YYYY')
+                                                }
                                                 <p className='jam'>{dayjs(evt.waktu_mulai).format('HH:mm') + ' - ' + dayjs(evt.waktu_selesai).format('HH:mm')}</p>
                                             </>
                                             : <>

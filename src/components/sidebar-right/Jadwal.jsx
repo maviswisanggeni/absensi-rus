@@ -29,7 +29,7 @@ function Jadwal() {
     <div className='jadwal'>
       <h1>Event</h1>
       {!loading ? <div className='loading'></div> :
-        data?.length === 0 ? <p>Tidak ada Event hingga akhir bulan ini</p> :
+        data?.length === 0 ? <p>Tidak ada event hingga akhir bulan ini</p> :
           data?.map((item, key) => {
             return (
               <CardJadwal title={item.judul} date={dayjs(item.waktu_mulai).format('DD MMMM YYYY, HH:mm -') + dayjs(item.waktu_selesai).format(' HH:mm')} lokasi={item.lokasi} key={key} />

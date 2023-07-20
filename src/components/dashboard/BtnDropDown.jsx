@@ -30,7 +30,7 @@ function BtnDropDown() {
 
   return (
     <div className="dropdown" ref={drop}>
-      <Button onClick={() => setOpen(open => !open)} current={current} />
+      <Button onClick={() => setOpen(open => !open)} current={current} open={open} />
       {open && <DropDownCard data={sampleData} setOpen={setOpen} current={current} setCurrent={setCurrent} />}
     </div>
   )
