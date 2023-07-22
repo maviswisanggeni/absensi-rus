@@ -227,12 +227,13 @@
 
 .detail {
   width: 80%;
+  border-right: 1px solid #eceef2;
 }
 .detail .navigation {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #ebf0fe;
+  border-bottom: 1px solid #eceef2;
   padding: 1rem 2.5rem;
 }
 .detail .navigation img {
@@ -299,6 +300,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   border: 1px solid #ebf0fe;
+  border-radius: 10px;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .wrapper-img {
   display: -webkit-box;
@@ -315,6 +317,15 @@
       -ms-flex-direction: column;
           flex-direction: column;
   height: 372px;
+  width: 315px;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .wrapper-img .check-img {
+  position: absolute;
+  visibility: hidden;
+}
+.detail .main .detail-masuk-keluar .masuk-keluar .card .wrapper-img img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .wrapper-img p {
   font-weight: 400;
@@ -514,7 +525,7 @@
   height: 40px;
   position: relative;
 }
-.detail .map {
+.detail .map-overlay {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -553,7 +564,7 @@
 .detail .close {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: -1rem;
   cursor: pointer;
   z-index: 999;
 }

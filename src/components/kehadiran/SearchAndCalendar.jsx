@@ -7,7 +7,7 @@ import searchIcon from '../../assets/icons/search-icon.svg'
 import formatDate from '../useFormatCalendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiran, updateStateKehadiran } from '../../features/kehadiranSlice'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { getJmlKehadiranKehadiran } from '../../features/jmlKehadiranSlice'
 
 function SearchAndCalendar() {
@@ -52,12 +52,6 @@ function SearchAndCalendar() {
       setIsParamsUpdated(false);
     }
   }, [searchParams.toString(), isParamsUpdated, dispatch]);
-
-  useEffect(() => {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('paginate', 1);
-    setSearchParams(newSearchParams)
-  }, [keterangan])
 
   async function handleSearch(e) {
     e.preventDefault()

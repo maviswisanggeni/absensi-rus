@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Map from '../../components/kehadiran/Map'
 import map from '../../assets/images/map.png'
 import close from '../../assets/icons/close.svg'
@@ -7,7 +7,27 @@ import folderImg from '../../assets/icons/folder.svg'
 
 function DetailCard({
     type, tanggal, waktu, link_foto, catatan, lokasi, latitude, longitude,
-    is_valid, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull }) {
+    is_valid, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull
+}) {
+
+    const wrapperRef = useRef(null);
+    const [imgLoaded, setImgLoaded] = useState(false);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+                console.log('Click outside detected');
+                setPopUpMap(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [setPopUpMap]);
+
     return (
         <div className='masuk-keluar'>
             <div className='jam-masuk'>
@@ -26,20 +46,23 @@ function DetailCard({
 
             <div className='card'>
                 <div className='wrapper-img'>
-                    {loading ?
-                        <img
-                            className={`${link_foto ? '' : 'foto-belum-keluar'} foto-masuk`}
-                            src={link_foto ? link_foto : folderImg}
-                            alt=""
-                            onClick={() => setPopUp(popUp ? false : true)}
-                        />
-                        : <div className={`foto-masuk ${loading && 'shimmer'}`}></div>
+                    <img className='check-img' src={link_foto} onLoad={() => setImgLoaded(true)} />
+                    {imgLoaded || !link_foto ?
+                        <>
+                            <img
+                                className={`${link_foto ? '' : 'foto-belum-keluar'} foto-masuk`}
+                                src={link_foto ? link_foto : folderImg}
+                                alt=""
+                                onClick={() => setPopUp(popUp ? false : true)}
+                            />
+                            {!link_foto ? <p>Belum Absen Keluar</p> : null}
+                        </>
+                        : <div className={`foto-masuk skeleton__loading`}></div>
                     }
-                    {!link_foto ? <p>Belum Absen Keluar</p> : null}
                 </div>
                 {popUp && link_foto &&
                     <div className={popUp ? 'pop-up' : ''} onClick={() => setPopUp(popUp ? false : true)}>
-                        <img className='img-user' src={link_foto} alt="" />
+                        <img className='img-user' src={link_foto} alt="" loading='loading' />
                     </div>
                 }
 
@@ -55,14 +78,23 @@ function DetailCard({
                     <div className='map-and-status'>
                         {popUpMap && latitude && longitude &&
                             <>
-                                <Map latitude={latitude} longitude={longitude} loading={loading} />
-                                <div className='wrapper-close'>
-                                    <img src={close} className='close' onClick={() => setPopUpMap(popUpMap ? false : true)} />
-                                </div>
+                                {popUpMap && latitude && longitude && (
+                                    <div className='map-overlay'>
+                                        <div className='map-image' ref={wrapperRef}>
+                                            <Map latitude={latitude} longitude={longitude} loading={loading} />
+                                        </div>
+                                    </div>
+                                )}
                             </>
                         }
-                        <img className='mape' src={map} onClick={() => setPopUpMap(popUpMap ? false : true)} />
-                        <div className='wrapper-status'>
+                        <img
+                            className='mape'
+                            src={map}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                setPopUpMap(true);
+                            }}
+                        />                        <div className='wrapper-status'>
                             <div
                                 className={`valid-masuk-pulang 
                                     ${is_valid === '1' ? 'valid-masuk' : is_valid === null ? '' : 'valid-pulang'}
@@ -78,7 +110,7 @@ function DetailCard({
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
