@@ -111,6 +111,10 @@
   display: -ms-flexbox;
   display: flex;
 }
+.dashboard .statistic-chart .div-2 .recharts-wrapper {
+  position: relative;
+  right: 30px;
+}
 .dashboard .statistic-chart .div-2 .chartInfo {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -183,6 +187,9 @@
 .sidebar-right {
   border-left: 1px solid #ebf0fe;
   position: relative;
+}
+.sidebar-right .wrapper-calendar {
+  margin-top: 1rem;
 }
 .sidebar-right .wrapper-calendar,
 .sidebar-right .jadwal {

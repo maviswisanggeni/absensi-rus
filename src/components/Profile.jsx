@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 function Profile() {
   const context = useApiProfile()
   const [active, setActive] = useState()
+  const [isTransitionFinished, setIsTransitionFinished] = useState(true)
   const drop = useRef()
 
   useEffect(() => {
@@ -37,13 +38,15 @@ function Profile() {
           <img src={arrowDown} alt="" className={active ? 'active' : ''} />
         </div>
       </div>
-      <div className={`${active ? 'active' : ''} dropdown-container`}>
-        {/* <Link to={'/pengaturan/kategori-karyawan'} className='link-container'> */}
-        <Link to={'/pengaturan/kategori-karyawan'} className={`${active ? 'active' : ''} dropdown-list`} onClick={() => console.log('test')}>
+      <div className={`${isTransitionFinished ? 'active' : ''} dropdown-container`}>
+        <Link
+          to={'/pengaturan/kategori-karyawan'}
+          className={`${active ? 'active' : ''} dropdown-list`}
+          onTransitionEnd={() => setIsTransitionFinished(true)}
+        >
           <p>Pengaturan</p>
           <img src={setting} alt="" />
         </Link>
-        {/* </Link> */}
         <div className={`${active ? 'active' : ''} dropdown-list`}>
           <p>Keluar</p>
           <div>

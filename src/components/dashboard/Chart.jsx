@@ -51,7 +51,6 @@ function Chart() {
 
       currentStatistik = weekTemplate.map((item) => {
         const count = statistikData.mingguan?.find((data) => dayjs(data.date).format('dddd') === item.date)?.count || 0
-        console.log(count);
         return {
           date: item.date,
           count
@@ -82,9 +81,9 @@ function Chart() {
 
   return (
     <>
-      {loading ? <div className='empty__container loading__statistik skeleton__loading'>Loading...</div>
+      {loading ? <div className='empty__container skeleton__loading'></div>
         : updatedData?.length < 1 || updatedData == undefined ? <div className='empty__container'>Data tidak ada</div>
-          : <ResponsiveContainer width='100%' height={300}>
+          : <ResponsiveContainer width={775} height={300}>
             <LineChart
               data={updatedData}
               margin={{

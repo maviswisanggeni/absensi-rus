@@ -109,6 +109,11 @@
     .div-2 {
       display: flex;
 
+      .recharts-wrapper {
+        position: relative;
+        right: 30px;
+      }
+
       .chartInfo {
         display: flex;
         flex-direction: column;
@@ -178,6 +183,10 @@
 .sidebar-right {
   border-left: 1px solid $secondary-color;
   position: relative;
+
+  .wrapper-calendar {
+    margin-top: 1rem;
+  }
 
   .wrapper-calendar,
   .jadwal {
