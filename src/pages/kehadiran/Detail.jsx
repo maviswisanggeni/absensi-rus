@@ -49,7 +49,7 @@ function Detail() {
     function checkNull(data) {
         return data ? data : '-'
     }
-
+    console.log(detail);
     return (
         <div className='wrapper-detail'>
             <Sidebar />
@@ -71,6 +71,7 @@ function Detail() {
                             latitude={detail?.latitude_masuk}
                             longitude={detail?.longitude_masuk}
                             is_valid={detail?.is_valid_masuk}
+                            is_valid_wkt={detail?.valid_masuk}
                             loading={loading}
                             popUp={popUpMasuk}
                             setPopUp={setPopUpMasuk}
@@ -89,6 +90,7 @@ function Detail() {
                             latitude={detail?.latitude_pulang}
                             longitude={detail?.longitude_pulang}
                             is_valid={detail?.is_valid_pulang}
+                            is_valid_wkt={detail?.valid_pulang}
                             loading={loading}
                             popUp={popUpKeluar}
                             setPopUp={setPopUpKeluar}

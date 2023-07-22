@@ -65,9 +65,18 @@ export const getKehadiranTerbaru = createAsyncThunk("kehadiran/getKehadiranTerba
 const kehadiranSlice = createSlice({
     name: 'kehadiran',
     initialState: {
+        listTabbar: [
+            { kategori: 'Masuk', id: 1 },
+            { kategori: 'Keluar', id: 2 },
+            { kategori: 'Sukses', id: 3 },
+            { kategori: 'Izin', id: 4 },
+            { kategori: 'Absen', id: 5 }
+        ],
         kehadiranMasuk: [],
         kehadiranKeluar: [],
         kehadiranIzin: [],
+        kehadiranSukses: [],
+        kehadiranAbsen: [],
         kehadiranTerbaru: [],
         search: '',
         startTime: formatDate(new Date()),
@@ -102,6 +111,29 @@ const kehadiranSlice = createSlice({
                 state.kehadiranMasuk = action.payload.data.masuk;
                 state.kehadiranKeluar = action.payload.data.pulang;
                 state.kehadiranIzin = action.payload.data.izin;
+
+                const listSuksesMasuk = action.payload.data.masuk.filter((item) =>
+                    item.isvld_wkt_masuk === '1'
+                    && item.isvld_wkt_pulang === '1'
+                    && item.is_valid_masuk === '1'
+                    && item.is_valid_pulang === '1'
+                )
+
+                const listSuksesPulang = action.payload.data.pulang.filter((item) =>
+                    item.isvld_wkt_masuk === '1'
+                    && item.isvld_wkt_pulang === '1'
+                    && item.is_valid_masuk === '1'
+                    && item.is_valid_pulang === '1'
+                )
+
+                state.kehadiranSukses = [
+                    ...(listSuksesMasuk || []),
+                    ...(listSuksesPulang || [])
+                ];
+                state.kehadiranAbsen = [
+                    ...(action.payload.data.masuk || []),
+                    ...(action.payload.data.pulang || [])
+                ];
             })
             .addCase(getKehadiran.rejected, (state, action) => {
                 state.loading = false;

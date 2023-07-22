@@ -37,6 +37,10 @@ function DetailProfile({ data }) {
                     <h3>Nomer HP</h3>
                     <p>{checkNull(data?.user.no_hp)}</p>
                 </div>
+                <div className='info'>
+                    <h3>Email</h3>
+                    <p>{data?.user.email}</p>
+                </div>
             </div>
             <div className='back-btn' onClick={() => navigate(-1)}>Kembali</div>
         </div>

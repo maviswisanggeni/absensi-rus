@@ -24,7 +24,7 @@ import formatDate from '../../components/useFormatCalendar'
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
-  const { statusResApi, messageResApi, isDisplayMessage, startTime, endTime } = useSelector((state) => state.kehadiran)
+  const { statusResApi, messageResApi, isDisplayMessage, listTabbar } = useSelector((state) => state.kehadiran)
   const { jmlKehadiran, loading, tanggalKehadiran } = useSelector(state => state.jmlKehadiran)
   const [date, setDate] = useState(new Date());
   const [isResetState, setIsResetState] = useState(false)
@@ -93,9 +93,11 @@ function Kehadiran() {
           <SearchAndCalendar />
           <TabbarAndFilter />
           <Routes>
-            <Route path='/Masuk' element={<Table />} />
-            <Route path='/Keluar' element={<Table />} />
-            <Route path='/Izin' element={<Table />} />
+            {listTabbar.map((item, index) => {
+              return (
+                <Route key={index} path={`/${item.kategori}`} element={<Table />} />
+              )
+            })}
           </Routes>
         </div>
         <div className='sidebar-right'>

@@ -2,12 +2,12 @@ import dayjs from 'dayjs'
 import React, { useEffect, useRef, useState } from 'react'
 import Map from '../../components/kehadiran/Map'
 import map from '../../assets/images/map.png'
-import close from '../../assets/icons/close.svg'
 import folderImg from '../../assets/icons/folder.svg'
+import 'dayjs/locale/id'
 
 function DetailCard({
     type, tanggal, waktu, link_foto, catatan, lokasi, latitude, longitude,
-    is_valid, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull
+    is_valid, is_valid_wkt, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull
 }) {
 
     const wrapperRef = useRef(null);
@@ -28,19 +28,25 @@ function DetailCard({
         };
     }, [setPopUpMap]);
 
+    useEffect(() => {
+        dayjs.locale('id')
+    }, [])
+
     return (
         <div className='masuk-keluar'>
             <div className='jam-masuk'>
                 <h3>{type}</h3>
                 <p>
                     {tanggal
-                        ? dayjs(tanggal).format('dddd DD MMM YYYY') + ', '
+                        ? dayjs(tanggal).format('dddd, DD MMMM YYYY') + ', pukul'
                         : '-'
                     }
-                    {waktu
-                        ? waktu.slice(0, 5)
-                        : ''
-                    }
+                    <span className={is_valid_wkt === '1' ? 'valid-masuk-text' : 'valid-pulang-text'}>
+                        {waktu
+                            ? ` ${waktu.slice(0, 5)}`
+                            : ''
+                        }
+                    </span>
                 </p>
             </div>
 
