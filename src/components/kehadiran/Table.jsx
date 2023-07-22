@@ -17,7 +17,6 @@ function Table() {
     const context = useKehadiranListAbsensi()
     const dispatch = useDispatch()
     let [searchParams] = useSearchParams();
-    const location = useLocation()
     const [filteredKehadiranKeluar, setFilteredKehadiranKeluar] = useState([])
     const [filteredKehadiranMasuk, setFilteredKehadiranMasuk] = useState([])
 
@@ -32,10 +31,6 @@ function Table() {
     }, [])
 
     useEffect(() => {
-        dispatch(updateStateKehadiran({ name: 'currentPage', value: 1 }))
-    }, [location.pathname.split('/').pop()]);
-
-    useEffect(() => {
         const currentPageParams = searchParams.get('paginate') ? searchParams.get('paginate') : 1;
         dispatch(updateStateKehadiran({ name: 'currentPage', value: parseInt(currentPageParams) }))
     }, [searchParams, dispatch]);
@@ -44,18 +39,17 @@ function Table() {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
 
-        let slicedData;
         let selectedData;
 
         if (keterangan === 'Keluar') {
             const filteredKeluar = kehadiranKeluar.filter((item) =>
-                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk)
+                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
             );
             setFilteredKehadiranKeluar(filteredKeluar)
             selectedData = filteredKeluar
         } else if (keterangan === 'Masuk') {
             const filteredMasuk = kehadiranMasuk.filter((item) =>
-                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk)
+                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
             );
             setFilteredKehadiranMasuk(filteredMasuk)
             selectedData = filteredMasuk;
@@ -161,8 +155,10 @@ function Table() {
                                                 <DisplayKategoriList list={item.user?.ktgkaryawan} />
                                             </td>
                                             <td>
-                                                {checkKeterangan(dayjs(item?.tanggal_masuk).format('ddd DD MMM YYYY'), dayjs(item?.tanggal_pulang).format('ddd DD MMM YYYY'))}
-                                                {keterangan === 'Izin' && `${item?.mulai_izin} - ${item?.selesai_izin}`}
+                                                {isIzin()
+                                                    ? `${item?.mulai_izin} - ${item?.selesai_izin}`
+                                                    : checkKeterangan(dayjs(item?.tanggal_masuk).format('ddd DD MMM YYYY'), dayjs(item?.tanggal_pulang).format('ddd DD MMM YYYY'))
+                                                }
                                             </td>
                                             {isIzin() ? null
                                                 : <td>
