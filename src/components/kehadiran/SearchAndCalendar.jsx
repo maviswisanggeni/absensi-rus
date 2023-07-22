@@ -7,8 +7,7 @@ import searchIcon from '../../assets/icons/search-icon.svg'
 import formatDate from '../useFormatCalendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiran, updateStateKehadiran } from '../../features/kehadiranSlice'
-import { useLocation, useSearchParams } from 'react-router-dom'
-import { getJmlKehadiranKehadiran } from '../../features/jmlKehadiranSlice'
+import { useSearchParams } from 'react-router-dom'
 
 function SearchAndCalendar() {
   const [startDate, setStartDate] = useState(new Date())

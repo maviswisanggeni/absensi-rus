@@ -7,17 +7,12 @@ import { updateStateKehadiran } from '../../features/kehadiranSlice'
 import { useSearchParams } from 'react-router-dom'
 import { setCurrentKategori, setKategoriId } from '../../features/ketegoriSlice'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 function TabbarAndFilter() {
-  const context = useKehadiranListAbsensi()
-  let [searchParams, setSearchParams] = useSearchParams();
+  const { listTabbar } = useSelector(state => state.kehadiran)
+  let [searchParams] = useSearchParams();
   const [slicedParams, setSlicedParams] = useState([])
-
-  const options = [
-    { kategori: 'Masuk', id: 1 },
-    { kategori: 'Keluar', id: 2 },
-    { kategori: 'Izin', id: 3 },
-  ]
 
   useEffect(() => {
     const paramsObject = Object.fromEntries(new URLSearchParams(searchParams));
@@ -29,7 +24,7 @@ function TabbarAndFilter() {
   return (
     <div className='tabbar-filter'>
       <Tabbar
-        options={options}
+        options={listTabbar}
         setKategoriId={setKategoriId}
         setCurrentKategori={setCurrentKategori}
         setKeterangan={updateStateKehadiran}

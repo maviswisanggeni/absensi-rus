@@ -10,6 +10,9 @@ import useImgError from '../../hooks/useImgError';
 import DisplayKategoriList from '../DisplayKategoriList';
 import dayjs from 'dayjs';
 import 'dayjs/locale/id';
+import IndicatorValid from './IndicatorValid';
+import RowTanggal from './RowTanggal';
+import RowJam from './RowJam';
 
 let PageSize = 10;
 
@@ -22,7 +25,7 @@ function Table() {
 
     const {
         kehadiranMasuk, kehadiranKeluar,
-        kehadiranIzin, currentPage,
+        kehadiranIzin, kehadiranSukses, kehadiranAbsen, currentPage,
         keterangan, urutan, loading
     } = useSelector(state => state.kehadiran)
 
@@ -53,6 +56,10 @@ function Table() {
             );
             setFilteredKehadiranMasuk(filteredMasuk)
             selectedData = filteredMasuk;
+        } else if (keterangan === 'Sukses') {
+            selectedData = kehadiranSukses;
+        } else if (keterangan === 'Absen') {
+            selectedData = kehadiranAbsen
         } else {
             selectedData = kehadiranIzin;
         }
@@ -100,16 +107,24 @@ function Table() {
     //     }
     // }, []);
 
-    function checkKeterangan(masuk, pulang) {
-        if (keterangan === 'Masuk') {
-            return masuk
-        } else {
-            return pulang
+    function checkKeterangan(dataMasuk, dataPulang) {
+        if (keterangan === 'Masuk' || keterangan === 'Sukses') {
+            return dataMasuk
+        } else if (keterangan === 'Keluar' || keterangan === 'Absen') {
+            return dataPulang
         }
     }
 
     function isIzin() {
         if (keterangan === 'Izin') {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    function isSuksesOrAbsen() {
+        if (keterangan === 'Sukses' || keterangan === 'Absen') {
             return true
         } else {
             return false
@@ -124,8 +139,12 @@ function Table() {
                         <th className='th-name'>Nama</th>
                         <th className='th-niy'>NIY</th>
                         <th className='th-jabatan'>Jabatan</th>
-                        <th className={`th-tanggal ${isIzin() ? 'izin' : ''}`}>Tanggal</th>
-                        {!isIzin() && <th className='th-waktu'>Waktu</th>}
+                        {!isSuksesOrAbsen() ? <th className={`th-tanggal ${isIzin() ? 'izin' : ''}`}>Tanggal</th> : null}
+                        {!isIzin() &&
+                            <th className='th-waktu'>
+                                {isSuksesOrAbsen() ? 'Presensi' : 'Waktu'}
+                            </th>
+                        }
                         <th className='th-action'>Action</th>
                     </tr>
                 </thead>
@@ -139,13 +158,14 @@ function Table() {
                                     return (
                                         <tr key={key}>
                                             <td className='row-img'>
-                                                <div
-                                                    className={`valid-masuk-pulang 
-                                                    ${checkKeterangan(item?.is_valid_masuk, item?.is_valid_pulang) === '1' && checkKeterangan(item?.isvld_wkt_masuk, item?.isvld_wkt_pulang) === '1'
-                                                            ? 'valid-masuk' : 'valid-pulang'
-                                                        }`}
-                                                >
-                                                </div>
+                                                <IndicatorValid
+                                                    keterangan={keterangan}
+                                                    is_valid_masuk={item?.is_valid_masuk}
+                                                    is_valid_pulang={item?.is_valid_pulang}
+                                                    isvld_wkt_masuk={item?.isvld_wkt_masuk}
+                                                    isvld_wkt_pulang={item?.isvld_wkt_pulang}
+                                                />
+
                                                 <img src={item?.user?.link_foto} onError={useImgError} alt={item.user?.nama} />
 
                                                 {item?.user?.nama}
@@ -154,13 +174,22 @@ function Table() {
                                             <td>
                                                 <DisplayKategoriList list={item.user?.ktgkaryawan} />
                                             </td>
-                                            <td>
-                                                {isIzin()
-                                                    ? `${item?.mulai_izin} - ${item?.selesai_izin}`
-                                                    : checkKeterangan(dayjs(item?.tanggal_masuk).format('ddd DD MMM YYYY'), dayjs(item?.tanggal_pulang).format('ddd DD MMM YYYY'))
-                                                }
-                                            </td>
-                                            {isIzin() ? null
+                                            <RowTanggal
+                                                keterangan={keterangan}
+                                                tgl_masuk={dayjs(item?.tanggal_masuk).format('ddd DD MMM YYYY')}
+                                                tgl_pulang={dayjs(item?.tanggal_pulang).format('ddd DD MMM YYYY')}
+                                                tgl_mulai_izin={item?.mulai_izin}
+                                                tgl_selesai_izin={item?.selesai_izin}
+                                            />
+                                            <RowJam
+                                                keteranganApi={item?.keterangan}
+                                                keteranganState={keterangan}
+                                                waktu_masuk={item?.waktu_masuk?.slice(0, 5)}
+                                                waktu_pulang={item?.waktu_pulang?.slice(0, 5)}
+                                                isvld_wkt_masuk={item?.isvld_wkt_masuk}
+                                                isvld_wkt_pulang={item?.isvld_wkt_pulang}
+                                            />
+                                            {/* {isIzin() ? null
                                                 : <td>
                                                     <p
                                                         className={`row__jam 
@@ -172,7 +201,7 @@ function Table() {
                                                         {checkKeterangan(item?.waktu_masuk?.slice(0, 5), item?.waktu_pulang?.slice(0, 5))} WIB
                                                     </p>
                                                 </td>
-                                            }
+                                            } */}
 
                                             <td>
                                                 <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
@@ -192,7 +221,9 @@ function Table() {
                     totalCount={
                         keterangan === 'Masuk' ? filteredKehadiranMasuk?.length
                             : keterangan === 'Keluar' ? filteredKehadiranKeluar?.length
-                                : kehadiranIzin?.length
+                                : keterangan === 'Izin' ? kehadiranIzin?.length
+                                    : keterangan === 'Sukses' ? kehadiranSukses?.length
+                                        : kehadiranAbsen?.length
                     }
                     pageSize={PageSize}
                     onPageChange={
