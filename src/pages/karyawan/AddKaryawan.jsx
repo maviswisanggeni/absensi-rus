@@ -20,9 +20,10 @@ function AddKaryawan() {
         nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, loadingStore,
         statusResApi, messageResApi, isDisplayMessage, isFormValid
     } = useSelector((state) => state.karyawan)
-    const { loadingKategori } = useSelector((state) => state.kategori)
     const [file, setFile] = useState({})
     const [isFileLoad, setIsFileLoad] = useState(false)
+    const [showAlert, setShowAlert] = useState(false)
+    const [isFormFilled, setIsFormFilled] = useState(false)
 
     const callbackFile = payload => {
         setFile(payload)
@@ -40,7 +41,6 @@ function AddKaryawan() {
     async function addUser(e) {
         e.preventDefault();
         dispatch(showFormError())
-
 
         if (isFormValid) {
             const filteredKategori = Object.values(listKtgkaryawan).map(item => item.id);
@@ -88,8 +88,35 @@ function AddKaryawan() {
 
     useEffect(() => {
         dispatch(updateStateKaryawan({ name: 'isFormValid', value: !validateDisabled() }))
-        console.log(!validateDisabled());
     }, [errors, validateDisabled(), file])
+
+    useEffect(() => {
+        if (
+            nama.trim() !== ''
+            || niy.trim() !== ''
+            || email.trim() !== ''
+            || password.trim() !== ''
+            || noHp.trim() !== ''
+            || alamat.trim() !== ''
+            || listKtgkaryawan.length >= 1
+            || listJadwal.some((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '')
+            || isFileLoad
+
+        ) {
+            setIsFormFilled(true)
+        } else {
+            setIsFormFilled(!validateDisabled())
+        }
+
+    }, [nama, niy, email, password, noHp, alamat, listJadwal, listKtgkaryawan, file])
+
+    function handleBack() {
+        if (isFormFilled) {
+            setShowAlert(true)
+        } else {
+            navigate(-1)
+        }
+    }
 
     return (
         <div className='wrapper-karyawan'>
@@ -106,7 +133,7 @@ function AddKaryawan() {
                 }
                 <div className='navigation'>
                     <div>
-                        <div className='wrapper-img' onClick={() => navigate(-1)}>
+                        <div className='wrapper-img' onClick={handleBack}>
                             <img src={arrowLeft} alt="" />
                         </div>
                         <h1>Tambah Karyawan</h1>
@@ -123,6 +150,20 @@ function AddKaryawan() {
                     <Form />
                     <FotoProfile callbackFile={callbackFile} callbackIsLoad={callbackIsLoad} />
                 </div>
+
+                {showAlert &&
+                    <div className='bg-modal'>
+                        <div className='alert-modal'>
+                            <h1>Tambah Karyawan</h1>
+                            <p>Kamu yakin keluar halaman tambah karyawan? form akan terhapus</p>
+                            <div>
+                                <button onClick={() => setShowAlert(false)}>Tidak</button>
+                                <button onClick={() => navigate(-1)}>Iya</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
                 <LoadingFullscreen loading={loadingStore} />
             </div>
         </div>

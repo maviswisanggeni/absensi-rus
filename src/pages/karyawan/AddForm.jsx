@@ -7,43 +7,39 @@ import Input from '../../components/karyawan/Input'
 import Label from '../../components/karyawan/Label'
 import Select from '../../components/karyawan/Select'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFieldValue } from '../../features/karyawanSlice'
+import { showFormError, updateFieldError, updateFieldValue } from '../../features/karyawanSlice'
 import JabatanSelect from '../../components/karyawan/JabatanSelect'
+import isValidEmail from '../../hooks/useIsValidateEmail'
 
 
 function Form() {
     const dispatch = useDispatch()
-    const { errors, nama, niy, password, email, noHp, alamat, listKtgkaryawan } = useSelector((state) => state.karyawan)
-    const { listKategori } = useSelector((state) => state.kategori)
+    const { errors, nama, niy, password, email, noHp, alamat } = useSelector((state) => state.karyawan)
 
     const context = useApiKaryawanStoreUser()
     const [passwordShown, setPasswordShown] = useState(false);
-    const [validatorNama, setValidatorNama] = useState(false)
     const contextValidator = useWrapperAddKaryawan()
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         dispatch(updateFieldValue({ field: name, value }));
+
+        if (value.trim() !== '') {
+            dispatch(updateFieldError({
+                field: name,
+                error: ''
+            }))
+        }
+
+        dispatch(showFormError(name))
     };
 
-    const handleSelect = function (e) {
-        const { value } = e.target;
-        dispatch(updateFieldValue({ field: 'ktgKaryawan', value }));
-    }
-
     function handleDeleteInput() {
-        context.setNama('')
+        dispatch(updateFieldValue({ field: 'nama', value: '' }));
     }
 
     function handleUnhide() {
         setPasswordShown(passwordShown ? false : true);
-    }
-
-    function ValidateEmail(mail) {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-            return (true)
-        }
-        return (false)
     }
 
     return (

@@ -77,6 +77,7 @@ function DetailForm() {
                 break;
         }
         dispatch(updateFieldError({ field: name, error }));
+        dispatch(updateFieldValue({ field: 'isFormFilled', value: true }))
     };
 
     const handleResetField = (field) => {

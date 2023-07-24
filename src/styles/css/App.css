@@ -595,8 +595,8 @@
 }
 .tabbar .tabbar-text div {
   width: 130px;
+  height: 60px;
   text-align: center;
-  padding-bottom: 1rem;
   -webkit-transition: border 0.3s ease-in-out;
   transition: border 0.3s ease-in-out;
   cursor: pointer;
@@ -604,13 +604,15 @@
   font-size: 14px;
   border-bottom: none;
   color: #9b9b9b;
+  display: grid;
+  place-items: center;
 }
 .tabbar .tabbar-text div.active {
   color: #3661eb;
 }
 .tabbar .line {
   width: 130px;
-  height: 2px;
+  height: 1px;
   background-color: #3661eb;
   -webkit-transform: translateX(0);
           transform: translateX(0);
@@ -941,7 +943,6 @@
   }
 }
 .skeleton__loading {
-  border-radius: 20px;
   width: 100%;
   background: #f5f5f5;
   background-image: -webkit-gradient(linear, left top, right top, color-stop(25%, #f5f5f5), color-stop(37%, #e8e8e8), color-stop(63%, #f5f5f5));
@@ -1038,7 +1039,7 @@
   font-size: 18px;
   font-weight: 500;
   color: black;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 .jadwal-absensi .container-jadwal {
   margin-bottom: 0.5rem;

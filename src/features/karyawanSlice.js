@@ -57,10 +57,11 @@ const initialState = {
     nama: '',
     niy: '',
     email: '',
-    password: 'password',
+    password: '',
     noHp: '',
     alamat: '',
     linkFoto: '',
+    isFileSend: false,
     errors: {
         nama: '',
         niy: '',
@@ -69,6 +70,7 @@ const initialState = {
         noHp: '',
         alamat: '',
         listKtgkaryawan: '',
+        isFileSend: '',
         jadwal: '',
     },
     listKtgkaryawan: [],
@@ -111,6 +113,7 @@ const initialState = {
     ],
     isFormValid: false,
     isFormErrorShown: false,
+    isFormFilled: false,
 
     isInitialGet: false,
     statusResApi: '',
@@ -313,7 +316,6 @@ const karyawanSlice = createSlice({
                 state.listJadwal = value;
             } else {
                 state[field] = value;
-                state.errors = validateForm(state)
             }
         },
         updateFieldError: (state, action) => {
@@ -353,44 +355,48 @@ const karyawanSlice = createSlice({
             state.listKaryawan = []
             state.isLoading = true
         },
-        showFormError: (state) => {
+        showFormError: (state, action) => {
             const isValidEmail = (email) => {
                 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 return emailRegex.test(email);
             };
 
-            if (state.nama.trim() === '') {
+            if (state.nama.trim() === '' && (action.payload === undefined || action.payload === 'nama')) {
                 state.errors.nama = 'Isi nama';
             }
 
-            if (state.niy.trim() === '' || state.niy.length < 8) {
+            if ((state.niy.trim() === '' || state.niy.length < 8) && (action.payload === undefined || action.payload === 'niy')) {
                 state.errors.niy = 'Isi NIY minimal 8 digit.';
             }
 
-            if (state.password.trim() === '' || state.password.length < 6) {
+            if ((state.password.trim() === '' || state.password.length < 6) && (action.payload === undefined || action.payload === 'password')) {
                 state.errors.password = 'Isi password minimal 6 karakter';
             }
 
-            if (state.noHp.trim() === '' || state.noHp.length < 10) {
+            if ((state.noHp.trim() === '' || state.noHp.length < 10) && (action.payload === undefined || action.payload === 'noHp')) {
                 state.errors.noHp = 'Nomor tidak valid';
             }
 
-            if (state.listKtgkaryawan.length === 0) {
+            if (state.listKtgkaryawan.length === 0 && (action.payload === undefined || action.payload === 'listKtgkaryawan')) {
                 state.errors.listKtgkaryawan = 'Isi Kategori Karyawan';
             }
 
-            if (state.alamat.trim() === '') {
+            if (state.alamat.trim() === '' && (action.payload === undefined || action.payload === 'alamat')) {
                 state.errors.alamat = 'Isi Alamat';
             }
 
-            if (state.email.trim() === '') {
+            if (state.email.trim() === '' && (action.payload === undefined || action.payload === 'email')) {
                 state.errors.email = 'Email is required.';
-            } else if (!isValidEmail(state.email)) {
+            } else if (!isValidEmail(state.email) && (action.payload === undefined || action.payload === 'email')) {
                 state.errors.email = 'Email tidak valid';
             }
 
-            if (!state.listJadwal.some((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '')) {
+            if (!state.listJadwal.some((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '') && (action.payload === undefined || action.payload === 'jadwal')) {
                 state.errors.jadwal = 'Isi Jadwal karyawan';
+            }
+
+            if (!state.isFileSend && (action.payload === undefined || action.payload === 'isFileSend')) {
+                state.errors.isFileSend = 'Isi Foto Karyawan';
             }
 
             state.isFormErrorShown = true;
@@ -426,6 +432,7 @@ const karyawanSlice = createSlice({
                 state.nama = initialData.nama;
                 state.niy = initialData.niy;
                 state.email = initialData.email;
+                state.password = 'password';
                 state.noHp = initialData.no_hp;
                 state.alamat = initialData.alamat;
                 state.linkFoto = initialData.link_foto;
