@@ -55,6 +55,7 @@ function DetailFotoProfile({ callback }) {
 
         // Dispatch the updateFieldValue action with the updated listJadwal
         dispatch(updateFieldValue({ field: 'listJadwal', value: updatedListJadwal }));
+        dispatch(updateFieldValue({ field: 'isFormFilled', value: true }))
     };
 
     useEffect(() => {
@@ -118,7 +119,10 @@ function DetailFotoProfile({ callback }) {
             <div className='wrapper-jabatan'>
                 <div className='select'>
                     <h1 className='select-heading'>Jabatan</h1>
-                    <h3>{listKtgkaryawan.length < 1 ? 'Karyawan tidak punya kategori' : null}</h3>
+                    {listKtgkaryawan.length < 1 ?
+                        <h3>'Karyawan tidak punya kategori</h3>
+                        : null
+                    }
                     <JabatanSelect />
                 </div>
                 <div className='jadwal-absensi'>

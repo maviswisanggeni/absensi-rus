@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ModalRole from './ModalRole';
-import { deleteKategori } from '../../features/karyawanSlice';
+import { deleteKategori, showFormError, updateFieldError } from '../../features/karyawanSlice';
 import close from '../../assets/icons/close.svg'
 import plus from '../../assets/icons/plus.svg'
 import { useState } from 'react';
@@ -12,6 +12,16 @@ function JabatanSelect() {
     const { listKtgkaryawan } = useSelector(
         (state) => state.karyawan
     );
+
+    useEffect(() => {
+        if (listKtgkaryawan.length !== 0) {
+            dispatch(updateFieldError({
+                field: 'listKtgkaryawan',
+                error: ''
+            }))
+            dispatch(showFormError('listKtgkaryawan'));
+        }
+    }, [listKtgkaryawan, dispatch])
 
     return (
         <div className='wrapper-container-jabatan'>

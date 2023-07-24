@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from '../Search';
 import { getKategori, updateStateKategori } from '../../features/ketegoriSlice';
-import { updateListKtgkaryawan, updateStateKaryawan } from '../../features/karyawanSlice';
+import { updateFieldValue, updateListKtgkaryawan } from '../../features/karyawanSlice';
 import { useState } from 'react';
 
 function ModalRole({ onClose }) {
@@ -25,7 +25,6 @@ function ModalRole({ onClose }) {
         }
     }, []);
 
-
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -42,6 +41,7 @@ function ModalRole({ onClose }) {
 
     function handleAdd(kategori, id) {
         dispatch(updateListKtgkaryawan({ kategori, id }));
+        dispatch(updateFieldValue({ field: 'isFormFilled', value: true }))
     }
 
     return (

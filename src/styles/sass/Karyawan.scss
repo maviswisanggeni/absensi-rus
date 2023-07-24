@@ -36,10 +36,11 @@
         width: 350px;
         height: 48px;
         margin-right: 1rem;
-        background-color: $bg-button;
+        background-color: $white;
         background-size: 21px;
         padding: 0 3rem;
         color: black;
+        border-radius: 5px;
       }
 
       .search::placeholder {
@@ -55,7 +56,11 @@
 
     .profile {
       width: 350px;
-      border: 1px solid #eceef2;
+      border: none;
+
+      .dropdown-list.active {
+        border-top: 1px solid $border-color;
+      }
     }
   }
 
@@ -138,13 +143,11 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    min-height: 50px;
     background-color: white;
-    padding: 1rem 1.5rem;
-    padding-left: 0;
-    padding-bottom: 0;
+    padding-right: 2rem;
     border: 1px solid #eceef2;
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     position: relative;
 
     .filter-angka {
@@ -169,6 +172,158 @@
       width: 100%;
       display: grid;
       place-items: center;
+    }
+  }
+
+  .wrapper__skeleton {
+    width: 100%;
+    height: 725px;
+    flex-direction: column;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+
+    .wrapper__tabbar {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $border-color;
+      padding-right: 2rem;
+    }
+
+    .list__text__skeleton {
+      display: flex;
+      width: 100%;
+      gap: 5rem;
+      padding-left: 2rem;
+
+      div {
+        width: 75px;
+        height: 25px;
+        background: #f5f5f5;
+        background-image: linear-gradient(
+          90deg,
+          #f5f5f5 25%,
+          #e8e8e8 37%,
+          #f5f5f5 63%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s infinite linear;
+      }
+    }
+
+    .right__square {
+      width: 100px;
+      height: 25px;
+      background: #f5f5f5;
+      background-image: linear-gradient(
+        90deg,
+        #f5f5f5 25%,
+        #e8e8e8 37%,
+        #f5f5f5 63%
+      );
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite linear;
+    }
+
+    .row__table {
+      display: flex;
+      position: relative;
+      gap: 2rem;
+      padding-left: 1rem;
+      height: 50px;
+      align-items: center;
+      border: 1px solid $border-color;
+
+      div {
+        width: 100px;
+        height: 25px;
+        background: #f5f5f5;
+        background-image: linear-gradient(
+          90deg,
+          #f5f5f5 25%,
+          #e8e8e8 37%,
+          #f5f5f5 63%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s infinite linear;
+      }
+
+      div:nth-child(1) {
+        width: 100px;
+      }
+
+      div:nth-child(2) {
+        width: 243px;
+      }
+
+      div:nth-child(3) {
+        width: 197px;
+      }
+
+      div:nth-child(4) {
+        width: 126px;
+      }
+
+      div:nth-child(5) {
+        width: 228px;
+      }
+
+      div:nth-child(6) {
+        width: 100px;
+      }
+    }
+
+    .column__table {
+      display: flex;
+      position: relative;
+      gap: 2rem;
+      padding-left: 1rem;
+      height: 68px;
+      align-items: center;
+
+      div {
+        width: 100px;
+        height: 25px;
+        background: #f5f5f5;
+        background-image: linear-gradient(
+          90deg,
+          #f5f5f5 25%,
+          #e8e8e8 37%,
+          #f5f5f5 63%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s infinite linear;
+      }
+
+      div:nth-child(1) {
+        width: 30px;
+        margin-right: 4rem;
+      }
+
+      div:nth-child(2) {
+        width: 75px;
+        margin-right: 9.75rem;
+      }
+
+      div:nth-child(3) {
+        width: 100px;
+        margin-right: 5.5rem;
+      }
+
+      div:nth-child(4) {
+        width: 100px;
+        margin-right: 1.3rem;
+      }
+
+      div:nth-child(5) {
+        width: 100px;
+      }
+
+      div:nth-child(6) {
+        width: 100px;
+      }
     }
   }
 
@@ -333,7 +488,7 @@
         font-size: 18px;
         font-weight: 500;
         color: black;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
       }
 
       h3 {

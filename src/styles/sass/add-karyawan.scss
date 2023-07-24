@@ -1,4 +1,5 @@
 @import "../variables/variables.scss";
+@use "../mixins/modal-styles";
 
 .add-karyawan {
   width: 80%;
@@ -269,4 +270,12 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
+}
+
+.bg-modal {
+  @include modal-styles.bg-modal;
+
+  .alert-modal {
+    @include modal-styles.alert-modal;
+  }
 }

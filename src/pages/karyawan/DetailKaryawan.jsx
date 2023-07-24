@@ -14,9 +14,13 @@ import LoadingFullscreen from '../../components/LoadingFullscreen'
 function DetailKaryawan() {
     let userId = useParams()
     const dispatch = useDispatch()
-    const { nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, loadingEdit
+    const {
+        nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan,
+        isLoading, statusResApi, messageResApi, isDisplayMessage, loadingEdit, isFormFilled
     } = useSelector((state) => state.karyawan)
     let navigate = useNavigate()
+    const [showAlertBack, setShowAlertBack] = useState(false)
+    const [showAlertUpdate, setShowAlertUpdate] = useState(false)
 
     const [file, setFile] = useState(null)
     const callback = payload => {
@@ -27,10 +31,15 @@ function DetailKaryawan() {
         dispatch(detailKaryawan(userId.id))
         dispatch(getKategori())
         dispatch(resetListKaryawan())
+        dispatch(updateStateKaryawan({ name: 'isFormFilled', value: false }))
     }, [userId])
 
     function updateUser(e) {
         e.preventDefault();
+        setShowAlertUpdate(true)
+    }
+
+    function handleApiUpdate() {
         const filteredKategori = Object.values(listKtgkaryawan).map(item => item.id);
         const filteredListJadwal = listJadwal.filter((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '');
         dispatch(updateKaryawan({
@@ -49,13 +58,23 @@ function DetailKaryawan() {
             })
     }
 
+    console.log(isFormFilled);
+
+    function handleBack() {
+        if (isFormFilled) {
+            setShowAlertBack(true)
+        } else {
+            navigate(-1)
+        }
+    }
+
     return (
         <div className='wrapper-karyawan'>
             <Sidebar />
             <form className='detail-karyawan' onSubmit={updateUser}>
                 <div className='navigation'>
                     <div>
-                        <img src={arrowLeft} alt="" onClick={() => navigate(-1)} />
+                        <img src={arrowLeft} alt="" onClick={handleBack} />
                         <h1>Detail Karyawan</h1>
                     </div>
 
@@ -75,6 +94,33 @@ function DetailKaryawan() {
                 </div>
                 <LoadingFullscreen loading={loadingEdit} />
             </form>
+
+            {showAlertBack &&
+                <div className='bg-modal'>
+                    <div className='alert-modal'>
+                        <h1>Edit Karyawan</h1>
+                        <p>Kamu yakin keluar halaman edit karyawan? form akan terhapus</p>
+                        <div>
+                            <button onClick={() => setShowAlertBack(false)}>Tidak</button>
+                            <button onClick={() => navigate(-1)}>Iya</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            {showAlertUpdate &&
+                <div className='bg-modal'>
+                    <div className='alert-modal'>
+                        <h1>Edit Karyawan</h1>
+                        <p>Kamu yakin edit karyawan ini?</p>
+                        <div>
+                            <button onClick={() => setShowAlertUpdate(false)}>Tidak</button>
+                            <button onClick={handleApiUpdate}>Iya</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
             <InfoBox
                 message={messageResApi}
                 status={statusResApi}

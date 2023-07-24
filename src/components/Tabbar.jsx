@@ -50,9 +50,8 @@ function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, set
           style={{ width: lineWidth, transform: `translate(${current ? lineTranslateX : '0%'}, 0)` }}
         >
         </div>
-
       }
-    </div >
+    </div>
   )
 }
 

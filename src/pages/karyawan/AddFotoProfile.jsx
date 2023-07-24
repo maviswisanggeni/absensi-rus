@@ -3,20 +3,19 @@ import { useState } from 'react';
 import uploadClour from '../../assets/icons/cloud-upload.svg'
 import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFieldValue } from '../../features/karyawanSlice';
+import { showFormError, updateFieldError, updateFieldValue } from '../../features/karyawanSlice';
 
 function FotoProfile({ callbackFile, callbackIsLoad }) {
     const context = useApiKaryawanStoreUser()
-    const { listJadwal, errors, isFormErrorShown } = useSelector(
+    const { listJadwal, errors, isFormErrorShown, isFileSend } = useSelector(
         (state) => state.karyawan
     );
     const dispatch = useDispatch()
     const [file, setFile] = useState({});
     const [previewImg, setPreviewImg] = useState(null)
     const inputRef = useRef(null);
-    // drag state
     const [dragActive, setDragActive] = useState(false);
-    // handle drag events
+
     const handleDrag = function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -32,8 +31,6 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
         e.stopPropagation();
         setDragActive(false);
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            // at least one file has been dropped so do something
-            // handleFiles(e.dataTransfer.files);
             setFile(e.dataTransfer.files[0]);
             callbackIsLoad(true)
             setPreviewImg(URL.createObjectURL(e.dataTransfer.files[0]))
@@ -43,8 +40,6 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
     const handleChange = function (e) {
         e.preventDefault();
         if (e.target.files && e.target.files[0]) {
-            // at least one file has been selected so do something
-            // handleFiles(e.target.files);
             setFile(e.target.files[0]);
             callbackIsLoad(true)
             setPreviewImg(URL.createObjectURL(e.target.files[0]))
@@ -58,32 +53,45 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
 
     useEffect(() => {
         callbackFile(file)
-    }, [file])
 
-    const formatTime = time => {
-        const [hours, minutes] = time.split(':');
-        const paddedHours = hours.padStart(2, '0'); // Add leading zero if necessary
-        return `${paddedHours}:${minutes}`;
-    };
+        if (file.name) {
+            dispatch(updateFieldValue({ field: 'isFileSend', value: true }))
+        }
+    }, [file])
 
     const handleTimeChange = (e, index, property) => {
         const { value } = e.target;
-
-        // Create a copy of the listJadwal array
+        console.log(value);
         const updatedListJadwal = [...listJadwal];
 
-        // Create a copy of the specific item in the listJadwal array
         const updatedItem = { ...updatedListJadwal[index] };
 
-        // Update the specific property in the copied item
-        updatedItem[property] = formatTime(value); // Format the time value
+        updatedItem[property] = value;
 
-        // Update the specific item in the copied listJadwal array
         updatedListJadwal[index] = updatedItem;
 
-        // Dispatch the updateFieldValue action with the updated listJadwal
         dispatch(updateFieldValue({ field: 'listJadwal', value: updatedListJadwal }));
     };
+
+    useEffect(() => {
+        if (isFileSend) {
+            dispatch(updateFieldError({
+                field: 'isFileSend',
+                error: ''
+            }))
+            dispatch(showFormError('isFileSend'))
+        }
+    }, [isFileSend, dispatch])
+
+    useEffect(() => {
+        if (listJadwal.some((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '')) {
+            dispatch(updateFieldError({
+                field: 'jadwal',
+                error: ''
+            }))
+            dispatch(showFormError('jadwal'))
+        }
+    }, [listJadwal, dispatch])
 
     return (
         <div>
@@ -103,9 +111,9 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
                 {dragActive && <div id="drag-file-element" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}
             </div>
 
-            {!isFormErrorShown ? null
-                : <p className='validator-text'>Isi Foto</p>
-            }
+            <p className='validator-text'>
+                {errors.isFileSend && errors.isFileSend}
+            </p>
 
             <div className='jadwal-absensi'>
                 <h1>Jadwal Absensi</h1>
@@ -118,7 +126,8 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
                                     type="time"
                                     name={item.jam_masuk}
                                     className='input'
-                                    value={item.jam_masuk ? formatTime(item.jam_masuk) : ''}
+                                    // value={item.jam_masuk ? formatTime(item.jam_masuk) : ''}
+                                    value={item.jam_masuk}
                                     onChange={e => handleTimeChange(e, key, 'jam_masuk')}
                                 />
                                 <div className='line'></div>
@@ -126,7 +135,8 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
                                     type="time"
                                     name={item.jam_pulang}
                                     className='input'
-                                    value={item.jam_pulang ? formatTime(item.jam_pulang) : ''}
+                                    // value={item.jam_pulang ? formatTime(item.jam_pulang) : ''}
+                                    value={item.jam_pulang}
                                     onChange={e => handleTimeChange(e, key, 'jam_pulang')}
                                 />
                             </div>

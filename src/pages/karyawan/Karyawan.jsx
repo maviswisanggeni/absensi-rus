@@ -14,19 +14,22 @@ import { getKategori, setCurrentKategori, setIsInitial, setKategoriId } from '..
 import { useState } from 'react'
 import { getKaryawan, resetTable, updateFieldValue, updateStateKaryawan } from '../../features/karyawanSlice'
 import InfoBox from '../../components/InfoBox'
+import SkeletonLoading from '../../components/SkeletonLoading'
 
 function Karyawan() {
-  const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search, currentPage } = useSelector(state => state.karyawan)
-  const { listKategori, kategoriId, loadingKategori, currentKategori, isInitialPage } = useSelector(state => state.kategori)
+  const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search } = useSelector(state => state.karyawan)
+  const { listKategori, kategoriId, loadingKategori, currentKategori } = useSelector(state => state.kategori)
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
   const [isKategoriUpdated, setIsKategoriUpdated] = useState(false);
+  const [isFirstRender, setIsFirstRender] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     dispatch(resetTable())
     dispatch(getKategori());
+    setIsFirstRender(true)
   }, []);
 
   useEffect(() => {
@@ -48,6 +51,16 @@ function Karyawan() {
       dispatch(getKaryawan({ search: searchParams.get('search') }))
     }
   }, [loadingKategori])
+
+  useEffect(() => {
+    if (listKategori.length > 0) {
+      const initialOption = listKategori.find(option => option.kategori === location.pathname.split('/').pop());
+      if (initialOption) {
+        dispatch(setCurrentKategori(initialOption.kategori))
+        dispatch(setKategoriId(initialOption.id))
+      }
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     if (!loadingKategori && currentKategori) {
@@ -109,39 +122,107 @@ function Karyawan() {
           <Link to='/karyawan/add'>+ Add New</Link>
         </div>
 
-        <div className='tabbar-filter'>
-          {loadingKategori ?
-            <div className='wrapper-loading'>
-              <div className='dots loading'><p>Loading...</p></div>
-            </div>
-            : <Tabbar
-              options={listKategori}
-              setKategoriId={setKategoriId}
-              setCurrentKategori={setCurrentKategori}
-              searchParams={''}
-              setKeterangan={updateStateKaryawan}
-              path='/karyawan'
-              loading={loadingKategori}
-            />
-          }
+        {/* <SkeletonLoading
+          loading={loadingKategori}
+          width={'100%'}
+          height={'725px'}
+        /> */}
 
-          {!isLoading &&
-            <div className='filter-angka'>
-              <Filter option1="Sesuai abjad" option2="Urut NIY"
-                setState={updateStateKaryawan}
-              />
-              <p>{listKaryawan.length + ' Guru'}</p>
+        {loadingKategori && isLoading ?
+          <div className='wrapper__skeleton'>
+            <div className='wrapper__tabbar'>
+              <div className='list__text__skeleton'>
+                {Array.from({ length: 5 }, (_, index) => (
+                  <div key={index}>
+                  </div>
+                ))}
+              </div>
+
+              <div className='right__square'></div>
             </div>
-          }
-        </div>
-        <Routes>
-          {listKategori.map((item, index) => {
-            return (
-              <Route key={index} path={`/${item.kategori}`} element={<Table />}>
-              </Route>
-            )
-          })}
-        </Routes>
+            {/* <div className='column__table'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div>
+              {Array.from({ length: 6 }, (_, index) => (
+                <div key={index}>
+                  <div className='row__table'>
+                    {Array.from({ length: 6 }, (_, index) => (
+                      <div key={index}></div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div> */}
+          </div>
+          : <>
+            <div className='tabbar-filter'>
+              <Tabbar
+                options={listKategori}
+                setKategoriId={setKategoriId}
+                setCurrentKategori={setCurrentKategori}
+                searchParams={''}
+                setKeterangan={updateStateKaryawan}
+                path='/karyawan'
+                loading={loadingKategori}
+              />
+
+              <div className='filter-angka'>
+                <Filter option1="Sesuai abjad" option2="Urut NIY"
+                  setState={updateStateKaryawan}
+                />
+                <p>{listKaryawan.length + ' Guru'}</p>
+              </div>
+            </div>
+
+            <Routes>
+              {listKategori.map((item, index) => {
+                return (
+                  <Route key={index} path={`/${item.kategori}`} element={<Table />}>
+                  </Route>
+                )
+              })}
+            </Routes>
+          </>
+        }
+
+        {/* {!isLoading && !loadingKategori ?
+          <>
+            <div className='tabbar-filter'>
+              <Tabbar
+                options={listKategori}
+                setKategoriId={setKategoriId}
+                setCurrentKategori={setCurrentKategori}
+                searchParams={''}
+                setKeterangan={updateStateKaryawan}
+                path='/karyawan'
+                loading={loadingKategori}
+              />
+
+              <div className='filter-angka'>
+                <Filter option1="Sesuai abjad" option2="Urut NIY"
+                  setState={updateStateKaryawan}
+                />
+                <p>{listKaryawan.length + ' Guru'}</p>
+              </div>
+            </div>
+
+            <Routes>
+              {listKategori.map((item, index) => {
+                return (
+                  <Route key={index} path={`/${item.kategori}`} element={<Table />}>
+                  </Route>
+                )
+              })}
+            </Routes>
+          </>
+          : null
+        } */}
       </div>
     </div>
   )
