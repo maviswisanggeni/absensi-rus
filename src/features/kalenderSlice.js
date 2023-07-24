@@ -31,6 +31,7 @@ const initialState = {
     },
     isFormValid: false,
     isFormShow: false,
+    isFormEditted: false,
 
     statusResApi: '',
     messageResApi: '',
@@ -65,7 +66,7 @@ export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan
             return rejectWithValue('Request timeout');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -90,7 +91,7 @@ export const getDetailKalender = createAsyncThunk("kalender/detailKalender", asy
             return rejectWithValue('Request timeout');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -119,7 +120,7 @@ export const getKaryawanKalender = createAsyncThunk("kalender/getKaryawanKalende
             return rejectWithValue('Request timeout');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -161,7 +162,7 @@ export const storeKalender = createAsyncThunk("kalender/store", async ({
             return rejectWithValue('Request timeout');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -205,7 +206,7 @@ export const updateKalender = createAsyncThunk("kalender/update", async (
             return rejectWithValue('Request timeout');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -230,7 +231,7 @@ export const deleteKalender = createAsyncThunk("kalender/delete", async (id, { r
             return rejectWithValue('Request timeout');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -328,9 +329,17 @@ const kalenderSlice = createSlice({
             })
             .addCase(getKalender.rejected, (state, action) => {
                 state.loading = false
-                state.statusResApi = action.error.message
-                state.messageResApi = action.payload
-                state.isDisplayMessage = true
+
+                if (action.payload === 'Request failed with status code 404') {
+                    // state.statusResApi = action.error.message
+                    // state.messageResApi = action.payload
+                    // state.isDisplayMessage = true
+                    // console.log(action);
+                } else {
+                    state.statusResApi = action.error.message
+                    state.messageResApi = action.payload
+                    state.isDisplayMessage = true
+                }
             })
 
 

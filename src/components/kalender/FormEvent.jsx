@@ -2,12 +2,15 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { showFormError, updateFieldError, updateFieldKalender, updateStateKalender } from '../../features/kalenderSlice'
 import BtnCalendar from '../BtnCalendar'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 function FormEvent() {
     const dispatch = useDispatch()
-    const { judul, kategoriEvent, lokasi, deskripsi, daySelected, errors,
+    const { judul, kategoriEvent, lokasi, deskripsi, errors, isFormEditted, peserta, loading, isAddPage,
         waktuMulaiLibur, waktuSelesaiLibur, jamMulai, jamSelesai, tanggalMulai, tanggalSelesai
     } = useSelector((state) => state.kalender)
+    const [copyForm, setCopyForm] = useState({})
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -26,7 +29,120 @@ function FormEvent() {
                 value: ''
             }))
         }
+
+        const preprocessString = (str) => str.replace(/\r/g, '');
+
+        if ((preprocessString(copyForm[name]) !== value || preprocessString(copyForm[name]) !== preprocessString(value.trim())) && (name !== 'jamMulai' && name !== 'jamSelesai')) {
+            dispatch(updateStateKalender({
+                name: 'isFormEditted',
+                value: true
+            }))
+        } else if ((name === 'jamMulai' || name === 'jamSelesai') && copyForm[name] !== value + ':00') {
+            dispatch(updateStateKalender({
+                name: 'isFormEditted',
+                value: true
+            }))
+        } else {
+            dispatch(updateStateKalender({
+                name: 'isFormEditted',
+                value: false
+            }))
+        }
     }
+
+    useEffect(() => {
+        console.log(isAddPage);
+        if (isAddPage) {
+            setCopyForm({
+                judul: '',
+                kategoriEvent: kategoriEvent,
+                lokasi: '',
+                deskripsi: '',
+                waktuMulaiLibur: waktuMulaiLibur,
+                waktuSelesaiLibur: waktuSelesaiLibur,
+                jamMulai: '',
+                jamSelesai: '',
+                tanggalMulai: tanggalMulai,
+                tanggalSelesai: tanggalSelesai,
+                peserta: []
+            });
+        } else {
+            setCopyForm({
+                judul: judul,
+                kategoriEvent: kategoriEvent,
+                lokasi: lokasi,
+                deskripsi: deskripsi,
+                waktuMulaiLibur: waktuMulaiLibur,
+                waktuSelesaiLibur: waktuSelesaiLibur,
+                jamMulai: jamMulai,
+                jamSelesai: jamSelesai,
+                tanggalMulai: tanggalMulai,
+                tanggalSelesai: tanggalSelesai,
+                peserta: peserta
+            })
+        }
+    }, [loading, isAddPage])
+
+    function areObjectsEqual(obj1, obj2) {
+        if (!obj1 && !obj2) {
+            return true;
+        }
+
+        if (!obj1 || !obj2) {
+            return false;
+        }
+
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+
+        if (keys1.length !== keys2.length) {
+            return false;
+        }
+
+        for (const key of keys1) {
+            const val1 = obj1[key];
+            const val2 = obj2[key];
+
+            if (typeof val1 === 'object' && typeof val2 === 'object') {
+                if (!areObjectsEqual(val1, val2)) {
+                    return false;
+                }
+            } else if (val1 !== val2) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function areArraysEqual(arr1, arr2) {
+        if (arr1?.length !== arr2?.length) {
+            return false;
+        }
+
+        for (let i = 0; i < arr1.length; i++) {
+            const obj1 = arr1[i];
+            const obj2 = arr2[i];
+
+            if (!areObjectsEqual(obj1, obj2)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // console.log(copyForm);
+    useEffect(() => {
+        // if (!loading && peserta.length > 0) {
+        dispatch(updateStateKalender({
+            name: 'isFormEditted',
+            value: !areArraysEqual(copyForm.peserta, peserta)
+        }))
+        // }
+    }, [peserta, copyForm.peserta, loading])
+
+    // console.log(isFormEditted + ' form teredit');
 
     return (
         <div className='wrapper-form'>
@@ -79,12 +195,16 @@ function FormEvent() {
                                 value={tanggalMulai}
                                 setState={updateStateKalender}
                                 stateName={'tanggalMulai'}
+                                setIsFormEditted={updateStateKalender}
+                                copyForm={copyForm}
                             />
 
                             <BtnCalendar
                                 value={tanggalSelesai}
                                 setState={updateStateKalender}
                                 stateName={'tanggalSelesai'}
+                                setIsFormEditted={updateStateKalender}
+                                copyForm={copyForm}
                             />
 
                             <input type="time" className='input'

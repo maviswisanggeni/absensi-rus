@@ -6,13 +6,13 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFieldKalender } from '../../features/kalenderSlice';
+import 'dayjs/locale/id'
 
 export default function Day({ day, rowIdx }) {
 
     const [dayEvents, setDayEvents] = useState([])
     const { setDaySelected, setShowEventModal, savedEvents, setSelectedEvent, selectedEvent, monthIndex, daySelected } = useContext(GlobalCalendar)
-    const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
-    const modalRef = useRef(null);
+    const modalRef = useRef(null)
     const [modalActive, setModalActive] = useState(null)
     const navigate = useNavigate()
     const context = useApiKalender()
@@ -22,6 +22,7 @@ export default function Day({ day, rowIdx }) {
     useEffect(() => {
         const events = listEvent.filter(evt => dayjs(evt.waktu_mulai).format("DD-MM-YY") === day.format("DD-MM-YY"))
         setDayEvents(events)
+        dayjs.locale('id')
     }, [savedEvents, day, loading, listEvent])
 
     function getCurrentDayClass() {
@@ -60,8 +61,8 @@ export default function Day({ day, rowIdx }) {
             </header>
             <div className={`handle-add`} onClick={handleAddClick}>
                 {dayEvents.map((evt, idx) => (
-                    <>
-                        <div key={idx} className='day-events'
+                    <React.Fragment key={idx}>
+                        <div className='day-events'
                             onMouseLeave={() => handleMouseLeave()}
                             onMouseOver={() => handleDetailHover(idx)}
                         >
@@ -124,7 +125,7 @@ export default function Day({ day, rowIdx }) {
                                 </div>
                                 : null}
                         </div>
-                    </>
+                    </React.Fragment>
                 ))}
             </div>
         </div>

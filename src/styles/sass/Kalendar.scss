@@ -1,3 +1,4 @@
+@use "../mixins/modal-styles.scss";
 @import "../variables/variables.scss";
 
 .kalender {
@@ -483,10 +484,6 @@
       outline: none;
     }
 
-    .input-lokasi {
-      // margin-bottom: 1rem;
-    }
-
     .wrapper-form {
       display: flex;
       flex-direction: column;
@@ -561,11 +558,15 @@
           font-size: 12px;
           height: 35px;
           outline: none;
-          padding: 0.5rem 1rem;
           position: relative;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+
+          .wrap__text {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+          }
 
           .arrow__down {
             background-color: $grey;
@@ -627,10 +628,6 @@
             width: 50%;
             text-align: center;
           }
-        }
-
-        .jam__mulai__err {
-          // position: absolute;
         }
       }
 
@@ -852,6 +849,14 @@
           }
         }
       }
+    }
+  }
+
+  .bg-modal {
+    @include modal-styles.bg-modal;
+
+    .alert-modal {
+      @include modal-styles.alert-modal;
     }
   }
 }
