@@ -58,8 +58,6 @@ function DetailKaryawan() {
             })
     }
 
-    console.log(isFormFilled);
-
     function handleBack() {
         if (isFormFilled) {
             setShowAlertBack(true)
@@ -99,7 +97,7 @@ function DetailKaryawan() {
                 <div className='bg-modal'>
                     <div className='alert-modal'>
                         <h1>Edit Karyawan</h1>
-                        <p>Kamu yakin keluar halaman edit karyawan? form akan terhapus</p>
+                        <p>Ada perubahan yang belum Anda simpan, Anda yakin ingin membatalkan?</p>
                         <div>
                             <button onClick={() => setShowAlertBack(false)}>Tidak</button>
                             <button onClick={() => navigate(-1)}>Iya</button>
