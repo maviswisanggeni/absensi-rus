@@ -7,16 +7,17 @@ function RowJam({ keteranganApi, keteranganState, waktu_masuk, waktu_pulang, isv
 
     const isValidMasuk = isvld_wkt_masuk === '1';
     const isValidPulang = isvld_wkt_pulang === '1';
-    const isValid = isValidPulang && isValidMasuk;
 
     return (
-        <td>
-            <p className={'row__jam ' + (isValid ? 'valid-masuk-text' : 'valid-pulang-text')
+        <td className='wrapper__row__jam'>
+            <p className={'row__jam ' + (isValidMasuk ? 'valid-masuk-text' : 'valid-pulang-text')
             }>
-                {keteranganApi === 'masuk' && keteranganState === 'Masuk' ? waktu_masuk : null}
-                {keteranganApi === 'pulang' && keteranganState === 'Keluar' ? waktu_pulang : null}
-                {keteranganApi === 'masuk' && (keteranganState === 'Absen' || keteranganState === 'Sukses') ? `${waktu_masuk} - ${waktu_masuk}` : null}
-                {keteranganApi === 'pulang' && (keteranganState === 'Absen' || keteranganState === 'Sukses') ? `${waktu_pulang} - ${waktu_pulang}` : null}
+                {(keteranganApi === 'masuk' || keteranganApi === 'pulang') && keteranganState === 'Masuk' ? waktu_masuk + ' WIB' : null}
+                {keteranganApi === 'pulang' && keteranganState === 'Keluar' ? waktu_pulang + ' WIB' : null}
+                {keteranganState === 'Absen' || keteranganState === 'Sukses' ? waktu_masuk : null}&nbsp;
+            </p>
+            <p className={'row__jam ' + (isValidPulang ? 'valid-masuk-text' : 'valid-pulang-text')}>
+                {keteranganApi === 'pulang' && (keteranganState === 'Absen' || keteranganState === 'Sukses') ? ` - ${waktu_pulang}` : null}
             </p>
         </td>
     )

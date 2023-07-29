@@ -54,8 +54,10 @@ function Table() {
             const filteredMasuk = kehadiranMasuk.filter((item) =>
                 !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
             );
-            setFilteredKehadiranMasuk(filteredMasuk)
-            selectedData = filteredMasuk;
+
+            const mergedMasukKeluar = [...filteredMasuk, ...kehadiranKeluar];
+            setFilteredKehadiranMasuk(mergedMasukKeluar)
+            selectedData = mergedMasukKeluar;
         } else if (keterangan === 'Sukses') {
             selectedData = kehadiranSukses;
         } else if (keterangan === 'Absen') {
@@ -135,7 +137,7 @@ function Table() {
         <>
             <table className='table'>
                 <thead>
-                    <tr>
+                    <tr className='column'>
                         <th className='th-name'>Nama</th>
                         <th className='th-niy'>NIY</th>
                         <th className='th-jabatan'>Jabatan</th>
@@ -189,22 +191,24 @@ function Table() {
                                                 isvld_wkt_masuk={item?.isvld_wkt_masuk}
                                                 isvld_wkt_pulang={item?.isvld_wkt_pulang}
                                             />
-                                            {/* {isIzin() ? null
-                                                : <td>
-                                                    <p
-                                                        className={`row__jam 
-                                                        ${checkKeterangan(item?.isvld_wkt_masuk, item?.isvld_wkt_pulang) === '1'
-                                                                ? 'valid-masuk-text' : 'valid-pulang-text'
-                                                            }`}
-                                                    >
+                                            <td className='wrapper__btn__detail'>
+                                                <Link
+                                                    className='btn-detail'
+                                                    to={
+                                                        item.jenis_izin === undefined
+                                                            ? `/kehadiran/detail/${item?.id}`
+                                                            : `/kehadiran/detail/izin/${item?.id}`
 
-                                                        {checkKeterangan(item?.waktu_masuk?.slice(0, 5), item?.waktu_pulang?.slice(0, 5))} WIB
-                                                    </p>
-                                                </td>
-                                            } */}
-
-                                            <td>
-                                                <Link className='btn-detail' to={`/kehadiran/detail/${item?.id}`}>Detail</Link>
+                                                    }
+                                                    onClick={() =>
+                                                        dispatch(updateStateKehadiran({
+                                                            name: 'detailKehadiranIzin',
+                                                            value: item
+                                                        }))
+                                                    }
+                                                >
+                                                    Detail
+                                                </Link>
                                             </td>
                                         </tr>
                                     )

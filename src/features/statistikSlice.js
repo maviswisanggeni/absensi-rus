@@ -23,9 +23,11 @@ export const getStatistik = createAsyncThunk("dashboard/statistik", async (_, { 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 

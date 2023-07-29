@@ -11,7 +11,6 @@ import { showFormError, updateFieldError, updateFieldValue } from '../../feature
 import JabatanSelect from '../../components/karyawan/JabatanSelect'
 import isValidEmail from '../../hooks/useIsValidateEmail'
 
-
 function Form() {
     const dispatch = useDispatch()
     const { errors, nama, niy, password, email, noHp, alamat } = useSelector((state) => state.karyawan)

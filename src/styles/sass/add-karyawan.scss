@@ -1,5 +1,5 @@
-@import "../variables/variables.scss";
 @use "../mixins/modal-styles";
+@import "../variables/variables.scss";
 
 .add-karyawan {
   width: 80%;
@@ -136,11 +136,9 @@
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        // margin-bottom: 1rem;
         position: absolute;
         right: 0;
         bottom: 0;
-        // transform: translate(-50%, 25%);
         transform: translate(-50%, -50%);
       }
     }
@@ -224,6 +222,8 @@
     border-style: dashed;
     border-color: $primary-color;
     background-color: #fafafa;
+    padding: 1rem 0;
+    cursor: pointer;
   }
 
   .upload-button {
@@ -240,9 +240,8 @@
   }
 
   .preview__img {
-    // width: 100%;
     height: 100%;
-    object-fit: center;
+    border-radius: 50%;
   }
 
   #label-file-upload.drag-active {
@@ -258,6 +257,25 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
+  }
+}
+
+.wrapper__btn {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  button {
+    @include modal-styles.btn__alert;
+  }
+
+  .edit__btn {
+    background-color: $primary-color;
+  }
+
+  .ganti__btn {
+    background-color: $primary-color;
   }
 }
 
@@ -278,4 +296,67 @@ input[type="number"] {
   .alert-modal {
     @include modal-styles.alert-modal;
   }
+}
+
+.bg__modal__cropper {
+  @include modal-styles.bg-modal;
+
+  .modal__cropper {
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    border-radius: 10px;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 1rem 0;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 1rem;
+      margin-right: auto;
+      padding-left: 1rem;
+    }
+
+    .wrapper__btn {
+      width: 100%;
+
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+      padding: 0 1rem;
+
+      button {
+        @include modal-styles.btn__alert;
+      }
+
+      button:first-child {
+        background-color: $danger-color;
+      }
+
+      button:nth-child(2) {
+        background-color: $primary-color;
+      }
+    }
+  }
+}
+.reactEasyCrop_Container {
+  width: 100%;
+  height: 80%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  filter: none;
+  position: relative !important;
 }

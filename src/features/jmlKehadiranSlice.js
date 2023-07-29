@@ -22,9 +22,11 @@ export const getJmlKehadiranDashboard = createAsyncThunk("dashboard/jmlKehadiran
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -49,9 +51,11 @@ export const getJmlKehadiranKehadiran = createAsyncThunk("kehadiran/jmlKehadiran
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 

@@ -17,7 +17,7 @@ function Jadwal() {
       setData(res.data.data)
       setLoading(true)
     }).catch((err) => {
-      console.log(err)
+      setLoading(true)
     })
   }
 

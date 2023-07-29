@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { assignKategori, deleteKaryawan, detailKategori, getKaryawanPengaturan, getKategoriPengaturan, searchKaryawan, setCurrentKategori, setKategoriId, unassignKategori, updateInputPengaturan } from '../../features/pengaturanSlice'
 import { Route, Routes, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { useRef } from 'react'
 import DisplayKategoriList from '../../components/DisplayKategoriList'
 import useImgError from '../../hooks/useImgError'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
+import Skeleton from 'react-loading-skeleton'
 
 function EditKategoriKaryawan() {
     const [current, setCurrent] = useState(null)
@@ -122,7 +122,19 @@ function EditKategoriKaryawan() {
                     <h2 onClick={() => handleShowModal()}>Tambahkan Karyawan</h2>
                 </div>
                 <div className='wrapper-column'>
-                    {loadingKategori ? <div className='loading dots'><p>Loading...</p></div>
+                    {loadingKategori ?
+                        Array.from({ length: 5 }, (_, index) => (
+                            <div className='container__list__skeleton'>
+                                <div className='left__content'>
+                                    <Skeleton width={35} height={35} circle={true} />
+                                    <div>
+                                        <Skeleton width={100} height={20} />
+                                        <Skeleton width={70} height={14} />
+                                    </div>
+                                </div>
+                                <Skeleton width={24} height={24} circle={true} />
+                            </div>
+                        ))
                         : listKaryawan.map((item, index) => {
                             if (!item.isChecked) return null;
                             return (
@@ -144,7 +156,10 @@ function EditKategoriKaryawan() {
                                     />
                                 </div>
                             )
-                        })}
+                        })
+                    }
+
+                    {listKaryawan.length === 0 && !loadingKategori && <p className='empty'>Tidak ada guru di kategori {currentKategori}</p>}
                 </div>
             </div>
             {showAlert && <div className='bg-modal'>

@@ -14,10 +14,12 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState('');
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     const formData = new FormData();
     formData.append('niy', email);
@@ -34,10 +36,12 @@ function Login() {
       .then((response) => {
         localStorage.setItem('token', response.data.token);
         navigate('/dashboard');
+        setLoading(false)
       })
       .catch((error) => {
         setValidation(error.response.data.messege);
         console.log(error.response.data.messege)
+        setLoading(false)
       })
   }
 
@@ -53,7 +57,7 @@ function Login() {
             {validation === 'user not found' && <p className="login__validation">{'Email tidak ada'}</p>}
             <Input imgSrc={passwordIcon} type="password" placeholder="Masukkan password" value={password} setFunction={setPassword} />
             {validation === 'wrong pass' && <p className="login__validation">{'Password Salah'}</p>}
-            <ButtonSignIn />
+            <ButtonSignIn loading={loading} />
           </form>
           <div className="login__forgotPassword">
             <p>Lupa password? <Link to="/">Reset Password</Link></p>

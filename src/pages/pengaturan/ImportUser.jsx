@@ -9,10 +9,11 @@ import { useRef } from 'react'
 import { useState } from 'react'
 import kategoriImg from '../../assets/images/kategori.png'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
+import LoadingTable from '../../components/LoadingTable'
 
 function ImportUser() {
     const dispatch = useDispatch()
-    const { listKategori, loadingKategori, kategoriId, loadingImport } = useSelector(state => state.pengaturan)
+    const { listKategori, loadingKategori, kategoriId, loadingImport, loadingKaryawan } = useSelector(state => state.pengaturan)
     const [file, setFile] = useState()
     const [showModal, setShowModal] = useState(false)
     const [isUpdateKategori, setIsUpdateKategori] = useState(false)
@@ -118,8 +119,9 @@ function ImportUser() {
                 }
 
             </div>
-            {loadingKategori
-                ? <div className='wrapper-loading'>
+            {/* {loadingKategori
+                ?
+                <div className='wrapper-loading'>
                     <div className='dots loading'><p>Loading...</p></div>
                 </div>
                 : <div className='wrapper-tabbar'>
@@ -133,8 +135,41 @@ function ImportUser() {
                         loading={loadingKategori}
                     />
                 </div>
+            } */}
+            {!loadingKategori
+                ? <div className='wrapper-tabbar'>
+                    <Tabbar
+                        options={listKategori}
+                        setKategoriId={setKategoriId}
+                        setCurrentKategori={setCurrentKategori}
+                        setKeterangan={updateInputPengaturan}
+                        searchParams={searchParams.toString()}
+                        path='/pengaturan/import-user'
+                        loading={loadingKategori}
+                    />
+                </div>
+
+                : <div className='wrapper__skeleton'>
+                    <div className='wrapper__tabbar'>
+                        <div className='list__text__skeleton'>
+                            {Array.from({ length: 5 }, (_, index) => (
+                                <div key={index}>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className='right__square'></div>
+                    </div>
+
+                    <LoadingTable />
+                </div>
             }
-            <Table />
+
+            {(loadingKategori || loadingKaryawan) ?
+                <LoadingTable />
+                : <Table />
+
+            }
             <LoadingFullscreen loading={loadingImport} />
         </div>
     )

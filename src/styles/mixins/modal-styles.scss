@@ -78,3 +78,13 @@
     background-color: $primary-color;
   }
 }
+
+@mixin btn__alert {
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}

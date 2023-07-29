@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import people1 from '../../assets/images/user-foto.png'
+import useImgError from '../../hooks/useImgError'
 
 function DetailProfile({ data }) {
     const navigate = useNavigate()
@@ -17,7 +18,7 @@ function DetailProfile({ data }) {
         <div className='detail-profile'>
             <div className='div-1'>
                 <h1>Foto Profile</h1>
-                <img src={isImgUrl(data?.user.link_foto) ? data.user?.link_foto : people1} alt="" />
+                <img src={isImgUrl(data?.user.link_foto) ? data.user?.link_foto : people1} onError={useImgError} alt="" />
                 <h3>{checkNull(data?.user.nama)}</h3>
                 <p>{checkNull(data?.user.niy)}</p>
             </div>

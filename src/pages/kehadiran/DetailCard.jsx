@@ -110,7 +110,7 @@ function DetailCard({
                             <p
                                 className='status'
                             >
-                                {checkNull(is_valid) === '-' ? '-' : is_valid === '1' ? 'Di dalam sekolah' : 'Di luar sekolah'}
+                                {checkNull(is_valid) === '-' ? '-' : is_valid === '1' ? 'Di dalam radius' : 'Di luar radius'}
                             </p>
                         </div>
                     </div>
