@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import statistikSlice from './features/statistikSlice';
 import jmlKehadiranSlice from './features/jmlKehadiranSlice';
 import kehadiranSlice from './features/kehadiranSlice';
@@ -7,6 +7,8 @@ import kalenderSlice from './features/kalenderSlice';
 import pengaturanSlice from './features/pengaturanSlice';
 import koordinatSlice from './features/koordinatSlice';
 import karyawanSlice from './features/karyawanSlice';
+import apiMiddleware from './middleware/apiMiddleware';
+import popupSlice from './features/popUpSlice';
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +19,8 @@ export const store = configureStore({
     karyawan: karyawanSlice,
     kalender: kalenderSlice,
     pengaturan: pengaturanSlice,
-    koordinat: koordinatSlice
+    koordinat: koordinatSlice,
+    popup: popupSlice,
   },
+  middleware: [...getDefaultMiddleware(), apiMiddleware]
 });

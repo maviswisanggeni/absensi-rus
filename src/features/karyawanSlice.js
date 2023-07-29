@@ -150,9 +150,11 @@ export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kat
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -175,8 +177,11 @@ export const detailKaryawan = createAsyncThunk("karyawan/detailKaryawan", async 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
-        return rejectWithValue(error.code)
+
+        return rejectWithValue(error.message)
     }
 });
 
@@ -223,9 +228,11 @@ export const storeKaryawan = createAsyncThunk("karyawan/storeKaryawan", async ({
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code);
+        return rejectWithValue(error.message);
     }
 
 });
@@ -274,9 +281,11 @@ export const updateKaryawan = createAsyncThunk("karyawan/editKaryawan", async ({
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code);
+        return rejectWithValue(error.message);
     }
 
 });
@@ -301,8 +310,11 @@ export const deleteKaryawan = createAsyncThunk("karyawan/deleteKaryawan", async 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
-        return rejectWithValue(error.code)
+
+        return rejectWithValue(error.message)
     }
 });
 

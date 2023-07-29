@@ -2,24 +2,42 @@ import React, { useEffect, useRef, useState } from 'react'
 import Button from '../../components/Button'
 import { useDispatch, useSelector } from 'react-redux';
 import { getBatasWaktu, updateBatasWaktu, updateInputPengaturan } from '../../features/pengaturanSlice';
+import Skeleton from 'react-loading-skeleton';
 
 function BatasWaktu() {
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch()
-    const { batasWaktuMasuk, batasWaktuPulang } = useSelector(state => state.pengaturan)
+    const { batasWaktuMasuk, batasWaktuPulang, loadingKategori } = useSelector(state => state.pengaturan)
     const inputRef1 = useRef(null)
     const inputRef2 = useRef(null)
+    const [rawWaktuMasuk, setRawWaktuMasuk] = useState('')
+    const [rawWaktuPulang, setRawWaktuPulang] = useState('')
+    const [showAlertMasuk, setShowAlertMasuk] = useState(false)
+    const [showAlertPulang, setShowAlertPulang] = useState(false)
 
     useEffect(() => {
         dispatch(getBatasWaktu())
     }, [])
 
     function handleTimeChange(e) {
-        dispatch(updateInputPengaturan({
-            name: e.target.name,
-            value: e.target.value
-        }))
+        if (e.target.value <= 720) {
+            if (e.target.name === 'batasWaktuMasuk') {
+                setShowAlertMasuk(false)
+                setRawWaktuMasuk(e.target.value)
+            } else {
+                setShowAlertPulang(false)
+                setRawWaktuPulang(e.target.value)
+            }
+        } else {
+            if (e.target.name === 'batasWaktuMasuk') {
+                setShowAlertMasuk(true)
+            } else {
+                setShowAlertPulang(true)
+            }
+        }
     }
+
+
 
     function handleEdit() {
         setIsEditing(!isEditing)
@@ -30,12 +48,35 @@ function BatasWaktu() {
         dispatch(getBatasWaktu())
     }
 
+    function formatMinutesToHIS(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
+        const seconds = Math.floor((remainingMinutes - Math.floor(remainingMinutes)) * 60);
+
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        return formattedTime;
+    }
+
+    function formatHISToMinutes(timeString) {
+        const timeComponents = timeString.split(":");
+        const hours = parseInt(timeComponents[0]);
+        const minutes = parseInt(timeComponents[1]);
+        const seconds = parseInt(timeComponents[2]);
+
+        const totalMinutes = hours * 60 + minutes + seconds / 60;
+        return totalMinutes;
+    }
+
+    useEffect(() => {
+        setRawWaktuMasuk(formatHISToMinutes(batasWaktuMasuk))
+        setRawWaktuPulang(formatHISToMinutes(batasWaktuPulang))
+    }, [loadingKategori])
 
     function handleSimpan() {
         setIsEditing(false)
         dispatch(updateBatasWaktu({
-            waktu_masuk: batasWaktuMasuk + ':00',
-            waktu_pulang: batasWaktuPulang + ':00'
+            waktu_masuk: formatMinutesToHIS(rawWaktuMasuk),
+            waktu_pulang: formatMinutesToHIS(rawWaktuPulang)
         }))
             .then((res) => {
                 if (res.meta.requestStatus === "fulfilled") {
@@ -49,29 +90,50 @@ function BatasWaktu() {
             <h1>Batas Waktu</h1>
             <div className='containers-input'>
                 <div className='container-input'>
-                    <label htmlFor="latitude">Absen Masuk</label>
-                    <input
-                        name='batasWaktuMasuk'
-                        type="time"
-                        value={batasWaktuMasuk}
-                        onChange={handleTimeChange}
-                        disabled={!isEditing}
-                        ref={inputRef1}
-                        onFocus={() => this.showPicker()}
+                    <label htmlFor="latitude">Jam Masuk</label>
+                    {loadingKategori
+                        ? <Skeleton
+                            width={187}
+                            height={48}
+                            borderRadius={5}
+                        />
+                        : <div>
+                            <input
+                                name='batasWaktuMasuk'
+                                type="number"
+                                value={rawWaktuMasuk}
+                                onChange={handleTimeChange}
+                                disabled={!isEditing}
+                                ref={inputRef1}
+                                max={720}
+                            />
+                            <p className='format'>Menit</p>
+                        </div>
+                    }
 
-                    />
+                    {showAlertMasuk && <p className='error__max'>Maksimal 720 menit</p>}
                 </div>
                 <div className='container-input'>
-                    <label htmlFor="longitude">Absen Pulang</label>
-                    <input
-                        name='batasWaktuPulang'
-                        type="time"
-                        value={batasWaktuPulang}
-                        onChange={handleTimeChange}
-                        disabled={!isEditing}
-                        ref={inputRef2}
-                    // onClick={() => datePic}
-                    />
+                    <label htmlFor="longitude">Jam Pulang</label>
+                    {loadingKategori
+                        ? <Skeleton
+                            width={187}
+                            height={48}
+                            borderRadius={5}
+                        />
+                        : <div>
+                            <input
+                                name='batasWaktuPulang'
+                                type="number"
+                                value={rawWaktuPulang}
+                                onChange={handleTimeChange}
+                                disabled={!isEditing}
+                                ref={inputRef2}
+                            />
+                            <p className='format'>Menit</p>
+                        </div>
+                    }
+                    {showAlertPulang && <p className='error__max'>Maksimal 720 menit</p>}
                 </div>
             </div>
             <div className='wrapper-btn'>

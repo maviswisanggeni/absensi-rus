@@ -54,9 +54,11 @@ export const updateKoordinat = createAsyncThunk("pengaturan/updateKoordinat", as
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 

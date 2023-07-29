@@ -28,9 +28,11 @@ export const getKehadiran = createAsyncThunk("kehadiran/getKehadiran", async ({ 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -56,9 +58,11 @@ export const getKehadiranTerbaru = createAsyncThunk("kehadiran/getKehadiranTerba
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -78,6 +82,7 @@ const kehadiranSlice = createSlice({
         kehadiranSukses: [],
         kehadiranAbsen: [],
         kehadiranTerbaru: [],
+        detailKehadiranIzin: {},
         search: '',
         startTime: formatDate(new Date()),
         endTime: null,

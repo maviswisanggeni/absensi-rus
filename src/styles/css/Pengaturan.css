@@ -124,17 +124,25 @@
   width: 100%;
   background-color: white;
   padding: 1rem 1.5rem;
+  padding-top: 0;
   padding-left: 0;
   padding-bottom: 0;
   border: 1px solid #ebf0fe;
   border-top: none;
   margin-top: 2rem;
+  border-radius: 10px 10px 0px 0px;
 }
 .pengaturan .import-user .pagination-container {
   padding-bottom: 2rem;
 }
 .pengaturan .import-user .wrapper-loading {
   background-color: white;
+  margin-top: 2rem;
+}
+.pengaturan .import-user .table .row-img {
+  padding: 0.5rem 0;
+}
+.pengaturan .import-user .wrapper__skeleton {
   margin-top: 2rem;
 }
 .pengaturan .radius-absen {
@@ -621,6 +629,26 @@
   -webkit-transform: scale(1);
           transform: scale(1);
 }
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .empty {
+  text-align: center;
+}
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .container__list__skeleton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .container__list__skeleton .left__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
 .pengaturan .detail-kategori-karyawan .bg-modal {
   width: 100vw;
   height: 100vh;
@@ -928,6 +956,9 @@
           flex-direction: column;
   position: relative;
 }
+.pengaturan .batas-waktu .containers-input .container-input div {
+  position: relative;
+}
 .pengaturan .batas-waktu .containers-input .container-input input {
   width: 187px;
   height: 48px;
@@ -940,14 +971,31 @@
   font-size: 14px;
   color: #5a6474;
 }
+.pengaturan .batas-waktu .containers-input .container-input .format {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 14px;
+  color: #9b9b9b;
+  padding-right: 1rem;
+}
+.pengaturan .batas-waktu .containers-input .container-input .error__max {
+  color: #ff4530;
+  font-size: 12px;
+}
 .pengaturan .batas-waktu .wrapper-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 2rem;
-  position: absolute;
-  bottom: 0;
-  right: 0;
 }
 .pengaturan .batas-waktu .wrapper-btn button {
   width: 125px;

@@ -242,6 +242,8 @@
   border-style: dashed;
   border-color: #3661eb;
   background-color: #fafafa;
+  padding: 1rem 0;
+  cursor: pointer;
 }
 .add-karyawan .upload-button {
   cursor: pointer;
@@ -256,8 +258,7 @@
 }
 .add-karyawan .preview__img {
   height: 100%;
-  -o-object-fit: center;
-     object-fit: center;
+  border-radius: 50%;
 }
 .add-karyawan #label-file-upload.drag-active {
   background-color: #ffffff;
@@ -271,6 +272,32 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
+}
+
+.wrapper__btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.wrapper__btn button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.wrapper__btn .edit__btn {
+  background-color: #3661eb;
+}
+.wrapper__btn .ganti__btn {
+  background-color: #3661eb;
 }
 
 input::-webkit-outer-spin-button,
@@ -366,4 +393,86 @@ input[type=number] {
 }
 .bg-modal .alert-modal button:nth-child(2) {
   background-color: #3661eb;
+}
+
+.bg__modal__cropper {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 999;
+}
+.bg__modal__cropper .modal__cropper {
+  width: 500px;
+  height: 600px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 1rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.bg__modal__cropper .modal__cropper h1 {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 1rem;
+  margin-right: auto;
+  padding-left: 1rem;
+}
+.bg__modal__cropper .modal__cropper .wrapper__btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: auto;
+  padding: 0 1rem;
+}
+.bg__modal__cropper .modal__cropper .wrapper__btn button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.bg__modal__cropper .modal__cropper .wrapper__btn button:first-child {
+  background-color: #ff4530;
+}
+.bg__modal__cropper .modal__cropper .wrapper__btn button:nth-child(2) {
+  background-color: #3661eb;
+}
+
+.reactEasyCrop_Container {
+  width: 100%;
+  height: 80%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-filter: none;
+          filter: none;
+  position: relative !important;
 }

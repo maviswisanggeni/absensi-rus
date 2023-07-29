@@ -25,6 +25,7 @@ import { WrapperEditKaryawanProvider } from './contexts/app/WrapperEditKaryawan'
 import KalenderAdd from './pages/kalender/KalenderAdd';
 import Pengaturan from './pages/pengaturan/Pengaturan';
 import ImportUser from './pages/pengaturan/ImportUser';
+import PopUp from './components/Popup';
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
           }
         />
 
-        <Route path='/kehadiran/detail/:id' element={<Detail />} />
+        <Route path='/kehadiran/detail/:izin?/:id' element={<Detail />} />
 
         <Route path='/karyawan/*'
           element={
@@ -98,6 +99,8 @@ function App() {
         <Route path='*' element={<NotFound />} />
         <Route path='/login' element={<Login />} />
       </Routes>
+
+      <PopUp />
     </>
   );
 }

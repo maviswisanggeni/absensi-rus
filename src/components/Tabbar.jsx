@@ -11,7 +11,10 @@ function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, set
 
   useEffect(() => {
     if (options.length > 0) {
-      const initialOption = options.find(option => option.kategori === location.pathname.split('/').pop());
+      const initialOption = options.find(option =>
+        option.kategori === decodeURIComponent(location.pathname.split('/').pop())
+      );
+
       if (initialOption) {
         setCurrent(initialOption.kategori);
         dispatch(setCurrentKategori(initialOption.kategori))

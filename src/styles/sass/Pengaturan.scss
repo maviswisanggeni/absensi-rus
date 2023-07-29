@@ -113,11 +113,13 @@
       width: 100%;
       background-color: white;
       padding: 1rem 1.5rem;
+      padding-top: 0;
       padding-left: 0;
       padding-bottom: 0;
       border: 1px solid $secondary-color;
       border-top: none;
       margin-top: 2rem;
+      border-radius: 10px 10px 0px 0px;
     }
 
     .pagination-container {
@@ -126,6 +128,16 @@
 
     .wrapper-loading {
       background-color: white;
+      margin-top: 2rem;
+    }
+
+    .table {
+      .row-img {
+        padding: 0.5rem 0;
+      }
+    }
+
+    .wrapper__skeleton {
       margin-top: 2rem;
     }
   }
@@ -551,6 +563,21 @@
             transform: scale(1);
           }
         }
+
+        .empty {
+          text-align: center;
+        }
+
+        .container__list__skeleton {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .left__content {
+            display: flex;
+            gap: 1rem;
+          }
+        }
       }
     }
 
@@ -854,6 +881,10 @@
         flex-direction: column;
         position: relative;
 
+        div {
+          position: relative;
+        }
+
         input {
           width: 187px;
           height: 48px;
@@ -866,15 +897,33 @@
           font-size: 14px;
           color: #5a6474;
         }
+
+        .format {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto 0;
+          right: 0;
+          width: fit-content;
+          height: fit-content;
+          font-size: 14px;
+          color: $grey;
+          padding-right: 1rem;
+        }
+
+        .error__max {
+          color: $danger-color;
+          font-size: 12px;
+        }
       }
     }
 
     .wrapper-btn {
       display: flex;
       gap: 2rem;
-      position: absolute;
-      bottom: 0;
-      right: 0;
+      // position: absolute;
+      // bottom: 0;
+      // right: 0;
 
       button {
         width: 125px;

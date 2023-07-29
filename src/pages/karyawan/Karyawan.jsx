@@ -14,7 +14,8 @@ import { getKategori, setCurrentKategori, setIsInitial, setKategoriId } from '..
 import { useState } from 'react'
 import { getKaryawan, resetTable, updateFieldValue, updateStateKaryawan } from '../../features/karyawanSlice'
 import InfoBox from '../../components/InfoBox'
-import SkeletonLoading from '../../components/SkeletonLoading'
+
+import LoadingTable from '../../components/LoadingTable'
 
 function Karyawan() {
   const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search } = useSelector(state => state.karyawan)
@@ -31,6 +32,11 @@ function Karyawan() {
     dispatch(getKategori());
     setIsFirstRender(true)
   }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+    }
+  }, [isLoading])
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -54,13 +60,16 @@ function Karyawan() {
 
   useEffect(() => {
     if (listKategori.length > 0) {
-      const initialOption = listKategori.find(option => option.kategori === location.pathname.split('/').pop());
+      const initialOption = listKategori.find(option =>
+        option.kategori === decodeURIComponent(location.pathname.split('/').pop())
+      );
+      // console.log(initialOption);
       if (initialOption) {
         dispatch(setCurrentKategori(initialOption.kategori))
         dispatch(setKategoriId(initialOption.id))
       }
     }
-  }, [location.pathname])
+  }, [location.pathname, loadingKategori])
 
   useEffect(() => {
     if (!loadingKategori && currentKategori) {
@@ -71,6 +80,7 @@ function Karyawan() {
 
   useEffect(() => {
     if (isKategoriUpdated && kategoriId && !searchParams.get('search')) {
+      // console.log('get karyawan');
       dispatch(getKaryawan({ kategori_id: kategoriId }));
       dispatch(updateFieldValue({ field: 'kategoriId', value: kategoriId }));
       setIsKategoriUpdated(false);
@@ -122,14 +132,27 @@ function Karyawan() {
           <Link to='/karyawan/add'>+ Add New</Link>
         </div>
 
-        {/* <SkeletonLoading
-          loading={loadingKategori}
-          width={'100%'}
-          height={'725px'}
-        /> */}
+        {!loadingKategori
+          ? <div className='tabbar-filter'>
+            <Tabbar
+              options={listKategori}
+              setKategoriId={setKategoriId}
+              setCurrentKategori={setCurrentKategori}
+              searchParams={''}
+              setKeterangan={updateStateKaryawan}
+              path='/karyawan'
+              loading={loadingKategori}
+            />
 
-        {loadingKategori && isLoading ?
-          <div className='wrapper__skeleton'>
+            <div className='filter-angka'>
+              <Filter option1="Sesuai abjad" option2="Urut NIY"
+                setState={updateStateKaryawan}
+              />
+              <p>{listKaryawan.length + ' Guru'}</p>
+            </div>
+          </div>
+
+          : <div className='wrapper__skeleton'>
             <div className='wrapper__tabbar'>
               <div className='list__text__skeleton'>
                 {Array.from({ length: 5 }, (_, index) => (
@@ -140,46 +163,14 @@ function Karyawan() {
 
               <div className='right__square'></div>
             </div>
-            {/* <div className='column__table'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
 
-            <div>
-              {Array.from({ length: 6 }, (_, index) => (
-                <div key={index}>
-                  <div className='row__table'>
-                    {Array.from({ length: 6 }, (_, index) => (
-                      <div key={index}></div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div> */}
+            <LoadingTable />
           </div>
+        }
+
+        {(loadingKategori || isLoading) ?
+          <LoadingTable />
           : <>
-            <div className='tabbar-filter'>
-              <Tabbar
-                options={listKategori}
-                setKategoriId={setKategoriId}
-                setCurrentKategori={setCurrentKategori}
-                searchParams={''}
-                setKeterangan={updateStateKaryawan}
-                path='/karyawan'
-                loading={loadingKategori}
-              />
-
-              <div className='filter-angka'>
-                <Filter option1="Sesuai abjad" option2="Urut NIY"
-                  setState={updateStateKaryawan}
-                />
-                <p>{listKaryawan.length + ' Guru'}</p>
-              </div>
-            </div>
-
             <Routes>
               {listKategori.map((item, index) => {
                 return (
@@ -190,41 +181,8 @@ function Karyawan() {
             </Routes>
           </>
         }
-
-        {/* {!isLoading && !loadingKategori ?
-          <>
-            <div className='tabbar-filter'>
-              <Tabbar
-                options={listKategori}
-                setKategoriId={setKategoriId}
-                setCurrentKategori={setCurrentKategori}
-                searchParams={''}
-                setKeterangan={updateStateKaryawan}
-                path='/karyawan'
-                loading={loadingKategori}
-              />
-
-              <div className='filter-angka'>
-                <Filter option1="Sesuai abjad" option2="Urut NIY"
-                  setState={updateStateKaryawan}
-                />
-                <p>{listKaryawan.length + ' Guru'}</p>
-              </div>
-            </div>
-
-            <Routes>
-              {listKategori.map((item, index) => {
-                return (
-                  <Route key={index} path={`/${item.kategori}`} element={<Table />}>
-                  </Route>
-                )
-              })}
-            </Routes>
-          </>
-          : null
-        } */}
       </div>
-    </div>
+    </div >
   )
 }
 

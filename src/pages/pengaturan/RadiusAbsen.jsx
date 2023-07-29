@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getKoordinat, inputKordinat, updateKoordinat, updateStateKordinat } from '../../features/koordinatSlice';
 import { useRef } from 'react';
 import InfoBox from '../../components/InfoBox';
+import Skeleton from 'react-loading-skeleton';
 
 function RadiusAbsen() {
     const dispatch = useDispatch()
@@ -99,28 +100,38 @@ function RadiusAbsen() {
             <div className='container-radius'>
                 <div className='radius-info'>
                     <label htmlFor="latitude">Latitude</label>
-                    <input type="number" id='latitude'
-                        name='latitudeWhileEdit'
-                        value={latitudeWhileEdit}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
+                    {loading
+                        ? <Skeleton width={187} height={48} borderRadius={8} />
+                        : <input type="number" id='latitude'
+                            name='latitudeWhileEdit'
+                            value={latitudeWhileEdit}
+                            onChange={handleChange}
+                            disabled={!isEditing}
+                        />
+                    }
                 </div>
                 <div className='radius-info'>
                     <label htmlFor="longitude">Longitude</label>
-                    <input type="number" id='longitude'
-                        name='longitudeWhiteEdit'
-                        value={longitudeWhiteEdit}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
+                    {loading
+                        ? <Skeleton width={187} height={48} borderRadius={8} />
+                        : <input type="number" id='longitude'
+                            name='longitudeWhiteEdit'
+                            value={longitudeWhiteEdit}
+                            onChange={handleChange}
+                            disabled={!isEditing}
+                        />
+                    }
+
                 </div>
                 <div className='radius-info'>
                     <label htmlFor="Radius">Radius</label>
-                    <input type="text" id='Radius' value={radius}
-                        onChange={(e) => dispatch(updateStateKordinat({ name: 'radius', value: e.target.value }))}
-                        disabled={!isEditing}
-                    />
+                    {loading
+                        ? <Skeleton width={187} height={48} borderRadius={8} />
+                        : <input type="text" id='Radius' value={radius}
+                            onChange={(e) => dispatch(updateStateKordinat({ name: 'radius', value: e.target.value }))}
+                            disabled={!isEditing}
+                        />
+                    }
                 </div>
 
                 <div className='wrapper-btn'>
@@ -143,7 +154,7 @@ function RadiusAbsen() {
 
 
             <div className='map'>
-                {loading ? 'loading...'
+                {loading ? <Skeleton width={"100%"} height={375} borderRadius={5} />
                     : <MapContainer center={[latitude, longitude]} zoom={20} scrollWheelZoom={false}>
                         <ChangeView center={[latitude, longitude]} zoom={20} />
 

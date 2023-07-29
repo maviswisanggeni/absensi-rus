@@ -64,6 +64,8 @@ export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
         return rejectWithValue(error.message)
@@ -89,6 +91,8 @@ export const getDetailKalender = createAsyncThunk("kalender/detailKalender", asy
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
         return rejectWithValue(error.message)
@@ -118,6 +122,8 @@ export const getKaryawanKalender = createAsyncThunk("kalender/getKaryawanKalende
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
         return rejectWithValue(error.message)
@@ -160,6 +166,8 @@ export const storeKalender = createAsyncThunk("kalender/store", async ({
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
         return rejectWithValue(error.message)
@@ -204,6 +212,8 @@ export const updateKalender = createAsyncThunk("kalender/update", async (
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
         return rejectWithValue(error.message)
@@ -229,6 +239,8 @@ export const deleteKalender = createAsyncThunk("kalender/delete", async (id, { r
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
         return rejectWithValue(error.message)

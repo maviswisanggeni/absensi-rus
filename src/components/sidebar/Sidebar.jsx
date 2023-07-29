@@ -12,24 +12,32 @@ import kalenderLogoGrey from '../../assets/icons/kalender-icon-grey.svg'
 import kalenderLogoBlue from '../../assets/icons/kalender-icon-blue.svg'
 import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 import axios from 'axios'
+import { useState } from 'react'
+import LoadingFullscreen from '../LoadingFullscreen'
 
 function Sidebar() {
   let query = useLocation()
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   if (query.pathname === "/login") {
     return null
   }
 
   const logoutHanlder = async () => {
+    setLoading(true)
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     const url = 'https://absensiguru.smkrus.com/api/logout'
     await axios.get(url)
       .then(() => {
         localStorage.removeItem("token");
         navigate('/login')
-      });
+        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
   };
 
   const dataSidebar = [
@@ -93,6 +101,7 @@ function Sidebar() {
           </li>
         ))}
       </ul>
+      <LoadingFullscreen loading={loading} />
     </nav>
   )
 }

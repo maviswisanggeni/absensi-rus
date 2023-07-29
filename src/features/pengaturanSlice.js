@@ -23,9 +23,11 @@ export const getKategoriPengaturan = createAsyncThunk("pengaturan/getKategori", 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -49,9 +51,11 @@ export const detailKategori = createAsyncThunk("pengaturan/detailKategori", asyn
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -78,9 +82,11 @@ export const storeKategori = createAsyncThunk("pengaturan/storeKategori", async 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -107,9 +113,11 @@ export const updateKategori = createAsyncThunk("pengaturan/updateKategori", asyn
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -133,9 +141,11 @@ export const deleteKategori = createAsyncThunk("pengaturan/deleteKategori", asyn
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -169,9 +179,11 @@ export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -202,9 +214,11 @@ export const assignKategori = createAsyncThunk("pengaturan/assignKategori", asyn
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -233,9 +247,11 @@ export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -258,9 +274,11 @@ export const getBatasWaktu = createAsyncThunk("pengaturan/getBatasWaktu", async 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -290,9 +308,11 @@ export const updateBatasWaktu = createAsyncThunk("pengaturan/updateBatasWaktu", 
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -320,9 +340,11 @@ export const importKaryawan = createAsyncThunk("pengaturan/importKaryawan", asyn
 
         if (error.code === 'ECONNABORTED') {
             return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
         }
 
-        return rejectWithValue(error.code)
+        return rejectWithValue(error.message)
     }
 })
 
@@ -550,8 +572,8 @@ const pengaturanSlice = createSlice({
             })
             .addCase(getBatasWaktu.fulfilled, (state, action) => {
                 state.loadingKategori = false;
-                state.batasWaktuMasuk = action.payload.data.batas_waktu_absen_masuk.slice(0, -3)
-                state.batasWaktuPulang = action.payload.data.batas_waktu_absen_pulang.slice(0, -3)
+                state.batasWaktuMasuk = action.payload.data.batas_waktu_absen_masuk
+                state.batasWaktuPulang = action.payload.data.batas_waktu_absen_pulang
             })
             .addCase(getBatasWaktu.rejected, (state, action) => {
                 state.loadingKategori = false;

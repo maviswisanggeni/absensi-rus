@@ -5,6 +5,7 @@ import userFoto from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiranTerbaru } from '../../features/kehadiranSlice'
 import moment from 'moment/moment'
+import useImgError from '../../hooks/useImgError'
 
 function KehadiranTerbaru() {
   const context = useKehadiranListAbsensi()
@@ -50,7 +51,7 @@ function KehadiranTerbaru() {
             : kehadiranTerbaru?.length === 0 ? <div className='no-data'>Tidak ada data</div>
               : kehadiranTerbaru?.map((item, index) => (
                 <li key={index}>
-                  <img src={item?.user?.link_foto ? item?.user?.link_foto : userFoto} alt="" />
+                  <img src={item?.user?.link_foto ? item?.user?.link_foto : userFoto} onError={useImgError} alt="" />
                   <div>
                     <p>{item.user?.nama}</p>
                     <p>{formatTime(item?.waktu_masuk)}</p>

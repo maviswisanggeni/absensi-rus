@@ -141,9 +141,7 @@
           justify-content: space-between;
   width: 100%;
   background-color: white;
-  padding: 1rem 1.5rem;
-  padding-left: 0;
-  padding-bottom: 0;
+  padding-right: 1.5rem;
   border: 1px solid #ebf0fe;
   border-top: none;
 }
@@ -187,7 +185,7 @@
   width: 105px;
 }
 .kehadiran table .th-jabatan {
-  width: 201px;
+  width: 180px;
 }
 .kehadiran table .th-tanggal {
   width: 120px;
@@ -196,10 +194,19 @@
   width: 175px;
 }
 .kehadiran table .th-waktu {
-  width: 115px;
+  width: 70px;
 }
 .kehadiran table .th-action {
   width: 109px;
+  padding-left: 1rem;
+}
+.kehadiran table .wrapper__btn__detail {
+  padding-left: 1rem;
+}
+.kehadiran table .wrapper__row__jam {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .valid-masuk-pulang {
@@ -207,6 +214,10 @@
   height: 5px;
   border-radius: 100%;
   margin-right: 1rem;
+}
+
+.valid-masuk-pulang.izin {
+  background-color: #ffd233;
 }
 
 .valid {
@@ -424,9 +435,14 @@
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates .wrapper-status .valid-masuk-pulang {
   margin-right: 0.5rem;
 }
+.detail .main .detail-masuk-keluar .masuk-keluar .card .note .wrapper-status .valid-masuk,
+.detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates .wrapper-status .valid-masuk {
+  background-color: #04d57d;
+}
 .detail .main .detail-masuk-keluar .masuk-keluar .card .note .wrapper-status .status,
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates .wrapper-status .status {
   font-size: 8px;
+  color: #04d57d;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates {
   background-color: #f9f9f9;
@@ -442,6 +458,108 @@
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .coordinates img {
   cursor: pointer;
+}
+.detail .main .detail__izin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 65%;
+  padding: 2rem 2.5rem;
+}
+.detail .main .detail__izin .wrapper__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-bottom: 1rem;
+}
+.detail .main .detail__izin .wrapper__header h1 {
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+}
+.detail .main .detail__izin .wrapper__header p {
+  color: #9b9b9b;
+  font-size: 14px;
+  font-weight: 500;
+}
+.detail .main .detail__izin .wrapper__tanggal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1rem;
+}
+.detail .main .detail__izin .wrapper__tanggal p {
+  color: #9b9b9b;
+  font-size: 14px;
+  font-weight: 500;
+}
+.detail .main .detail__izin .wrapper__file {
+  width: 400px;
+  height: 200px;
+  border-radius: 8px;
+  border: 1px solid #3661eb;
+  background: rgba(39, 127, 254, 0.1);
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.detail .main .detail__izin .wrapper__file .image {
+  height: 80%;
+}
+.detail .main .detail__izin .wrapper__file p {
+  color: #737373;
+  font-size: 12px;
+  font-weight: 400;
+}
+.detail .main .detail__izin .wrapper__catatan h1 {
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.detail .main .detail__izin .wrapper__catatan p {
+  color: #9b9b9b;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.detail .main .detail__izin .bg-modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.detail .main .detail__izin .bg-modal img {
+  height: 80vh;
 }
 .detail .main .detail-profile {
   display: -webkit-box;

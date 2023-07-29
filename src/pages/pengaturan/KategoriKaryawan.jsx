@@ -9,6 +9,8 @@ import { deleteKategori, getKategoriPengaturan, storeKategori, updateInputPengat
 import { Link } from 'react-router-dom'
 import InfoBox from '../../components/InfoBox'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function KategoriKaryawan() {
     const [showModalAddKategori, setShowModalAddKategori] = useState(false)
@@ -118,7 +120,34 @@ function KategoriKaryawan() {
                     <img src={plusIcon} alt="" />
                 </div>
 
-                {loadingKategori ? <div className='loading dots'><p>Loading...</p></div>
+                {loadingKategori
+                    ? <div className=''>
+                        <Skeleton
+                            width={'100%'}
+                            height={48}
+                            style={{ marginBottom: '0.5rem' }}
+                        />
+                        <Skeleton
+                            width={'100%'}
+                            height={48}
+                            style={{ marginBottom: '0.5rem' }}
+                        />
+                        <Skeleton
+                            width={'100%'}
+                            height={48}
+                            style={{ marginBottom: '0.5rem' }}
+                        />
+                        <Skeleton
+                            width={'100%'}
+                            height={48}
+                            style={{ marginBottom: '0.5rem' }}
+                        />
+                        <Skeleton
+                            width={'100%'}
+                            height={48}
+                            style={{ marginBottom: '0.5rem' }}
+                        />
+                    </div>
                     : listKategori.map((item, index) => (
                         <div className='container-kategori' key={index}>
                             <Link to={`${item.kategori}/${item.id}`}>

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { useSelector } from 'react-redux';
 import 'dayjs/locale/id';
 
@@ -83,39 +83,39 @@ function Chart() {
     <>
       {loading ? <div className='empty__container skeleton__loading'></div>
         : updatedData?.length < 1 || updatedData == undefined ? <div className='empty__container'>Data tidak ada</div>
-          : <ResponsiveContainer width={775} height={300}>
-            <LineChart
-              data={updatedData}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 0,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="1" />
-              <XAxis
-                dataKey={'date'}
-                style={{ fontSize: 10, fill: '#9B9B9B' }}
-                stroke='#F0F0F0'
-              />
+          : <LineChart
+            data={updatedData}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 0,
+              bottom: 5,
+            }}
+            width={775}
+            height={300}
+          >
+            <CartesianGrid strokeDasharray="1" />
+            <XAxis
+              dataKey={'date'}
+              style={{ fontSize: 10, fill: '#9B9B9B' }}
+              stroke='#F0F0F0'
+            />
 
-              <YAxis domain={[lowest, highest]}
-                dataKey="jumlah"
-                tickCount={
-                  Math.max(...updatedData.map((item) => (item.jumlah < 7 ? item.jumlah : 8)))
-                }
-                tickFormatter={(tick) => tick.toFixed(0)}
-                padding={{ top: 10 }}
-                tickSize={12}
-                style={{ fontSize: 10, fill: '#9B9B9B' }}
-                stroke='#F0F0F0'
-              />
+            <YAxis domain={[lowest, highest]}
+              dataKey="jumlah"
+              tickCount={
+                Math.max(...updatedData.map((item) => (item.jumlah < 7 ? item.jumlah : 8)))
+              }
+              tickFormatter={(tick) => tick.toFixed(0)}
+              padding={{ top: 10 }}
+              tickSize={12}
+              style={{ fontSize: 10, fill: '#9B9B9B' }}
+              stroke='#F0F0F0'
+            />
 
-              <Tooltip />
-              <Line type="monotone" dataKey="jumlah" stroke="#3661EB" strokeWidth='2px' dot={{ strokeWidth: 2, fill: '#3661EB', stroke: '#3661EB' }} />
-            </LineChart>
-          </ResponsiveContainer>
+            <Tooltip />
+            <Line type="monotone" dataKey="jumlah" stroke="#3661EB" strokeWidth='2px' dot={{ strokeWidth: 2, fill: '#3661EB', stroke: '#3661EB' }} />
+          </LineChart>
       }
     </>
   )

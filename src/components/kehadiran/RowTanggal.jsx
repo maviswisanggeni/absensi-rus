@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React from 'react'
 
 function RowTanggal({ keterangan, tgl_mulai_izin, tgl_selesai_izin, tgl_masuk, tgl_pulang }) {
@@ -8,7 +9,7 @@ function RowTanggal({ keterangan, tgl_mulai_izin, tgl_selesai_izin, tgl_masuk, t
     return (
         <td>
             <div>
-                {keterangan === 'Izin' ? `${tgl_mulai_izin} - ${tgl_selesai_izin}` : null}
+                {keterangan === 'Izin' ? `${dayjs(tgl_mulai_izin).format('ddd, DD MMM YYYY')} - ${dayjs(tgl_selesai_izin).format('ddd, DD MMM YYYY')}` : null}
                 {keterangan === 'Masuk' ? tgl_masuk : null}
                 {keterangan === 'Keluar' ? tgl_pulang : null}
             </div>
