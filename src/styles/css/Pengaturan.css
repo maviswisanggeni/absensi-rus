@@ -956,6 +956,9 @@
           flex-direction: column;
   position: relative;
 }
+.pengaturan .batas-waktu .containers-input .container-input label {
+  margin-bottom: 0.5rem;
+}
 .pengaturan .batas-waktu .containers-input .container-input div {
   position: relative;
 }

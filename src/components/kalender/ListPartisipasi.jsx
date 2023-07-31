@@ -4,6 +4,7 @@ import { deletePeserta, updateFieldError } from '../../features/kalenderSlice'
 import useImgError from '../../hooks/useImgError'
 import DisplayKategoriList from '../DisplayKategoriList'
 import { useEffect } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 function ListPartisipasi() {
     const { peserta, loadngGetKaryawan, errors } = useSelector((state) => state.kalender)
@@ -42,7 +43,23 @@ function ListPartisipasi() {
                     ))}
                 </div>
             }
-            {loadngGetKaryawan ? <p>Loading...</p> : null}
+            {loadngGetKaryawan
+                ? <div className='container_skeleton'>
+                    {Array.from({ length: 5 }, (_, index) => (
+                        <div className='container__list__skeleton'>
+                            <div className='left__content'>
+                                <Skeleton width={35} height={35} circle={true} />
+                                <div>
+                                    <Skeleton width={100} height={20} />
+                                    <Skeleton width={70} height={14} />
+                                </div>
+                            </div>
+                            <Skeleton width={24} height={24} circle={true} />
+                        </div>
+                    ))}
+                </div>
+                : null
+            }
             <p className='validator-text'>{errors.peserta && errors.peserta}</p>
         </>
     )

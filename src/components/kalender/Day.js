@@ -9,7 +9,6 @@ import { updateFieldKalender } from '../../features/kalenderSlice';
 import 'dayjs/locale/id'
 
 export default function Day({ day, rowIdx }) {
-
     const [dayEvents, setDayEvents] = useState([])
     const { setDaySelected, setShowEventModal, savedEvents, setSelectedEvent, selectedEvent, monthIndex, daySelected } = useContext(GlobalCalendar)
     const modalRef = useRef(null)
@@ -18,7 +17,6 @@ export default function Day({ day, rowIdx }) {
     const context = useApiKalender()
     const { listEvent, loading } = useSelector((state) => state.kalender)
     const dispatch = useDispatch()
-
     useEffect(() => {
         const events = listEvent.filter(evt => dayjs(evt.waktu_mulai).format("DD-MM-YY") === day.format("DD-MM-YY"))
         setDayEvents(events)
@@ -40,18 +38,16 @@ export default function Day({ day, rowIdx }) {
     }
 
     function handleAddClick() {
-        console.log('ini namabh add');
         setDaySelected(day);
-        dispatch(updateFieldKalender({ name: 'daySelected', value: day.format('D MMMM YYYY') }))
-        navigate(`/kalender/add/${day.format('D MMMM YYYY')}/`);
+        dispatch(updateFieldKalender({ name: 'daySelected', value: day.format('DD MMMM YYYY') }))
+        navigate(`/kalender/add/${day.format('YYYY-MM-DD')}/`);
     }
 
     function handleEventClick(event, evt) {
-        console.log('ini event');
         event.stopPropagation();
         setSelectedEvent(evt)
-        dispatch(updateFieldKalender({ name: 'daySelected', value: day.format('D MMMM YYYY') }))
-        navigate(`/kalender/add/${day.format('D MMMM YYYY')}/${evt.id}`)
+        dispatch(updateFieldKalender({ name: 'daySelected', value: day.format('DD MMMM YYYY') }))
+        navigate(`/kalender/add/${day.format('YYYY-MM-DD')}/${evt.id}`)
     }
 
     return (
@@ -85,7 +81,7 @@ export default function Day({ day, rowIdx }) {
                                     key={idx + 1}
                                     style={
                                         day.format('dddd') === 'Jumat' || day.format('dddd') === 'Sabtu' || day.format('dddd') === 'Kamis' ?
-                                            { left: -395 }
+                                            { left: -392.5 }
                                             : null
                                     }
                                 >

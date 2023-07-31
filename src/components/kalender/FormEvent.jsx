@@ -51,7 +51,6 @@ function FormEvent() {
     }
 
     useEffect(() => {
-        console.log(isAddPage);
         if (isAddPage) {
             setCopyForm({
                 judul: '',
@@ -132,17 +131,13 @@ function FormEvent() {
         return true;
     }
 
-    // console.log(copyForm);
     useEffect(() => {
-        // if (!loading && peserta.length > 0) {
         dispatch(updateStateKalender({
             name: 'isFormEditted',
             value: !areArraysEqual(copyForm.peserta, peserta)
         }))
-        // }
     }, [peserta, copyForm.peserta, loading])
-
-    // console.log(isFormEditted + ' form teredit');
+    // console.log(tanggalMulai);
 
     return (
         <div className='wrapper-form'>

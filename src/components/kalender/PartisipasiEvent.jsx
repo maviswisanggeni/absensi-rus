@@ -5,6 +5,7 @@ import ListPartisipasi from './ListPartisipasi'
 import { useDispatch, useSelector } from 'react-redux'
 import { deletePesertaByKategori, getKaryawanKalender, resetePeserta, updateListPeserta } from '../../features/kalenderSlice'
 import { useParams } from 'react-router'
+import Skeleton from 'react-loading-skeleton'
 
 function PartisipasiEvent() {
   let id = useParams()
@@ -15,14 +16,6 @@ function PartisipasiEvent() {
     { option: 'Guru DKV' },
     { option: 'Staff' },
   ]
-
-  function checkIsAdd() {
-    if (id.id === undefined) {
-      return true
-    } else {
-      return false
-    }
-  }
 
   const dispatch = useDispatch()
   const { peserta } = useSelector((state) => state.kalender)
@@ -51,16 +44,13 @@ function PartisipasiEvent() {
   };
 
   useEffect(() => {
-    // Make the API call based on the selected categories
     const selectedCategoryIds = selectedCategories.map((category) => {
-      // Map the category name to the corresponding category ID
       const selectedCategory = listKategori.find(
         (item) => item.kategori === category
       );
       return selectedCategory?.id;
     });
 
-    // console.log('Selected Category IDs:', selectedCategoryIds);
     if (selectedCategoryIds.length > 0) {
       dispatch(getKaryawanKalender({ kategori_id: selectedCategoryIds[0] }))
     }
@@ -95,7 +85,24 @@ function PartisipasiEvent() {
           />
           <label htmlFor='Semua Karyawan'>Semua Karyawan</label>
         </div>
-        {loadingKategori ? <p>Loading...</p>
+        {loadingKategori
+          ? <>
+            {Array(5).fill().map(key => (
+              <div className='wrap_skeleton' key={key}>
+                <Skeleton
+                  width={15}
+                  height={15}
+                  borderRadius={3}
+                  style={{ marginRight: '0.5rem' }}
+                />
+                <Skeleton
+                  width={90}
+                  height={15}
+                  borderRadius={3}
+                />
+              </div>
+            ))}
+          </>
           : listKategori.map((item, index) => (
             <div key={index} className='wrapper-checkbox-label'>
               <input
@@ -118,7 +125,7 @@ function PartisipasiEvent() {
         <p onClick={handleReset}>Reset</p>
       </div>
       <ListPartisipasi />
-    </div>
+    </div >
   )
 }
 

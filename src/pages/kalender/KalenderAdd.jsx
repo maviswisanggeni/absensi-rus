@@ -10,19 +10,21 @@ import { checkIsAddPage, getDetailKalender, resetFieldKalender, updateFieldKalen
 import { getKategori } from '../../features/ketegoriSlice'
 import InfoBox from '../../components/InfoBox'
 import dayjs from 'dayjs'
+import 'dayjs/locale/id'
 
 function KalenderAdd() {
-  let id = useParams()
+  let { id, date } = useParams()
   const dispatch = useDispatch()
   const { statusResApi, messageResApi, isDisplayMessage, daySelected } = useSelector(state => state.kalender)
 
   useEffect(() => {
+    dayjs.locale('id')
     dispatch(getKategori())
-    dispatch(checkIsAddPage(id.id))
+    dispatch(checkIsAddPage(id))
     dispatch(resetFieldKalender())
-    dispatch(updateStateKalender({ name: 'daySelected', value: id.date }))
-    if (id.id !== undefined) {
-      dispatch(getDetailKalender(id.id))
+    dispatch(updateStateKalender({ name: 'daySelected', value: date }))
+    if (id !== undefined) {
+      dispatch(getDetailKalender(id))
     }
   }, [])
 
@@ -38,13 +40,13 @@ function KalenderAdd() {
 
     dispatch(updateFieldKalender({
       name: 'tanggalMulai',
-      value: `${dayjs(daySelected).format('YYYY-MM-DD')}`
+      value: dayjs(date).format('YYYY-MM-DD')
     }))
     dispatch(updateFieldKalender({
       name: 'tanggalSelesai',
-      value: `${dayjs(daySelected).format('YYYY-MM-DD')}`
+      value: dayjs(date).format('YYYY-MM-DD')
     }))
-  }, [daySelected])
+  }, [date])
 
   return (
     <div className='wrapper-kalender'>
