@@ -2,6 +2,8 @@
   width: 225px;
   height: 100vh;
   border-right: 1px solid #ebf0fe;
+  position: sticky;
+  top: 0;
 }
 .nav .active-sidebar {
   color: #3661eb;

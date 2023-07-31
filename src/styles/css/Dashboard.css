@@ -182,6 +182,7 @@
   display: grid;
   place-items: center;
   font-size: 12px;
+  border-radius: 5px;
 }
 
 .sidebar-right {

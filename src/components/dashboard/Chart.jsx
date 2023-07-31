@@ -81,7 +81,7 @@ function Chart() {
 
   return (
     <>
-      {loading ? <div className='empty__container skeleton__loading'></div>
+      {!loading ? <div className='empty__container skeleton__loading'></div>
         : updatedData?.length < 1 || updatedData == undefined ? <div className='empty__container'>Data tidak ada</div>
           : <LineChart
             data={updatedData}

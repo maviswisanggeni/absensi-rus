@@ -158,7 +158,7 @@ function NavKalender() {
         // }
         />
       </div>
-      {loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null}
+      {/* {loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null} */}
 
       {showAlertBack &&
         <div className='bg-modal'>

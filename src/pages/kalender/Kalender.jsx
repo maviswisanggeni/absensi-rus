@@ -34,13 +34,13 @@ function Kalender() {
         <CalendarHeader />
         <div className='sidebar-month'>
           <div className='container-days'>
-            <p className='day'>Minggu</p>
-            <p className='day'>Senin</p>
-            <p className='day'>Selasa</p>
-            <p className='day'>Rabu</p>
-            <p className='day'>Kamis</p>
-            <p className='day'>Jum'at</p>
-            <p className='day'>Sabtu</p>
+            <p className='day'>Sunday</p>
+            <p className='day'>Monday</p>
+            <p className='day'>Tuesday</p>
+            <p className='day'>Wednesday</p>
+            <p className='day'>Thursday</p>
+            <p className='day'>Friday</p>
+            <p className='day'>Saturday</p>
           </div>
           <Month month={currentMonth} />
         </div>

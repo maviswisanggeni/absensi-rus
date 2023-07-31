@@ -881,6 +881,10 @@
         flex-direction: column;
         position: relative;
 
+        label {
+          margin-bottom: 0.5rem;
+        }
+
         div {
           position: relative;
         }

@@ -90,7 +90,7 @@ function BatasWaktu() {
             <h1>Batas Waktu</h1>
             <div className='containers-input'>
                 <div className='container-input'>
-                    <label htmlFor="latitude">Jam Masuk</label>
+                    <label htmlFor="latitude">Batas waktu Masuk</label>
                     {loadingKategori
                         ? <Skeleton
                             width={187}
@@ -111,10 +111,13 @@ function BatasWaktu() {
                         </div>
                     }
 
-                    {showAlertMasuk && <p className='error__max'>Maksimal 720 menit</p>}
+                    {showAlertMasuk
+                        ? <p className='error__max'>Maksimal 720 menit</p>
+                        : <p className='error__max'>*Sebelum waktu masuk</p>
+                    }
                 </div>
                 <div className='container-input'>
-                    <label htmlFor="longitude">Jam Pulang</label>
+                    <label htmlFor="longitude">Batas waktu Pulang</label>
                     {loadingKategori
                         ? <Skeleton
                             width={187}
@@ -133,7 +136,10 @@ function BatasWaktu() {
                             <p className='format'>Menit</p>
                         </div>
                     }
-                    {showAlertPulang && <p className='error__max'>Maksimal 720 menit</p>}
+                    {showAlertPulang
+                        ? <p className='error__max'>Maksimal 720 menit</p>
+                        : <p className='error__max'>*Sebelum waktu pulang</p>
+                    }
                 </div>
             </div>
             <div className='wrapper-btn'>

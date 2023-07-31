@@ -3,9 +3,10 @@
 
 .kalender {
   width: 1179px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  margin-bottom: 5rem;
+  flex: 1;
 
   button {
     border: none;
@@ -54,14 +55,14 @@
     .container-days {
       display: grid;
       grid-template-columns: repeat(7, minmax(0, 1fr));
-      // align-items: center;
       width: 100%;
       height: 40px;
 
       .day {
         display: grid;
         place-items: center;
-        border-bottom: 2px solid #eceef2;
+        border-bottom: 1px solid $border-color;
+        border-right: 1px solid $border-color;
         width: 100%;
         height: 100%;
         text-align: center;
@@ -76,86 +77,85 @@
     display: grid;
     flex: 1 1 0%;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    grid-template-rows: repeat(5, minmax(0, 1fr));
-    max-height: 740px;
-  }
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+    max-height: 1000px;
 
-  .day {
-    display: flex;
-    flex-direction: column;
-    border-right: #e5e7eb 1px solid;
-    border-bottom: #e5e7eb 1px solid;
-    padding-left: 0.5rem;
-    padding-bottom: 0.5rem;
-    height: 148px;
-    width: 168px;
-    position: relative;
-    // z-index: -1;
-
-    .handle-add {
-      // position: relative;
-      flex: 1 1 0%;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background-color: rgb(255, 255, 255);
-      overflow-y: scroll;
-    }
-
-    header {
+    .day {
       display: flex;
       flex-direction: column;
-      // align-items: center;
-      justify-content: flex-start;
-
-      .dd {
-        text-align: left;
-        font-size: 10px;
-        font-weight: 500;
-      }
-
-      h1 {
-        margin-right: 2.5rem;
-        color: #6b7280;
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-      }
-
-      .currentDay {
-        display: grid;
-        place-items: center;
-        background-color: #2563eb;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        color: #ffffff;
-      }
-
-      p {
-        padding: 0.25rem;
-        margin-top: 0.25rem;
-        margin-bottom: 0.25rem;
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        text-align: left;
-      }
-    }
-
-    .day-events {
-      display: flex;
-      flex-direction: column;
+      border-right: #e5e7eb 1px solid;
+      border-bottom: #e5e7eb 1px solid;
+      padding-left: 0.5rem;
+      padding-bottom: 0.5rem;
+      height: 148px;
+      width: 100%;
       position: relative;
-      margin-bottom: 1rem;
-      cursor: default;
 
-      p {
-        font-weight: 500;
-        font-size: 12px;
+      .handle-add {
+        // position: relative;
+        flex: 1 1 0%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background-color: rgb(255, 255, 255);
+        overflow-y: scroll;
       }
 
-      span {
-        font-weight: 500;
-        font-size: 10px;
-        color: $grey;
+      header {
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        justify-content: flex-start;
+
+        .dd {
+          text-align: left;
+          font-size: 10px;
+          font-weight: 500;
+        }
+
+        h1 {
+          margin-right: 2.5rem;
+          color: #6b7280;
+          font-size: 1.25rem;
+          line-height: 1.75rem;
+        }
+
+        .currentDay {
+          display: grid;
+          place-items: center;
+          background-color: #2563eb;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          color: #ffffff;
+        }
+
+        p {
+          padding: 0.25rem;
+          margin-top: 0.25rem;
+          margin-bottom: 0.25rem;
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          text-align: left;
+        }
+      }
+
+      .day-events {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-bottom: 1rem;
+        cursor: default;
+
+        p {
+          font-weight: 500;
+          font-size: 12px;
+        }
+
+        span {
+          font-weight: 500;
+          font-size: 10px;
+          color: $grey;
+        }
       }
     }
   }
@@ -718,7 +718,7 @@
         width: 90%;
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem 0;
+        gap: 0.5rem 0.25rem;
         margin: 0.5rem 0 1.5rem;
 
         .wrapper-checkbox-label {
@@ -731,6 +731,19 @@
             font-size: 12px;
             color: #5a6474;
             cursor: pointer;
+          }
+        }
+
+        .wrap_skeleton {
+          display: flex;
+          flex-wrap: wrap;
+          margin-right: 0.5rem;
+
+          .wrap_label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-right: 1rem;
           }
         }
       }
@@ -846,6 +859,27 @@
 
           input:checked::before {
             transform: scale(1);
+          }
+        }
+      }
+
+      .container_skeleton {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        overflow-y: scroll;
+        height: 500px;
+        padding-right: 0.5rem;
+
+        .container__list__skeleton {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .left__content {
+            display: flex;
+            gap: 1rem;
           }
         }
       }
