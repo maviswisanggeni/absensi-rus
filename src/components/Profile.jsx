@@ -5,15 +5,35 @@ import { useApiProfile } from '../contexts/api/ApiProfile'
 import defaultfoto from '../assets/images/user-foto.png'
 import { useState } from 'react'
 import setting from '../assets/icons/setting.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
 import { useEffect } from 'react'
+import axios from 'axios'
+import token from '../datas/tokenAuthorization'
+import LoadingFullscreen from './LoadingFullscreen'
 
 function Profile() {
   const context = useApiProfile()
   const [active, setActive] = useState()
   const [isTransitionFinished, setIsTransitionFinished] = useState(true)
   const drop = useRef()
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const logoutHanlder = async () => {
+    setLoading(true)
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token()}`
+    const url = 'https://absensiguru.smkrus.com/api/logout'
+    await axios.get(url)
+      .then(() => {
+        localStorage.removeItem("token");
+        navigate('/login')
+        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -47,7 +67,7 @@ function Profile() {
           <p>Pengaturan</p>
           <img src={setting} alt="" />
         </Link>
-        <div className={`${active ? 'active' : ''} dropdown-list`}>
+        <div className={`${active ? 'active' : ''} dropdown-list`} onClick={logoutHanlder}>
           <p>Keluar</p>
           <div>
             <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,6 +76,7 @@ function Profile() {
           </div>
         </div>
       </div>
+      <LoadingFullscreen loading={loading} />
     </div>
   )
 }

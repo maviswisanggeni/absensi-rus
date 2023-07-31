@@ -38,13 +38,13 @@
   border: 0px solid #ffffff;
 }
 
-.dashboard,
-.kehadiran {
+.main-dashboard,
+.main-kehadiran {
   display: flex;
   flex-direction: column;
   background-color: $background-color;
   padding: 2rem;
-  width: 837px;
+  width: 70%;
 
   .loading::before {
     margin: 0 0 0.75rem 2.5rem;
@@ -179,7 +179,8 @@
 .sidebar-right {
   border-left: 1px solid $secondary-color;
   border-right: 1px solid $secondary-color;
-  width: 350px;
+  // width: 378px;
+  width: 30%;
   position: relative;
 }
 

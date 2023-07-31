@@ -9,6 +9,11 @@
 
   .active-sidebar {
     color: $primary-color;
+
+    .active.img {
+      filter: brightness(0) saturate(100%) invert(29%) sepia(95%)
+        saturate(2816%) hue-rotate(221deg) brightness(95%) contrast(93%);
+    }
   }
 
   .logo-sidebar {

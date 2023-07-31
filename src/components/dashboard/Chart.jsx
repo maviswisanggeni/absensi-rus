@@ -81,7 +81,8 @@ function Chart() {
 
   return (
     <>
-      {!loading ? <div className='empty__container skeleton__loading'></div>
+      {loading
+        ? <div className='empty__container skeleton__loading'></div>
         : updatedData?.length < 1 || updatedData == undefined ? <div className='empty__container'>Data tidak ada</div>
           : <LineChart
             data={updatedData}
@@ -91,7 +92,7 @@ function Chart() {
               left: 0,
               bottom: 5,
             }}
-            width={775}
+            width={725}
             height={300}
           >
             <CartesianGrid strokeDasharray="1" />
