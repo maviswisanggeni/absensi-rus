@@ -36,7 +36,7 @@ const statistikSlice = createSlice({
     initialState: {
         statistikData: [],
         kategori: 'Minggu',
-        loading: false,
+        loading: true,
 
         statusResApi: '',
         messageResApi: '',

@@ -63,56 +63,64 @@ function Kehadiran() {
     <div className='wrapper-kehadiran'>
       <Sidebar />
       <TanggalKehadiranProvider>
-        <div className='kehadiran dashboard-and-kehadiran'>
-          <h1>Kehadiran karyawan</h1>
-          <div className='wrapper-circular'>
-            <CircularStatistic
-              name="Kehadiran"
-              firstValue={jmlKehadiran?.jumlah_kehadiran}
-              secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_kehadiran} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
-              imgSrc={masukIcon}
-            />
+        <div className='kehadiran'>
+          <div className='main-kehadiran'>
+            <h1>Kehadiran karyawan</h1>
+            <div className='wrapper-circular'>
+              <CircularStatistic
+                name="Kehadiran"
+                firstValue={jmlKehadiran?.jumlah_kehadiran}
+                secondValue={jmlKehadiran?.jumlah_karyawan}
+                // uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_kehadiran} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
+                uiValue={`${jmlKehadiran?.jumlah_kehadiran} / ${jmlKehadiran?.jumlah_karyawan}`}
+                imgSrc={masukIcon}
+                loading={loading}
+              />
 
-            <CircularStatistic
-              name="Izin"
-              firstValue={jmlKehadiran?.jumlah_izin}
-              secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_izin}`} Orang</p> : <div className='dots loading'></div>}
-              imgSrc={izinIcon}
-            />
+              <CircularStatistic
+                name="Izin"
+                firstValue={jmlKehadiran?.jumlah_izin}
+                secondValue={jmlKehadiran?.jumlah_karyawan}
+                // uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_izin}`} Orang</p> : <div className='dots loading'></div>}
+                uiValue={`${jmlKehadiran?.jumlah_izin} Orang`}
+                imgSrc={izinIcon}
+                loading={loading}
+              />
 
-            <CircularStatistic
-              name="Absen"
-              firstValue={jmlKehadiran?.jumlah_absen}
-              secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_absen}`} Orang</p> : <div className='dots loading'></div>}
-              imgSrc={absenIcon}
-            />
+              <CircularStatistic
+                name="Absen"
+                firstValue={jmlKehadiran?.jumlah_absen}
+                secondValue={jmlKehadiran?.jumlah_karyawan}
+                // uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_absen}`} Orang</p> : <div className='dots loading'></div>}
+                uiValue={`${jmlKehadiran?.jumlah_absen} Orang`}
+                imgSrc={absenIcon}
+                loading={loading}
+              />
+            </div>
+            <SearchAndCalendar />
+            <TabbarAndFilter />
+            <Routes>
+              {listTabbar.map((item, index) => {
+                return (
+                  <Route key={index} path={`/${item.kategori}`} element={<Table />} />
+                )
+              })}
+            </Routes>
           </div>
-          <SearchAndCalendar />
-          <TabbarAndFilter />
-          <Routes>
-            {listTabbar.map((item, index) => {
-              return (
-                <Route key={index} path={`/${item.kategori}`} element={<Table />} />
-              )
-            })}
-          </Routes>
-        </div>
-        <div className='sidebar-right'>
-          <div className='wrapper-profile'>
-            <Profile />
+          <div className='sidebar-right'>
+            <div className='wrapper-profile'>
+              <Profile />
+            </div>
+            <div className='wrapper-calendar'>
+              <CustomCalendar
+                tanggal={date}
+                setTanggal={setDate}
+                stateName={'tanggalKehadiran'}
+                setNonSerializableTanggal={updateStateJmlKehadiran}
+              />
+            </div>
+            <KehadiranTerbaru />
           </div>
-          <div className='wrapper-calendar'>
-            <CustomCalendar
-              tanggal={date}
-              setTanggal={setDate}
-              stateName={'tanggalKehadiran'}
-              setNonSerializableTanggal={updateStateJmlKehadiran}
-            />
-          </div>
-          <KehadiranTerbaru />
         </div>
 
         <InfoBox

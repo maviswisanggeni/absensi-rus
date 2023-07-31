@@ -2,6 +2,9 @@
 @import "../variables/variables.scss";
 
 .kehadiran {
+  width: 1215px;
+  display: flex;
+
   h1 {
     font-size: 24px;
     font-weight: 500;
@@ -12,7 +15,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // gap: 0.5rem;
     width: 100%;
     background-color: white;
     padding: 1rem 1.5rem;
@@ -677,5 +679,7 @@
   .profile {
     border: 1px solid #eceef2;
     border-left: none;
+    border-right: none;
+    width: 100%;
   }
 }

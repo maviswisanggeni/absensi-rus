@@ -1,3 +1,9 @@
+.kehadiran {
+  width: 1215px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 .kehadiran h1 {
   font-size: 24px;
   font-weight: 500;
@@ -755,4 +761,6 @@
 .sidebar-right .profile {
   border: 1px solid #eceef2;
   border-left: none;
+  border-right: none;
+  width: 100%;
 }

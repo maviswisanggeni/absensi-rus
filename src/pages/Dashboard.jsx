@@ -51,47 +51,52 @@ function Dashboard() {
   return (
     <div className='wrapper-dashboard'>
       <Sidebar />
-      <div className='dashboard dashboard-and-kehadiran'>
-        <h1>Dashboard</h1>
-        <div className='wrapper-circular'>
-          <CircularStatistic
-            name="Masuk"
-            firstValue={jmlKehadiran?.jumlah_masuk}
-            secondValue={jmlKehadiran?.jumlah_karyawan}
-            uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_masuk} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
-            imgSrc={masukIcon}
-          />
+      <div className='dashboard'>
+        <div className='main-dashboard'>
+          <h1>Dashboard</h1>
+          <div className='wrapper-circular'>
+            <CircularStatistic
+              name="Masuk"
+              firstValue={jmlKehadiran?.jumlah_masuk}
+              secondValue={jmlKehadiran?.jumlah_karyawan}
+              uiValue={`${jmlKehadiran?.jumlah_masuk} / ${jmlKehadiran?.jumlah_karyawan}`}
+              imgSrc={masukIcon}
+              loading={loading}
+            />
 
-          <CircularStatistic
-            name="Izin"
-            firstValue={jmlKehadiran?.jumlah_izin}
-            secondValue={jmlKehadiran?.jumlah_karyawan}
-            uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_izin}`} Orang</p> : <div className='dots loading'></div>}
-            imgSrc={izinIcon}
-          />
+            <CircularStatistic
+              name="Izin"
+              firstValue={jmlKehadiran?.jumlah_izin}
+              secondValue={jmlKehadiran?.jumlah_karyawan}
+              uiValue={`${jmlKehadiran?.jumlah_izin} Orang`}
+              imgSrc={izinIcon}
+              loading={loading}
+            />
 
-          <CircularStatistic
-            name="Absen"
-            firstValue={jmlKehadiran?.jumlah_absen}
-            secondValue={jmlKehadiran?.jumlah_karyawan}
-            uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_absen}`} Orang</p> : <div className='dots loading'></div>}
-            imgSrc={absenIcon}
-          />
+            <CircularStatistic
+              name="Absen"
+              firstValue={jmlKehadiran?.jumlah_absen}
+              secondValue={jmlKehadiran?.jumlah_karyawan}
+              uiValue={`${jmlKehadiran?.jumlah_absen} Orang`}
+              imgSrc={absenIcon}
+              loading={loading}
+            />
+          </div>
+          <StatisticChart />
         </div>
-        <StatisticChart />
-      </div>
 
-      <div className='sidebar-right'>
-        <Profile />
-        <div className='wrapper-calendar'>
-          <Calender
-            tanggal={date}
-            setTanggal={setDate}
-            stateName={'tanggalDashboard'}
-            setNonSerializableTanggal={updateStateJmlKehadiran}
-          />
+        <div className='sidebar-right'>
+          <Profile />
+          <div className='wrapper-calendar'>
+            <Calender
+              tanggal={date}
+              setTanggal={setDate}
+              stateName={'tanggalDashboard'}
+              setNonSerializableTanggal={updateStateJmlKehadiran}
+            />
+          </div>
+          <Jadwal />
         </div>
-        <Jadwal />
       </div>
 
       <InfoBox

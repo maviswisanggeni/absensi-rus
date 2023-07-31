@@ -1,6 +1,9 @@
 @import "../variables/variables.scss";
 
 .dashboard {
+  width: 1215px;
+  display: flex;
+
   .search {
     background-position: 5% 50%;
     background-color: $bg-button;
@@ -23,7 +26,7 @@
   .statistic-chart {
     width: 100%;
     background-color: white;
-    padding: 1rem;
+    padding: 2rem 2rem 1rem 3rem;
     border: 1px solid $secondary-color;
     border-radius: 10px;
     margin-top: 1rem;

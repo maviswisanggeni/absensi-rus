@@ -2,14 +2,10 @@ import React, { useEffect } from 'react'
 import '../../styles/css/Sidebar.css'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import LogoSidebar from './LogoSidebar'
-import dashboardLogoBlue from '../../assets/icons/dashboard-icon-blue.svg'
 import dashboardLogoGrey from '../../assets/icons/dashboard-icon-grey.svg'
 import kehadiranLogoGrey from '../../assets/icons/kehadiran-icon-grey.svg'
-import kehadiranLogoBlue from '../../assets/icons/kehadiran-icon-blue.svg'
 import karyawanLogoGrey from '../../assets/icons/karyawan-icon-grey.svg'
-import karyawanLogoBlue from '../../assets/icons/karyawan-icon-blue.svg'
 import kalenderLogoGrey from '../../assets/icons/kalender-icon-grey.svg'
-import kalenderLogoBlue from '../../assets/icons/kalender-icon-blue.svg'
 import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 import axios from 'axios'
 import { useState } from 'react'
@@ -45,7 +41,6 @@ function Sidebar() {
       id: 1,
       path: '/dashboard',
       img: dashboardLogoGrey,
-      imgActive: dashboardLogoBlue,
       text: 'Dashboard'
     },
     {
@@ -53,7 +48,6 @@ function Sidebar() {
       path: '/kehadiran',
       tabbarPath: '/kehadiran/Masuk',
       img: kehadiranLogoGrey,
-      imgActive: kehadiranLogoBlue,
       text: 'Kehadiran'
     },
     {
@@ -61,21 +55,18 @@ function Sidebar() {
       path: '/karyawan',
       tabbarPath: `/karyawan/`,
       img: karyawanLogoGrey,
-      imgActive: karyawanLogoBlue,
       text: 'Karyawan'
     },
     {
       id: 4,
       path: '/kalender',
       img: kalenderLogoGrey,
-      imgActive: kalenderLogoBlue,
       text: 'Kalender'
     },
     {
       id: 5,
       path: 'logout',
       img: loginLogoGrey,
-      imgActive: loginLogoGrey,
       text: 'Logout'
     },
   ]
@@ -95,7 +86,11 @@ function Sidebar() {
                 to={item.tabbarPath || item.path}
                 className={query.pathname.startsWith(item.path) ? 'active-sidebar' : ''}
               >
-                <img src={query.pathname.startsWith(item.path) ? item.imgActive : item.img} alt="" />
+                <img
+                  src={item.img}
+                  className={`img ${query.pathname.startsWith(item.path) ? 'active' : ''}`}
+                  alt=""
+                />
                 {item.text}
               </NavLink>}
           </li>

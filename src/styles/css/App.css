@@ -37,8 +37,8 @@
   border: 0px solid #ffffff;
 }
 
-.dashboard,
-.kehadiran {
+.main-dashboard,
+.main-kehadiran {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -48,10 +48,10 @@
           flex-direction: column;
   background-color: #f9f9f9;
   padding: 2rem;
-  width: 837px;
+  width: 70%;
 }
-.dashboard .loading::before,
-.kehadiran .loading::before {
+.main-dashboard .loading::before,
+.main-kehadiran .loading::before {
   margin: 0 0 0.75rem 2.5rem;
 }
 
@@ -218,7 +218,7 @@
 .sidebar-right {
   border-left: 1px solid #ebf0fe;
   border-right: 1px solid #ebf0fe;
-  width: 350px;
+  width: 30%;
   position: relative;
 }
 

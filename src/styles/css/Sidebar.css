@@ -8,6 +8,10 @@
 .nav .active-sidebar {
   color: #3661eb;
 }
+.nav .active-sidebar .active.img {
+  -webkit-filter: brightness(0) saturate(100%) invert(29%) sepia(95%) saturate(2816%) hue-rotate(221deg) brightness(95%) contrast(93%);
+          filter: brightness(0) saturate(100%) invert(29%) sepia(95%) saturate(2816%) hue-rotate(221deg) brightness(95%) contrast(93%);
+}
 .nav .logo-sidebar {
   display: -webkit-box;
   display: -ms-flexbox;
