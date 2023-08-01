@@ -3,6 +3,7 @@
 .wrapper-karyawan,
 .wrapper-kalender,
 .not-found,
+.no-internet,
 .wrapper-detail {
   max-width: 1440px;
   display: -webkit-box;
@@ -72,6 +73,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  cursor: pointer;
 }
 
 .btn-search {

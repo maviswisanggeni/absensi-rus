@@ -13,6 +13,7 @@ import KalenderAddOrDetail from './pages/kalender/KalenderAddOrDetail';
 import Pengaturan from './pages/pengaturan/Pengaturan';
 import AlertNotAuthorize from './components/AlertNotAuthorize';
 import NoInternetConnection from './components/NoInternetConnection';
+import WrapperCalendar from './contexts/app/WrapperCalendar';
 
 function App() {
   return (
@@ -23,7 +24,14 @@ function App() {
           <Route path='/kehadiran/*' element={<Kehadiran />} />
           <Route path='/kehadiran/detail/:izin?/:id' element={<Detail />} />
           <Route path='/karyawan/*' element={<Karyawan />} />
-          <Route path='/kalender' element={<Kalender />} />
+          <Route
+            path='/kalender'
+            element={
+              <WrapperCalendar>
+                <Kalender />
+              </WrapperCalendar>
+            }
+          />
           <Route path='/kalender/add/:date?/:id?' element={<KalenderAddOrDetail />} />
           <Route path='/karyawan/add' element={<AddKaryawan />} />
           <Route path='/karyawan/edit/:id' element={<DetailKaryawan />} />
