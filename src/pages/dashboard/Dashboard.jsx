@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import '../styles/css/Dashboard.css'
-import CircularStatistic from '../components/dashboard/CircularStatistic'
-import masukIcon from '../assets/icons/masuk-icon.svg'
-import izinIcon from '../assets/icons/izin-icon.svg'
-import absenIcon from '../assets/icons/absen-icon.svg'
-import StatisticChart from '../components/dashboard/StatisticChart'
-import Profile from '../components/Profile';
-import Jadwal from '../components/sidebar-right/Jadwal'
-import Calender from '../components/CustomCalendar'
-import Sidebar from '../components/sidebar/Sidebar'
+import '../../styles/css/Dashboard.css'
+import CircularStatistic from '../../components/dashboard/CircularStatistic'
+import masukIcon from '../../assets/icons/masuk-icon.svg'
+import izinIcon from '../../assets/icons/izin-icon.svg'
+import absenIcon from '../../assets/icons/absen-icon.svg'
+import StatisticChart from '../../components/dashboard/StatisticChart'
+import Profile from '../../components/Profile';
+import Jadwal from '../../components/sidebar-right/Jadwal'
+import Calender from '../../components/CustomCalendar'
+import Sidebar from '../../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
-import { getJmlKehadiranDashboard, setJmlKehadiran, updateStateJmlKehadiran } from '../features/jmlKehadiranSlice'
+import { getJmlKehadiranDashboard, setJmlKehadiran, updateStateJmlKehadiran } from '../../features/jmlKehadiranSlice'
 import Pusher from "pusher-js";
-import InfoBox from '../components/InfoBox'
-import formatDate from '../components/useFormatCalendar'
+import InfoBox from '../../components/InfoBox'
+import formatDate from '../../components/useFormatCalendar'
 
 function Dashboard() {
   const dispatch = useDispatch()

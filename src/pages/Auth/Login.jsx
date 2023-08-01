@@ -1,14 +1,14 @@
 import React from 'react'
-import LogoLogin from '../components/login/LogoLogin'
-import Input from '../components/login/Input'
-import ButtonSignIn from '../components/login/ButtonSignIn'
-import emailIcon from "../assets/icons/email-icon-blue.svg";
-import passwordIcon from "../assets/icons/password-icon-blue.svg";
-import "../styles/css/Login.css";
+import LogoLogin from '../../components/login/LogoLogin'
+import Input from '../../components/login/Input'
+import ButtonSignIn from '../../components/login/ButtonSignIn'
+import emailIcon from "../../assets/icons/email-icon-blue.svg";
+import passwordIcon from "../../assets/icons/password-icon-blue.svg";
+import "../../styles/css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
-import apiUrl from '../datas/apiUrl';
+import apiUrl from '../../datas/apiUrl';
 
 function Login() {
   const [email, setEmail] = useState("");

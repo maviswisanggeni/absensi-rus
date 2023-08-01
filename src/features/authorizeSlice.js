@@ -1,4 +1,3 @@
-// popupSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -6,8 +5,8 @@ const initialState = {
     isNavigate: false,
 };
 
-const popupSlice = createSlice({
-    name: 'popup',
+const authorizeSlice = createSlice({
+    name: 'authorize',
     initialState,
     reducers: {
         setShowPopup: (state, action) => {
@@ -19,5 +18,5 @@ const popupSlice = createSlice({
     },
 });
 
-export const { setShowPopup, setIsNavigate } = popupSlice.actions;
-export default popupSlice.reducer;
+export const { setShowPopup, setIsNavigate } = authorizeSlice.actions;
+export default authorizeSlice.reducer;

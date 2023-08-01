@@ -516,7 +516,7 @@
             div {
               display: flex;
               flex-direction: column;
-              justify-content: flex-start;
+              justify-content: start;
               p {
                 font-weight: 500;
                 font-size: 14px;
@@ -718,7 +718,7 @@
         h4 {
           font-weight: 500;
           font-size: 12px;
-          align-self: flex-start;
+          align-self: start;
           margin: 1rem 0;
         }
 

@@ -25,6 +25,7 @@ export const getJmlKehadiranDashboard = createAsyncThunk("dashboard/jmlKehadiran
         } else if (error.response.data.admin === false) {
             return rejectWithValue('Permission denied');
         }
+        console.log(error);
 
         return rejectWithValue(error.message)
     }
