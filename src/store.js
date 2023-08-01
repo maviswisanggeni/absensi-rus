@@ -8,7 +8,7 @@ import pengaturanSlice from './features/pengaturanSlice';
 import koordinatSlice from './features/koordinatSlice';
 import karyawanSlice from './features/karyawanSlice';
 import apiMiddleware from './middleware/apiMiddleware';
-import popupSlice from './features/popUpSlice';
+import authorizeSlice from './features/authorizeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,7 +20,7 @@ export const store = configureStore({
     kalender: kalenderSlice,
     pengaturan: pengaturanSlice,
     koordinat: koordinatSlice,
-    popup: popupSlice,
+    authorize: authorizeSlice,
   },
   middleware: [...getDefaultMiddleware(), apiMiddleware]
 });

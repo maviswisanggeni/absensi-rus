@@ -1,25 +1,19 @@
-// PopupComponent.js
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsNavigate, setShowPopup } from '../features/popUpSlice';
+import { setIsNavigate, setShowPopup } from '../features/authorizeSlice';
 import dangerIcon from '../assets/icons/danger.svg';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 import token from '../datas/tokenAuthorization';
 
-const PopUp = () => {
+const AlertNotAuthorize = () => {
     const dispatch = useDispatch();
-    const { showPopup, isNavigate } = useSelector(state => state.popup);
+    const { showPopup, isNavigate } = useSelector(state => state.authorize);
     const navigate = useNavigate()
 
     const handleRedirectToLogin = () => {
-        // navigate('/login')
         dispatch(setShowPopup(false));
     };
-
-    // if (isNavigate) {
-    //     // navigate('/login')
-    // }
 
     useEffect(() => {
         if (isNavigate) {
@@ -50,4 +44,4 @@ const PopUp = () => {
     );
 };
 
-export default PopUp;
+export default AlertNotAuthorize;

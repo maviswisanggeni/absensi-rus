@@ -12,7 +12,7 @@ import InfoBox from '../../components/InfoBox'
 import dayjs from 'dayjs'
 import 'dayjs/locale/id'
 
-function KalenderAdd() {
+function KalenderAddOrDetail() {
   let { id, date } = useParams()
   const dispatch = useDispatch()
   const { statusResApi, messageResApi, isDisplayMessage, daySelected } = useSelector(state => state.kalender)
@@ -71,4 +71,4 @@ function KalenderAdd() {
   )
 }
 
-export default KalenderAdd
+export default KalenderAddOrDetail

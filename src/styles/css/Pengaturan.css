@@ -583,7 +583,7 @@
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: flex-start;
+          justify-content: start;
 }
 .pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column .wrapper-list .list-content-left div p {
   font-weight: 500;
@@ -786,7 +786,7 @@
   font-weight: 500;
   font-size: 12px;
   -ms-flex-item-align: start;
-      align-self: flex-start;
+      align-self: start;
   margin: 1rem 0;
 }
 .pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .container-anggota {
