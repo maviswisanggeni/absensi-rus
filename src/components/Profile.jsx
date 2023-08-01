@@ -15,8 +15,9 @@ import LoadingFullscreen from './LoadingFullscreen'
 function Profile() {
   const context = useApiProfile()
   const [active, setActive] = useState()
-  const [isTransitionFinished, setIsTransitionFinished] = useState(true)
+  const [isTransitionFinished, setIsTransitionFinished] = useState(false)
   const drop = useRef()
+  const transition = useRef()
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -49,6 +50,18 @@ function Profile() {
     };
   }, [])
 
+  useEffect(() => {
+    transition.current.addEventListener("transitionstart", () => {
+      setIsTransitionFinished(true);
+    });
+  }, [])
+
+  function handleTransition(event) {
+    if (!event.target.classList.contains('active')) {
+      setIsTransitionFinished(false)
+    }
+  }
+
   return (
     <div className='profile' ref={drop}>
       <div className='wrapper-profile-detail' onClick={() => setActive(!active)}>
@@ -62,7 +75,8 @@ function Profile() {
         <Link
           to={'/pengaturan/kategori-karyawan'}
           className={`${active ? 'active' : ''} dropdown-list`}
-          onTransitionEnd={() => setIsTransitionFinished(true)}
+          onTransitionEnd={handleTransition}
+          ref={transition}
         >
           <p>Pengaturan</p>
           <img src={setting} alt="" />
