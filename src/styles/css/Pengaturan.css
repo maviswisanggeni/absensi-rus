@@ -530,7 +530,6 @@
   color: #3661eb;
   cursor: pointer;
   position: relative;
-  z-index: 999;
 }
 .pengaturan .detail-kategori-karyawan .wrapper-edit-kategori .wrapper-column {
   display: -webkit-box;

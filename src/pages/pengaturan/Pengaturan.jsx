@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../../styles/css/Pengaturan.css'
 import NavbarPengaturan from '../../components/pengaturan/NavbarPengaturan'
 import SidebarPengaturan from '../../components/pengaturan/SidebarPengaturan'
@@ -14,6 +14,11 @@ import { updateInputPengaturan } from '../../features/pengaturanSlice'
 
 function Pengaturan() {
     const { statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.pengaturan)
+
+    useEffect(() => {
+        const body = document.querySelector('body')
+        body.style.overflowX = 'hidden'
+    }, [])
 
     return (
         <div className='bg-pengaturan'>
