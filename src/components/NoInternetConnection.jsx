@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Sidebar from './sidebar/Sidebar';
+import disconnectImg from '../assets/icons/disconnect.svg';
+import '../styles/css/no-internet.css'
+import Button from './Button';
 
 const NoInternetConnection = (props) => {
-    const [isOnline, setOnline] = useState(true);
+    const [isOnline, setOnline] = useState(false);
 
     useEffect(() => {
         setOnline(navigator.onLine)
@@ -14,13 +18,26 @@ const NoInternetConnection = (props) => {
     window.addEventListener('offline', () => {
         setOnline(false)
     });
-
+    console.log(isOnline);
     if (isOnline) {
         return (
             props.children
         )
     } else {
-        return (<h1>No Interner Connection. Please try again later.</h1>)
+        function handleClick() {
+            window.location.reload()
+        }
+        return (
+            <div className='no-internet'>
+                <Sidebar />
+                <div>
+                    <img src={disconnectImg} alt="" />
+                    <h1>Sambungkan Ke Internet</h1>
+                    <p>Anda sedang offline. Periksa koneksi Anda.</p>
+                    <Button onClick={handleClick} text='Coba lagi' />
+                </div>
+            </div>
+        )
     }
 }
 
