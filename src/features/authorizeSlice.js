@@ -1,9 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import token from '../datas/tokenAuthorization';
+import getBaseUrl from '../datas/apiUrl';
+import axios from 'axios';
 
 const initialState = {
     showPopup: false,
     isNavigate: false,
 };
+
+export const getAuthorize = createAsyncThunk("authorize", async (_, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            getBaseUrl + '/api/dashboard/statistik',
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
+        }
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
+        }
+
+        return rejectWithValue(error.message)
+    }
+})
 
 const authorizeSlice = createSlice({
     name: 'authorize',

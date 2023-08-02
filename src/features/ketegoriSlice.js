@@ -6,7 +6,7 @@ import token from "../datas/tokenAuthorization";
 export const getKategori = createAsyncThunk("karyawan/getKategori", async (test, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'karyawan/kategori',
+            getBaseUrl + '/api/karyawan/kategori',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,

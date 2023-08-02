@@ -4,7 +4,6 @@ import { setIsNavigate, setShowPopup } from '../features/authorizeSlice';
 import dangerIcon from '../assets/icons/danger.svg';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import token from '../datas/tokenAuthorization';
 
 const AlertNotAuthorize = () => {
     const dispatch = useDispatch();
@@ -23,12 +22,6 @@ const AlertNotAuthorize = () => {
             dispatch(setIsNavigate(false))
         }
     }, [isNavigate])
-
-    useEffect(() => {
-        if (!token()) {
-            // navigate('login')
-        }
-    }, [])
 
     return (
         showPopup && (

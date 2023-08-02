@@ -45,7 +45,7 @@ const initialState = {
 export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'kalender',
+            getBaseUrl + '/api/kalender',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -75,7 +75,7 @@ export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan
 export const getDetailKalender = createAsyncThunk("kalender/detailKalender", async (id, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `kalender/detail/${id}`,
+            getBaseUrl + `/api/kalender/detail/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -102,7 +102,7 @@ export const getDetailKalender = createAsyncThunk("kalender/detailKalender", asy
 export const getKaryawanKalender = createAsyncThunk("kalender/getKaryawanKalender", async ({ kategori_id, search }, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `kalender/get-karyawan`,
+            getBaseUrl + `/api/kalender/get-karyawan`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -149,7 +149,7 @@ export const storeKalender = createAsyncThunk("kalender/store", async ({
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `kalender/create`,
+            getBaseUrl + `/api/kalender/create`,
             formData,
             {
                 headers: {
@@ -194,7 +194,7 @@ export const updateKalender = createAsyncThunk("kalender/update", async (
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `kalender/update/${id}`,
+            getBaseUrl + `/api/kalender/update/${id}`,
             formData,
             {
                 headers: {
@@ -223,7 +223,7 @@ export const updateKalender = createAsyncThunk("kalender/update", async (
 export const deleteKalender = createAsyncThunk("kalender/delete", async (id, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `kalender/destroy/${id}`,
+            getBaseUrl + `/api/kalender/destroy/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,

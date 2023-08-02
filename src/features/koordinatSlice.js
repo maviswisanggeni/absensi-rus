@@ -6,7 +6,7 @@ import token from "../datas/tokenAuthorization";
 export const getKoordinat = createAsyncThunk("pengaturan/getKoordinat", async (_, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'setting/kordinat',
+            getBaseUrl + '/api/setting/kordinat',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -37,7 +37,7 @@ export const updateKoordinat = createAsyncThunk("pengaturan/updateKoordinat", as
 
     try {
         const response = await axios.post(
-            getBaseUrl() + 'setting/kordinat/update',
+            getBaseUrl + '/api/setting/kordinat/update',
             formData,
             {
                 headers: {

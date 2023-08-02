@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './sidebar/Sidebar';
 import disconnectImg from '../assets/icons/disconnect.svg';
 import '../styles/css/no-internet.css'
-import Button from './Button';
+import Button from '../components/Button';
+import Sidebar from '../components/sidebar/Sidebar';
 
 const NoInternetConnection = (props) => {
     const [isOnline, setOnline] = useState(false);
@@ -30,7 +30,7 @@ const NoInternetConnection = (props) => {
         return (
             <div className='no-internet'>
                 <Sidebar />
-                <div>
+                <div className='content'>
                     <img src={disconnectImg} alt="" />
                     <h1>Sambungkan Ke Internet</h1>
                     <p>Anda sedang offline. Periksa koneksi Anda.</p>

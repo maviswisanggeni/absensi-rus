@@ -7,7 +7,7 @@ import formatDate from "../components/useFormatCalendar";
 export const getKehadiran = createAsyncThunk("kehadiran/getKehadiran", async ({ start_time, end_time, search }, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'kehadiran',
+            getBaseUrl + '/api/kehadiran',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -39,7 +39,7 @@ export const getKehadiran = createAsyncThunk("kehadiran/getKehadiran", async ({ 
 export const getKehadiranTerbaru = createAsyncThunk("kehadiran/getKehadiranTerbaru", async ({ start_time }, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'kehadiran',
+            getBaseUrl + '/api/kehadiran',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,

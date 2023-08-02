@@ -6,7 +6,7 @@ import token from "../datas/tokenAuthorization";
 export const getStatistik = createAsyncThunk("dashboard/statistik", async (_, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'dashboard/statistik',
+            getBaseUrl + '/api/dashboard/statistik',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,

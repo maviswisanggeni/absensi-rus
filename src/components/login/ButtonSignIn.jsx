@@ -4,7 +4,7 @@ function ButtonSignIn({ loading }) {
 
   return (
     <div className="login__button">
-      <button type="submit">
+      <button type="submit" disabled={loading ? true : false}>
         {!loading && 'Sign in'}
         {loading && <div className="loader loader--style8" title="7">
           <svg
