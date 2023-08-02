@@ -130,7 +130,7 @@ const initialState = {
 export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'karyawan',
+            getBaseUrl + '/api/karyawan',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -161,7 +161,7 @@ export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kat
 export const detailKaryawan = createAsyncThunk("karyawan/detailKaryawan", async (id, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `karyawan/detail/${id}`,
+            getBaseUrl + `/api/karyawan/detail/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -210,7 +210,7 @@ export const storeKaryawan = createAsyncThunk("karyawan/storeKaryawan", async ({
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `karyawan/store`,
+            getBaseUrl + `/api/karyawan/store`,
             formData,
             {
                 headers: {
@@ -263,7 +263,7 @@ export const updateKaryawan = createAsyncThunk("karyawan/editKaryawan", async ({
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `karyawan/update/${id}`,
+            getBaseUrl + `/api/karyawan/update/${id}`,
             formData,
             {
                 headers: {
@@ -293,7 +293,7 @@ export const updateKaryawan = createAsyncThunk("karyawan/editKaryawan", async ({
 export const deleteKaryawan = createAsyncThunk("karyawan/deleteKaryawan", async (id, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `karyawan/delete/${id}`,
+            getBaseUrl + `/api/karyawan/delete/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,

@@ -6,7 +6,7 @@ import token from "../datas/tokenAuthorization";
 export const getKategoriPengaturan = createAsyncThunk("pengaturan/getKategori", async (_, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + 'setting/kategori',
+            getBaseUrl + '/api/setting/kategori',
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -34,7 +34,7 @@ export const getKategoriPengaturan = createAsyncThunk("pengaturan/getKategori", 
 export const detailKategori = createAsyncThunk("pengaturan/detailKategori", async (id, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `setting/kategori/detail/${id}`,
+            getBaseUrl + `/api/setting/kategori/detail/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -62,7 +62,7 @@ export const detailKategori = createAsyncThunk("pengaturan/detailKategori", asyn
 export const storeKategori = createAsyncThunk("pengaturan/storeKategori", async (nama_kategori, { rejectWithValue }) => {
     try {
         const response = await axios.post(
-            getBaseUrl() + 'setting/kategori/store',
+            getBaseUrl + '/api/setting/kategori/store',
             {
                 nama_kategori: nama_kategori
             },
@@ -93,7 +93,7 @@ export const storeKategori = createAsyncThunk("pengaturan/storeKategori", async 
 export const updateKategori = createAsyncThunk("pengaturan/updateKategori", async ({ id, nama_kategori }, { rejectWithValue }) => {
     try {
         const response = await axios.post(
-            getBaseUrl() + `setting/kategori/update/${id}`,
+            getBaseUrl + `/api/setting/kategori/update/${id}`,
             {
                 nama_kategori: nama_kategori
             },
@@ -124,7 +124,7 @@ export const updateKategori = createAsyncThunk("pengaturan/updateKategori", asyn
 export const deleteKategori = createAsyncThunk("pengaturan/deleteKategori", async (id, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `setting/kategori/delete/${id}`,
+            getBaseUrl + `/api/setting/kategori/delete/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -152,13 +152,13 @@ export const deleteKategori = createAsyncThunk("pengaturan/deleteKategori", asyn
 export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", async ({ search, kategori_id, route }, { rejectWithValue }) => {
     let url;
     if (route === 'setting') {
-        url = 'setting/kategori/get-karyawan'
+        url = '/api/setting/kategori/get-karyawan'
     } else if (route === 'karyawan') {
-        url = 'karyawan'
+        url = '/api/karyawan'
     }
     try {
         const response = await axios.get(
-            getBaseUrl() + url,
+            getBaseUrl + url,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -196,7 +196,7 @@ export const assignKategori = createAsyncThunk("pengaturan/assignKategori", asyn
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `setting/kategori/assign`,
+            getBaseUrl + `/api/setting/kategori/assign`,
             formData,
             {
                 headers: {
@@ -230,7 +230,7 @@ export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", 
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `setting/kategori/unassign`,
+            getBaseUrl + `/api/setting/kategori/unassign`,
             formData,
             {
                 headers: {
@@ -258,7 +258,7 @@ export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", 
 export const getBatasWaktu = createAsyncThunk("pengaturan/getBatasWaktu", async (_, { rejectWithValue }) => {
     try {
         const response = await axios.get(
-            getBaseUrl() + `setting/batas-waktu`,
+            getBaseUrl + `/api/setting/batas-waktu`,
             {
                 headers: {
                     Authorization: `Bearer ${token()}`,
@@ -290,7 +290,7 @@ export const updateBatasWaktu = createAsyncThunk("pengaturan/updateBatasWaktu", 
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `setting/batas-waktu/update`,
+            getBaseUrl + `/api/setting/batas-waktu/update`,
             formData,
             {
                 headers: {
@@ -322,7 +322,7 @@ export const importKaryawan = createAsyncThunk("pengaturan/importKaryawan", asyn
 
     try {
         const response = await axios.post(
-            getBaseUrl() + `karyawan/import`,
+            getBaseUrl + `/api/karyawan/import`,
             formData,
             {
                 headers: {

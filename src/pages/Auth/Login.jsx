@@ -9,6 +9,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../../datas/apiUrl';
+import { useDispatch } from 'react-redux';
+import { getAuthorize } from '../../features/authorizeSlice';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -16,8 +18,9 @@ function Login() {
   const [validation, setValidation] = useState('');
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
-  const loginHandler = async (e) => {
+  const loginHandler = (e) => {
     e.preventDefault();
     setLoading(true)
 
@@ -25,9 +28,9 @@ function Login() {
     formData.append('niy', email);
     formData.append('password', password);
 
-    await axios({
+    axios({
       method: "post",
-      url: apiUrl() + 'login',
+      url: apiUrl + '/api/login',
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -35,12 +38,17 @@ function Login() {
     })
       .then((response) => {
         localStorage.setItem('token', response.data.token);
-        navigate('/dashboard');
-        setLoading(false)
+
+        dispatch(
+          getAuthorize()
+        )
+          .then(() => {
+            navigate('/dashboard');
+            setLoading(false)
+          })
       })
       .catch((error) => {
         setValidation(error.response.data.messege);
-        console.log(error.response.data.messege)
         setLoading(false)
       })
   }

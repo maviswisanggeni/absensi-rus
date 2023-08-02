@@ -1,11 +1,13 @@
 .no-internet {
-  div {
-    width: 90%;
+  .content {
+    width: 1215px;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 1rem;
+    margin: 0 auto;
 
     img {
       width: 110px;

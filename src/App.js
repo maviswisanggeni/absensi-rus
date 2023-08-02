@@ -11,10 +11,11 @@ import DetailKaryawan from './pages/karyawan/DetailKaryawan';
 import NotFound from './components/NotFound';
 import KalenderAddOrDetail from './pages/kalender/KalenderAddOrDetail';
 import Pengaturan from './pages/pengaturan/Pengaturan';
-import AlertNotAuthorize from './components/AlertNotAuthorize';
-import NoInternetConnection from './components/NoInternetConnection';
+import AlertNotAuthorize from './middleware/AlertNotAuthorize';
+import NoInternetConnection from './middleware/NoInternetConnection';
 import WrapperCalendar from './contexts/app/WrapperCalendar';
-import ResponsiveAlert from './components/ResponsiveAlert';
+import ResponsiveAlert from './middleware/ResponsiveAlert';
+import PrivateRoutes from './middleware/PrivateRoutes';
 
 function App() {
   return (
@@ -22,23 +23,30 @@ function App() {
       <ResponsiveAlert>
         <NoInternetConnection>
           <Routes>
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/kehadiran/*' element={<Kehadiran />} />
-            <Route path='/kehadiran/detail/:izin?/:id' element={<Detail />} />
-            <Route path='/karyawan/*' element={<Karyawan />} />
-            <Route
-              path='/kalender'
-              element={
-                <WrapperCalendar>
-                  <Kalender />
-                </WrapperCalendar>
-              }
-            />
-            <Route path='/kalender/add/:date?/:id?' element={<KalenderAddOrDetail />} />
-            <Route path='/karyawan/add' element={<AddKaryawan />} />
-            <Route path='/karyawan/edit/:id' element={<DetailKaryawan />} />
-            <Route path='/pengaturan/*' element={<Pengaturan />} />
-            <Route path='*' element={<NotFound />} />
+            <Route element={<PrivateRoutes />}>
+              <Route path='/dashboard' element={<Dashboard />} />
+
+              <Route path='/kehadiran/*' element={<Kehadiran />} />
+              <Route path='/kehadiran/detail/:izin?/:id' element={<Detail />} />
+
+              <Route path='/karyawan/*' element={<Karyawan />} />
+              <Route path='/karyawan/add' element={<AddKaryawan />} />
+              <Route path='/karyawan/edit/:id' element={<DetailKaryawan />} />
+
+              <Route
+                path='/kalender'
+                element={
+                  <WrapperCalendar>
+                    <Kalender />
+                  </WrapperCalendar>
+                }
+              />
+              <Route path='/kalender/add/:date?/:id?' element={<KalenderAddOrDetail />} />
+
+              <Route path='/pengaturan/*' element={<Pengaturan />} />
+              <Route path='*' element={<NotFound />} />
+            </Route>
+
             <Route path='/login' element={<Login />} />
           </Routes>
           <AlertNotAuthorize />

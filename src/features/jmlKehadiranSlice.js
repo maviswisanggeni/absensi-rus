@@ -6,7 +6,7 @@ import formatDate from "../components/useFormatCalendar";
 
 export const getJmlKehadiranDashboard = createAsyncThunk("dashboard/jmlKehadiran", async (tanggal, { rejectWithValue }) => {
     try {
-        const response = await axios.get(getBaseUrl() + 'dashboard', {
+        const response = await axios.get(getBaseUrl + '/api/dashboard', {
             headers: {
                 Authorization: `Bearer ${token()}`,
             },
@@ -33,7 +33,7 @@ export const getJmlKehadiranDashboard = createAsyncThunk("dashboard/jmlKehadiran
 
 export const getJmlKehadiranKehadiran = createAsyncThunk("kehadiran/jmlKehadiran", async ({ start_time, end_time }, { rejectWithValue }) => {
     try {
-        const response = await axios.get(getBaseUrl() + 'kehadiran/jml-kehadiran', {
+        const response = await axios.get(getBaseUrl + '/api/kehadiran/jml-kehadiran', {
             headers: {
                 Authorization: `Bearer ${token()}`,
             },
