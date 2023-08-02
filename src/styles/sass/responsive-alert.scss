@@ -1,0 +1,30 @@
+.responsive-alert {
+  width: 375px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  .logo-sidebar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+
+    h1 {
+      color: #000;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    img {
+      width: 65px;
+      height: 65px;
+    }
+  }
+
+  .alert__text {
+    color: #000;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+}

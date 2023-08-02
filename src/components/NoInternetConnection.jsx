@@ -18,7 +18,7 @@ const NoInternetConnection = (props) => {
     window.addEventListener('offline', () => {
         setOnline(false)
     });
-    console.log(isOnline);
+
     if (isOnline) {
         return (
             props.children
