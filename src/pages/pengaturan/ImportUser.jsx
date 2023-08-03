@@ -161,7 +161,7 @@ function ImportUser() {
                         <div className='right__square'></div>
                     </div>
 
-                    <LoadingTable />
+                    <LoadingTable size={'large'} />
                 </div>
             }
 

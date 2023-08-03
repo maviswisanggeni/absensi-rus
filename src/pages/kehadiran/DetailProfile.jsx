@@ -18,29 +18,29 @@ function DetailProfile({ data }) {
         <div className='detail-profile'>
             <div className='div-1'>
                 <h1>Foto Profile</h1>
-                <img src={isImgUrl(data?.user.link_foto) ? data.user?.link_foto : people1} onError={useImgError} alt="" />
-                <h3>{checkNull(data?.user.nama)}</h3>
-                <p>{checkNull(data?.user.niy)}</p>
+                <img src={data?.user?.link_foto} onError={useImgError} alt="" />
+                <h3>{checkNull(data?.user?.nama)}</h3>
+                <p>{checkNull(data?.user?.niy)}</p>
             </div>
             <div className='div-2'>
                 <div className='info'>
                     <h3>Jabatan</h3>
                     <p>
-                        {data?.user.ktgkaryawan.map((itemKategori, index) => (
+                        {data?.user?.ktgkaryawan.map((itemKategori, index) => (
                             <React.Fragment key={itemKategori.id}>
                                 {itemKategori.kategori}
-                                {index !== data?.user.ktgkaryawan.length - 1 && ','}{' '}
+                                {index !== data?.user?.ktgkaryawan?.length - 1 && ','}{' '}
                             </React.Fragment>
                         ))}
                     </p>
                 </div>
                 <div className='info'>
                     <h3>Nomer HP</h3>
-                    <p>{checkNull(data?.user.no_hp)}</p>
+                    <p>{checkNull(data?.user?.no_hp)}</p>
                 </div>
                 <div className='info'>
                     <h3>Email</h3>
-                    <p>{data?.user.email}</p>
+                    <p>{data?.user?.email}</p>
                 </div>
             </div>
             <div className='back-btn' onClick={() => navigate(-1)}>Kembali</div>

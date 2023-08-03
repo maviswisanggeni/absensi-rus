@@ -206,6 +206,9 @@
   width: 109px;
   padding-left: 1rem;
 }
+.kehadiran table .td-jabatan {
+  padding-right: 1rem;
+}
 .kehadiran table .wrapper__btn__detail {
   padding-left: 1rem;
 }
@@ -213,6 +216,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+.kehadiran .wrapper__table {
+  height: auto;
 }
 
 .valid-masuk-pulang {
@@ -245,6 +251,7 @@
 .detail {
   width: 80%;
   border-right: 1px solid #eceef2;
+  border-bottom: 1px solid #eceef2;
 }
 .detail .navigation {
   display: -webkit-box;
@@ -367,6 +374,7 @@
 .detail .main .detail-masuk-keluar .masuk-keluar .card .foto-belum-keluar {
   width: 75px;
   height: 75px;
+  cursor: default;
 }
 .detail .main .detail-masuk-keluar .masuk-keluar .card .pop-up {
   display: -webkit-box;
@@ -674,7 +682,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  position: fixed;
   z-index: 999;
 }
 .detail .leaflet-container {

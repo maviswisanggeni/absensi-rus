@@ -20,12 +20,14 @@ import Pusher from "pusher-js";
 import InfoBox from '../../components/InfoBox'
 import CustomCalendar from '../../components/CustomCalendar'
 import formatDate from '../../components/useFormatCalendar'
+import { updateStateKehadiran } from '../../features/kehadiranSlice'
+import LoadingTable from '../../components/LoadingTable'
 
 function Kehadiran() {
   const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
-  const { statusResApi, messageResApi, isDisplayMessage, listTabbar } = useSelector((state) => state.kehadiran)
-  const { jmlKehadiran, loading, tanggalKehadiran } = useSelector(state => state.jmlKehadiran)
+  const { statusResApi, messageResApi, isDisplayMessage, listTabbar, loading: tableLoading } = useSelector((state) => state.kehadiran)
+  const { jmlKehadiran, loading: jmlLoading, tanggalKehadiran } = useSelector(state => state.jmlKehadiran)
   const [date, setDate] = useState(new Date());
   const [isResetState, setIsResetState] = useState(false)
 
@@ -71,41 +73,41 @@ function Kehadiran() {
                 name="Kehadiran"
                 firstValue={jmlKehadiran?.jumlah_kehadiran}
                 secondValue={jmlKehadiran?.jumlah_karyawan}
-                // uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_kehadiran} / ${jmlKehadiran?.jumlah_karyawan}`}</p> : <div className='dots loading'></div>}
                 uiValue={`${jmlKehadiran?.jumlah_kehadiran} / ${jmlKehadiran?.jumlah_karyawan}`}
                 imgSrc={masukIcon}
-                loading={loading}
+                loading={jmlLoading}
               />
 
               <CircularStatistic
                 name="Izin"
                 firstValue={jmlKehadiran?.jumlah_izin}
                 secondValue={jmlKehadiran?.jumlah_karyawan}
-                // uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_izin}`} Orang</p> : <div className='dots loading'></div>}
                 uiValue={`${jmlKehadiran?.jumlah_izin} Orang`}
                 imgSrc={izinIcon}
-                loading={loading}
+                loading={jmlLoading}
               />
 
               <CircularStatistic
                 name="Absen"
                 firstValue={jmlKehadiran?.jumlah_absen}
                 secondValue={jmlKehadiran?.jumlah_karyawan}
-                // uiValue={loading ? <p className='p2'>{`${jmlKehadiran?.jumlah_absen}`} Orang</p> : <div className='dots loading'></div>}
                 uiValue={`${jmlKehadiran?.jumlah_absen} Orang`}
                 imgSrc={absenIcon}
-                loading={loading}
+                loading={jmlLoading}
               />
             </div>
             <SearchAndCalendar />
             <TabbarAndFilter />
-            <Routes>
-              {listTabbar.map((item, index) => {
-                return (
-                  <Route key={index} path={`/${item.kategori}`} element={<Table />} />
-                )
-              })}
-            </Routes>
+            {tableLoading
+              ? <LoadingTable size={'small'} />
+              : <Routes>
+                {listTabbar.map((item, index) => {
+                  return (
+                    <Route key={index} path={`/${item.kategori}`} element={<Table />} />
+                  )
+                })}
+              </Routes>
+            }
           </div>
           <div className='sidebar-right'>
             <div className='wrapper-profile'>
@@ -127,7 +129,7 @@ function Kehadiran() {
           message={messageResApi}
           status={statusResApi}
           isDisplay={isDisplayMessage}
-          setIsDisplay={updateStateJmlKehadiran}
+          setIsDisplay={updateStateKehadiran}
           stateName='isDisplayMessage'
         />
       </TanggalKehadiranProvider>
