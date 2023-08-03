@@ -1242,29 +1242,6 @@
   gap: 5rem;
   padding-left: 2rem;
 }
-.wrapper__skeleton .list__text__skeleton div,
-.wrapper__table .list__text__skeleton div {
-  border-radius: 5px;
-  width: 75px;
-  height: 25px;
-  background: #f5f5f5;
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(25%, #f5f5f5), color-stop(37%, #e8e8e8), color-stop(63%, #f5f5f5));
-  background-image: linear-gradient(90deg, #f5f5f5 25%, #e8e8e8 37%, #f5f5f5 63%);
-  background-size: 200% 100%;
-  -webkit-animation: skeleton-loading 1.5s infinite linear;
-          animation: skeleton-loading 1.5s infinite linear;
-}
-.wrapper__skeleton .right__square,
-.wrapper__table .right__square {
-  width: 100px;
-  height: 25px;
-  background: #f5f5f5;
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(25%, #f5f5f5), color-stop(37%, #e8e8e8), color-stop(63%, #f5f5f5));
-  background-image: linear-gradient(90deg, #f5f5f5 25%, #e8e8e8 37%, #f5f5f5 63%);
-  background-size: 200% 100%;
-  -webkit-animation: skeleton-loading 1.5s infinite linear;
-          animation: skeleton-loading 1.5s infinite linear;
-}
 .wrapper__skeleton .row__table,
 .wrapper__table .row__table {
   display: -webkit-box;
@@ -1276,42 +1253,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #eceef2;
-}
-.wrapper__skeleton .row__table div,
-.wrapper__table .row__table div {
-  width: 100px;
-  height: 25px;
-  background: #f5f5f5;
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(25%, #f5f5f5), color-stop(37%, #e8e8e8), color-stop(63%, #f5f5f5));
-  background-image: linear-gradient(90deg, #f5f5f5 25%, #e8e8e8 37%, #f5f5f5 63%);
-  background-size: 200% 100%;
-  -webkit-animation: skeleton-loading 1.5s infinite linear;
-          animation: skeleton-loading 1.5s infinite linear;
-}
-.wrapper__skeleton .row__table div:nth-child(1),
-.wrapper__table .row__table div:nth-child(1) {
-  width: 100px;
-}
-.wrapper__skeleton .row__table div:nth-child(2),
-.wrapper__table .row__table div:nth-child(2) {
-  width: 243px;
-}
-.wrapper__skeleton .row__table div:nth-child(3),
-.wrapper__table .row__table div:nth-child(3) {
-  width: 197px;
-}
-.wrapper__skeleton .row__table div:nth-child(4),
-.wrapper__table .row__table div:nth-child(4) {
-  width: 126px;
-}
-.wrapper__skeleton .row__table div:nth-child(5),
-.wrapper__table .row__table div:nth-child(5) {
-  width: 228px;
-}
-.wrapper__skeleton .row__table div:nth-child(6),
-.wrapper__table .row__table div:nth-child(6) {
-  width: 100px;
 }
 .wrapper__skeleton .column__table,
 .wrapper__table .column__table {
@@ -1325,43 +1266,4 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-.wrapper__skeleton .column__table div,
-.wrapper__table .column__table div {
-  width: 100px;
-  height: 25px;
-  background: #f5f5f5;
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(25%, #f5f5f5), color-stop(37%, #e8e8e8), color-stop(63%, #f5f5f5));
-  background-image: linear-gradient(90deg, #f5f5f5 25%, #e8e8e8 37%, #f5f5f5 63%);
-  background-size: 200% 100%;
-  -webkit-animation: skeleton-loading 1.5s infinite linear;
-          animation: skeleton-loading 1.5s infinite linear;
-}
-.wrapper__skeleton .column__table div:nth-child(1),
-.wrapper__table .column__table div:nth-child(1) {
-  width: 30px;
-  margin-right: 4rem;
-}
-.wrapper__skeleton .column__table div:nth-child(2),
-.wrapper__table .column__table div:nth-child(2) {
-  width: 75px;
-  margin-right: 9.75rem;
-}
-.wrapper__skeleton .column__table div:nth-child(3),
-.wrapper__table .column__table div:nth-child(3) {
-  width: 100px;
-  margin-right: 5.5rem;
-}
-.wrapper__skeleton .column__table div:nth-child(4),
-.wrapper__table .column__table div:nth-child(4) {
-  width: 100px;
-  margin-right: 1.3rem;
-}
-.wrapper__skeleton .column__table div:nth-child(5),
-.wrapper__table .column__table div:nth-child(5) {
-  width: 100px;
-}
-.wrapper__skeleton .column__table div:nth-child(6),
-.wrapper__table .column__table div:nth-child(6) {
-  width: 100px;
 }

@@ -10,6 +10,8 @@ import { useState } from 'react'
 import kategoriImg from '../../assets/images/kategori.png'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import LoadingTable from '../../components/LoadingTable'
+import LoadingTabbar from '../../components/LoadingTabbar'
+import Skeleton from 'react-loading-skeleton'
 
 function ImportUser() {
     const dispatch = useDispatch()
@@ -70,7 +72,7 @@ function ImportUser() {
                 }
             })
     }
-    console.log(showModal);
+
     return (
         <div className='import-user'>
             <div className='top-table'>
@@ -119,23 +121,7 @@ function ImportUser() {
                 }
 
             </div>
-            {/* {loadingKategori
-                ?
-                <div className='wrapper-loading'>
-                    <div className='dots loading'><p>Loading...</p></div>
-                </div>
-                : <div className='wrapper-tabbar'>
-                    <Tabbar
-                        options={listKategori}
-                        setKategoriId={setKategoriId}
-                        setCurrentKategori={setCurrentKategori}
-                        setKeterangan={updateInputPengaturan}
-                        searchParams={searchParams.toString()}
-                        path='/pengaturan/import-user'
-                        loading={loadingKategori}
-                    />
-                </div>
-            } */}
+
             {!loadingKategori
                 ? <div className='wrapper-tabbar'>
                     <Tabbar
@@ -150,25 +136,202 @@ function ImportUser() {
                 </div>
 
                 : <div className='wrapper__skeleton'>
-                    <div className='wrapper__tabbar'>
-                        <div className='list__text__skeleton'>
-                            {Array.from({ length: 5 }, (_, index) => (
-                                <div key={index}>
-                                </div>
-                            ))}
+                    <LoadingTabbar amount={5} />
+                    <div className='wrapper__table'>
+                        <div className='column__table'>
+                            <Skeleton
+                                height={20}
+                                width={50}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '4rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={75}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '9.75rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '5.5rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '2rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '2rem' }}
+                            />
                         </div>
+                        {Array.from({ length: 10 }, (_, index) => (
+                            <div className='row__table' key={index}>
+                                <Skeleton
+                                    height={20}
+                                    width={100}
+                                    borderRadius={5}
+                                    count={1}
+                                    style={{ marginRight: '3rem' }}
+                                />
 
-                        <div className='right__square'></div>
+                                <Skeleton
+                                    height={35}
+                                    width={35}
+                                    borderRadius={'50%'}
+                                    circle={true}
+                                    count={1}
+                                    style={{ marginRight: '0.5rem' }}
+                                />
+
+                                <Skeleton
+                                    height={20}
+                                    width={100}
+                                    borderRadius={5}
+                                    count={1}
+                                    style={{ marginRight: '7.25rem' }}
+                                />
+
+                                <Skeleton
+                                    height={20}
+                                    width={100}
+                                    borderRadius={5}
+                                    count={1}
+                                    style={{ marginRight: '7.5rem' }}
+                                />
+
+                                <Skeleton
+                                    height={20}
+                                    width={100}
+                                    borderRadius={5}
+                                    count={1}
+                                    style={{ marginRight: '4rem' }}
+                                />
+
+                                <Skeleton
+                                    height={20}
+                                    width={100}
+                                    borderRadius={5}
+                                    count={1}
+                                    style={{ marginRight: '5rem' }}
+                                />
+                            </div>
+                        ))}
                     </div>
-
-                    <LoadingTable size={'large'} />
                 </div>
             }
 
-            {(loadingKategori || loadingKaryawan) ?
-                <LoadingTable />
-                : <Table />
+            {loadingKategori || loadingKaryawan ?
+                <div className='wrapper__table'>
+                    <div className='column__table'>
+                        <Skeleton
+                            height={20}
+                            width={50}
+                            borderRadius={5}
+                            count={1}
+                            style={{ marginRight: '4rem' }}
+                        />
 
+                        <Skeleton
+                            height={20}
+                            width={75}
+                            borderRadius={5}
+                            count={1}
+                            style={{ marginRight: '9.75rem' }}
+                        />
+
+                        <Skeleton
+                            height={20}
+                            width={100}
+                            borderRadius={5}
+                            count={1}
+                            style={{ marginRight: '5.5rem' }}
+                        />
+
+                        <Skeleton
+                            height={20}
+                            width={100}
+                            borderRadius={5}
+                            count={1}
+                            style={{ marginRight: '2rem' }}
+                        />
+
+                        <Skeleton
+                            height={20}
+                            width={100}
+                            borderRadius={5}
+                            count={1}
+                            style={{ marginRight: '2rem' }}
+                        />
+                    </div>
+                    {Array.from({ length: 10 }, (_, index) => (
+                        <div className='row__table' key={index}>
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '3rem' }}
+                            />
+
+                            <Skeleton
+                                height={35}
+                                width={35}
+                                borderRadius={'50%'}
+                                circle={true}
+                                count={1}
+                                style={{ marginRight: '0.5rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '7.25rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '7.5rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '4rem' }}
+                            />
+
+                            <Skeleton
+                                height={20}
+                                width={100}
+                                borderRadius={5}
+                                count={1}
+                                style={{ marginRight: '5rem' }}
+                            />
+                        </div>
+                    ))}
+                </div>
+                : <Table />
             }
             <LoadingFullscreen loading={loadingImport} />
         </div>

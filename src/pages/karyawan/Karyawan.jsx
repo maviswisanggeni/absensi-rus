@@ -16,6 +16,7 @@ import { getKaryawan, resetTable, updateFieldValue, updateStateKaryawan } from '
 import InfoBox from '../../components/InfoBox'
 
 import LoadingTable from '../../components/LoadingTable'
+import LoadingTabbar from '../../components/LoadingTabbar'
 
 function Karyawan() {
   const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search } = useSelector(state => state.karyawan)
@@ -153,17 +154,7 @@ function Karyawan() {
           </div>
 
           : <div className='wrapper__skeleton'>
-            <div className='wrapper__tabbar'>
-              <div className='list__text__skeleton'>
-                {Array.from({ length: 5 }, (_, index) => (
-                  <div key={index}>
-                  </div>
-                ))}
-              </div>
-
-              <div className='right__square'></div>
-            </div>
-
+            <LoadingTabbar amount={5} />
             <LoadingTable />
           </div>
         }
