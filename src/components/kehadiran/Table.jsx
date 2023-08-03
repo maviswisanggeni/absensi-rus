@@ -173,7 +173,7 @@ function Table() {
                                                 {item?.user?.nama}
                                             </td>
                                             <td>{item?.user?.niy}</td>
-                                            <td>
+                                            <td className='td-jabatan'>
                                                 <DisplayKategoriList list={item.user?.ktgkaryawan} />
                                             </td>
                                             <RowTanggal

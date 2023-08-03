@@ -169,7 +169,7 @@ function Karyawan() {
         }
 
         {(loadingKategori || isLoading) ?
-          <LoadingTable />
+          <LoadingTable size={'large'} />
           : <>
             <Routes>
               {listKategori.map((item, index) => {

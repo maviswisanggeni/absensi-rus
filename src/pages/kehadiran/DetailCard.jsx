@@ -7,7 +7,7 @@ import 'dayjs/locale/id'
 
 function DetailCard({
     type, tanggal, waktu, link_foto, catatan, lokasi, latitude, longitude,
-    is_valid, is_valid_wkt, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull
+    is_valid, is_valid_wkt, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull, keterangan
 }) {
 
     const wrapperRef = useRef(null);
@@ -53,20 +53,33 @@ function DetailCard({
             <div className='card'>
                 <div className='wrapper-img'>
                     <img className='check-img' src={link_foto} onLoad={() => setImgLoaded(true)} />
-                    {imgLoaded || !link_foto ?
+                    {/* {imgLoaded || !link_foto ?
                         <>
                             <img
                                 className={`${link_foto ? '' : 'foto-belum-keluar'} foto-masuk`}
                                 src={link_foto ? link_foto : folderImg}
+                                // src={folderImg}
                                 alt=""
                                 onClick={() => setPopUp(popUp ? false : true)}
                             />
                             {!link_foto ? <p>Belum Absen Keluar</p> : null}
                         </>
                         : <div className={`foto-masuk skeleton__loading`}></div>
+                    } */}
+                    {imgLoaded || !link_foto ?
+                        <>
+                            <img
+                                className={`${is_valid ? '' : 'foto-belum-keluar'} foto-masuk`}
+                                src={is_valid ? link_foto : folderImg}
+                                alt=""
+                                onClick={() => setPopUp(popUp ? false : true)}
+                            />
+                            {!is_valid ? <p>Belum Absen Keluar</p> : null}
+                        </>
+                        : <div className={`foto-masuk skeleton__loading`}></div>
                     }
                 </div>
-                {popUp && link_foto &&
+                {popUp && is_valid &&
                     <div className={popUp ? 'pop-up' : ''} onClick={() => setPopUp(popUp ? false : true)}>
                         <img className='img-user' src={link_foto} alt="" loading='loading' />
                     </div>

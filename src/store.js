@@ -9,12 +9,14 @@ import koordinatSlice from './features/koordinatSlice';
 import karyawanSlice from './features/karyawanSlice';
 import apiMiddleware from './middleware/apiMiddleware';
 import authorizeSlice from './features/authorizeSlice';
+import kehadiranDetailSlice from './features/kehadiranDetailSlice';
 
 export const store = configureStore({
   reducer: {
     statistik: statistikSlice,
     jmlKehadiran: jmlKehadiranSlice,
     kehadiran: kehadiranSlice,
+    kehadiranDetail: kehadiranDetailSlice,
     kategori: kategoriSlice,
     karyawan: karyawanSlice,
     kalender: kalenderSlice,
