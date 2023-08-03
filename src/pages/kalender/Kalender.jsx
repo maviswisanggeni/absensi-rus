@@ -24,13 +24,6 @@ function Kalender() {
     <div className='wrapper-kalender'>
       <Sidebar />
       <div className='kalender'>
-        <InfoBox
-          message={messageResApi}
-          status={statusResApi}
-          isDisplay={isDisplayMessage}
-          setIsDisplay={updateStateKalender}
-          stateName='isDisplayMessage'
-        />
         <CalendarHeader />
         <div className='sidebar-month'>
           <div className='container-days'>
@@ -45,6 +38,13 @@ function Kalender() {
           <Month month={currentMonth} />
         </div>
       </div>
+      <InfoBox
+        message={messageResApi}
+        status={statusResApi}
+        isDisplay={isDisplayMessage}
+        setIsDisplay={updateStateKalender}
+        stateName='isDisplayMessage'
+      />
     </div>
   )
 }

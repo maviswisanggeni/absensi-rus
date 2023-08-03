@@ -28,15 +28,103 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding: 1.5rem 0 1.5rem 2rem;
   border-bottom: 2px solid #eceef2;
   width: 100%;
 }
-.kalender .header h2 {
+.kalender .header .left-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.kalender .header .left-header .wrapper-arrow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.kalender .header .left-header h2 {
   margin-left: 1rem;
   font-size: 30px;
   line-height: 1.75rem;
   font-weight: 400;
+}
+.kalender .header .right-header button {
+  width: 150px;
+  height: 45px;
+}
+.kalender .header .right-header input {
+  display: none;
+}
+.kalender .header .bg-modal .modal-konfirm {
+  width: 500px;
+  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 1rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.kalender .header .bg-modal .modal-konfirm svg {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  width: 13px;
+  height: 13px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.kalender .header .bg-modal .modal-konfirm img {
+  width: 128px;
+  height: 128px;
+}
+.kalender .header .bg-modal .modal-konfirm h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: #5a6474;
+  margin: 2rem 0;
+}
+.kalender .header .bg-modal .modal-konfirm p {
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-weight: 500;
+  font-size: 12px;
+  color: #5a6474;
+}
+.kalender .header .bg-modal .modal-konfirm button {
+  border: none;
+  outline: none;
+  display: grid;
+  place-items: center;
+  background-color: #3661eb;
+  color: #ffffff;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  margin-top: 2rem;
+  font-weight: 500;
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
 }
 .kalender .header .today {
   padding-top: 0.5rem;

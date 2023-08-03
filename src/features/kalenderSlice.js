@@ -247,6 +247,37 @@ export const deleteKalender = createAsyncThunk("kalender/delete", async (id, { r
     }
 })
 
+export const importEvents = createAsyncThunk("kalender/import", async (file, { rejectWithValue }) => {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+        const response = await axios.post(
+            getBaseUrl + `/api/kalender/import`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Bearer ${token()}`,
+                },
+                timeout: 20000
+            }
+        )
+        return response.data
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            throw new Error('Request canceled');
+        }
+
+        if (error.code === 'ECONNABORTED') {
+            return rejectWithValue('Request timeout');
+        } else if (error.response.data.admin === false) {
+            return rejectWithValue('Permission denied');
+        }
+
+        return rejectWithValue(error.message)
+    }
+})
+
 const kalenderSlice = createSlice({
     name: 'kalender',
     initialState,
@@ -459,6 +490,23 @@ const kalenderSlice = createSlice({
                 state.isDisplayMessage = true
             })
             .addCase(deleteKalender.rejected, (state, action) => {
+                state.loading = false
+                state.statusResApi = action.error.message
+                state.messageResApi = action.payload
+                state.isDisplayMessage = true
+            })
+
+
+            .addCase(importEvents.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(importEvents.fulfilled, (state) => {
+                state.loading = false
+                state.statusResApi = 'success'
+                state.messageResApi = 'Event berhasil diimport'
+                state.isDisplayMessage = true
+            })
+            .addCase(importEvents.rejected, (state, action) => {
                 state.loading = false
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
