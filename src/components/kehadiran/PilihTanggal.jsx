@@ -11,7 +11,6 @@ function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateT
 
   function handleClick() {
     setOpen(!open);
-    console.log('fsds');
   }
 
   function change(e) {
@@ -26,7 +25,6 @@ function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateT
       if (
         calendarRef.current
         && !calendarRef.current.contains(event.target)
-        // && !event.target.classList.contains('react-calendar__tile')
         && event.target.tagName !== "ABBR"
       ) {
         setOpen(false);

@@ -352,8 +352,6 @@ const karyawanSlice = createSlice({
             const isIdAlreadyAdded = state.listKtgkaryawan.some((item) => item.id === id);
             if (!isIdAlreadyAdded) {
                 state.listKtgkaryawan.push({ kategori, id });
-            } else {
-                console.log("Item with the same id already exists.");
             }
         },
         deleteKategori: (state, action) => {
@@ -426,7 +424,6 @@ const karyawanSlice = createSlice({
             })
             .addCase(getKaryawan.rejected, (state, action) => {
                 state.isLoading = false;
-                console.log(action);
                 state.statusResApi = action.error.message
                 state.messageResApi = action.payload
                 state.isDisplayMessage = true
