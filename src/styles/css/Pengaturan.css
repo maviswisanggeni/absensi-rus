@@ -5,7 +5,6 @@
 
 .pengaturan {
   width: 1440px;
-  height: 100vh;
   margin: 0 auto;
   background-color: #f9f9f9;
   padding-top: 2rem;
@@ -144,6 +143,9 @@
 }
 .pengaturan .import-user .wrapper__skeleton {
   margin-top: 2rem;
+}
+.pengaturan .import-user .wrapper__table {
+  height: auto;
 }
 .pengaturan .radius-absen {
   width: 100%;

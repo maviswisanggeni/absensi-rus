@@ -7,7 +7,6 @@
 
 .pengaturan {
   width: 1440px;
-  height: 100vh;
   margin: 0 auto;
   background-color: $background-color;
   padding-top: 2rem;
@@ -139,6 +138,10 @@
 
     .wrapper__skeleton {
       margin-top: 2rem;
+    }
+
+    .wrapper__table {
+      height: auto;
     }
   }
 
