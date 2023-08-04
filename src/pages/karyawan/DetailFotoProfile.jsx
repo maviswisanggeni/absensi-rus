@@ -127,14 +127,22 @@ function DetailFotoProfile({ callback }) {
             );
 
             const dataURL = canvasEle.toDataURL("image/jpeg");
-            // console.log(canvasEle);
             setImgAfterCrop(dataURL);
             setCurrentPage("img-cropped");
-            console.log(dataURL);
+
+            setCroppedImgArray((prevArray) => {
+                const updatedArray = [...prevArray];
+                if (updatedArray.length === 2) {
+                    return updatedArray.slice(1);
+                } else {
+                    return updatedArray;
+                }
+            })
 
             fetch(dataURL)
                 .then((res) => res.blob())
                 .then((blob) => {
+                    const originalFileName = file.name;
                     const croppedFile = new File([blob], originalFileName, {
                         type: "image/jpeg",
                         lastModified: Date.now(),
@@ -145,7 +153,11 @@ function DetailFotoProfile({ callback }) {
                     setImgArray((prevArray) => {
                         const updatedArray = [...prevArray];
                         updatedArray[updatedArray.length - 1] = croppedFile;
-                        return updatedArray;
+                        if (updatedArray.length === 2) {
+                            return updatedArray.slice(1);
+                        } else {
+                            return updatedArray;
+                        }
                     });
                 });
         };
@@ -153,16 +165,19 @@ function DetailFotoProfile({ callback }) {
 
     const onCropCancel = () => {
         setCurrentPage("choose-img");
-        // setCroppedImgArray((prevArray) => prevArray.slice(0, -1));
-        // setImgArray((prevArray) => prevArray.slice(0, -1));
-        // setImage(croppedImgArray[croppedImgArray.length - 2]);
-        // setFile(imgArray[imgArray.length - 2])
+
+        if (croppedImgArray.length > 1) {
+            setCroppedImgArray((prevArray) => prevArray.slice(0, -1));
+            setImgArray((prevArray) => prevArray.slice(0, -1));
+            setImage(croppedImgArray[croppedImgArray.length - 2]);
+            setFile(imgArray[imgArray.length - 2])
+        }
 
         if (inputRef.current) {
             inputRef.current.value = '';
         }
     };
-    // console.log(imgAfterCrop);
+
     const onImageSelected = (selectedImg) => {
         setImage(selectedImg);
         setCurrentPage("crop-img");

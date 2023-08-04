@@ -147,15 +147,23 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
             );
 
             const dataURL = canvasEle.toDataURL("image/jpeg");
-
             setImgAfterCrop(dataURL);
             setCurrentPage("img-cropped");
+
+            setCroppedImgArray((prevArray) => {
+                const updatedArray = [...prevArray];
+                if (updatedArray.length === 2) {
+                    return updatedArray.slice(1);
+                } else {
+                    return updatedArray;
+                }
+            })
 
             fetch(dataURL)
                 .then((res) => res.blob())
                 .then((blob) => {
-                    // Convert the Blob to File
-                    const croppedFile = new File([blob], "cropped_image.jpg", {
+                    const originalFileName = file.name;
+                    const croppedFile = new File([blob], originalFileName, {
                         type: "image/jpeg",
                         lastModified: Date.now(),
                     });
@@ -165,7 +173,11 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
                     setImgArray((prevArray) => {
                         const updatedArray = [...prevArray];
                         updatedArray[updatedArray.length - 1] = croppedFile;
-                        return updatedArray;
+                        if (updatedArray.length === 2) {
+                            return updatedArray.slice(1);
+                        } else {
+                            return updatedArray;
+                        }
                     });
                 });
         };
@@ -173,10 +185,12 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
 
     const onCropCancel = () => {
         setCurrentPage("choose-img");
-        setCroppedImgArray((prevArray) => prevArray.slice(0, -1));
-        setImgArray((prevArray) => prevArray.slice(0, -1));
-        setImage(croppedImgArray[croppedImgArray.length - 2]);
-        setFile(imgArray[imgArray.length - 2])
+        if (croppedImgArray.length > 1) {
+            setCroppedImgArray((prevArray) => prevArray.slice(0, -1));
+            setImgArray((prevArray) => prevArray.slice(0, -1));
+            setImage(croppedImgArray[croppedImgArray.length - 2]);
+            setFile(imgArray[imgArray.length - 2])
+        }
 
         if (inputRef.current) {
             inputRef.current.value = '';
