@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
-import Label from '../../components/karyawan/Label'
-import Select from '../../components/karyawan/Select'
 import imgIcon from '../../assets/icons/img-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { listJadwalWeek, updateFieldValue } from '../../features/karyawanSlice'
@@ -13,14 +11,13 @@ function DetailFotoProfile({ callback }) {
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
     const [weekListJadwal, setWeekListJadwal] = useState([])
-    const { nama, niy, linkFoto, listKtgkaryawan, ktgKaryawan, listJadwal } = useSelector(
+    const { nama, niy, linkFoto, listKtgkaryawan, listJadwal } = useSelector(
         (state) => state.karyawan
     );
 
     const inputRef = useRef(null)
 
     const handleChange = function (e) {
-        console.log(e.target.files[0]);
         if (e.target.files && e.target.files[0]) {
             setImage(URL.createObjectURL(e.target.files[0]));
             setFile(e.target.files[0])
@@ -32,30 +29,22 @@ function DetailFotoProfile({ callback }) {
         callback(file)
     }, [file])
 
-    const formatTime = time => {
-        const [hours, minutes] = time?.split(':');
-        const paddedHours = hours.padStart(2, '0'); // Add leading zero if necessary
-        return `${paddedHours}:${minutes}`;
-    };
-
     const handleTimeChange = (e, index, property) => {
         const { value } = e.target;
-
-        // Create a copy of the listJadwal array
         const updatedListJadwal = [...weekListJadwal];
 
-        // Create a copy of the specific item in the listJadwal array
         const updatedItem = { ...updatedListJadwal[index] };
 
-        // Update the specific property in the copied item
-        updatedItem[property] = formatTime(value); // Format the time value
+        if (value === '') {
+            updatedItem[property] = value;
+        } else {
+            updatedItem[property] = value + ':00';
+        }
 
-        // Update the specific item in the copied listJadwal array
         updatedListJadwal[index] = updatedItem;
 
-        // Dispatch the updateFieldValue action with the updated listJadwal
         dispatch(updateFieldValue({ field: 'listJadwal', value: updatedListJadwal }));
-        dispatch(updateFieldValue({ field: 'isFormFilled', value: true }))
+        dispatch(updateFieldValue({ field: 'isFormEditted', value: true }))
     };
 
     useEffect(() => {
@@ -136,7 +125,7 @@ function DetailFotoProfile({ callback }) {
                                         type="time"
                                         name={item.jam_masuk}
                                         className='input'
-                                        value={formatTime(item?.jam_masuk)}
+                                        value={item?.jam_masuk}
                                         onChange={e => handleTimeChange(e, key, 'jam_masuk')}
                                     />
                                     <div className='line'></div>
@@ -144,7 +133,7 @@ function DetailFotoProfile({ callback }) {
                                         type="time"
                                         name={item.jam_masuk}
                                         className='input'
-                                        value={formatTime(item?.jam_pulang)}
+                                        value={item?.jam_pulang}
                                         onChange={e => handleTimeChange(e, key, 'jam_pulang')}
                                     />
                                 </div>

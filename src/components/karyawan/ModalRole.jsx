@@ -41,7 +41,6 @@ function ModalRole({ onClose }) {
 
     function handleAdd(kategori, id) {
         dispatch(updateListKtgkaryawan({ kategori, id }));
-        dispatch(updateFieldValue({ field: 'isFormFilled', value: true }))
     }
 
     return (

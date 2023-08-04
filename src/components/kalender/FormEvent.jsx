@@ -137,7 +137,6 @@ function FormEvent() {
             value: !areArraysEqual(copyForm.peserta, peserta)
         }))
     }, [peserta, copyForm.peserta, loading])
-    // console.log(tanggalMulai);
 
     return (
         <div className='wrapper-form'>

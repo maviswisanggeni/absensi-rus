@@ -4,15 +4,17 @@ import eye from '../../assets/icons/eye.svg'
 import at from '../../assets/icons/at.svg'
 import Label from '../../components/karyawan/Label'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetField, updateFieldError, updateFieldValue } from '../../features/karyawanSlice'
+import { resetField, updateFieldError, updateFieldValue, updateStateKaryawan } from '../../features/karyawanSlice'
+import { useEffect } from 'react'
 
 function DetailForm() {
     const dispatch = useDispatch()
-    const { nama, email, password, noHp, alamat, errors } = useSelector(
+    const { nama, email, password, noHp, alamat, errors, listKtgkaryawan, listJadwal, linkFoto, isLoading, isFormEditted } = useSelector(
         (state) => state.karyawan
     );
 
     const [passwordShown, setPasswordShown] = useState(false);
+    const [copyForm, setCopyForm] = useState({})
 
     function handleUnhide() {
         setPasswordShown(passwordShown ? false : true);
@@ -77,12 +79,105 @@ function DetailForm() {
                 break;
         }
         dispatch(updateFieldError({ field: name, error }));
-        dispatch(updateFieldValue({ field: 'isFormFilled', value: true }))
+
+        const preprocessString = (str) => str.replace(/\r/g, '');
+        if (
+            preprocessString(copyForm[name]) !== value ||
+            preprocessString(copyForm[name]) !== preprocessString(value.trim())
+        ) {
+            dispatch(updateStateKaryawan({
+                name: 'isFormEditted',
+                value: true
+            }))
+        } else {
+            dispatch(updateStateKaryawan({
+                name: 'isFormEditted',
+                value: false
+            }))
+        }
     };
 
     const handleResetField = (field) => {
         dispatch(resetField(field));
     };
+
+
+    function areObjectsEqual(obj1, obj2) {
+        if (!obj1 && !obj2) {
+            return true;
+        }
+
+        if (!obj1 || !obj2) {
+            return false;
+        }
+
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+
+        if (keys1.length !== keys2.length) {
+            return false;
+        }
+
+        for (const key of keys1) {
+            const val1 = obj1[key];
+            const val2 = obj2[key];
+
+            if (typeof val1 === 'object' && typeof val2 === 'object') {
+                if (!areObjectsEqual(val1, val2)) {
+                    return false;
+                }
+            } else if (val1 !== val2) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function areArraysEqual(arr1, arr2) {
+        if (arr1?.length !== arr2?.length) {
+            return false;
+        }
+
+        for (let i = 0; i < arr1.length; i++) {
+            const obj1 = arr1[i];
+            const obj2 = arr2[i];
+
+            if (!areObjectsEqual(obj1, obj2)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    useEffect(() => {
+        setCopyForm({
+            nama: nama,
+            email: email,
+            password: password,
+            noHp: noHp,
+            alamat: alamat,
+            jabatan: listKtgkaryawan,
+            jadwal: listJadwal,
+            foto: linkFoto
+        })
+    }, [isLoading])
+
+    useEffect(() => {
+        dispatch(updateStateKaryawan({
+            name: 'isFormEditted',
+            value: !areArraysEqual(copyForm.jabatan, listKtgkaryawan)
+        }))
+    }, [copyForm, isLoading, listKtgkaryawan, listJadwal])
+
+
+    useEffect(() => {
+        dispatch(updateStateKaryawan({
+            name: 'isFormEditted',
+            value: !areArraysEqual(copyForm.jadwal, listJadwal)
+        }))
+    }, [copyForm, isLoading, listJadwal])
 
     return (
         <div className='form'>
