@@ -113,7 +113,7 @@ const initialState = {
     ],
     isFormValid: false,
     isFormErrorShown: false,
-    isFormFilled: false,
+    isFormEditted: false,
 
     isInitialGet: false,
     statusResApi: '',
@@ -351,7 +351,7 @@ const karyawanSlice = createSlice({
             const { kategori, id } = action.payload;
             const isIdAlreadyAdded = state.listKtgkaryawan.some((item) => item.id === id);
             if (!isIdAlreadyAdded) {
-                state.listKtgkaryawan.push({ kategori, id });
+                state.listKtgkaryawan.push({ id, kategori });
             }
         },
         deleteKategori: (state, action) => {
@@ -447,7 +447,11 @@ const karyawanSlice = createSlice({
                 state.linkFoto = initialData.link_foto;
                 state.listKtgkaryawan = initialData.ktgkaryawan;
                 state.ktgKaryawan = initialData.ktgkaryawan[0]?.kategori;
-                state.listJadwal = initialData.jadwal;
+
+                let filteredJadwal = state.listJadwal.map(obj => initialData.jadwal.find(o => o.hari.toLowerCase() === obj.hari.toLowerCase()) || obj);
+                // state.listJadwal = initialData.jadwal;
+                state.listJadwal = filteredJadwal.map(({ user_id, ...rest }) => rest);
+
                 state.errors = validateForm(state);
             })
             .addCase(detailKaryawan.rejected, (state, action) => {

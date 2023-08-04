@@ -16,7 +16,7 @@ function DetailKaryawan() {
     const dispatch = useDispatch()
     const {
         nama, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan,
-        isLoading, statusResApi, messageResApi, isDisplayMessage, loadingEdit, isFormFilled
+        statusResApi, messageResApi, isDisplayMessage, loadingEdit, isFormEditted
     } = useSelector((state) => state.karyawan)
     let navigate = useNavigate()
     const [showAlertBack, setShowAlertBack] = useState(false)
@@ -31,7 +31,7 @@ function DetailKaryawan() {
         dispatch(detailKaryawan(userId.id))
         dispatch(getKategori())
         dispatch(resetListKaryawan())
-        dispatch(updateStateKaryawan({ name: 'isFormFilled', value: false }))
+        dispatch(updateStateKaryawan({ name: 'isFormEditted', value: false }))
     }, [userId])
 
     function updateUser(e) {
@@ -59,7 +59,7 @@ function DetailKaryawan() {
     }
 
     function handleBack() {
-        if (isFormFilled) {
+        if (isFormEditted) {
             setShowAlertBack(true)
         } else {
             navigate(-1)
