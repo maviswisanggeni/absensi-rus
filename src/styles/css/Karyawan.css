@@ -400,7 +400,7 @@
   -ms-flex-item-align: start;
       align-self: flex-start;
 }
-.detail-karyawan .detail-profile .div-1 img {
+.detail-karyawan .detail-profile .div-1 .img-profile {
   width: 124px;
   height: 124px;
   border-radius: 50%;

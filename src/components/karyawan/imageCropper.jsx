@@ -33,7 +33,7 @@ function ImageCropper({ image, onCropDone, onCropCancel }) {
                     <button onClick={onCropCancel}>Cancel</button>
                     <button
                         onClick={() => {
-                            onCropDone(croppedArea);
+                            onCropDone(croppedArea)
                         }}
                     >
                         Done

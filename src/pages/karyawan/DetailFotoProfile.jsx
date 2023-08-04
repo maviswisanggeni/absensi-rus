@@ -1,16 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useApiKaryawanUpdate } from '../../contexts/api/karyawan/ContextApiKaryawanEdit'
 import imgIcon from '../../assets/icons/img-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { listJadwalWeek, updateFieldValue } from '../../features/karyawanSlice'
+import { updateFieldValue } from '../../features/karyawanSlice'
 import JabatanSelect from '../../components/karyawan/JabatanSelect'
+import useImgError from '../../hooks/useImgError'
+import ImageCropper from '../../components/karyawan/imageCropper'
 
 function DetailFotoProfile({ callback }) {
     const dispatch = useDispatch()
-    const context = useApiKaryawanUpdate()
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
     const [weekListJadwal, setWeekListJadwal] = useState([])
+
+    const [currentPage, setCurrentPage] = useState("choose-img");
+    const [imgAfterCrop, setImgAfterCrop] = useState("");
+    const [croppedImgArray, setCroppedImgArray] = useState([]);
+    const [imgArray, setImgArray] = useState([]);
     const { nama, niy, linkFoto, listKtgkaryawan, listJadwal } = useSelector(
         (state) => state.karyawan
     );
@@ -18,10 +23,20 @@ function DetailFotoProfile({ callback }) {
     const inputRef = useRef(null)
 
     const handleChange = function (e) {
+        e.preventDefault();
+
         if (e.target.files && e.target.files[0]) {
-            setImage(URL.createObjectURL(e.target.files[0]));
+            // setImage(URL.createObjectURL(e.target.files[0]));
             setFile(e.target.files[0])
-            context.setFoto(e.target?.files[0])
+
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = function () {
+                onImageSelected(reader.result);
+
+                setCroppedImgArray((prevArray) => [...prevArray, reader.result]);
+                setImgArray((prevArray) => [...prevArray, e.target.files[0]]);
+            };
         }
     };
 
@@ -89,19 +104,108 @@ function DetailFotoProfile({ callback }) {
         setWeekListJadwal(res)
     }, [listJadwal])
 
+    const onCropDone = (imgCroppedArea) => {
+        const canvasEle = document.createElement("canvas");
+        canvasEle.width = imgCroppedArea.width;
+        canvasEle.height = imgCroppedArea.height;
+
+        const context = canvasEle.getContext("2d");
+
+        let imageObj1 = new Image();
+        imageObj1.src = image;
+        imageObj1.onload = function () {
+            context.drawImage(
+                imageObj1,
+                imgCroppedArea.x,
+                imgCroppedArea.y,
+                imgCroppedArea.width,
+                imgCroppedArea.height,
+                0,
+                0,
+                imgCroppedArea.width,
+                imgCroppedArea.height
+            );
+
+            const dataURL = canvasEle.toDataURL("image/jpeg");
+            // console.log(canvasEle);
+            setImgAfterCrop(dataURL);
+            setCurrentPage("img-cropped");
+            console.log(dataURL);
+
+            fetch(dataURL)
+                .then((res) => res.blob())
+                .then((blob) => {
+                    const croppedFile = new File([blob], originalFileName, {
+                        type: "image/jpeg",
+                        lastModified: Date.now(),
+                    });
+
+                    setFile(croppedFile);
+
+                    setImgArray((prevArray) => {
+                        const updatedArray = [...prevArray];
+                        updatedArray[updatedArray.length - 1] = croppedFile;
+                        return updatedArray;
+                    });
+                });
+        };
+    };
+
+    const onCropCancel = () => {
+        setCurrentPage("choose-img");
+        // setCroppedImgArray((prevArray) => prevArray.slice(0, -1));
+        // setImgArray((prevArray) => prevArray.slice(0, -1));
+        // setImage(croppedImgArray[croppedImgArray.length - 2]);
+        // setFile(imgArray[imgArray.length - 2])
+
+        if (inputRef.current) {
+            inputRef.current.value = '';
+        }
+    };
+    // console.log(imgAfterCrop);
+    const onImageSelected = (selectedImg) => {
+        setImage(selectedImg);
+        setCurrentPage("crop-img");
+    };
+
     return (
         <div className='detail-profile'>
             <div className='div-1'>
                 <h1>Foto Profile</h1>
                 <div className='wrapper-img'>
-                    <img src={
-                        image ? image : linkFoto
-                    } alt="" />
+                    <img
+                        src={
+                            !imgAfterCrop ? linkFoto : imgAfterCrop
+                        }
+                        onError={useImgError}
+                        className='img-profile'
+                        alt=""
+                    />
                     <div className='edit-img'>
-                        <input type="file" ref={inputRef} onChange={handleChange} />
+                        <input type="file" ref={inputRef} onChange={handleChange} accept="image/png, image/gif, image/jpeg" />
                         <img src={imgIcon} onClick={() => inputRef.current.click()} />
                     </div>
                 </div>
+
+                {currentPage === 'crop-img' &&
+                    <ImageCropper
+                        image={image}
+                        onCropDone={onCropDone}
+                        onCropCancel={onCropCancel}
+                    />
+                }
+
+                {(currentPage === "img-cropped" || imgAfterCrop) &&
+                    <div className='wrapper__btn'>
+                        <button className='edit__btn' onClick={() => setCurrentPage("crop-img")}>
+                            Edit Crop
+                        </button>
+                        <button className='ganti__btn' onClick={() => inputRef.current.click()}>
+                            Ganti gambar
+                        </button>
+                    </div>
+                }
+
                 <h3>{nama}</h3>
                 <p>{niy}</p>
             </div>

@@ -69,7 +69,7 @@ function DetailKaryawan() {
     return (
         <div className='wrapper-karyawan'>
             <Sidebar />
-            <form className='detail-karyawan' onSubmit={updateUser}>
+            <div className='detail-karyawan'>
                 <div className='navigation'>
                     <div>
                         <img src={arrowLeft} alt="" onClick={handleBack} />
@@ -84,14 +84,14 @@ function DetailKaryawan() {
                             errors.alamat === ""
                             ? false : true
                     }
-                        type="submit" value='Konfirmasi' className='btn-submit' />
+                        type="button" value='Konfirmasi' className='btn-submit' onClick={updateUser} />
                 </div>
                 <div className='detail-form'>
                     <DetailForm />
                     <DetailFotoProfile callback={callback} />
                 </div>
                 <LoadingFullscreen loading={loadingEdit} />
-            </form>
+            </div>
 
             {showAlertBack &&
                 <div className='bg-modal'>
