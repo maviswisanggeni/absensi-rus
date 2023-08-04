@@ -64,7 +64,6 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
 
             const reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
-            console.log(e.target.files);
             reader.onload = function () {
                 onImageSelected(reader.result);
 
@@ -183,8 +182,6 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
             inputRef.current.value = '';
         }
     };
-
-    // console.log(currentPage);
 
     return (
         <div>
