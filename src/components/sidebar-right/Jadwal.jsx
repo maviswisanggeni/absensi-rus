@@ -29,9 +29,12 @@ function Jadwal() {
   return (
     <div className='jadwal'>
       <h1>Event</h1>
-      {!loading ? <Skeleton width={300} height={102} /> :
-        data?.length === 0 ? <p>Tidak ada event hingga akhir bulan ini</p> :
-          data?.map((item, key) => {
+      {!loading
+        ? Array.from({ length: 3 }, (_, index) => (
+          <Skeleton width={300} height={102} style={{ marginBottom: '1rem' }} />
+        ))
+        : data?.length === 0 ? <p>Tidak ada event hingga akhir bulan ini</p>
+          : data?.map((item, key) => {
             return (
               <CardJadwal title={item.judul} date={dayjs(item.waktu_mulai).format('DD MMMM YYYY, HH:mm -') + dayjs(item.waktu_selesai).format(' HH:mm')} lokasi={item.lokasi} key={key} />
             )

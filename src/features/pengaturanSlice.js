@@ -588,6 +588,9 @@ const pengaturanSlice = createSlice({
             })
             .addCase(updateBatasWaktu.fulfilled, (state) => {
                 state.loadingKategori = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Batas waktu berhasil diupdate'
+                state.isDisplayMessage = true
             })
 
             .addCase(updateBatasWaktu.rejected, (state, action) => {

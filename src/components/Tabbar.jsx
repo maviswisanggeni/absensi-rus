@@ -41,7 +41,7 @@ function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, set
     dispatch(setKategoriId(index));
 
     const activeElement = refs.current.find(ref => ref.current.className === 'active');
-    console.log(refs.current.find(ref => ref.current));
+
     if (activeElement) {
       const width = activeElement.current.offsetWidth;
       const left = activeElement.current.offsetLeft;
@@ -66,7 +66,6 @@ function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, set
                 className={current === option.kategori ? 'active' : ''}
               >
                 {option.kategori}
-                {/* <span>{option.kategori}</span> */}
               </div>
             </Link>
           )

@@ -9,7 +9,7 @@ function NavbarPengaturan() {
             <div className='wrapper-navbar'>
                 <div className='wrapper-logo'>
                     <img src={rusLogo} alt="" />
-                    <h1>SMK Raden Umar Sadi</h1>
+                    <h1>SMK Raden Umar Said</h1>
                 </div>
                 <Profile />
             </div>

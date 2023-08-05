@@ -54,7 +54,7 @@ function Karyawan() {
 
   useEffect(() => {
     if (searchParams.get('search') && !loadingKategori) {
-      dispatch(updateStateKaryawan({ name: 'search', value: searchParams.get('paginate') }));
+      dispatch(updateStateKaryawan({ name: 'search', value: searchParams.get('search') }));
       dispatch(getKaryawan({ search: searchParams.get('search') }))
     }
   }, [loadingKategori])
@@ -80,7 +80,6 @@ function Karyawan() {
 
   useEffect(() => {
     if (isKategoriUpdated && kategoriId && !searchParams.get('search')) {
-      // console.log('get karyawan');
       dispatch(getKaryawan({ kategori_id: kategoriId }));
       dispatch(updateFieldValue({ field: 'kategoriId', value: kategoriId }));
       setIsKategoriUpdated(false);
