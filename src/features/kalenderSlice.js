@@ -37,7 +37,7 @@ const initialState = {
     messageResApi: '',
     isDisplayMessage: false,
 
-    loading: false,
+    loading: true,
     loadngGetKaryawan: false,
     loadingSearch: false
 }

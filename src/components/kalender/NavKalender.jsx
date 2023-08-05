@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteKalender, storeKalender, updateKalender, updateStateKalender } from '../../features/kalenderSlice'
 import dayjs from 'dayjs'
 import { showFormError } from '../../features/kalenderSlice'
+import LoadingFullscreen from '../LoadingFullscreen'
 
 function NavKalender() {
   let navigate = useNavigate()
@@ -151,14 +152,8 @@ function NavKalender() {
           value='Konfirmasi'
           className='btn-submit'
           onClick={handleSubmit}
-        // disabled={
-        //   kategoriEvent === 'event'
-        //     ? validateBtnEvent()
-        //     : validateBtnLibur()
-        // }
         />
       </div>
-      {/* {loading ? <div className='loading-fullscreen'><div className='loading'></div></div> : null} */}
 
       {showAlertBack &&
         <div className='bg-modal'>
@@ -185,6 +180,8 @@ function NavKalender() {
           </div>
         </div>
       }
+
+      <LoadingFullscreen loading={loading} />
     </div>
   )
 }

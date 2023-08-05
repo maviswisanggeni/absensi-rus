@@ -1,6 +1,17 @@
 @use "../mixins/modal-styles";
 @import "../variables/variables.scss";
 
+::-webkit-scrollbar {
+  width: 14px;
+  height: 1px;
+}
+::-webkit-scrollbar-thumb {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #aaaaaa;
+}
+
 .wrapper-dashboard,
 .wrapper-kehadiran,
 .wrapper-karyawan,
@@ -11,85 +22,11 @@
   max-width: 1440px;
   display: flex;
   margin: 0 auto;
-  padding: 1rem;
 }
 
 .no-scroll {
   overflow: hidden;
 }
-
-/* ===== Scrollbar CSS ===== */
-// ::-webkit-scrollbar {
-//   width: 8px;
-//   height: 8px;
-// }
-// ::-webkit-scrollbar-button {
-//   width: 0px;
-//   height: 0px;
-// }
-// ::-webkit-scrollbar-thumb {
-//   background: #3661eb;
-//   border: 0px none #ffffff;
-//   border-radius: 50px;
-// }
-// ::-webkit-scrollbar-thumb:hover {
-//   background: rgb(54, 97, 235, 0.7);
-// }
-// ::-webkit-scrollbar-thumb:active {
-//   background: rgb(54, 97, 235, 0.7);
-// }
-// ::-webkit-scrollbar-track {
-//   background: #ffffff;
-//   border: 0px none #ffffff;
-//   border-radius: 50px;
-// }
-// ::-webkit-scrollbar-track:hover {
-//   background: #ffffff;
-// }
-// ::-webkit-scrollbar-track:active {
-//   background: #ffffff;
-// }
-// ::-webkit-scrollbar-corner {
-//   background: transparent;
-// }
-
-/* Styling for the custom scrollbar with right padding */
-::-webkit-scrollbar {
-  width: 14px;
-  height: 1px;
-  // background: rgb(236, 236, 236);
-}
-::-webkit-scrollbar-thumb {
-  border: 3px solid rgba(0, 0, 0, 0);
-  background-clip: padding-box;
-  border-radius: 9999px;
-  background-color: #aaaaaa;
-}
-// ::-webkit-scrollbar-thumb {
-//   background: #8c8c8c;
-//   border: 0px none #ffffff;
-//   border-radius: 50px;
-// }
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #8c8c8c;
-// }
-// ::-webkit-scrollbar-thumb:active {
-//   background: #8c8c8c;
-// }
-// ::-webkit-scrollbar-track {
-//   background: #ffffff;
-//   border: 0px none #ffffff;
-//   border-radius: 50px;
-// }
-// ::-webkit-scrollbar-track:hover {
-//   background: #ffffff;
-// }
-// ::-webkit-scrollbar-track:active {
-//   background: #ffffff;
-// }
-// ::-webkit-scrollbar-corner {
-//   background: transparent;
-// }
 
 .main-dashboard,
 .main-kehadiran {

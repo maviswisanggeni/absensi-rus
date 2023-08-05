@@ -1,3 +1,15 @@
+::-webkit-scrollbar {
+  width: 14px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #aaaaaa;
+}
+
 .wrapper-dashboard,
 .wrapper-kehadiran,
 .wrapper-karyawan,
@@ -10,25 +22,10 @@
   display: -ms-flexbox;
   display: flex;
   margin: 0 auto;
-  padding: 1rem;
 }
 
 .no-scroll {
   overflow: hidden;
-}
-
-/* ===== Scrollbar CSS ===== */
-/* Styling for the custom scrollbar with right padding */
-::-webkit-scrollbar {
-  width: 14px;
-  height: 1px;
-}
-
-::-webkit-scrollbar-thumb {
-  border: 3px solid rgba(0, 0, 0, 0);
-  background-clip: padding-box;
-  border-radius: 9999px;
-  background-color: #aaaaaa;
 }
 
 .main-dashboard,

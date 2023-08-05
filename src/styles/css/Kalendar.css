@@ -31,8 +31,9 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 1.5rem 0 1.5rem 2rem;
+  padding: 1rem 2rem;
   border-bottom: 2px solid #eceef2;
+  border-right: 2px solid #eceef2;
   width: 100%;
 }
 .kalender .header .left-header {
@@ -42,6 +43,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 1rem;
 }
 .kalender .header .left-header .wrapper-arrow {
   display: -webkit-box;
@@ -49,10 +51,22 @@
   display: flex;
 }
 .kalender .header .left-header h2 {
-  margin-left: 1rem;
   font-size: 30px;
   line-height: 1.75rem;
   font-weight: 400;
+}
+.kalender .header .left-header button {
+  width: 75px;
+  height: 45px;
+  background-color: white;
+  border: 2px solid #eceef2;
+  color: black;
+  font-weight: 500;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+.kalender .header .left-header button:hover {
+  background-color: #f9f9f9;
 }
 .kalender .header .right-header button {
   width: 150px;

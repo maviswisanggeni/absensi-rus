@@ -22,16 +22,15 @@ function initEvents() {
 }
 
 export default function WrapperCalendar(props) {
-    const [monthIndex, setMonthIndex] = useState(dayjs().month())
+    const storedMonthIndex = localStorage.getItem('selectedMonth');
+    const month = storedMonthIndex ? parseInt(storedMonthIndex) : dayjs().month();
+
+    const [monthIndex, setMonthIndex] = useState(month)
     const [smallCalendarMonth, setSmallCalendarMonth] = useState(null)
     const [daySelected, setDaySelected] = useState(dayjs())
     const [showEventModal, setShowEventModal] = useState(false)
     const [selectedEvent, setSelectedEvent] = useState(null)
     const [savedEvents, dispatchCalEvent] = useReducer(savedEventsReducer, [], initEvents)
-
-    useEffect(() => {
-        localStorage.setItem('savedEvents', JSON.stringify(savedEvents))
-    }, [savedEvents])
 
     useEffect(() => {
         if (smallCalendarMonth !== null) {

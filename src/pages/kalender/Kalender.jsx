@@ -8,17 +8,24 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { getKalender, updateStateKalender } from '../../features/kalenderSlice';
 import InfoBox from '../../components/InfoBox';
+import { useSearchParams } from 'react-router-dom';
 
 function Kalender() {
   const [currentMonth, setCurrentMonth] = useState(getMonth())
-  const { monthIndex, showEventModal } = useContext(GlobalCalendar)
-  const { statusResApi, messageResApi, isDisplayMessage } = useSelector(state => state.kalender)
+  const { monthIndex, setMonthIndex } = useContext(GlobalCalendar)
+  const { statusResApi, messageResApi, isDisplayMessage, listEvent } = useSelector(state => state.kalender)
   const dispatch = useDispatch()
+  const [params, setParams] = useSearchParams()
 
   useEffect(() => {
-    setCurrentMonth(getMonth(monthIndex))
     dispatch(getKalender(monthIndex + 1))
-  }, [monthIndex])
+    setCurrentMonth(getMonth(monthIndex))
+    setParams({ month: monthIndex + 1 })
+  }, [monthIndex, dispatch])
+
+  useEffect(() => {
+    localStorage.setItem('selectedMonth', monthIndex);
+  }, [monthIndex]);
 
   return (
     <div className='wrapper-kalender'>
