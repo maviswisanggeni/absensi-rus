@@ -41,7 +41,6 @@ function AddKaryawan() {
     async function addUser(e) {
         e.preventDefault();
         dispatch(showFormError())
-        console.log('add user');
         if (isFormValid) {
             const filteredKategori = Object.values(listKtgkaryawan).map(item => item.id);
             const filteredListJadwal = listJadwal.filter((jadwal) => jadwal.jam_masuk !== '' && jadwal.jam_pulang !== '');

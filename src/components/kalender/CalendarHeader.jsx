@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import arrow from '../../assets/icons/arrow-kalendar.svg'
 import GlobalCalendar from '../../contexts/app/GlobalCalendar'
 import dayjs from 'dayjs'
@@ -13,15 +13,17 @@ import LoadingFullscreen from '../LoadingFullscreen'
 
 export default function CalendarHeader() {
   const { monthIndex, setMonthIndex } = useContext(GlobalCalendar)
-  const { loading, messageResApi, statusResApi, isDisplayMessage } = useSelector(state => state.kalender)
+  const { messageResApi, statusResApi, isDisplayMessage } = useSelector(state => state.kalender)
   const dispatch = useDispatch()
   const inputFileRef = useRef(null)
   const [showModal, setShowModal] = useState(false)
   const [file, setFile] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   function handlePrevMonth() {
     setMonthIndex(monthIndex - 1);
   }
+
   function handleNextMonth() {
     setMonthIndex(monthIndex + 1);
   }
@@ -43,12 +45,14 @@ export default function CalendarHeader() {
   }
 
   function handleImport() {
+    setLoading(true)
     dispatch(importEvents(file))
       .then((res) => {
         if (res.meta.requestStatus === "fulfilled") {
           setShowModal(false)
           inputFileRef.current.value = '';
           dispatch(getKalender(monthIndex + 1))
+          setLoading(false)
         }
       })
   }
@@ -63,7 +67,12 @@ export default function CalendarHeader() {
         <h2 className='h2'>
           {dayjs(new Date(dayjs().year(), monthIndex)).format('MMMM YYYY')}
         </h2>
+        <Button
+          text={'Hari ini'}
+          onClick={handleReset}
+        />
       </div>
+
 
       <div className='right-header'>
         <Button

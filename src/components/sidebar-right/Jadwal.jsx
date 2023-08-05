@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import CardJadwal from './CardJadwal'
 import dayjs from 'dayjs';
+import Skeleton from 'react-loading-skeleton';
 
 function Jadwal() {
   const [data, setData] = useState(null)
@@ -28,7 +29,7 @@ function Jadwal() {
   return (
     <div className='jadwal'>
       <h1>Event</h1>
-      {!loading ? <div className='loading'></div> :
+      {!loading ? <Skeleton width={300} height={102} /> :
         data?.length === 0 ? <p>Tidak ada event hingga akhir bulan ini</p> :
           data?.map((item, key) => {
             return (

@@ -10,13 +10,14 @@ import 'dayjs/locale/id'
 
 export default function Day({ day, rowIdx }) {
     const [dayEvents, setDayEvents] = useState([])
-    const { setDaySelected, setShowEventModal, savedEvents, setSelectedEvent, selectedEvent, monthIndex, daySelected } = useContext(GlobalCalendar)
+    const { setDaySelected, savedEvents, setSelectedEvent } = useContext(GlobalCalendar)
     const modalRef = useRef(null)
     const [modalActive, setModalActive] = useState(null)
     const navigate = useNavigate()
     const context = useApiKalender()
     const { listEvent, loading } = useSelector((state) => state.kalender)
     const dispatch = useDispatch()
+
     useEffect(() => {
         const events = listEvent.filter(evt => dayjs(evt.waktu_mulai).format("DD-MM-YY") === day.format("DD-MM-YY"))
         setDayEvents(events)

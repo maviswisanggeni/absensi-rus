@@ -159,6 +159,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 2rem;
+  padding-left: 3rem;
 }
 .kehadiran table .row-img {
   padding: 0.5rem 0.75rem;
@@ -765,6 +766,17 @@
   margin-right: 1.5rem;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.sidebar-right .kehadiran-terbaru .skeleton-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style: none;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }
 .sidebar-right .profile {
   border: 1px solid #eceef2;

@@ -164,13 +164,13 @@
           justify-content: space-between;
   width: 100%;
   background-color: white;
-  padding-right: 2rem;
   border: 1px solid #eceef2;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   position: relative;
 }
 .karyawan .tabbar-filter .filter-angka {
+  width: 15%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -178,6 +178,9 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .karyawan .tabbar-filter .filter-angka p {
   color: #9b9b9b;

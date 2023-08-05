@@ -1,6 +1,17 @@
 @use "../mixins/modal-styles";
 @import "../variables/variables.scss";
 
+::-webkit-scrollbar {
+  width: 14px;
+  height: 1px;
+}
+::-webkit-scrollbar-thumb {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #aaaaaa;
+}
+
 .wrapper-dashboard,
 .wrapper-kehadiran,
 .wrapper-karyawan,
@@ -15,28 +26,6 @@
 
 .no-scroll {
   overflow: hidden;
-}
-
-/* ===== Scrollbar CSS ===== */
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: $blue-light #ffffff;
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 5px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #ffffff;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: $blue-light;
-  border-radius: 10px;
-  border: 0px solid #ffffff;
 }
 
 .main-dashboard,
@@ -494,6 +483,8 @@
   flex-direction: column;
   width: fit-content;
   position: relative;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
 
   a {
     text-decoration: none;
@@ -503,7 +494,7 @@
     display: flex;
 
     div {
-      width: 130px;
+      min-width: 130px;
       height: 60px;
       text-align: center;
       transition: border 0.3s ease-in-out;
@@ -514,6 +505,13 @@
       color: $grey;
       display: grid;
       place-items: center;
+      transition: all 0.2s ease-in-out;
+      padding: 0 2rem;
+      white-space: nowrap;
+    }
+
+    div:hover {
+      color: $primary-color;
     }
 
     div.active {

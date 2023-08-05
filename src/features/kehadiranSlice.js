@@ -74,7 +74,7 @@ const kehadiranSlice = createSlice({
             { kategori: 'Keluar', id: 2 },
             { kategori: 'Sukses', id: 3 },
             { kategori: 'Izin', id: 4 },
-            { kategori: 'Absen', id: 5 }
+            { kategori: 'Absen', id: 5 },
         ],
         kehadiranMasuk: [],
         kehadiranKeluar: [],

@@ -34,7 +34,7 @@ function Dashboard() {
   // useEffect(() => {
   //   Pusher.logToConsole = true;
 
-  //   const pusher = new Pusher('7b9c2c870e01322901d9', {
+  //   const pusher = new Pusher('', {
   //     cluster: 'ap1'
   //   });
 

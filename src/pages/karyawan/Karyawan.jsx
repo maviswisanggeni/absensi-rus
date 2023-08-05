@@ -14,9 +14,9 @@ import { getKategori, setCurrentKategori, setIsInitial, setKategoriId } from '..
 import { useState } from 'react'
 import { getKaryawan, resetTable, updateFieldValue, updateStateKaryawan } from '../../features/karyawanSlice'
 import InfoBox from '../../components/InfoBox'
-
 import LoadingTable from '../../components/LoadingTable'
 import LoadingTabbar from '../../components/LoadingTabbar'
+import Skeleton from 'react-loading-skeleton'
 
 function Karyawan() {
   const { listKaryawan, isLoading, statusResApi, messageResApi, isDisplayMessage, search } = useSelector(state => state.karyawan)
@@ -64,7 +64,6 @@ function Karyawan() {
       const initialOption = listKategori.find(option =>
         option.kategori === decodeURIComponent(location.pathname.split('/').pop())
       );
-      // console.log(initialOption);
       if (initialOption) {
         dispatch(setCurrentKategori(initialOption.kategori))
         dispatch(setKategoriId(initialOption.id))
@@ -146,15 +145,25 @@ function Karyawan() {
             />
 
             <div className='filter-angka'>
-              <Filter option1="Sesuai abjad" option2="Urut NIY"
-                setState={updateStateKaryawan}
-              />
-              <p>{listKaryawan.length + ' Guru'}</p>
+              {isLoading
+                ? <Skeleton
+                  width={100}
+                  height={25}
+                />
+                : <>
+                  <Filter option1="Sesuai abjad" option2="Urut NIY"
+                    setState={updateStateKaryawan}
+                  />
+                  <p>{listKaryawan.length + ' Guru'}</p>
+
+                </>
+              }
             </div>
+
           </div>
 
           : <div className='wrapper__skeleton'>
-            <LoadingTabbar amount={5} />
+            <LoadingTabbar amount={5} loadingFilter={isLoading} />
             <LoadingTable />
           </div>
         }
