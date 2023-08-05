@@ -2,6 +2,7 @@
 
 .bg-pengaturan {
   width: 100vw;
+  height: 100vh;
   background-color: $background-color;
 }
 
@@ -28,7 +29,8 @@
   }
 
   .import-user {
-    width: 100%;
+    width: 1100px;
+    margin-left: auto;
 
     .top-table {
       display: flex;
@@ -70,6 +72,11 @@
         height: 13px;
         margin-bottom: 1rem;
         cursor: pointer;
+      }
+
+      img {
+        width: 128px;
+        height: 128px;
       }
 
       h3 {
@@ -338,6 +345,11 @@
         height: 13px;
         margin-bottom: 1rem;
         cursor: pointer;
+      }
+
+      img {
+        width: 128px;
+        height: 128px;
       }
 
       h3 {
@@ -637,6 +649,18 @@
               text-align: center;
               width: auto;
               font-size: 12px;
+            }
+
+            .skeleton-tambah-anggota {
+              display: flex;
+              align-items: center;
+              gap: 1rem;
+
+              div {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              }
             }
           }
 

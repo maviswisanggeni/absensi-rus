@@ -48,25 +48,27 @@ function KehadiranTerbaru() {
 
       <ul>
         {loadingKehadiranTerbaru
-          ? <div className='skeleton-wrapper'>
-            <Skeleton
-              circle={true}
-              width={40}
-              height={40}
-            />
-
-            <div>
+          ? Array.from({ length: 5 }, (_, index) => (
+            <div className='skeleton-wrapper'>
               <Skeleton
-                width={80}
-                height={18}
+                circle={true}
+                width={40}
+                height={40}
               />
 
-              <Skeleton
-                width={104}
-                height={18}
-              />
+              <div>
+                <Skeleton
+                  width={80}
+                  height={18}
+                />
+
+                <Skeleton
+                  width={104}
+                  height={18}
+                />
+              </div>
             </div>
-          </div>
+          ))
           : kehadiranTerbaru?.length === 0
             ? <div className='no-data'>Tidak ada data</div>
             : kehadiranTerbaru?.map((item, index) => (

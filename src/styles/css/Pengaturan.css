@@ -1,5 +1,6 @@
 .bg-pengaturan {
   width: 100vw;
+  height: 100vh;
   background-color: #f9f9f9;
 }
 
@@ -31,7 +32,8 @@
   font-size: 14px;
 }
 .pengaturan .import-user {
-  width: 100%;
+  width: 1100px;
+  margin-left: auto;
 }
 .pengaturan .import-user .top-table {
   display: -webkit-box;
@@ -82,6 +84,10 @@
   height: 13px;
   margin-bottom: 1rem;
   cursor: pointer;
+}
+.pengaturan .import-user .top-table img {
+  width: 128px;
+  height: 128px;
 }
 .pengaturan .import-user .top-table h3 {
   font-style: normal;
@@ -353,6 +359,10 @@
   height: 13px;
   margin-bottom: 1rem;
   cursor: pointer;
+}
+.pengaturan .kategori-karyawan .modal-kategori img {
+  width: 128px;
+  height: 128px;
 }
 .pengaturan .kategori-karyawan .modal-kategori h3 {
   font-style: normal;
@@ -707,6 +717,24 @@
   text-align: center;
   width: auto;
   font-size: 12px;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .wrapper-list .skeleton-tambah-anggota {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+}
+.pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .wrapper-list .skeleton-tambah-anggota div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
 }
 .pengaturan .detail-kategori-karyawan .bg-modal .modal-tambah-anggota .padding .dropdown-container {
   background-color: #ffffff;

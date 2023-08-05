@@ -188,24 +188,34 @@ function EditKategoriKaryawan() {
                             <h4>Anggota</h4>
                             <div className='wrapper-list'>
                                 {listKaryawanNotFinal.length === 0 ? <p className='empty'>Data tidak ditemukan</p>
-                                    : listKaryawanNotFinal.map((item, index) => {
-                                        const isCurrentId = item.ktgkaryawan.some((data) => data.id == kategoriId);
-
-                                        if (!isCurrentId) {
-                                            return (
-                                                <div className='container-anggota' key={index}>
-                                                    <Checkbox
-                                                        name='listKaryawanNotFinal'
-                                                        control={index}
-                                                        onChange={() => handleChangeCheckbox('listKaryawanNotFinal', item, item.id)}
-                                                        checked={item.isChecked}
-                                                    />
-                                                    <img src={item.link_foto} onError={useImgError} alt='' />
-                                                    <label htmlFor={index}>{item.nama}</label>
+                                    : loadingKategori
+                                        ? Array.from({ length: 15 }, (_, index) => (
+                                            <div className='skeleton-tambah-anggota'>
+                                                <Skeleton width={20} height={20} />
+                                                <div>
+                                                    <Skeleton width={25} height={25} circle={true} />
+                                                    <Skeleton width={50} height={20} />
                                                 </div>
-                                            );
-                                        }
-                                    })
+                                            </div>
+                                        ))
+                                        : listKaryawanNotFinal.map((item, index) => {
+                                            const isCurrentId = item.ktgkaryawan.some((data) => data.id == kategoriId);
+
+                                            if (!isCurrentId) {
+                                                return (
+                                                    <div className='container-anggota' key={index}>
+                                                        <Checkbox
+                                                            name='listKaryawanNotFinal'
+                                                            control={index}
+                                                            onChange={() => handleChangeCheckbox('listKaryawanNotFinal', item, item.id)}
+                                                            checked={item.isChecked}
+                                                        />
+                                                        <img src={item.link_foto} onError={useImgError} alt='' />
+                                                        <label htmlFor={index}>{item.nama}</label>
+                                                    </div>
+                                                );
+                                            }
+                                        })
 
                                 }
                             </div>
