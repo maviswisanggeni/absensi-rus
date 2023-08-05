@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -8,6 +8,9 @@ function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, set
   let location = useLocation()
   const [current, setCurrent] = useState(null)
   const [index, setIndex] = useState(null)
+  const refs = useRef(options.map(React.createRef))
+  const [lineWidth, setLineWidth] = useState(0);
+  const [lineTranslateX, setLineTranslateX] = useState(0);
 
   useEffect(() => {
     if (options.length > 0) {
@@ -33,16 +36,38 @@ function Tabbar({ options, setKeterangan, searchParams, path, setKategoriId, set
     dispatch(setKategoriId(index))
   }, [current])
 
-  const lineWidth = `${100 / options.length}%`;
-  const lineTranslateX = `${options.findIndex(option => option.kategori === current) * 100}%`;
+  useEffect(() => {
+    dispatch(setKeterangan({ name: 'keterangan', value: current }));
+    dispatch(setKategoriId(index));
+
+    const activeElement = refs.current.find(ref => ref.current.className === 'active');
+    console.log(refs.current.find(ref => ref.current));
+    if (activeElement) {
+      const width = activeElement.current.offsetWidth;
+      const left = activeElement.current.offsetLeft;
+      setLineWidth(width);
+      setLineTranslateX(left + 'px');
+
+      const container = document.querySelector('.tabbar');
+      container.scrollLeft = left + width / 2 - container.offsetWidth / 2;
+    }
+  }, [current]);
 
   return (
     <div className='tabbar'>
       <div className='tabbar-text'>
         {options.map((option, index) => {
           return (
-            <Link to={`${path}/${option.kategori}?${searchParams}`} key={index}>
-              <div onClick={() => handleClick(option.kategori, option.id)} className={current === option.kategori ? 'active' : ''}>{option.kategori}</div>
+            <Link to={`${path}/${option.kategori}?${searchParams}`} key={index} ref={refs.current[index]}
+              className={current === option.kategori ? 'active' : ''}
+            >
+              <div
+                onClick={() => handleClick(option.kategori, option.id)}
+                className={current === option.kategori ? 'active' : ''}
+              >
+                {option.kategori}
+                {/* <span>{option.kategori}</span> */}
+              </div>
             </Link>
           )
         })}

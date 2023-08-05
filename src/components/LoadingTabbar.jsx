@@ -15,7 +15,6 @@ function LoadingTabbar({ amount }) {
                 ))}
             </div>
 
-            <div className='right__square'></div>
             <Skeleton
                 width={100}
                 height={25}

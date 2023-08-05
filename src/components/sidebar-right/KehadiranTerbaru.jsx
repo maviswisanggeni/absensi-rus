@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiranTerbaru } from '../../features/kehadiranSlice'
 import moment from 'moment/moment'
 import useImgError from '../../hooks/useImgError'
+import Skeleton from 'react-loading-skeleton'
 
 function KehadiranTerbaru() {
   const context = useKehadiranListAbsensi()
@@ -46,18 +47,37 @@ function KehadiranTerbaru() {
       </div>
 
       <ul>
-        {
-          loadingKehadiranTerbaru ? <div className='loading'></div>
-            : kehadiranTerbaru?.length === 0 ? <div className='no-data'>Tidak ada data</div>
-              : kehadiranTerbaru?.map((item, index) => (
-                <li key={index}>
-                  <img src={item?.user?.link_foto ? item?.user?.link_foto : userFoto} onError={useImgError} alt="" />
-                  <div>
-                    <p>{item.user?.nama}</p>
-                    <p>{formatTime(item?.waktu_masuk)}</p>
-                  </div>
-                </li>
-              ))
+        {loadingKehadiranTerbaru
+          ? <div className='skeleton-wrapper'>
+            <Skeleton
+              circle={true}
+              width={40}
+              height={40}
+            />
+
+            <div>
+              <Skeleton
+                width={80}
+                height={18}
+              />
+
+              <Skeleton
+                width={104}
+                height={18}
+              />
+            </div>
+          </div>
+          : kehadiranTerbaru?.length === 0
+            ? <div className='no-data'>Tidak ada data</div>
+            : kehadiranTerbaru?.map((item, index) => (
+              <li key={index}>
+                <img src={item?.user?.link_foto ? item?.user?.link_foto : userFoto} onError={useImgError} alt="" />
+                <div>
+                  <p>{item.user?.nama}</p>
+                  <p>{formatTime(item?.waktu_masuk)}</p>
+                </div>
+              </li>
+            ))
         }
       </ul>
     </div>

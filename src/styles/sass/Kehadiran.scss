@@ -125,6 +125,7 @@
       display: flex;
       align-items: center;
       gap: 2rem;
+      padding-left: 3rem;
     }
   }
 
@@ -683,6 +684,14 @@
           object-fit: cover;
         }
       }
+    }
+
+    .skeleton-wrapper {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin-bottom: 1rem;
+      gap: 1rem;
     }
   }
 

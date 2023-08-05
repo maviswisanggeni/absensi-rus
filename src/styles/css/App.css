@@ -10,6 +10,7 @@
   display: -ms-flexbox;
   display: flex;
   margin: 0 auto;
+  padding: 1rem;
 }
 
 .no-scroll {
@@ -17,25 +18,17 @@
 }
 
 /* ===== Scrollbar CSS ===== */
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #c2d2ff #ffffff;
+/* Styling for the custom scrollbar with right padding */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 1px;
 }
 
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 5px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #ffffff;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #c2d2ff;
-  border-radius: 10px;
-  border: 0px solid #ffffff;
+::-webkit-scrollbar-thumb {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #aaaaaa;
 }
 
 .main-dashboard,
@@ -586,6 +579,8 @@
   width: -moz-fit-content;
   width: fit-content;
   position: relative;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
 }
 .tabbar a {
   text-decoration: none;
@@ -596,7 +591,7 @@
   display: flex;
 }
 .tabbar .tabbar-text div {
-  width: 130px;
+  min-width: 130px;
   height: 60px;
   text-align: center;
   -webkit-transition: border 0.3s ease-in-out;
@@ -608,6 +603,13 @@
   color: #9b9b9b;
   display: grid;
   place-items: center;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 0 2rem;
+  white-space: nowrap;
+}
+.tabbar .tabbar-text div:hover {
+  color: #3661eb;
 }
 .tabbar .tabbar-text div.active {
   color: #3661eb;
