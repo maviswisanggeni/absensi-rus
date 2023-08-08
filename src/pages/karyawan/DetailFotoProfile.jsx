@@ -10,8 +10,6 @@ function DetailFotoProfile({ callback }) {
     const dispatch = useDispatch()
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
-    const [weekListJadwal, setWeekListJadwal] = useState([])
-
     const [currentPage, setCurrentPage] = useState("choose-img");
     const [imgAfterCrop, setImgAfterCrop] = useState("");
     const [croppedImgArray, setCroppedImgArray] = useState([]);
@@ -26,7 +24,6 @@ function DetailFotoProfile({ callback }) {
         e.preventDefault();
 
         if (e.target.files && e.target.files[0]) {
-            // setImage(URL.createObjectURL(e.target.files[0]));
             setFile(e.target.files[0])
 
             const reader = new FileReader();
@@ -45,15 +42,23 @@ function DetailFotoProfile({ callback }) {
     }, [file])
 
     const handleTimeChange = (e, index, property) => {
-        const { value } = e.target;
-        const updatedListJadwal = [...weekListJadwal];
+        const value = e.target.value;
+        const updatedListJadwal = [...listJadwal];
 
         const updatedItem = { ...updatedListJadwal[index] };
 
         if (value === '') {
             updatedItem[property] = value;
         } else {
-            updatedItem[property] = value + ':00';
+            const timeParts = value.split(':');
+            const hours = parseInt(timeParts[0]);
+            const minutes = parseInt(timeParts[1]);
+            const timeDate = new Date();
+            timeDate.setHours(hours);
+            timeDate.setMinutes(minutes);
+
+            const formattedTime = timeDate.toTimeString().slice(0, 5);
+            updatedItem[property] = formattedTime;
         }
 
         updatedListJadwal[index] = updatedItem;
@@ -61,48 +66,6 @@ function DetailFotoProfile({ callback }) {
         dispatch(updateFieldValue({ field: 'listJadwal', value: updatedListJadwal }));
         dispatch(updateFieldValue({ field: 'isFormEditted', value: true }))
     };
-
-    useEffect(() => {
-        let listJadwalWeek = [
-            {
-                hari: 'senin',
-                jam_masuk: '',
-                jam_pulang: ''
-            },
-            {
-                hari: 'selasa',
-                jam_masuk: '',
-                jam_pulang: ''
-            },
-            {
-                hari: 'rabu',
-                jam_masuk: '',
-                jam_pulang: ''
-            },
-            {
-                hari: 'kamis',
-                jam_masuk: '',
-                jam_pulang: ''
-            },
-            {
-                hari: 'jumat',
-                jam_masuk: '',
-                jam_pulang: ''
-            },
-            {
-                hari: 'sabtu',
-                jam_masuk: '',
-                jam_pulang: ''
-            },
-            {
-                hari: 'minggu',
-                jam_masuk: '',
-                jam_pulang: ''
-            }
-        ];
-        var res = listJadwalWeek.map(obj => listJadwal.find(o => o.hari.toLowerCase() === obj.hari.toLowerCase()) || obj);
-        setWeekListJadwal(res)
-    }, [listJadwal])
 
     const onCropDone = (imgCroppedArea) => {
         const canvasEle = document.createElement("canvas");
@@ -235,7 +198,7 @@ function DetailFotoProfile({ callback }) {
                 </div>
                 <div className='jadwal-absensi'>
                     <h1>Jadwal Absensi</h1>
-                    {weekListJadwal.map((item, key) => {
+                    {listJadwal.map((item, key) => {
                         return (
                             <div key={key} className='container-jadwal'>
                                 <p>{item.hari}</p>

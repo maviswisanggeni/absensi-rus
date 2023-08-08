@@ -120,7 +120,7 @@ function PartisipasiEvent() {
       <div className='wrapper-top-list'>
         <div>
           <h4>Orang yang diundang</h4>
-          <div className='count'>{peserta.filter(peserta => peserta.isChecked === true).length}</div>
+          {/* <div className='count'>{peserta.filter(peserta => peserta.isChecked === true).length}</div> */}
         </div>
         <p onClick={handleReset}>Reset</p>
       </div>

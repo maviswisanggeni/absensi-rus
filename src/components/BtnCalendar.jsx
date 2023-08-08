@@ -4,29 +4,10 @@ import { useEffect } from 'react'
 import { Calendar } from 'react-calendar'
 import { useDispatch } from 'react-redux'
 
-function BtnCalendar({ value, stateName, setState, setIsFormEditted, copyForm }) {
+function BtnCalendar({ value, onChange }) {
     const dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false)
     const ref = useRef()
-
-    function handleChange(value) {
-        dispatch(setState({
-            name: stateName,
-            value: `${dayjs(value).format('YYYY-MM-DD')}`
-        }));
-
-        if (copyForm[stateName] !== dayjs(value).format('YYYY-MM-DD')) {
-            dispatch(setIsFormEditted({
-                name: 'isFormEditted',
-                value: true
-            }))
-        } else {
-            dispatch(setIsFormEditted({
-                name: 'isFormEditted',
-                value: false
-            }))
-        }
-    }
 
     function handleClick() {
         setIsOpen(!isOpen)
@@ -62,7 +43,7 @@ function BtnCalendar({ value, stateName, setState, setIsFormEditted, copyForm })
             </div>
             {isOpen &&
                 <Calendar
-                    onChange={handleChange}
+                    onChange={onChange}
                     value={new Date(value)}
                 />
             }
