@@ -10,11 +10,12 @@ import { checkIsAddPage, getDetailKalender, resetFieldKalender, updateFieldKalen
 import { getKategori } from '../../features/ketegoriSlice'
 import dayjs from 'dayjs'
 import 'dayjs/locale/id'
+import InfoBox from '../../components/InfoBox'
 
 function KalenderAddOrDetail() {
   let { id, date } = useParams()
   const dispatch = useDispatch()
-  const { daySelected } = useSelector(state => state.kalender)
+  const { statusResApi, messageResApi, isDisplayMessage, daySelected } = useSelector(state => state.kalender)
 
   useEffect(() => {
     dayjs.locale('id')
@@ -57,6 +58,13 @@ function KalenderAddOrDetail() {
           <PartisipasiEvent />
         </div>
       </div>
+      <InfoBox
+        message={messageResApi}
+        status={statusResApi}
+        isDisplay={isDisplayMessage}
+        setIsDisplay={updateStateKalender}
+        stateName='isDisplayMessage'
+      />
     </div>
   )
 }

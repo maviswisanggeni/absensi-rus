@@ -119,6 +119,9 @@ const koordinatSlice = createSlice({
             })
             .addCase(updateKoordinat.fulfilled, (state) => {
                 state.loading = false;
+                state.statusResApi = 'success'
+                state.messageResApi = 'Koordinat atau radius berhasil diubah'
+                state.isDisplayMessage = true
             })
             .addCase(updateKoordinat.rejected, (state, action) => {
                 state.loading = false;

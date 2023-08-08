@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import { useRef } from 'react';
 import { useEffect } from 'react';
 import LogoSidebar from '../components/sidebar/LogoSidebar';
 import imgAlert from '../assets/icons/responsive-alert.svg'

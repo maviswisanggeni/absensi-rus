@@ -47,16 +47,22 @@ function ModalRole({ onClose }) {
         <div className='bg-modal'>
             <div className='modal-container' ref={modalRef}>
                 <h1>Tambah Jabatan</h1>
-                <Search placeholder='Jabatan' value={search} setSearch={updateStateKategori} stateName='search' />
+                <Search
+                    placeholder='Jabatan'
+                    value={search}
+                    onChange={(e) => dispatch(updateStateKategori({ name: 'search', value: e.target.value }))}
+                    onKeyDown={() => { }}
+                />
                 <div className='wrapper-list'>
-                    {!loadingKategori
-                        ? searchedKategori.map((item, index) => (
-                            <div className='container-list' key={index} onClick={() => handleAdd(item.kategori, item.id)}>
-                                <p>{item.kategori}</p>
-                                <p>+</p>
-                            </div>
-                        ))
-                        : <span>Loading...</span>
+                    {loadingKategori ? <span>Loading...</span>
+                        : searchedKategori.length === 0 ? <span>Jabatan tidak ada</span>
+                            :
+                            searchedKategori.map((item, index) => (
+                                <div className='container-list' key={index} onClick={() => handleAdd(item.kategori, item.id)}>
+                                    <p>{item.kategori}</p>
+                                    <p>+</p>
+                                </div>
+                            ))
                     }
                 </div>
             </div>
