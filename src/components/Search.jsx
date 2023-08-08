@@ -1,14 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 
-function Search({ placeholder, setSearch, value, stateName }) {
-  const dispatch = useDispatch()
-  function handleChange(e) {
-    dispatch(setSearch({ name: stateName, value: e.target.value }))
-  }
-
+function Search({ placeholder, value, onChange, onKeyDown }) {
   return (
-    <input className='search' value={value} onChange={handleChange} placeholder={placeholder} />
+    <input className='search' value={value} onChange={onChange} placeholder={placeholder} onKeyDown={onKeyDown} />
   )
 }
 

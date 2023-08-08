@@ -7,6 +7,7 @@ import { deleteKalender, storeKalender, updateKalender, updateStateKalender } fr
 import dayjs from 'dayjs'
 import { showFormError } from '../../features/kalenderSlice'
 import LoadingFullscreen from '../LoadingFullscreen'
+import AlertModal from '../AlertModal'
 
 function NavKalender() {
   let navigate = useNavigate()
@@ -17,6 +18,7 @@ function NavKalender() {
   const dispatch = useDispatch()
   const [showAlertBack, setShowAlertBack] = useState(false)
   const [showAlertUpdate, setShowAlertUpdate] = useState(false)
+  const [showAlertDelete, setShowAlertDelete] = useState(false)
   const [isFormFilled, setIsFormFilled] = useState(false)
 
   function handleSubmit() {
@@ -143,7 +145,7 @@ function NavKalender() {
       <div className='wrapper-action-btn'>
         {
           isAddPage ? null :
-            <button onClick={handleDelete}>
+            <button onClick={() => setShowAlertDelete(true)}>
               <img src={trashWhite} alt="" />
             </button>
         }
@@ -156,29 +158,30 @@ function NavKalender() {
       </div>
 
       {showAlertBack &&
-        <div className='bg-modal'>
-          <div className='alert-modal'>
-            <h1>{isAddPage ? 'Tambah Event' : 'Edit Event'}</h1>
-            <p>Ada perubahan yang belum Anda simpan, Anda yakin ingin membatalkan?</p>
-            <div>
-              <button onClick={() => setShowAlertBack(false)}>Tidak</button>
-              <button onClick={() => navigate(-1)}>Iya</button>
-            </div>
-          </div>
-        </div>
+        <AlertModal
+          heading={isAddPage ? 'Tambah Event' : 'Edit Event'}
+          message={`Ada perubahan yang belum Anda simpan, Anda yakin ingin membatalkan?`}
+          onCancel={() => setShowAlertBack(false)}
+          onConfirm={() => navigate(-1)}
+        />
       }
 
       {showAlertUpdate &&
-        <div className='bg-modal'>
-          <div className='alert-modal'>
-            <h1>{isAddPage ? 'Tambah Event' : 'Edit Event'}</h1>
-            <p>Kamu yakin {isAddPage ? 'Tambah Event' : 'Edit Event'}?</p>
-            <div>
-              <button onClick={() => setShowAlertUpdate(false)}>Tidak</button>
-              <button onClick={handleApiCreateOrUpdate}>Iya</button>
-            </div>
-          </div>
-        </div>
+        <AlertModal
+          heading={isAddPage ? 'Tambah Event' : 'Edit Event'}
+          message={`Kamu yakin ${isAddPage ? 'Tambah Event' : 'Edit Event'}?`}
+          onCancel={() => setShowAlertUpdate(false)}
+          onConfirm={handleApiCreateOrUpdate}
+        />
+      }
+
+      {showAlertDelete &&
+        <AlertModal
+          heading={'Hapus Event'}
+          message={`Kamu yakin hapus event?`}
+          onCancel={() => setShowAlertDelete(false)}
+          onConfirm={handleDelete}
+        />
       }
 
       <LoadingFullscreen loading={loading} />

@@ -4,6 +4,7 @@ import { showFormError, updateFieldError, updateFieldKalender, updateStateKalend
 import BtnCalendar from '../BtnCalendar'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import dayjs from 'dayjs'
 
 function FormEvent() {
     const dispatch = useDispatch()
@@ -138,6 +139,25 @@ function FormEvent() {
         }))
     }, [peserta, copyForm.peserta, loading])
 
+    function handleDateChange(value, stateName) {
+        dispatch(updateStateKalender({
+            name: stateName,
+            value: `${dayjs(value).format('YYYY-MM-DD')}`
+        }));
+
+        if (copyForm[stateName] !== dayjs(value).format('YYYY-MM-DD')) {
+            dispatch(updateStateKalender({
+                name: 'isFormEditted',
+                value: true
+            }))
+        } else {
+            dispatch(updateStateKalender({
+                name: 'isFormEditted',
+                value: false
+            }))
+        }
+    }
+
     return (
         <div className='wrapper-form'>
             <h3>Detail Event</h3>
@@ -187,18 +207,12 @@ function FormEvent() {
                         <>
                             <BtnCalendar
                                 value={tanggalMulai}
-                                setState={updateStateKalender}
-                                stateName={'tanggalMulai'}
-                                setIsFormEditted={updateStateKalender}
-                                copyForm={copyForm}
+                                onChange={(e) => handleDateChange(e, 'tanggalMulai')}
                             />
 
                             <BtnCalendar
                                 value={tanggalSelesai}
-                                setState={updateStateKalender}
-                                stateName={'tanggalSelesai'}
-                                setIsFormEditted={updateStateKalender}
-                                copyForm={copyForm}
+                                onChange={(e) => handleDateChange(e, 'tanggalSelesai')}
                             />
 
                             <input type="time" className='input'
@@ -219,16 +233,14 @@ function FormEvent() {
                         <>
                             <BtnCalendar
                                 value={waktuMulaiLibur}
-                                stateName='waktuMulaiLibur'
-                                setState={updateStateKalender}
+                                onChange={(e) => handleDateChange(e, 'waktuMulaiLibur')}
                             />
 
                             <div className='line'></div>
 
                             <BtnCalendar
                                 value={waktuSelesaiLibur}
-                                stateName='waktuSelesaiLibur'
-                                setState={updateStateKalender}
+                                onChange={(e) => handleDateChange(e, 'waktuSelesaiLibur')}
                             />
                         </>
                     }

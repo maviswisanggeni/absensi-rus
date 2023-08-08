@@ -98,6 +98,7 @@
   padding: 0.5rem 2.5rem;
   outline: none;
   font-weight: 400;
+  color: black;
 }
 
 .search::-webkit-input-placeholder {
@@ -116,9 +117,12 @@
   color: #a6a6a6;
 }
 
-.search::placeholder,
-.search {
+.search::placeholder {
   color: #a6a6a6;
+}
+
+.search:focus {
+  border: 2px solid #3661eb;
 }
 
 .info__box {

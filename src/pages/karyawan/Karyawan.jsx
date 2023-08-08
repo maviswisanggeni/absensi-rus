@@ -98,6 +98,12 @@ function Karyawan() {
     })
   }
 
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
+
   return (
     <div className='wrapper-karyawan'>
       <Sidebar />
@@ -116,6 +122,8 @@ function Karyawan() {
               value={search}
               setSearch={updateStateKaryawan}
               stateName={'search'}
+              onKeyDown={handleKeyDown}
+              onChange={(e) => dispatch(updateStateKaryawan({ name: 'search', value: e.target.value }))}
             />
             <button
               className='btn-search'

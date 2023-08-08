@@ -449,8 +449,13 @@ const karyawanSlice = createSlice({
                 state.ktgKaryawan = initialData.ktgkaryawan[0]?.kategori;
 
                 let filteredJadwal = state.listJadwal.map(obj => initialData.jadwal.find(o => o.hari.toLowerCase() === obj.hari.toLowerCase()) || obj);
-                // state.listJadwal = initialData.jadwal;
-                state.listJadwal = filteredJadwal.map(({ user_id, ...rest }) => rest);
+                state.listJadwal = filteredJadwal.map(({ user_id, ...rest }) => (
+                    {
+                        ...rest,
+                        jam_masuk: rest.jam_masuk === null ? '' : rest.jam_masuk.slice(0, 5),
+                        jam_pulang: rest.jam_pulang === null ? '' : rest.jam_pulang.slice(0, 5)
+                    }
+                ));
 
                 state.errors = validateForm(state);
             })

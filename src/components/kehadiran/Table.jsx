@@ -93,7 +93,7 @@ function Table() {
     // useEffect(() => {
     //     Pusher.logToConsole = true;
 
-    //     const pusher = new Pusher('7b9c2c870e01322901d9', {
+    //     const pusher = new Pusher('', {
     //         cluster: 'ap1'
     //     });
 
@@ -161,11 +161,10 @@ function Table() {
                                         <tr key={key}>
                                             <td className='row-img'>
                                                 <IndicatorValid
-                                                    keterangan={keterangan}
-                                                    is_valid_masuk={item?.is_valid_masuk}
-                                                    is_valid_pulang={item?.is_valid_pulang}
-                                                    isvld_wkt_masuk={item?.isvld_wkt_masuk}
-                                                    isvld_wkt_pulang={item?.isvld_wkt_pulang}
+                                                    keteranganState={keterangan}
+                                                    keteranganApi={item?.keterangan}
+                                                    is_valid_radius_masuk={item?.is_valid_masuk}
+                                                    is_valid_radius_pulang={item?.is_valid_pulang}
                                                 />
 
                                                 <img src={item?.user?.link_foto} onError={useImgError} alt={item.user?.nama} />

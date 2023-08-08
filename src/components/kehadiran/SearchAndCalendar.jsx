@@ -62,10 +62,20 @@ function SearchAndCalendar() {
     })
   }
 
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
+
   return (
     <form className='search-calendar'>
-      <Search placeholder='Cari guru atau karyawan' value={search} stateName={'search'}
-        setSearch={updateStateKehadiran}
+      <Search
+        placeholder='Cari guru atau karyawan'
+        value={search}
+        stateName={'search'}
+        onChange={(e) => dispatch(updateStateKehadiran({ name: 'search', value: e.target.value }))}
+        onKeyDown={handleKeyDown}
       />
       <div className='wrapper-pilih-tanggal'>
         <PilihTanggal

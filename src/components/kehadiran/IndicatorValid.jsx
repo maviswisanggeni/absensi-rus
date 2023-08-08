@@ -1,19 +1,21 @@
 import React from 'react';
 
-function IndicatorValid({ keterangan, is_valid_masuk, is_valid_pulang, isvld_wkt_masuk, isvld_wkt_pulang }) {
+function IndicatorValid({ keteranganState, keteranganApi, is_valid_radius_masuk, is_valid_radius_pulang }) {
 
-    const isValidMasuk = is_valid_masuk === '1' && isvld_wkt_masuk === '1';
-    const isValidPulang = is_valid_pulang === '1' && isvld_wkt_pulang === '1';
+    const isValidRadiusMasuk = is_valid_radius_masuk === '1';
+    const isValidRadiusPulang = is_valid_radius_pulang === '1';
+
     const isValid =
-        keterangan === 'Sukses'
-        || ((keterangan === 'Absen') && isValidMasuk && isValidPulang)
-        || ((keterangan === 'Masuk') && isValidMasuk)
-        || ((keterangan === 'Keluar') && isValidPulang)
+        keteranganState === 'Sukses' ||
+        ((keteranganState === 'Absen' && keteranganApi === 'masuk') && isValidRadiusMasuk) ||
+        ((keteranganState === 'Absen' && keteranganApi === 'pulang') && isValidRadiusMasuk && isValidRadiusPulang) ||
+        ((keteranganState === 'Masuk') && isValidRadiusMasuk) ||
+        ((keteranganState === 'Keluar') && isValidRadiusPulang)
 
     return (
         <div
             className={`valid-masuk-pulang 
-                ${keterangan === 'Izin' ? 'izin' : isValid ? 'valid' : 'gak-valid'}
+                ${keteranganState === 'Izin' ? 'izin' : isValid ? 'valid' : 'gak-valid'}
             `}
         >
         </div>
