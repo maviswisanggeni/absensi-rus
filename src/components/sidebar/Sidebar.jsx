@@ -12,12 +12,12 @@ import { useState } from 'react'
 import LoadingFullscreen from '../LoadingFullscreen'
 
 function Sidebar() {
-  let query = useLocation()
+  let location = useLocation()
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
 
-  if (query.pathname === "/login") {
+  if (location.pathname === "/login") {
     return null
   }
 
@@ -39,7 +39,7 @@ function Sidebar() {
   const dataSidebar = [
     {
       id: 1,
-      path: '/dashboard',
+      path: '/',
       img: dashboardLogoGrey,
       text: 'Dashboard'
     },
@@ -71,28 +71,34 @@ function Sidebar() {
     },
   ]
 
+  const isActiveRoute = (path) => {
+    return location.pathname === path || location.pathname.startsWith(path + '/');
+  };
+
   return (
     <nav className='nav'>
       <LogoSidebar />
       <ul>
-        {dataSidebar.map((item) => (
-          <li key={item.id}>
-            {item.text === 'Logout'
-              ? <a onClick={logoutHanlder} className={query.pathname === '/login' ? 'active-sidebar' : ''}>
-                <img src={query.pathname === '/login' ? loginLogoGrey : loginLogoGrey} alt="" />
+        {dataSidebar.map((item, index) => (
+          <li key={index}>
+            {item.text === 'Logout' ? (
+              <a onClick={logoutHanlder} className={location.pathname === '/login' ? 'active-sidebar' : ''}>
+                <img src={location.pathname === '/login' ? loginLogoGrey : loginLogoGrey} alt="" />
                 Logout
               </a>
-              : <NavLink
+            ) : (
+              <NavLink
                 to={item.tabbarPath || item.path}
-                className={query.pathname.startsWith(item.path) ? 'active-sidebar' : ''}
+                className={isActiveRoute(item.path) ? 'active-sidebar' : ''}
               >
                 <img
                   src={item.img}
-                  className={`img ${query.pathname.startsWith(item.path) ? 'active' : ''}`}
+                  className={`img ${isActiveRoute(item.path) ? 'active' : ''}`}
                   alt=""
                 />
                 {item.text}
-              </NavLink>}
+              </NavLink>
+            )}
           </li>
         ))}
       </ul>

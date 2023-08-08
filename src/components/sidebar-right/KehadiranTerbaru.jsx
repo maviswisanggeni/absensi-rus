@@ -49,7 +49,7 @@ function KehadiranTerbaru() {
       <ul>
         {loadingKehadiranTerbaru
           ? Array.from({ length: 5 }, (_, index) => (
-            <div className='skeleton-wrapper'>
+            <div className='skeleton-wrapper' key={index}>
               <Skeleton
                 circle={true}
                 width={40}

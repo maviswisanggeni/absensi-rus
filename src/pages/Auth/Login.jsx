@@ -43,7 +43,7 @@ function Login() {
           getAuthorize()
         )
           .then(() => {
-            navigate('/dashboard');
+            navigate('/');
             setLoading(false)
           })
       })

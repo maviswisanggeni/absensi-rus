@@ -31,7 +31,7 @@ function Jadwal() {
       <h1>Event</h1>
       {!loading
         ? Array.from({ length: 3 }, (_, index) => (
-          <Skeleton width={300} height={102} style={{ marginBottom: '1rem' }} />
+          <Skeleton width={300} height={102} style={{ marginBottom: '1rem' }} key={index} />
         ))
         : data?.length === 0 ? <p>Tidak ada event hingga akhir bulan ini</p>
           : data?.map((item, key) => {

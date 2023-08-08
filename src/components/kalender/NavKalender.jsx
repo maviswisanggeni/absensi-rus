@@ -19,7 +19,6 @@ function NavKalender() {
   const [showAlertBack, setShowAlertBack] = useState(false)
   const [showAlertUpdate, setShowAlertUpdate] = useState(false)
   const [showAlertDelete, setShowAlertDelete] = useState(false)
-  const [isFormFilled, setIsFormFilled] = useState(false)
 
   function handleSubmit() {
     dispatch(showFormError())
@@ -112,21 +111,6 @@ function NavKalender() {
       value: kategoriEvent === 'event' ? !validateBtnEvent() : !validateBtnLibur()
     }))
   }, [errors, validateBtnEvent(), validateBtnLibur(), kategoriEvent])
-
-  useEffect(() => {
-    if (
-      judul.trim() !== ''
-      || lokasi.trim() !== ''
-      || jamMulai.trim() !== ''
-      || jamSelesai.trim() !== ''
-      || deskripsi.trim() !== ''
-      || peserta.length >= 1
-    ) {
-      setIsFormFilled(true)
-    } else {
-      setIsFormFilled(kategoriEvent === 'event' ? !validateBtnEvent() : validateBtnLibur())
-    }
-  }, [judul, lokasi, jamMulai, jamSelesai, deskripsi, peserta, kategoriEvent])
 
   function handleBack() {
     if (isFormEditted) {

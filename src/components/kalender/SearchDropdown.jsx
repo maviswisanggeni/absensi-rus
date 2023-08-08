@@ -13,7 +13,7 @@ function SearchDropdown() {
     const [value, setValue] = useState('')
     const [shouldCloseDropdown, setShouldCloseDropdown] = useState(false);
     const dispatch = useDispatch()
-    const debounceSearchValue = useDebounce(value, 1000)
+    const debounceSearchValue = useDebounce(value, 500)
     const { listSearchPeserta, loadingSearch } = useSelector((state) => state.kalender)
     const dropdownRef = useRef(null);
 
@@ -47,7 +47,7 @@ function SearchDropdown() {
             if (!dropdownRef.current.contains(document.activeElement)) {
                 setShouldCloseDropdown(true);
             }
-        }, 200);
+        }, 100);
     }
 
     return (

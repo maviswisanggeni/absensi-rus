@@ -90,7 +90,7 @@ export default function Day({ day, rowIdx }) {
                                         <h1 style={{ color: evt?.kategori_event === 'event' ? "#21D2FF" : '#EA4D90' }}>{evt.judul}</h1>
                                         <h2 onClick={(event) => handleEventClick(event, evt)}>Edit</h2>
                                     </div>
-                                    <p className='tanggal'>
+                                    <div className='tanggal'>
                                         {evt?.kategori_event === 'event'
                                             ? <>
                                                 {dayjs(evt.waktu_mulai).format('DD MMMM YYYY') === dayjs(evt.waktu_selesai).format('DD MMMM YYYY') ? dayjs(evt.waktu_mulai).format('DD MMMM YYYY')
@@ -110,7 +110,7 @@ export default function Day({ day, rowIdx }) {
                                                 }
                                             </>
                                         }
-                                    </p>
+                                    </div>
 
                                     {evt?.kategori_event === 'event' &&
                                         <span className='lokasi'>

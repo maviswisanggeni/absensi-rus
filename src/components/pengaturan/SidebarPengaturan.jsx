@@ -51,7 +51,7 @@ function SidebarPengaturan() {
                 })}
             </div>
             <NavLink
-                to='/dashboard'
+                to='/'
                 className={'keluar-pengaturan'}
             >
                 <img src={logoutIcon} alt="" />
