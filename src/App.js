@@ -24,7 +24,7 @@ function App() {
         <NoInternetConnection>
           <Routes>
             <Route element={<PrivateRoutes />}>
-              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/' element={<Dashboard />} />
 
               <Route path='/kehadiran/*' element={<Kehadiran />} />
               <Route path='/kehadiran/detail/:izin?/:id' element={<Detail />} />

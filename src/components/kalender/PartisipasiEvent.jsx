@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import SearchDropdown from './SearchDropdown'
-import Checkbox from './Checkbox'
 import ListPartisipasi from './ListPartisipasi'
 import { useDispatch, useSelector } from 'react-redux'
-import { deletePesertaByKategori, getKaryawanKalender, resetePeserta, updateListPeserta } from '../../features/kalenderSlice'
-import { useParams } from 'react-router'
+import { deletePesertaByKategori, getKaryawanKalender, resetePeserta } from '../../features/kalenderSlice'
 import Skeleton from 'react-loading-skeleton'
 
 function PartisipasiEvent() {
-  let id = useParams()
-  const checkboxOption = [
-    { option: 'Semua Karyawan' },
-    { option: 'Guru PPLG' },
-    { option: 'Guru Animasi' },
-    { option: 'Guru DKV' },
-    { option: 'Staff' },
-  ]
-
   const dispatch = useDispatch()
   const { peserta } = useSelector((state) => state.kalender)
   const { listKategori, loadingKategori } = useSelector((state) => state.kategori)
@@ -38,7 +27,7 @@ function PartisipasiEvent() {
     });
   };
 
-  const handleAllKaryawanChange = (isChecked) => {
+  const handleAllKaryawanChange = () => {
     setIsAllKaryawanChecked(!isAllKaryawanChecked);
     setSelectedCategories([]);
   };
@@ -87,8 +76,8 @@ function PartisipasiEvent() {
         </div>
         {loadingKategori
           ? <>
-            {Array(5).fill().map(key => (
-              <div className='wrap_skeleton' key={key}>
+            {Array(5).fill().map((_, index) => (
+              <div className='wrap_skeleton' key={index}>
                 <Skeleton
                   width={15}
                   height={15}
@@ -120,7 +109,7 @@ function PartisipasiEvent() {
       <div className='wrapper-top-list'>
         <div>
           <h4>Orang yang diundang</h4>
-          {/* <div className='count'>{peserta.filter(peserta => peserta.isChecked === true).length}</div> */}
+          <div className='count'>{peserta.filter(peserta => peserta.isChecked === true).length}</div>
         </div>
         <p onClick={handleReset}>Reset</p>
       </div>

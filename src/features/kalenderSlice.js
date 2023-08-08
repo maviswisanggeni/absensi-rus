@@ -415,9 +415,10 @@ const kalenderSlice = createSlice({
 
 
             .addCase(getKaryawanKalender.pending, (state, action) => {
-                state.loadngGetKaryawan = true
                 if (action.meta.arg && action.meta.arg.search) {
                     state.loadingSearch = true
+                } else {
+                    state.loadngGetKaryawan = true
                 }
             })
             .addCase(getKaryawanKalender.fulfilled, (state, action) => {

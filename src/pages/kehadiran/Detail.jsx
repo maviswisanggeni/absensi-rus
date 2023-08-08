@@ -132,7 +132,7 @@ function Detail() {
                                     className={isLinkPdfOrImage(detailData.link_file) === 'image' ? 'image' : 'pdf'}
                                     alt=""
                                 />
-                                {isLinkPdfOrImage(detailData.link_file) === 'pdf' && <p>{detailData.path_file}</p>}
+                                {isLinkPdfOrImage(detailData.link_file) === 'pdf' && <p>{detailData.file_name}</p>}
                             </div>
 
                             {popUpMasuk &&

@@ -46,7 +46,7 @@ function ListPartisipasi() {
             {loadngGetKaryawan
                 ? <div className='container_skeleton'>
                     {Array.from({ length: 5 }, (_, index) => (
-                        <div className='container__list__skeleton'>
+                        <div className='container__list__skeleton' key={index}>
                             <div className='left__content'>
                                 <Skeleton width={35} height={35} circle={true} />
                                 <div>
