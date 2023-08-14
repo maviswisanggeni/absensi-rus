@@ -1019,6 +1019,9 @@
   color: #ff4530;
   font-size: 12px;
 }
+.pengaturan .batas-waktu .containers-input .container-input .alert {
+  font-size: 12px;
+}
 .pengaturan .batas-waktu .wrapper-btn {
   display: -webkit-box;
   display: -ms-flexbox;

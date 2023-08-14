@@ -51,7 +51,10 @@ const initialState = {
     listKaryawan: [],
     currentPage: 1,
     keterangan: null,
-    urutan: 'Sesuai abjad',
+    urutan: {
+        column: 'nama',
+        order: 'asc'
+    },
     search: '',
 
     nama: '',
