@@ -137,6 +137,28 @@
       color: $primary-color;
       font-weight: 500;
     }
+
+    .wrap-filter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 2rem;
+
+      img {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transform: rotate(90deg);
+      }
+
+      .arrow-down {
+        transform: rotate(90deg);
+      }
+
+      .arrow-up {
+        transform: rotate(-90deg);
+      }
+    }
   }
 
   .tabbar-filter {

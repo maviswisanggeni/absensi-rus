@@ -20,7 +20,7 @@ function Filter({ setState, option1, option2 }) {
         return () => {
             document.removeEventListener("click", handleClick);
         };
-    }, []);
+    });
 
     useEffect(() => {
         dispatch(setState({ name: 'urutan', value: current }))

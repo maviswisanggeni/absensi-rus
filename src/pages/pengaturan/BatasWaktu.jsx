@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Button from '../../components/Button'
 import { useDispatch, useSelector } from 'react-redux';
-import { getBatasWaktu, updateBatasWaktu, updateInputPengaturan } from '../../features/pengaturanSlice';
+import { getBatasWaktu, updateBatasWaktu } from '../../features/pengaturanSlice';
 import Skeleton from 'react-loading-skeleton';
 
 function BatasWaktu() {
@@ -36,8 +36,6 @@ function BatasWaktu() {
             }
         }
     }
-
-
 
     function handleEdit() {
         setIsEditing(!isEditing)
@@ -81,6 +79,8 @@ function BatasWaktu() {
             .then((res) => {
                 if (res.meta.requestStatus === "fulfilled") {
                     dispatch(getBatasWaktu())
+                    setShowAlertMasuk(false)
+                    setShowAlertPulang(false)
                 }
             })
     }
@@ -112,8 +112,8 @@ function BatasWaktu() {
                     }
 
                     {showAlertMasuk
-                        ? <p className='error__max'>Maksimal 720 menit</p>
-                        : <p className='error__max'>*Sebelum waktu masuk</p>
+                        ? <p className='error__max'>*Maksimal 720 menit</p>
+                        : <p className='alert'>Sebelum waktu masuk</p>
                     }
                 </div>
                 <div className='container-input'>
@@ -137,8 +137,8 @@ function BatasWaktu() {
                         </div>
                     }
                     {showAlertPulang
-                        ? <p className='error__max'>Maksimal 720 menit</p>
-                        : <p className='error__max'>*Sebelum waktu pulang</p>
+                        ? <p className='error__max'>*Maksimal 720 menit</p>
+                        : <p className='alert'>Sebelum waktu pulang</p>
                     }
                 </div>
             </div>

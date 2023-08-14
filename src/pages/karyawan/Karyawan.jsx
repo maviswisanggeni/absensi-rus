@@ -4,7 +4,6 @@ import Tabbar from '../../components/Tabbar'
 import Profile from '../../components/Profile'
 import Search from '../../components/Search'
 import '../../styles/css/Karyawan.css'
-import Filter from '../../components/Filter'
 import Table from '../../components/karyawan/Table'
 import searchIcon from '../../assets/icons/search-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,19 +24,12 @@ function Karyawan() {
   const location = useLocation()
   const navigate = useNavigate()
   const [isKategoriUpdated, setIsKategoriUpdated] = useState(false);
-  const [isFirstRender, setIsFirstRender] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     dispatch(resetTable())
     dispatch(getKategori());
-    setIsFirstRender(true)
   }, []);
-
-  useEffect(() => {
-    if (!isLoading) {
-    }
-  }, [isLoading])
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -157,13 +149,7 @@ function Karyawan() {
                   width={100}
                   height={25}
                 />
-                : <>
-                  <Filter option1="Sesuai abjad" option2="Urut NIY"
-                    setState={updateStateKaryawan}
-                  />
-                  <p>{listKaryawan.length + ' Guru'}</p>
-
-                </>
+                : <p>{listKaryawan.length + ' Guru'}</p>
               }
             </div>
 
