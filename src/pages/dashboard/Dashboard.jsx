@@ -57,9 +57,9 @@ function Dashboard() {
           <div className='wrapper-circular'>
             <CircularStatistic
               name="Masuk"
-              firstValue={jmlKehadiran?.jumlah_absen}
+              firstValue={jmlKehadiran?.jumlah_masuk}
               secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={`${jmlKehadiran?.jumlah_absen} / ${jmlKehadiran?.jumlah_karyawan}`}
+              uiValue={`${jmlKehadiran?.jumlah_masuk} / ${jmlKehadiran?.jumlah_karyawan}`}
               imgSrc={masukIcon}
               loading={loading}
             />
@@ -77,7 +77,7 @@ function Dashboard() {
               name="Absen"
               firstValue={jmlKehadiran?.jumlah_absen}
               secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={`${jmlKehadiran?.jumlah_karyawan - jmlKehadiran?.jumlah_absen} Orang`}
+              uiValue={`${jmlKehadiran?.jumlah_absen} Orang`}
               imgSrc={absenIcon}
               loading={loading}
             />
