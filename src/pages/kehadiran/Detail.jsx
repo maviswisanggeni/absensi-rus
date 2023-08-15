@@ -8,14 +8,13 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import DetailCard from '../../components/kehadiran/DetailCard'
 import pdfIcon from '../../assets/icons/pdf.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDetailIzinKehadiran, getDetailKehadiran, updateStateDetailKehadiran } from '../../features/kehadiranDetailSlice'
+import { getDetailIzinKehadiran, getDetailKehadiran, resetDetail, updateStateDetailKehadiran } from '../../features/kehadiranDetailSlice'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import InfoBox from '../../components/InfoBox'
 import { goBack } from '../../utils/goBack'
 
 function Detail() {
     let userId = useParams()
-    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const [popUpMasuk, setPopUpMasuk] = useState(false);
@@ -23,6 +22,10 @@ function Detail() {
     const [popUpMapMasuk, setPopUpMapMasuk] = useState(false);
     const [popUpMapKeluar, setPopUpMapKeluar] = useState(false);
     const { loading, detailData, statusResApi, messageResApi, isDisplayMessage } = useSelector(State => State.kehadiranDetail)
+
+    useEffect(() => {
+        dispatch(resetDetail())
+    }, [])
 
     useEffect(() => {
         if (userId.izin) {

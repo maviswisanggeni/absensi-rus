@@ -72,6 +72,9 @@ const kehadiranDetailSlice = createSlice({
             const { name, value } = action.payload
             state[name] = value
         },
+        resetDetail: (state) => {
+            state.detailData = {}
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -106,5 +109,5 @@ const kehadiranDetailSlice = createSlice({
     }
 })
 
-export const { updateStateDetailKehadiran } = kehadiranDetailSlice.actions
+export const { updateStateDetailKehadiran, resetDetail } = kehadiranDetailSlice.actions
 export default kehadiranDetailSlice.reducer;

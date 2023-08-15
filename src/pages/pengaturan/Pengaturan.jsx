@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import '../../styles/css/Pengaturan.css'
 import NavbarPengaturan from '../../components/pengaturan/NavbarPengaturan'
 import SidebarPengaturan from '../../components/pengaturan/SidebarPengaturan'
-import { Routes, Route } from 'react-router'
+import { Routes, Route, useLocation } from 'react-router'
 import ImportUser from './ImportUser'
 import KategoriKaryawan from './KategoriKaryawan'
 import RadiusAbsen from './RadiusAbsen'
@@ -14,14 +14,22 @@ import { updateInputPengaturan } from '../../features/pengaturanSlice'
 
 function Pengaturan() {
     const { statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.pengaturan)
+    const location = useLocation()
 
     useEffect(() => {
         const body = document.querySelector('body')
-        body.style.overflowX = 'hidden'
+
+        if (location.pathname.startsWith('/pengaturan')) {
+            body.classList.add('bg-pengaturan')
+        }
+
+        return () => {
+            body.classList.remove('bg-pengaturan')
+        }
     }, [])
 
     return (
-        <div className='bg-pengaturan'>
+        <>
             <NavbarPengaturan />
             <div className='pengaturan'>
                 <SidebarPengaturan />
@@ -41,7 +49,7 @@ function Pengaturan() {
                 setIsDisplay={updateInputPengaturan}
                 stateName='isDisplayMessage'
             />
-        </div>
+        </>
     )
 }
 

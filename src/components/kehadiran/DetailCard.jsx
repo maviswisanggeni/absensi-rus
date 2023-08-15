@@ -53,19 +53,6 @@ function DetailCard({
             <div className='card'>
                 <div className='wrapper-img'>
                     <img className='check-img' src={link_foto} onLoad={() => setImgLoaded(true)} />
-                    {/* {imgLoaded || !link_foto ?
-                        <>
-                            <img
-                                className={`${link_foto ? '' : 'foto-belum-keluar'} foto-masuk`}
-                                src={link_foto ? link_foto : folderImg}
-                                // src={folderImg}
-                                alt=""
-                                onClick={() => setPopUp(popUp ? false : true)}
-                            />
-                            {!link_foto ? <p>Belum Absen Keluar</p> : null}
-                        </>
-                        : <div className={`foto-masuk skeleton__loading`}></div>
-                    } */}
                     {imgLoaded || !link_foto ?
                         <>
                             <img

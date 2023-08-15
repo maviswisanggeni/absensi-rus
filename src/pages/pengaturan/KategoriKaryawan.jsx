@@ -11,6 +11,7 @@ import InfoBox from '../../components/InfoBox'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import AlertModal from '../../components/AlertModal'
 
 function KategoriKaryawan() {
     const [showModalAddKategori, setShowModalAddKategori] = useState(false)
@@ -18,6 +19,8 @@ function KategoriKaryawan() {
     const [currentMore, setCurrentMore] = useState(null)
     const [isAdd, setIsAdd] = useState(true)
     const [id, setId] = useState(null)
+    const [showAlertDelete, setShowAlertDelete] = useState(false)
+    const [selectedKategori, setSelectedKategori] = useState({ id: null, kategori: null })
 
     const dispatch = useDispatch()
     const { listKategori, kategoriInput, loadingKategori, loadingCUD } = useSelector((state) => state.pengaturan)
@@ -68,19 +71,17 @@ function KategoriKaryawan() {
         }
     }
 
-    function handleDelete(id, kategori) {
-        if (window.confirm('Yakin hapus ' + kategori)) {
-            dispatch(deleteKategori(id))
-                .then((res) => {
-                    if (res.meta.requestStatus === "fulfilled") {
-                        setCurrentMore(null)
-                        dispatch(getKategoriPengaturan())
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
+    function handleDelete(id) {
+        dispatch(deleteKategori(id))
+            .then((res) => {
+                if (res.meta.requestStatus === "fulfilled") {
+                    setCurrentMore(null)
+                    dispatch(getKategoriPengaturan())
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     function handleUpdate(id, kategori) {
@@ -163,7 +164,14 @@ function KategoriKaryawan() {
                                 />
                                 {currentMore === index ?
                                     <div className='dropdown-content'>
-                                        <div onClick={() => handleDelete(item.id, item.kategori)}>
+                                        <div onClick={() => {
+                                            setSelectedKategori({
+                                                id: item.id,
+                                                kategori: item.kategori
+                                            })
+                                            setShowAlertDelete(true)
+                                        }}
+                                        >
                                             <img src={trashIcons} alt="" />
                                             <p>Delete</p>
                                         </div>
@@ -208,6 +216,12 @@ function KategoriKaryawan() {
                 }
             </div>
             <LoadingFullscreen loading={loadingCUD} />
+            {showAlertDelete && <AlertModal
+                heading={`Hapus Kategori`}
+                message={`Kamu yakin hapus kategori ${selectedKategori.kategori}?`}
+                onCancel={() => setShowAlertDelete(false)}
+                onConfirm={() => handleDelete(selectedKategori.id)}
+            />}
         </>
     )
 }
