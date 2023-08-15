@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deletePeserta, updateFieldError } from '../../features/kalenderSlice'
-import useImgError from '../../hooks/useImgError'
+import imgErrorValidation from '../../utils/imgErrorValidation'
 import DisplayKategoriList from '../DisplayKategoriList'
 import { useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
@@ -48,7 +48,7 @@ function ListPartisipasi() {
                 peserta.map((item, index) => (
                     <div className='wrapper-list' key={index}>
                         <div className='list-content-left'>
-                            <img src={item.link_foto} onError={useImgError} alt="" />
+                            <img src={item.link_foto} onError={imgErrorValidation} alt="" />
                             <div>
                                 <p>{item.nama}</p>
                                 <span>

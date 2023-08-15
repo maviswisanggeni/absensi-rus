@@ -1,32 +1,37 @@
 import React, { useMemo, useState } from 'react'
 import Pagination from '../Pagination';
-import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Pusher from "pusher-js";
 import { updateStateKehadiran } from '../../features/kehadiranSlice';
 import { useEffect } from 'react';
-import useImgError from '../../hooks/useImgError';
+import useImgError from '../../utils/imgErrorValidation';
 import DisplayKategoriList from '../DisplayKategoriList';
 import dayjs from 'dayjs';
 import 'dayjs/locale/id';
 import IndicatorValid from './IndicatorValid';
 import RowTanggal from './RowTanggal';
 import RowJam from './RowJam';
+import ColumnMasukAndKeluar from './ColumnMasukAndKeluar';
+import ColumnSuksesAndAbsen from './ColumnSuksesAndAbsen';
+import ColumnIzin from './ColumnIzin';
 
 let PageSize = 10;
 
 function Table() {
-    const context = useKehadiranListAbsensi()
     const dispatch = useDispatch()
     let [searchParams] = useSearchParams();
-    const [filteredKehadiranKeluar, setFilteredKehadiranKeluar] = useState([])
-    const [filteredKehadiranMasuk, setFilteredKehadiranMasuk] = useState([])
 
     const {
-        kehadiranMasuk, kehadiranKeluar,
-        kehadiranIzin, kehadiranSukses, kehadiranAbsen, currentPage,
-        keterangan, urutan, loading
+        kehadiranMasuk,
+        kehadiranKeluar,
+        kehadiranIzin,
+        kehadiranSukses,
+        kehadiranAbsen,
+        currentPage,
+        keterangan,
+        urutan,
+        loading
     } = useSelector(state => state.kehadiran)
 
     useEffect(() => {
@@ -45,19 +50,9 @@ function Table() {
         let selectedData;
 
         if (keterangan === 'Keluar') {
-            const filteredKeluar = kehadiranKeluar.filter((item) =>
-                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
-            );
-            setFilteredKehadiranKeluar(filteredKeluar)
-            selectedData = filteredKeluar
+            selectedData = kehadiranKeluar
         } else if (keterangan === 'Masuk') {
-            const filteredMasuk = kehadiranMasuk.filter((item) =>
-                !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
-            );
-
-            const mergedMasukKeluar = [...filteredMasuk, ...kehadiranKeluar];
-            setFilteredKehadiranMasuk(mergedMasukKeluar)
-            selectedData = mergedMasukKeluar;
+            selectedData = kehadiranMasuk;
         } else if (keterangan === 'Sukses') {
             selectedData = kehadiranSukses;
         } else if (keterangan === 'Absen') {
@@ -109,109 +104,77 @@ function Table() {
     //     }
     // }, []);
 
-    function checkKeterangan(dataMasuk, dataPulang) {
-        if (keterangan === 'Masuk' || keterangan === 'Sukses') {
-            return dataMasuk
-        } else if (keterangan === 'Keluar' || keterangan === 'Absen') {
-            return dataPulang
-        }
-    }
-
-    function isIzin() {
-        if (keterangan === 'Izin') {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    function isSuksesOrAbsen() {
-        if (keterangan === 'Sukses' || keterangan === 'Absen') {
-            return true
-        } else {
-            return false
-        }
-    }
-
     return (
         <>
             <table className='table'>
                 <thead>
                     <tr className='column'>
-                        <th className='th-name'>Nama</th>
-                        <th className='th-niy'>NIY</th>
-                        <th className='th-jabatan'>Jabatan</th>
-                        {!isSuksesOrAbsen() ? <th className={`th-tanggal ${isIzin() ? 'izin' : ''}`}>Tanggal</th> : null}
-                        {!isIzin() &&
-                            <th className='th-waktu'>
-                                {isSuksesOrAbsen() ? 'Presensi' : 'Waktu'}
-                            </th>
-                        }
-                        <th className='th-action'>Action</th>
+                        {keterangan === 'Masuk' || keterangan === 'Keluar' ? 
+                            <ColumnMasukAndKeluar/>
+                        : keterangan === 'Sukses' || keterangan === 'Absen' ? 
+                            <ColumnSuksesAndAbsen/>
+                        : <ColumnIzin/>
+                    }
                     </tr>
                 </thead>
 
                 <tbody>
-                    {
-                        loading ? <tr className='loading loading-table'><td>Loading...</td></tr>
-                            : currentTableData.length === 0 ? <tr className='loading-table'><td>Data tidak ditemukan </td></tr>
-                                :
-                                currentTableData?.map((item, key) => {
-                                    return (
-                                        <tr key={key}>
-                                            <td className='row-img'>
-                                                <IndicatorValid
-                                                    keteranganState={keterangan}
-                                                    keteranganApi={item?.keterangan}
-                                                    is_valid_radius_masuk={item?.is_valid_masuk}
-                                                    is_valid_radius_pulang={item?.is_valid_pulang}
-                                                />
+                    {currentTableData.length === 0 ? (
+                        <tr className='loading-table'>
+                            <td>Data tidak ditemukan </td>
+                        </tr>
+                    ) : currentTableData?.map((item, key) => {
+                        return (
+                            <tr key={key}>
+                                <td className='row-img'>
+                                    <IndicatorValid
+                                        keteranganState={keterangan}
+                                        keteranganApi={item?.keterangan}
+                                        is_valid_radius_masuk={item?.is_valid_masuk}
+                                        is_valid_radius_pulang={item?.is_valid_pulang}
+                                    />
+                                    <img src={item?.user?.link_foto} onError={useImgError} alt={item.user?.nama} />
+                                    {item?.user?.nama}
+                                </td>
 
-                                                <img src={item?.user?.link_foto} onError={useImgError} alt={item.user?.nama} />
+                                <td>{item?.user?.niy}</td>
 
-                                                {item?.user?.nama}
-                                            </td>
-                                            <td>{item?.user?.niy}</td>
-                                            <td className='td-jabatan'>
-                                                <DisplayKategoriList list={item.user?.ktgkaryawan} />
-                                            </td>
-                                            <RowTanggal
-                                                keterangan={keterangan}
-                                                tgl_masuk={dayjs(item?.tanggal_masuk).format('ddd DD MMM YYYY')}
-                                                tgl_pulang={dayjs(item?.tanggal_pulang).format('ddd DD MMM YYYY')}
-                                                tgl_mulai_izin={item?.mulai_izin}
-                                                tgl_selesai_izin={item?.selesai_izin}
-                                            />
-                                            <RowJam
-                                                keteranganApi={item?.keterangan}
-                                                keteranganState={keterangan}
-                                                waktu_masuk={item?.waktu_masuk?.slice(0, 5)}
-                                                waktu_pulang={item?.waktu_pulang?.slice(0, 5)}
-                                                isvld_wkt_masuk={item?.isvld_wkt_masuk}
-                                                isvld_wkt_pulang={item?.isvld_wkt_pulang}
-                                            />
-                                            <td className='wrapper__btn__detail'>
-                                                <Link
-                                                    className='btn-detail'
-                                                    to={
-                                                        item.jenis_izin === undefined
-                                                            ? `/kehadiran/detail/${item?.id}`
-                                                            : `/kehadiran/detail/izin/${item?.id}`
+                                <td className='td-jabatan'>
+                                    <DisplayKategoriList list={item.user?.ktgkaryawan} />
+                                </td>
 
-                                                    }
-                                                    onClick={() =>
-                                                        dispatch(updateStateKehadiran({
-                                                            name: 'detailKehadiranIzin',
-                                                            value: item
-                                                        }))
-                                                    }
-                                                >
-                                                    Detail
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
+                                <RowTanggal
+                                    keterangan={keterangan}
+                                    tgl_masuk={dayjs(item?.tanggal_masuk).format('ddd DD MMM YYYY')}
+                                    tgl_pulang={dayjs(item?.tanggal_pulang).format('ddd DD MMM YYYY')}
+                                    tgl_mulai_izin={item?.mulai_izin}
+                                    tgl_selesai_izin={item?.selesai_izin}
+                                />
+
+                                <RowJam
+                                    keteranganApi={item?.keterangan}
+                                    keteranganState={keterangan}
+                                    waktu_masuk={item?.waktu_masuk?.slice(0, 5)}
+                                    waktu_pulang={item?.waktu_pulang?.slice(0, 5)}
+                                    isvld_wkt_masuk={item?.isvld_wkt_masuk}
+                                    isvld_wkt_pulang={item?.isvld_wkt_pulang}
+                                />
+
+                                <td className='wrapper__btn__detail'>
+                                    <Link
+                                        className='btn-detail'
+                                        to={
+                                            item.jenis_izin === undefined
+                                                ? `/kehadiran/detail/${item?.id}`
+                                                : `/kehadiran/detail/izin/${item?.id}`
+                                        }
+                                    >
+                                        Detail
+                                    </Link>
+                                </td>
+                            </tr>
+                        )
+                    })
                     }
                 </tbody>
 
@@ -222,11 +185,11 @@ function Table() {
                     className="pagination-bar"
                     currentPage={currentPage}
                     totalCount={
-                        keterangan === 'Masuk' ? filteredKehadiranMasuk?.length
-                            : keterangan === 'Keluar' ? filteredKehadiranKeluar?.length
-                                : keterangan === 'Izin' ? kehadiranIzin?.length
-                                    : keterangan === 'Sukses' ? kehadiranSukses?.length
-                                        : kehadiranAbsen?.length
+                        keterangan === 'Masuk' ? kehadiranMasuk?.length :
+                        keterangan === 'Keluar' ? kehadiranKeluar?.length : 
+                        keterangan === 'Izin' ? kehadiranIzin?.length :
+                        keterangan === 'Sukses' ? kehadiranSukses?.length :
+                        kehadiranAbsen?.length
                     }
                     pageSize={PageSize}
                     onPageChange={

@@ -6,14 +6,14 @@ import izinIcon from '../../assets/icons/izin-icon.svg'
 import absenIcon from '../../assets/icons/absen-icon.svg'
 import StatisticChart from '../../components/dashboard/StatisticChart'
 import Profile from '../../components/Profile';
-import Jadwal from '../../components/sidebar-right/Jadwal'
+import Jadwal from '../../components/dashboard/Jadwal'
 import Calender from '../../components/CustomCalendar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
-import { getJmlKehadiranDashboard, setJmlKehadiran, updateStateJmlKehadiran } from '../../features/jmlKehadiranSlice'
+import { getJmlKehadiranDashboard, updateStateJmlKehadiran } from '../../features/jmlKehadiranSlice'
 import Pusher from "pusher-js";
 import InfoBox from '../../components/InfoBox'
-import formatDate from '../../components/useFormatCalendar'
+import formatDate from '../../utils/formatDate'
 
 function Dashboard() {
   const dispatch = useDispatch()
@@ -57,9 +57,9 @@ function Dashboard() {
           <div className='wrapper-circular'>
             <CircularStatistic
               name="Masuk"
-              firstValue={jmlKehadiran?.jumlah_masuk}
+              firstValue={jmlKehadiran?.jumlah_absen}
               secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={`${jmlKehadiran?.jumlah_masuk} / ${jmlKehadiran?.jumlah_karyawan}`}
+              uiValue={`${jmlKehadiran?.jumlah_absen} / ${jmlKehadiran?.jumlah_karyawan}`}
               imgSrc={masukIcon}
               loading={loading}
             />
@@ -77,7 +77,7 @@ function Dashboard() {
               name="Absen"
               firstValue={jmlKehadiran?.jumlah_absen}
               secondValue={jmlKehadiran?.jumlah_karyawan}
-              uiValue={`${jmlKehadiran?.jumlah_absen} Orang`}
+              uiValue={`${jmlKehadiran?.jumlah_karyawan - jmlKehadiran?.jumlah_absen} Orang`}
               imgSrc={absenIcon}
               loading={loading}
             />

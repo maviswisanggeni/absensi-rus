@@ -5,7 +5,7 @@ import { getKaryawanKalender, setLoading, updateListPeserta } from '../../featur
 import useDebounce from '../../hooks/useDebounce'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import useImgError from '../../hooks/useImgError'
+import imgErrorValidation from '../../utils/imgErrorValidation'
 import DisplayKategoriList from '../DisplayKategoriList'
 
 function SearchDropdown() {
@@ -85,7 +85,7 @@ function SearchDropdown() {
                                         <div className='dropdown-outer-item' key={index}>
                                             <div className='dropdown-item'>
                                                 <div>
-                                                    <img src={item.link_foto} onError={useImgError} alt='' />
+                                                    <img src={item.link_foto} onError={imgErrorValidation} alt='' />
                                                     <p>{item.nama}</p>
                                                     <span>
                                                         /

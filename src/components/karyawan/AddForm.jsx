@@ -1,23 +1,15 @@
 import React, { useState } from 'react'
 import close from '../../assets/icons/close.svg'
 import eye from '../../assets/icons/eye.svg'
-import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser'
-import { useWrapperAddKaryawan } from '../../contexts/app/WrapperAddKaryawan'
-import Input from '../../components/karyawan/Input'
-import Label from '../../components/karyawan/Label'
-import Select from '../../components/karyawan/Select'
+import Label from './Label'
 import { useDispatch, useSelector } from 'react-redux'
 import { showFormError, updateFieldError, updateFieldValue } from '../../features/karyawanSlice'
-import JabatanSelect from '../../components/karyawan/JabatanSelect'
-import isValidEmail from '../../hooks/useIsValidateEmail'
+import JabatanSelect from './JabatanSelect'
 
 function Form() {
     const dispatch = useDispatch()
     const { errors, nama, niy, password, email, noHp, alamat } = useSelector((state) => state.karyawan)
-
-    const context = useApiKaryawanStoreUser()
     const [passwordShown, setPasswordShown] = useState(false);
-    const contextValidator = useWrapperAddKaryawan()
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

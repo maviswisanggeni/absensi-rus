@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
 import refeshIcons from '../../assets/icons/refresh.svg'
-import { useKehadiranListAbsensi } from '../../contexts/api/kehadiran/ContextApiKehadiranListData'
 import userFoto from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiranTerbaru } from '../../features/kehadiranSlice'
 import moment from 'moment/moment'
-import useImgError from '../../hooks/useImgError'
+import useImgError from '../../utils/imgErrorValidation'
 import Skeleton from 'react-loading-skeleton'
 
 function KehadiranTerbaru() {
-  const context = useKehadiranListAbsensi()
   const dispatch = useDispatch()
   const { loadingKehadiranTerbaru, kehadiranTerbaru } = useSelector(state => state.kehadiran)
 

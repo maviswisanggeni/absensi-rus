@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Search from '../Search'
 import PilihTanggal from './PilihTanggal'
 import calenderIcon from '../../assets/icons/arrow-right.svg'
-import { useTanggalKehadiran } from '../../contexts/app/ContextTanggalKehadiran'
 import searchIcon from '../../assets/icons/search-icon.svg'
-import formatDate from '../useFormatCalendar'
+import formatDate from '../../utils/formatDate'
 import { useDispatch, useSelector } from 'react-redux'
 import { getKehadiran, updateStateKehadiran } from '../../features/kehadiranSlice'
 import { useSearchParams } from 'react-router-dom'
@@ -12,7 +11,6 @@ import { useSearchParams } from 'react-router-dom'
 function SearchAndCalendar() {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
-  const context = useTanggalKehadiran()
   const dispatch = useDispatch()
   const { startTime, endTime, search, startText, endText, isPaginationClicked, keterangan } = useSelector(state => state.kehadiran)
   let [searchParams, setSearchParams] = useSearchParams();

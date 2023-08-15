@@ -1,14 +1,13 @@
 import Pagination from '../Pagination'
-import React, { useEffect, useMemo } from 'react'
-import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useMemo } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import copy from '../../assets/icons/copy.svg'
 import edit from '../../assets/icons/edit.svg'
 import trash from '../../assets/icons/trashRed.svg'
-import { useApiKaryawan } from '../../contexts/api/karyawan/ContextApiKaryawan';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteKaryawan, getKaryawan, updateStateKaryawan } from '../../features/karyawanSlice';
 import DisplayKategoriList from '../DisplayKategoriList';
-import useImgError from '../../hooks/useImgError';
+import imgErrorValidation from '../../utils/imgErrorValidation';
 import arrowDownIcon from '../../assets/icons/arrow-right.svg'
 import AlertModal from '../AlertModal';
 import { useState } from 'react';
@@ -19,7 +18,6 @@ function Table() {
   const { listKaryawan, isLoading, urutan, currentPage } = useSelector(state => state.karyawan)
   const { kategoriId } = useSelector(state => state.kategori)
   const navigate = useNavigate()
-  const context = useApiKaryawan()
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
   const [alertModalDelete, setAlertModalDelete] = useState(false)
@@ -130,7 +128,7 @@ function Table() {
                     <tr key={key}>
                       <td className='niy-col'>{item?.niy}</td>
                       <td className='row-img' onClick={() => handleDetail(item.id)}>
-                        <img src={item?.link_foto} onError={useImgError} alt="" />
+                        <img src={item?.link_foto} onError={imgErrorValidation} alt="" />
                         {item?.nama}
                       </td>
                       <td>

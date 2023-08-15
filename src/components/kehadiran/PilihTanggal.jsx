@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Calendar } from 'react-calendar'
 import calenderIcon from '../../assets/icons/kalender-card.svg'
-import formatDate from '../useFormatCalendar';
+import formatDate from '../../utils/formatDate';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 function PilihTanggal({ setText, setTime, setDate, text, date, stateTime, stateText }) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import '../styles/css/App.css'
-import formatDate from './useFormatCalendar';
+import formatDate from '../utils/formatDate';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Calendar } from 'react-calendar';

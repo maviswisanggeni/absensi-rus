@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import getBaseUrl from "../datas/apiUrl";
-import token from "../datas/tokenAuthorization";
-import formatDate from "../components/useFormatCalendar";
+import getBaseUrl from "../utils/apiUrl";
+import token from "../utils/tokenAuthorization";
+import formatDate from "../utils/formatDate";
 
 export const getKehadiran = createAsyncThunk("kehadiran/getKehadiran", async ({ start_time, end_time, search }, { rejectWithValue }) => {
     try {
@@ -113,9 +113,24 @@ const kehadiranSlice = createSlice({
             })
             .addCase(getKehadiran.fulfilled, (state, action) => {
                 state.loading = false;
-                state.kehadiranMasuk = action.payload.data.masuk;
-                state.kehadiranKeluar = action.payload.data.pulang;
-                state.kehadiranIzin = action.payload.data.izin;
+
+                const kehadiranMasuk = action.payload.data.masuk
+                const kehadiranKeluar = action.payload.data.pulang
+                const kehadiranIzin = action.payload.data.izin
+
+                const filteredMasuk = kehadiranMasuk.filter((item) =>
+                    !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
+                );
+                
+                const filteredKeluar = kehadiranKeluar.filter((item) =>
+                    !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
+                );
+
+                const mergedMasukKeluar = [...filteredMasuk, ...kehadiranKeluar];
+                
+                state.kehadiranMasuk = mergedMasukKeluar;
+                state.kehadiranKeluar = filteredKeluar;
+                state.kehadiranIzin = kehadiranIzin;
 
                 const listSuksesMasuk = action.payload.data.masuk.filter((item) =>
                     item.isvld_wkt_masuk === '1'
@@ -153,7 +168,10 @@ const kehadiranSlice = createSlice({
             })
             .addCase(getKehadiranTerbaru.fulfilled, (state, action) => {
                 state.loadingKehadiranTerbaru = false;
-                state.kehadiranTerbaru = action.payload.data.masuk;
+                let kehadiranMasuk = action.payload.data.masuk;
+                let kehadiranKeluar = action.payload.data.pulang;
+
+                state.kehadiranTerbaru = [...kehadiranMasuk, ...kehadiranKeluar];
             })
             .addCase(getKehadiranTerbaru.rejected, (state, action) => {
                 state.loadingKehadiranTerbaru = false;

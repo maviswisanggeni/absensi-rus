@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { usePagination, DOTS } from './usePagination';
+import { usePagination, DOTS } from '../hooks/usePagination';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateStateKehadiran } from '../features/kehadiranSlice';
