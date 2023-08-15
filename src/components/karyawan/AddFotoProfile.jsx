@@ -1,14 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import { useState } from 'react';
 import uploadClour from '../../assets/icons/cloud-upload.svg'
-import { useApiKaryawanStoreUser } from '../../contexts/api/karyawan/ContextApiKaryawanStoreUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { showFormError, updateFieldError, updateFieldValue } from '../../features/karyawanSlice';
-import FileInput from '../../components/karyawan/FileInput';
-import ImageCropper from '../../components/karyawan/imageCropper';
+import FileInput from './FileInput';
+import ImageCropper from './imageCropper';
 
 function FotoProfile({ callbackFile, callbackIsLoad }) {
-    const context = useApiKaryawanStoreUser()
     const { listJadwal, errors, isFileSend } = useSelector(
         (state) => state.karyawan
     );

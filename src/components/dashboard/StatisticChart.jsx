@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
-import { useApiDashboardStatistik } from '../../contexts/api/dashboard/ApiDashboardStatistik';
 import BtnDropDown from './BtnDropDown';
 import Chart from './Chart';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStatistik } from '../../features/statistikSlice';
 
 function StatisticChart() {
-  const context = useApiDashboardStatistik()
   const { kategori } = useSelector(state => state.statistik)
   const dispatch = useDispatch()
 

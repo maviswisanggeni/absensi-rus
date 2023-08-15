@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
-import token from '../datas/tokenAuthorization'
+import token from '../utils/tokenAuthorization'
 import LoadingFullscreen from './LoadingFullscreen'
 
 function Profile() {

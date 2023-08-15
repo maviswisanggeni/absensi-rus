@@ -8,8 +8,7 @@ import '../../styles/css/Kehadiran.css'
 import SearchAndCalendar from '../../components/kehadiran/SearchAndCalendar'
 import TabbarAndFilter from '../../components/kehadiran/TabbarAndFilter'
 import Table from '../../components/kehadiran/Table'
-import KehadiranTerbaru from '../../components/sidebar-right/KehadiranTerbaru'
-import { useKehadiranJmlKehadiran } from '../../contexts/api/kehadiran/ContextApiKehadiran'
+import KehadiranTerbaru from '../../components/kehadiran/KehadiranTerbaru'
 import { TanggalKehadiranProvider } from '../../contexts/app/ContextTanggalKehadiran'
 import Sidebar from '../../components/sidebar/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,12 +18,11 @@ import { Route, Routes } from 'react-router'
 import Pusher from "pusher-js";
 import InfoBox from '../../components/InfoBox'
 import CustomCalendar from '../../components/CustomCalendar'
-import formatDate from '../../components/useFormatCalendar'
+import formatDate from '../../utils/formatDate'
 import { updateStateKehadiran } from '../../features/kehadiranSlice'
 import LoadingTable from '../../components/LoadingTable'
 
 function Kehadiran() {
-  const context = useKehadiranJmlKehadiran()
   const dispatch = useDispatch()
   const { statusResApi, messageResApi, isDisplayMessage, listTabbar, loading: tableLoading } = useSelector((state) => state.kehadiran)
   const { jmlKehadiran, loading: jmlLoading, tanggalKehadiran } = useSelector(state => state.jmlKehadiran)
@@ -89,15 +87,17 @@ function Kehadiran() {
 
               <CircularStatistic
                 name="Absen"
-                firstValue={jmlKehadiran?.jumlah_absen}
+                firstValue={jmlKehadiran?.jumlah_kehadiran}
                 secondValue={jmlKehadiran?.jumlah_karyawan}
-                uiValue={`${jmlKehadiran?.jumlah_absen} Orang`}
+                uiValue={`${jmlKehadiran?.jumlah_kehadiran} Orang`}
                 imgSrc={absenIcon}
                 loading={jmlLoading}
               />
             </div>
+            
             <SearchAndCalendar />
             <TabbarAndFilter />
+
             {tableLoading
               ? <LoadingTable size={'small'} />
               : <Routes>

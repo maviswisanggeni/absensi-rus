@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import getBaseUrl from "../datas/apiUrl";
-import token from "../datas/tokenAuthorization";
-import formatDate from "../components/useFormatCalendar";
+import getBaseUrl from "../utils/apiUrl";
+import token from "../utils/tokenAuthorization";
+import formatDate from "../utils/formatDate";
 
 export const getJmlKehadiranDashboard = createAsyncThunk("dashboard/jmlKehadiran", async (tanggal, { rejectWithValue }) => {
     try {

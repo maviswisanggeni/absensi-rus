@@ -7,7 +7,7 @@ import { assignKategori, deleteKaryawan, detailKategori, getKaryawanPengaturan, 
 import { Route, Routes, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import DisplayKategoriList from '../../components/DisplayKategoriList'
-import useImgError from '../../hooks/useImgError'
+import imgErrorValidation from '../../utils/imgErrorValidation'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import Skeleton from 'react-loading-skeleton'
 
@@ -140,7 +140,7 @@ function EditKategoriKaryawan() {
                             return (
                                 <div className='wrapper-list' key={index}>
                                     <div className='list-content-left'>
-                                        <img src={item.link_foto} onError={useImgError} alt="" />
+                                        <img src={item.link_foto} onError={imgErrorValidation} alt="" />
                                         <div>
                                             <p>{item.nama}</p>
                                             <span>
@@ -210,7 +210,7 @@ function EditKategoriKaryawan() {
                                                             onChange={() => handleChangeCheckbox('listKaryawanNotFinal', item, item.id)}
                                                             checked={item.isChecked}
                                                         />
-                                                        <img src={item.link_foto} onError={useImgError} alt='' />
+                                                        <img src={item.link_foto} onError={imgErrorValidation} alt='' />
                                                         <label htmlFor={index}>{item.nama}</label>
                                                     </div>
                                                 );

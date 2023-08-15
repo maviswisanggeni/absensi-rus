@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import getBaseUrl from "../datas/apiUrl";
-import token from "../datas/tokenAuthorization";
+import getBaseUrl from "../utils/apiUrl";
+import token from "../utils/tokenAuthorization";
 
 export const getDetailKehadiran = createAsyncThunk("detail/getDetail", async (id, { rejectWithValue }) => {
     try {

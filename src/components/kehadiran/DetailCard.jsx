@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import React, { useEffect, useRef, useState } from 'react'
-import Map from '../../components/kehadiran/Map'
+import Map from './Map'
 import map from '../../assets/images/map.png'
 import folderImg from '../../assets/icons/folder.svg'
 import 'dayjs/locale/id'

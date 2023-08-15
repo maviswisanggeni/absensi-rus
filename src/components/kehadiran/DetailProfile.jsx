@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import people1 from '../../assets/images/user-foto.png'
-import useImgError from '../../hooks/useImgError'
+import useImgError from '../../utils/imgErrorValidation'
+import { goBack } from '../../utils/goBack'
 
 function DetailProfile({ data }) {
     const navigate = useNavigate()
@@ -43,7 +44,7 @@ function DetailProfile({ data }) {
                     <p>{data?.user?.email}</p>
                 </div>
             </div>
-            <div className='back-btn' onClick={() => navigate(-1)}>Kembali</div>
+            <div className='back-btn' onClick={goBack}>Kembali</div>
         </div>
     )
 }

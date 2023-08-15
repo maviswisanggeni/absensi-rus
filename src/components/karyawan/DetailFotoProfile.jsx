@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import imgIcon from '../../assets/icons/img-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFieldValue } from '../../features/karyawanSlice'
-import JabatanSelect from '../../components/karyawan/JabatanSelect'
-import useImgError from '../../hooks/useImgError'
-import ImageCropper from '../../components/karyawan/imageCropper'
+import JabatanSelect from './JabatanSelect'
+import imgErrorValidation from '../../utils/imgErrorValidation'
+import ImageCropper from './imageCropper'
 
 function DetailFotoProfile({ callback }) {
     const dispatch = useDispatch()
@@ -155,7 +155,7 @@ function DetailFotoProfile({ callback }) {
                         src={
                             !imgAfterCrop ? linkFoto : imgAfterCrop
                         }
-                        onError={useImgError}
+                        onError={imgErrorValidation}
                         className='img-profile'
                         alt=""
                     />

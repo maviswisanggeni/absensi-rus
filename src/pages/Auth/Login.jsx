@@ -8,7 +8,7 @@ import "../../styles/css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
-import apiUrl from '../../datas/apiUrl';
+import apiUrl from '../../utils/apiUrl';
 import { useDispatch } from 'react-redux';
 import { getAuthorize } from '../../features/authorizeSlice';
 

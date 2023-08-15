@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import arrowLeft from '../../assets/icons/arrow-left.svg'
-import DetailProfile from './DetailProfile'
-import { useNavigate, useParams } from 'react-router-dom'
+import DetailProfile from '../../components/kehadiran/DetailProfile'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import dayjs from 'dayjs'
 import Sidebar from '../../components/sidebar/Sidebar'
-import DetailCard from './DetailCard'
+import DetailCard from '../../components/kehadiran/DetailCard'
 import pdfIcon from '../../assets/icons/pdf.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDetailIzinKehadiran, getDetailKehadiran, updateStateDetailKehadiran } from '../../features/kehadiranDetailSlice'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import InfoBox from '../../components/InfoBox'
+import { goBack } from '../../utils/goBack'
 
 function Detail() {
     let userId = useParams()
@@ -55,12 +56,12 @@ function Detail() {
             <Sidebar />
             <div className='detail'>
                 <div className='navigation'>
-                    <img onClick={() => navigate(-1)} src={arrowLeft} alt="" />
+                    <img onClick={goBack} src={arrowLeft} alt="" />
                     <h1>Detail Kehadiran</h1>
                 </div>
 
                 <div className='main'>
-                    {detailData?.jenis_izin === undefined ?
+                    {detailData?.jenis_izin === undefined &&
                         <div className='detail-masuk-keluar'>
                             <DetailCard
                                 type='Masuk'
@@ -102,8 +103,10 @@ function Detail() {
                                 keterangan={detailData?.keterangan}
                             />
                         </div>
+                    }
 
-                        : <div className='detail__izin'>
+                    {detailData?.jenis_izin !== undefined &&
+                        <div className='detail__izin'>
                             <div className='wrapper__header'>
                                 <h1>Izin {detailData.jenis_izin} &nbsp;</h1>
                             </div>
@@ -147,6 +150,7 @@ function Detail() {
                             </div>
                         </div>
                     }
+
                     <DetailProfile data={detailData} />
                 </div>
             </div>

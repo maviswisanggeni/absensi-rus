@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import formatDate from "../../components/useFormatCalendar";
+import formatDate from "../../utils/formatDate";
 
 const ContextTanggalKehadiran = createContext({})
 
-function useTanggalKehadiran(){
+function useTanggalKehadiran() {
     return useContext(ContextTanggalKehadiran)
 }
 
-function TanggalKehadiranProvider ({children}) {
+function TanggalKehadiranProvider({ children }) {
     const [startTanggal, setStartTanggal] = useState(new Date());
     const [endTanggal, setEndTanggal] = useState(new Date());
     const [startText, setStartText] = useState('Tanggal mulai')
@@ -15,7 +15,7 @@ function TanggalKehadiranProvider ({children}) {
     const [startTime, setStartTime] = useState(formatDate(new Date()))
     const [endTime, setEndTime] = useState(formatDate(new Date()))
     const [id, setId] = useState(null)
-    const [detail, setDetail]  = useState(null);
+    const [detail, setDetail] = useState(null);
 
     useEffect(() => {
         // console.log(startText)
@@ -40,11 +40,11 @@ function TanggalKehadiranProvider ({children}) {
         setDetail,
     }
 
-    return(
+    return (
         <ContextTanggalKehadiran.Provider value={contextValue}>
             {children}
         </ContextTanggalKehadiran.Provider>
     )
 }
 
-export {ContextTanggalKehadiran, TanggalKehadiranProvider, useTanggalKehadiran}
+export { ContextTanggalKehadiran, TanggalKehadiranProvider, useTanggalKehadiran }
