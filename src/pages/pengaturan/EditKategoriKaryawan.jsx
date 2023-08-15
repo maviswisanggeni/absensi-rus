@@ -106,14 +106,16 @@ function EditKategoriKaryawan() {
             </Routes>
             <div className='wrapper-kategori'>
                 <h1>Kategori Karyawan</h1>
-                {listKategori.map((data, index) => (
-                    <Link to={`/pengaturan/kategori-karyawan/${data.kategori}/${data.id}`} key={index}>
-                        <div className={`${data.id == current ? 'active' : ''} kategori`} onClick={() => setCurrent(data.id)}>
-                            <p>{data.kategori}</p>
-                            <span>{data.jumlah + " Guru"}</span>
-                        </div>
-                    </Link>
-                ))}
+                <div className='container-list-kategori'>
+                    {listKategori.map((data, index) => (
+                        <Link to={`/pengaturan/kategori-karyawan/${data.kategori}/${data.id}`} key={index}>
+                            <div className={`${data.id == current ? 'active' : ''} kategori`} onClick={() => setCurrent(data.id)}>
+                                <p>{data.kategori}</p>
+                                <span>{data.jumlah + " Guru"}</span>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
             </div>
 
             <div className='wrapper-edit-kategori'>

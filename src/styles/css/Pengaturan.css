@@ -34,6 +34,7 @@
 .pengaturan .import-user {
   width: 1100px;
   margin-left: auto;
+  margin-bottom: 5rem;
 }
 .pengaturan .import-user .top-table {
   display: -webkit-box;
@@ -480,6 +481,11 @@
   font-weight: 500;
   font-size: 24px;
   margin-bottom: 2rem;
+}
+.pengaturan .detail-kategori-karyawan .wrapper-kategori .container-list-kategori {
+  max-height: 510px;
+  width: 370px;
+  overflow-y: auto;
 }
 .pengaturan .detail-kategori-karyawan .wrapper-kategori .kategori {
   display: -webkit-box;

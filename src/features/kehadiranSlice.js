@@ -82,7 +82,6 @@ const kehadiranSlice = createSlice({
         kehadiranSukses: [],
         kehadiranAbsen: [],
         kehadiranTerbaru: [],
-        detailKehadiranIzin: {},
         search: '',
         startTime: formatDate(new Date()),
         endTime: null,
@@ -121,13 +120,13 @@ const kehadiranSlice = createSlice({
                 const filteredMasuk = kehadiranMasuk.filter((item) =>
                     !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
                 );
-                
+
                 const filteredKeluar = kehadiranKeluar.filter((item) =>
                     !kehadiranIzin.some((data) => data.mulai_izin === item.tanggal_masuk && data.user.id === item.user.id)
                 );
 
                 const mergedMasukKeluar = [...filteredMasuk, ...kehadiranKeluar];
-                
+
                 state.kehadiranMasuk = mergedMasukKeluar;
                 state.kehadiranKeluar = filteredKeluar;
                 state.kehadiranIzin = kehadiranIzin;
