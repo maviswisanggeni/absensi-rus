@@ -152,12 +152,10 @@ function Karyawan() {
                 : <p>{listKaryawan.length + ' Guru'}</p>
               }
             </div>
-
           </div>
 
           : <div className='wrapper__skeleton'>
             <LoadingTabbar amount={5} loadingFilter={isLoading} />
-            <LoadingTable />
           </div>
         }
 

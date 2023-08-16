@@ -142,10 +142,15 @@
 
     .wrapper__skeleton {
       margin-top: 2rem;
+      height: auto;
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
     .wrapper__table {
       height: auto;
+      padding-bottom: 1rem;
     }
   }
 
@@ -446,9 +451,9 @@
         margin-bottom: 2rem;
       }
 
-      .container-list-kategori{
+      .container-list-kategori {
         max-height: 510px;
-        width:370px;
+        width: 370px;
         overflow-y: auto;
       }
 

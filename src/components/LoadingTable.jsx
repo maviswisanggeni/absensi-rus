@@ -2,7 +2,7 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-function LoadingTable({ size }) {
+function LoadingTable({ size, isHaveActionBtn }) {
     return (
         <>
             {size === 'small'
@@ -200,12 +200,12 @@ function LoadingTable({ size }) {
                                 style={{ marginRight: '5rem' }}
                             />
 
-                            <Skeleton
+                            {isHaveActionBtn && <Skeleton
                                 height={20}
                                 width={100}
                                 borderRadius={5}
                                 count={1}
-                            />
+                            />}
                         </div>
                     ))}
                 </div>

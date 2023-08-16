@@ -9,9 +9,8 @@ import { useRef } from 'react'
 import { useState } from 'react'
 import kategoriImg from '../../assets/images/kategori.png'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
-import LoadingTable from '../../components/LoadingTable'
 import LoadingTabbar from '../../components/LoadingTabbar'
-import Skeleton from 'react-loading-skeleton'
+import LoadingTable from '../../components/LoadingTable'
 
 function ImportUser() {
     const dispatch = useDispatch()
@@ -121,215 +120,29 @@ function ImportUser() {
                 }
             </div>
 
-            {!loadingKategori
-                ? <div className='wrapper-tabbar'>
-                    <Tabbar
-                        options={listKategori}
-                        setKategoriId={setKategoriId}
-                        setCurrentKategori={setCurrentKategori}
-                        setKeterangan={updateInputPengaturan}
-                        searchParams={searchParams.toString()}
-                        path='/pengaturan/import-user'
-                        loading={loadingKategori}
-                    />
-                </div>
-
-                : <div className='wrapper__skeleton'>
-                    <LoadingTabbar amount={5} />
-                    <div className='wrapper__table'>
-                        <div className='column__table'>
-                            <Skeleton
-                                height={20}
-                                width={50}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '4rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={75}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '9.75rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '5.5rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '2rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '2rem' }}
-                            />
-                        </div>
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <div className='row__table' key={index}>
-                                <Skeleton
-                                    height={20}
-                                    width={100}
-                                    borderRadius={5}
-                                    count={1}
-                                    style={{ marginRight: '3rem' }}
-                                />
-
-                                <Skeleton
-                                    height={35}
-                                    width={35}
-                                    borderRadius={'50%'}
-                                    circle={true}
-                                    count={1}
-                                    style={{ marginRight: '0.5rem' }}
-                                />
-
-                                <Skeleton
-                                    height={20}
-                                    width={100}
-                                    borderRadius={5}
-                                    count={1}
-                                    style={{ marginRight: '7.25rem' }}
-                                />
-
-                                <Skeleton
-                                    height={20}
-                                    width={100}
-                                    borderRadius={5}
-                                    count={1}
-                                    style={{ marginRight: '7.5rem' }}
-                                />
-
-                                <Skeleton
-                                    height={20}
-                                    width={100}
-                                    borderRadius={5}
-                                    count={1}
-                                    style={{ marginRight: '4rem' }}
-                                />
-
-                                <Skeleton
-                                    height={20}
-                                    width={100}
-                                    borderRadius={5}
-                                    count={1}
-                                    style={{ marginRight: '5rem' }}
-                                />
-                            </div>
-                        ))}
+            {loadingKategori
+                ? (
+                    <div className='wrapper__skeleton'>
+                        <LoadingTabbar amount={5} />
                     </div>
-                </div>
+                )
+                : (
+                    <div className='wrapper-tabbar'>
+                        <Tabbar
+                            options={listKategori}
+                            setKategoriId={setKategoriId}
+                            setCurrentKategori={setCurrentKategori}
+                            setKeterangan={updateInputPengaturan}
+                            searchParams={searchParams.toString()}
+                            path='/pengaturan/import-user'
+                            loading={loadingKategori}
+                        />
+                    </div>
+                )
             }
 
-            {loadingKategori || loadingKaryawan ?
-                <div className='wrapper__table'>
-                    <div className='column__table'>
-                        <Skeleton
-                            height={20}
-                            width={50}
-                            borderRadius={5}
-                            count={1}
-                            style={{ marginRight: '4rem' }}
-                        />
-
-                        <Skeleton
-                            height={20}
-                            width={75}
-                            borderRadius={5}
-                            count={1}
-                            style={{ marginRight: '9.75rem' }}
-                        />
-
-                        <Skeleton
-                            height={20}
-                            width={100}
-                            borderRadius={5}
-                            count={1}
-                            style={{ marginRight: '5.5rem' }}
-                        />
-
-                        <Skeleton
-                            height={20}
-                            width={100}
-                            borderRadius={5}
-                            count={1}
-                            style={{ marginRight: '2rem' }}
-                        />
-
-                        <Skeleton
-                            height={20}
-                            width={100}
-                            borderRadius={5}
-                            count={1}
-                            style={{ marginRight: '2rem' }}
-                        />
-                    </div>
-                    {Array.from({ length: 10 }, (_, index) => (
-                        <div className='row__table' key={index}>
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '3rem' }}
-                            />
-
-                            <Skeleton
-                                height={35}
-                                width={35}
-                                borderRadius={'50%'}
-                                circle={true}
-                                count={1}
-                                style={{ marginRight: '0.5rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '7.25rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '7.5rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '4rem' }}
-                            />
-
-                            <Skeleton
-                                height={20}
-                                width={100}
-                                borderRadius={5}
-                                count={1}
-                                style={{ marginRight: '5rem' }}
-                            />
-                        </div>
-                    ))}
-                </div>
+            {loadingKategori || loadingKaryawan
+                ? <LoadingTable isHaveActionBtn={false} />
                 : <Table />
             }
             <LoadingFullscreen loading={loadingImport} />

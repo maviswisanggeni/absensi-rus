@@ -146,9 +146,14 @@
 }
 .pengaturan .import-user .wrapper__skeleton {
   margin-top: 2rem;
+  height: auto;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .pengaturan .import-user .wrapper__table {
   height: auto;
+  padding-bottom: 1rem;
 }
 .pengaturan .radius-absen {
   width: 100%;
