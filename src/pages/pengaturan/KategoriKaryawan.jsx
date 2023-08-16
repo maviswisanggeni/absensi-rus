@@ -77,10 +77,12 @@ function KategoriKaryawan() {
                 if (res.meta.requestStatus === "fulfilled") {
                     setCurrentMore(null)
                     dispatch(getKategoriPengaturan())
+                    setShowAlertDelete(false)
                 }
             })
             .catch((err) => {
                 console.log(err);
+                setShowAlertDelete(false)
             })
     }
 

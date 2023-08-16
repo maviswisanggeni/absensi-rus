@@ -201,6 +201,19 @@
   .dropdown-container {
     height: 100px;
   }
+
+  .wrapper__skeleton {
+    height: auto;
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .wrapper__table {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: auto;
+  }
 }
 
 .detail-karyawan {
