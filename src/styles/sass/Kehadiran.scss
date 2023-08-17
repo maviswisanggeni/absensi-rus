@@ -211,19 +211,19 @@
 }
 
 .valid {
-  background-color: $succes-color;
+  background-color: $succes-color !important;
 }
 
 .gak-valid {
-  background-color: $danger-color;
+  background-color: $danger-color !important;
 }
 
-.valid-masuk-text {
-  color: $succes-color;
+.valid-text {
+  color: $succes-color !important;
 }
 
-.valid-pulang-text {
-  color: $danger-color;
+.gak-valid-text {
+  color: $danger-color !important;
 }
 
 .detail {
@@ -372,6 +372,16 @@
               font-size: 10px;
               color: $grey;
             }
+          }
+
+          .coordinates {
+            background-color: $background-color;
+            display: flex;
+            justify-content: space-between;
+
+            h3 {
+              margin-bottom: 0;
+            }
 
             .map-and-status {
               display: flex;
@@ -388,29 +398,9 @@
               .valid-masuk-pulang {
                 margin-right: 0.5rem;
               }
-
-              .valid-masuk {
-                background-color: $succes-color;
-              }
-
               .status {
                 font-size: 8px;
-                color: $succes-color;
               }
-            }
-          }
-
-          .coordinates {
-            background-color: $background-color;
-            display: flex;
-            justify-content: space-between;
-
-            h3 {
-              margin-bottom: 0;
-            }
-
-            img {
-              cursor: pointer;
             }
           }
         }
