@@ -7,7 +7,7 @@ import 'dayjs/locale/id'
 
 function DetailCard({
     type, tanggal, waktu, link_foto, catatan, lokasi, latitude, longitude,
-    is_valid, is_valid_wkt, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull, keterangan
+    is_valid, is_valid_wkt, loading, popUp, setPopUp, popUpMap, setPopUpMap, checkNull
 }) {
 
     const wrapperRef = useRef(null);
@@ -16,7 +16,6 @@ function DetailCard({
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-                console.log('Click outside detected');
                 setPopUpMap(false);
             }
         };
@@ -32,6 +31,14 @@ function DetailCard({
         dayjs.locale('id')
     }, [])
 
+    function isValid() {
+        return is_valid === '1'
+    }
+
+    function isNull(state) {
+        return state === null || state === undefined
+    }
+
     return (
         <div className='masuk-keluar'>
             <div className='jam-masuk'>
@@ -41,7 +48,7 @@ function DetailCard({
                         ? dayjs(tanggal).format('dddd, DD MMMM YYYY') + ', pukul'
                         : '-'
                     }
-                    <span className={is_valid_wkt === '1' ? 'valid-masuk-text' : 'valid-pulang-text'}>
+                    <span className={is_valid_wkt === '1' ? 'valid-text' : 'gak-valid-text'}>
                         {waktu
                             ? ` ${waktu.slice(0, 5)}`
                             : ''
@@ -95,22 +102,19 @@ function DetailCard({
                         }
                         <img
                             className='mape'
+                            style={{ cursor: !popUpMap && latitude && longitude ? 'pointer' : 'default' }}
                             src={map}
                             onClick={(event) => {
                                 event.stopPropagation();
                                 setPopUpMap(true);
                             }}
-                        />                        <div className='wrapper-status'>
-                            <div
-                                className={`valid-masuk-pulang 
-                                    ${is_valid === '1' ? 'valid-masuk' : is_valid === null ? '' : 'valid-pulang'}
-                                `}
-                            >
+                        />
+                        <div className='wrapper-status'>
+                            <div className={`valid-masuk-pulang ${isValid() ? 'valid' : isNull(is_valid) ? '' : 'gak-valid'}`}>
                             </div>
-                            <p
-                                className='status'
-                            >
-                                {checkNull(is_valid) === '-' ? '-' : is_valid === '1' ? 'Di dalam radius' : 'Di luar radius'}
+                            <p className={`status ${isValid() ? 'valid-text' : isNull(is_valid) ? '' : 'gak-valid-text'}`}>
+                                {checkNull(is_valid)}
+                                {isValid() ? 'Di dalam radius' : isNull(is_valid) ? '' : 'Di luar radius'}
                             </p>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import { getDetailIzinKehadiran, getDetailKehadiran, resetDetail, updateStateDet
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import InfoBox from '../../components/InfoBox'
 import { goBack } from '../../utils/goBack'
+import { getKoordinat } from '../../features/koordinatSlice'
 
 function Detail() {
     let userId = useParams()
@@ -25,6 +26,7 @@ function Detail() {
 
     useEffect(() => {
         dispatch(resetDetail())
+        dispatch(getKoordinat())
     }, [])
 
     useEffect(() => {

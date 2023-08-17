@@ -10,13 +10,13 @@ function RowJam({ keteranganApi, keteranganState, waktu_masuk, waktu_pulang, isv
 
     return (
         <td className='wrapper__row__jam'>
-            <p className={'row__jam ' + (isValidMasuk ? 'valid-masuk-text' : 'valid-pulang-text')
+            <p className={'row__jam ' + (isValidMasuk ? 'valid-text' : 'gak-valid-text')
             }>
                 {(keteranganApi === 'masuk' || keteranganApi === 'pulang') && keteranganState === 'Masuk' ? waktu_masuk + ' WIB' : null}
                 {keteranganApi === 'pulang' && keteranganState === 'Keluar' ? waktu_pulang + ' WIB' : null}
                 {keteranganState === 'Absen' || keteranganState === 'Sukses' ? waktu_masuk : null}&nbsp;
             </p>
-            <p className={'row__jam ' + (isValidPulang ? 'valid-masuk-text' : 'valid-pulang-text')}>
+            <p className={'row__jam ' + (isValidPulang ? 'valid-text' : 'gak-valid-text')}>
                 {keteranganApi === 'pulang' && (keteranganState === 'Absen' || keteranganState === 'Sukses') ? ` - ${waktu_pulang}` : null}
             </p>
         </td>
