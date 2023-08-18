@@ -7,7 +7,7 @@ import trash from '../../assets/icons/trashRed.svg'
 import defaultUser from '../../assets/images/user-foto.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteKaryawan, getKaryawan, updateStateKaryawan } from '../../features/karyawanSlice';
-import { updateInputPengaturan } from '../../features/pengaturanSlice';
+import { updateStatePengaturan } from '../../features/pengaturanSlice';
 import imgErrorValidation from '../../utils/imgErrorValidation';
 
 let PageSize = 10;
@@ -98,7 +98,7 @@ function Table() {
                     totalCount={listKaryawan?.length}
                     pageSize={PageSize}
                     onPageChange={page =>
-                        dispatch(updateInputPengaturan({ name: 'currentPage', value: page }))
+                        dispatch(updateStatePengaturan({ name: 'currentPage', value: page }))
                     }
                 />
             }

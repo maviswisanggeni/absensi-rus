@@ -10,7 +10,7 @@ import EditKategoriKaryawan from './EditKategoriKaryawan'
 import BatasWaktu from './BatasWaktu'
 import InfoBox from '../../components/InfoBox'
 import { useSelector } from 'react-redux'
-import { updateInputPengaturan } from '../../features/pengaturanSlice'
+import { updateStatePengaturan } from '../../features/pengaturanSlice'
 
 function Pengaturan() {
     const { statusResApi, messageResApi, isDisplayMessage } = useSelector((state) => state.pengaturan)
@@ -26,7 +26,7 @@ function Pengaturan() {
         return () => {
             body.classList.remove('bg-pengaturan')
         }
-    }, [])
+    }, [location.pathname])
 
     return (
         <>
@@ -46,7 +46,7 @@ function Pengaturan() {
                 message={messageResApi}
                 status={statusResApi}
                 isDisplay={isDisplayMessage}
-                setIsDisplay={updateInputPengaturan}
+                setIsDisplay={updateStatePengaturan}
                 stateName='isDisplayMessage'
             />
         </>

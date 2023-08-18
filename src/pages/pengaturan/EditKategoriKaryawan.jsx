@@ -3,13 +3,14 @@ import { useState } from 'react'
 import Checkbox from '../../components/kalender/Checkbox'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { assignKategori, deleteKaryawan, detailKategori, getKaryawanPengaturan, getKategoriPengaturan, searchKaryawan, setCurrentKategori, setKategoriId, unassignKategori, updateInputPengaturan } from '../../features/pengaturanSlice'
+import { assignKategori, toggleCheck, detailKategori, getKaryawanPengaturan, getKategoriPengaturan, searchKaryawan, setCurrentKategori, setKategoriId, unassignKategori } from '../../features/pengaturanSlice'
 import { Route, Routes, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import DisplayKategoriList from '../../components/DisplayKategoriList'
 import imgErrorValidation from '../../utils/imgErrorValidation'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import Skeleton from 'react-loading-skeleton'
+import Button from '../../components/Button'
 
 function EditKategoriKaryawan() {
     const [current, setCurrent] = useState(null)
@@ -18,22 +19,30 @@ function EditKategoriKaryawan() {
     const [value, setValue] = useState('')
 
     const dispatch = useDispatch()
-    const { listKategori, loadingKategori, listKaryawan, loadingAssign,
-        currentKategori, listKaryawanNotFinal, currentKaryawan, kategoriId
+    const {
+        listKategori,
+        loadingKategori,
+        listKaryawan,
+        loadingAssign,
+        currentKategori,
+        listKaryawanNotFinal,
+        listSearchKaryawan,
+        kategoriId,
     } = useSelector((state) => state.pengaturan)
     const { kategori, id } = useParams()
     const [kategoriIsUpdated, setKategoriIsUpdated] = useState(false)
+    const [listUnassignKaryawan, setListUnassignKaryawan] = useState([])
 
     useEffect(() => {
         dispatch(getKategoriPengaturan())
         dispatch(getKaryawanPengaturan({ route: 'setting' }))
         setCurrent(id)
-    }, [])
+    }, [id])
 
     useEffect(() => {
         dispatch(setCurrentKategori(kategori))
         dispatch(setKategoriId(id))
-    }, [id])
+    }, [kategori, id])
 
     useEffect(() => {
         if (!loadingKategori) {
@@ -57,21 +66,21 @@ function EditKategoriKaryawan() {
         dispatch(searchKaryawan({ name: 'listSearchKaryawan', value: inputValue }))
     }
 
-    function handleChangeCheckbox(name, item, index) {
+    function handleChangeCheckbox(name, index) {
         if (name === 'listKaryawan') {
-            dispatch(updateInputPengaturan({ name: 'currentKaryawan', value: item }))
-            setShowAlert(true)
+            dispatch(toggleCheck({ name: 'listKaryawan', index }));
         } else {
-            dispatch(deleteKaryawan({ name: 'listKaryawanNotFinal', index }));
-            dispatch(deleteKaryawan({ name: 'listSearchKaryawan', index }));
+            dispatch(toggleCheck({ name: 'listKaryawanNotFinal', index }));
+            dispatch(toggleCheck({ name: 'listSearchKaryawan', index }));
         }
     }
 
     function handleAssignKategori() {
-        const selectedListKaryawan = listKaryawanNotFinal.filter(item => item.isChecked).concat(listKaryawan)
+        const selectedListKaryawan = listSearchKaryawan.filter(item => item.isChecked).concat(listKaryawan)
+
         dispatch(assignKategori({
             kategori_id: id,
-            karyawan: selectedListKaryawan
+            listKaryawan: selectedListKaryawan
         }))
             .then((res) => {
                 if (res.meta.requestStatus === "fulfilled") {
@@ -84,10 +93,9 @@ function EditKategoriKaryawan() {
     }
 
     const handleDelete = () => {
-        dispatch(deleteKaryawan({ name: 'listKaryawan', index: currentKaryawan.id }));
         dispatch(unassignKategori({
             kategori_id: kategoriId,
-            user_id: currentKaryawan.id
+            listKaryawan: listUnassignKaryawan
         }))
             .then((res) => {
                 if (res.meta.requestStatus === "fulfilled") {
@@ -98,6 +106,10 @@ function EditKategoriKaryawan() {
                 }
             })
     };
+
+    useEffect(() => {
+        setListUnassignKaryawan(listKaryawan.filter(item => !item.isChecked))
+    }, [listKaryawan])
 
     return (
         <div className='detail-kategori-karyawan'>
@@ -126,7 +138,7 @@ function EditKategoriKaryawan() {
                 <div className='wrapper-column'>
                     {loadingKategori ?
                         Array.from({ length: 5 }, (_, index) => (
-                            <div className='container__list__skeleton'>
+                            <div className='container__list__skeleton' key={index}>
                                 <div className='left__content'>
                                     <Skeleton width={35} height={35} circle={true} />
                                     <div>
@@ -138,7 +150,6 @@ function EditKategoriKaryawan() {
                             </div>
                         ))
                         : listKaryawan.map((item, index) => {
-                            if (!item.isChecked) return null;
                             return (
                                 <div className='wrapper-list' key={index}>
                                     <div className='list-content-left'>
@@ -154,7 +165,8 @@ function EditKategoriKaryawan() {
                                         type="checkbox"
                                         name='listKaryawan'
                                         checked={item.isChecked}
-                                        onChange={() => handleChangeCheckbox('listKaryawan', item, index)}
+                                        value={item.isChecked}
+                                        onChange={() => handleChangeCheckbox('listKaryawan', item.id)}
                                     />
                                 </div>
                             )
@@ -163,20 +175,33 @@ function EditKategoriKaryawan() {
 
                     {listKaryawan.length === 0 && !loadingKategori && <p className='empty'>Tidak ada guru di kategori {currentKategori}</p>}
                 </div>
+
+                {listUnassignKaryawan.length > 0 &&
+                    <div className='total-selected-user'>
+                        <p>Jumlah {listUnassignKaryawan.length}</p>
+                        <Button
+                            text={'Hapus'}
+                            onClick={() => setShowAlert(true)}
+                        />
+                    </div>
+                }
             </div>
-            {showAlert && <div className='bg-modal'>
-                <div className='alert-modal'>
-                    <h1>Edit Kategori Karyawan</h1>
-                    <p>Kamu yakin hapus karyawan dari kategori?</p>
-                    <div>
-                        <button onClick={() => setShowAlert(false)}>Tidak</button>
-                        <button onClick={handleDelete}>Iya</button>
+
+            {showAlert &&
+                <div className='bg-modal'>
+                    <div className='alert-modal'>
+                        <h1>Edit Kategori Karyawan</h1>
+                        <p>Kamu yakin hapus {listUnassignKaryawan.length} karyawan dari kategori?</p>
+                        <div>
+                            <button onClick={() => setShowAlert(false)}>Tidak</button>
+                            <button onClick={handleDelete}>Iya</button>
+                        </div>
                     </div>
                 </div>
-            </div>}
+            }
 
-            {
-                showModal && <div className='bg-modal'>
+            {showModal &&
+                <div className='bg-modal'>
                     <div className='modal-tambah-anggota'>
                         <h1>Tambah Anggota</h1>
                         <h3>Guru Anggota {currentKategori}</h3>
@@ -209,7 +234,7 @@ function EditKategoriKaryawan() {
                                                         <Checkbox
                                                             name='listKaryawanNotFinal'
                                                             control={index}
-                                                            onChange={() => handleChangeCheckbox('listKaryawanNotFinal', item, item.id)}
+                                                            onChange={() => handleChangeCheckbox('listKaryawanNotFinal', item.id)}
                                                             checked={item.isChecked}
                                                         />
                                                         <img src={item.link_foto} onError={imgErrorValidation} alt='' />

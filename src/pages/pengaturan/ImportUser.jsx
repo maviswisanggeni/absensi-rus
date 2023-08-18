@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Button from '../../components/Button'
 import Tabbar from '../../components/Tabbar'
-import { emptyKaryawan, getKaryawanPengaturan, getKategoriPengaturan, importKaryawan, setCurrentKategori, setKategoriId, updateInputPengaturan } from '../../features/pengaturanSlice'
+import { emptyKaryawan, getKaryawanPengaturan, getKategoriPengaturan, importKaryawan, setCurrentKategori, setKategoriId, updateStatePengaturan } from '../../features/pengaturanSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import Table from '../../components/pengaturan/Table'
@@ -14,7 +14,13 @@ import LoadingTable from '../../components/LoadingTable'
 
 function ImportUser() {
     const dispatch = useDispatch()
-    const { listKategori, loadingKategori, kategoriId, loadingImport, loadingKaryawan } = useSelector(state => state.pengaturan)
+    const {
+        listKategori,
+        loadingKategori,
+        kategoriId,
+        loadingImport,
+        loadingKaryawan,
+    } = useSelector(state => state.pengaturan)
     const [file, setFile] = useState()
     const [showModal, setShowModal] = useState(false)
     const [isUpdateKategori, setIsUpdateKategori] = useState(false)
@@ -27,7 +33,7 @@ function ImportUser() {
         dispatch(getKategoriPengaturan())
         setIsUpdateKategori(true)
         dispatch(emptyKaryawan())
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         const currentPath = location.pathname;
@@ -35,7 +41,7 @@ function ImportUser() {
             const defaultPath = `/pengaturan/import-user/${listKategori[0]?.kategori}`;
             navigate(defaultPath);
         }
-    }, [location.pathname, listKategori])
+    }, [location.pathname, listKategori, navigate])
 
     useEffect(() => {
         if (isUpdateKategori) {
@@ -44,11 +50,11 @@ function ImportUser() {
                 route: 'karyawan'
             }))
         }
-    }, [kategoriId])
+    }, [kategoriId, isUpdateKategori, dispatch])
 
     useEffect(() => {
-        dispatch(updateInputPengaturan({ name: 'currentPage', value: 1 }))
-    }, [location.pathname.split('/').pop()]);
+        dispatch(updateStatePengaturan({ name: 'currentPage', value: 1 }))
+    }, [dispatch, location.pathname.split('/').pop()]);
 
     function handleChange(e) {
         e.preventDefault();
@@ -132,7 +138,7 @@ function ImportUser() {
                             options={listKategori}
                             setKategoriId={setKategoriId}
                             setCurrentKategori={setCurrentKategori}
-                            setKeterangan={updateInputPengaturan}
+                            setKeterangan={updateStatePengaturan}
                             searchParams={searchParams.toString()}
                             path='/pengaturan/import-user'
                             loading={loadingKategori}

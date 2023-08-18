@@ -113,8 +113,7 @@ function DetailCard({
                             <div className={`valid-masuk-pulang ${isValid() ? 'valid' : isNull(is_valid) ? '' : 'gak-valid'}`}>
                             </div>
                             <p className={`status ${isValid() ? 'valid-text' : isNull(is_valid) ? '' : 'gak-valid-text'}`}>
-                                {checkNull(is_valid)}
-                                {isValid() ? 'Di dalam radius' : isNull(is_valid) ? '' : 'Di luar radius'}
+                                {isValid() ? 'Di dalam radius' : isNull(is_valid) ? '-' : 'Di luar radius'}
                             </p>
                         </div>
                     </div>

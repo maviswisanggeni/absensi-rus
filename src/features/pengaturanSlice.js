@@ -187,10 +187,10 @@ export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", 
     }
 })
 
-export const assignKategori = createAsyncThunk("pengaturan/assignKategori", async ({ kategori_id, karyawan }, { rejectWithValue }) => {
+export const assignKategori = createAsyncThunk("pengaturan/assignKategori", async ({ kategori_id, listKaryawan }, { rejectWithValue }) => {
     const formData = new FormData()
     formData.append('kategori_id', kategori_id)
-    karyawan.forEach((item, index) => {
+    listKaryawan.forEach((item, index) => {
         formData.append(`karyawan_id[${index}]`, item.id)
     })
 
@@ -222,11 +222,13 @@ export const assignKategori = createAsyncThunk("pengaturan/assignKategori", asyn
     }
 })
 
-export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", async ({ kategori_id, user_id }, { rejectWithValue }) => {
+export const unassignKategori = createAsyncThunk("pengaturan/unassignKategori", async ({ kategori_id, listKaryawan }, { rejectWithValue }) => {
     const formData = new FormData()
-    const prefix = `unassign[${0}]`;
-    formData.append(`${prefix}[kategori_id]`, kategori_id)
-    formData.append(`${prefix}[user_id]`, user_id)
+    listKaryawan.forEach((item, index) => {
+        const prefix = `unassign[${index}]`;
+        formData.append(`${prefix}[kategori_id]`, kategori_id)
+        formData.append(`${prefix}[user_id]`, item.id)
+    });
 
     try {
         const response = await axios.post(
@@ -356,7 +358,6 @@ const pengaturanSlice = createSlice({
         listSearchKaryawan: [],
         listKaryawanNotFinal: [],
 
-        currentKaryawan: null,
         currentKategori: null,
         kategoriId: null,
         currentPage: 1,
@@ -378,7 +379,7 @@ const pengaturanSlice = createSlice({
         isDisplayMessage: false,
     },
     reducers: {
-        updateInputPengaturan: (state, action) => {
+        updateStatePengaturan: (state, action) => {
             const { name, value } = action.payload
             state[name] = value
         },
@@ -388,7 +389,7 @@ const pengaturanSlice = createSlice({
         setCurrentKategori: (state, action) => {
             state.currentKategori = action.payload
         },
-        deleteKaryawan: (state, action) => {
+        toggleCheck: (state, action) => {
             const { name, index } = action.payload
             state[name] = state[name].map((item, i) => {
                 if (item.id === index) {
@@ -619,5 +620,5 @@ const pengaturanSlice = createSlice({
     }
 })
 
-export const { setKategoriId, setCurrentKategori, updateInputPengaturan, deleteKaryawan, searchKaryawan, emptyKaryawan } = pengaturanSlice.actions
+export const { setKategoriId, setCurrentKategori, updateStatePengaturan, toggleCheck, searchKaryawan, emptyKaryawan } = pengaturanSlice.actions
 export default pengaturanSlice.reducer;
