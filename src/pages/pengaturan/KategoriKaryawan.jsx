@@ -5,9 +5,8 @@ import kategoriImg from '../../assets/images/kategori.png'
 import trashIcons from '../../assets/icons/trashRed.svg'
 import editIcons from '../../assets/icons/edit.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteKategori, getKategoriPengaturan, storeKategori, updateInputPengaturan, updateKategori } from '../../features/pengaturanSlice'
+import { deleteKategori, getKategoriPengaturan, storeKategori, updateStatePengaturan, updateKategori } from '../../features/pengaturanSlice'
 import { Link } from 'react-router-dom'
-import InfoBox from '../../components/InfoBox'
 import LoadingFullscreen from '../../components/LoadingFullscreen'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -15,7 +14,6 @@ import AlertModal from '../../components/AlertModal'
 
 function KategoriKaryawan() {
     const [showModalAddKategori, setShowModalAddKategori] = useState(false)
-    const [showModal, setShowModal] = useState(false)
     const [currentMore, setCurrentMore] = useState(null)
     const [isAdd, setIsAdd] = useState(true)
     const [id, setId] = useState(null)
@@ -30,17 +28,9 @@ function KategoriKaryawan() {
         dispatch(getKategoriPengaturan())
     }, [])
 
-    useEffect(() => {
-        if (showModal) {
-            document.body.classList.add("no-scroll")
-        } else {
-            document.body.classList.remove("no-scroll")
-        }
-    }, [showModal])
-
     function handleChange(e) {
         const { name, value } = e.target
-        dispatch(updateInputPengaturan({ name, value }))
+        dispatch(updateStatePengaturan({ name, value }))
     }
 
     function handleSubmit() {
@@ -50,7 +40,7 @@ function KategoriKaryawan() {
                     if (res.meta.requestStatus === "fulfilled") {
                         setShowModalAddKategori(false)
                         dispatch(getKategoriPengaturan())
-                        dispatch(updateInputPengaturan({ name: 'kategoriInput', value: '' }))
+                        dispatch(updateStatePengaturan({ name: 'kategoriInput', value: '' }))
                     }
                 })
                 .catch((err) => {
@@ -62,7 +52,7 @@ function KategoriKaryawan() {
                     if (res.meta.requestStatus === "fulfilled") {
                         setShowModalAddKategori(false)
                         dispatch(getKategoriPengaturan())
-                        dispatch(updateInputPengaturan({ name: 'kategoriInput', value: '' }))
+                        dispatch(updateStatePengaturan({ name: 'kategoriInput', value: '' }))
                     }
                 })
                 .catch((err) => {
@@ -89,7 +79,7 @@ function KategoriKaryawan() {
     function handleUpdate(id, kategori) {
         setCurrentMore(null)
         setShowModalAddKategori(true)
-        dispatch(updateInputPengaturan({ name: 'kategoriInput', value: kategori }))
+        dispatch(updateStatePengaturan({ name: 'kategoriInput', value: kategori }))
         setIsAdd(false)
         setId(id)
     }
@@ -163,6 +153,7 @@ function KategoriKaryawan() {
                                 <img
                                     src={dotIcon}
                                     onClick={() => handleMore(index)}
+                                    alt=''
                                 />
                                 {currentMore === index ?
                                     <div className='dropdown-content'>
@@ -194,7 +185,7 @@ function KategoriKaryawan() {
                             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 onClick={() => {
                                     setShowModalAddKategori(false);
-                                    dispatch(updateInputPengaturan({ name: 'kategoriInput', value: '' }))
+                                    dispatch(updateStatePengaturan({ name: 'kategoriInput', value: '' }))
                                 }}
                             >
                                 <path fillRule="evenodd" clipRule="evenodd" d="M8.03194 6.50013L12.6826 1.84948C13.1062 1.42591 13.1062 0.741255 12.6826 0.317681C12.259 -0.105894 11.5744 -0.105894 11.1508 0.317681L6.50013 4.96833L1.84948 0.317681C1.42591 -0.105894 0.741255 -0.105894 0.317681 0.317681C-0.105894 0.741255 -0.105894 1.42591 0.317681 1.84948L4.96833 6.50013L0.317681 11.1508C-0.105894 11.5744 -0.105894 12.259 0.317681 12.6826C0.528926 12.8938 0.806254 13 1.08358 13C1.36091 13 1.63824 12.8938 1.84948 12.6826L6.50013 8.03194L11.1508 12.6826C11.362 12.8938 11.6394 13 11.9167 13C12.194 13 12.4713 12.8938 12.6826 12.6826C13.1062 12.259 13.1062 11.5744 12.6826 11.1508L8.03194 6.50013Z" fill="#5A6474" />
@@ -218,12 +209,14 @@ function KategoriKaryawan() {
                 }
             </div>
             <LoadingFullscreen loading={loadingCUD} />
-            {showAlertDelete && <AlertModal
-                heading={`Hapus Kategori`}
-                message={`Kamu yakin hapus kategori ${selectedKategori.kategori}?`}
-                onCancel={() => setShowAlertDelete(false)}
-                onConfirm={() => handleDelete(selectedKategori.id)}
-            />}
+            {showAlertDelete &&
+                <AlertModal
+                    heading={`Hapus Kategori`}
+                    message={`Kamu yakin hapus kategori ${selectedKategori.kategori}?`}
+                    onCancel={() => setShowAlertDelete(false)}
+                    onConfirm={() => handleDelete(selectedKategori.id)}
+                />
+            }
         </>
     )
 }

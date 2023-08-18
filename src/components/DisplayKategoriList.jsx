@@ -5,7 +5,7 @@ function DisplayKategoriList({ list }) {
         <>
             {list?.length === 0 && 'Tidak ada kategori'}
             {list?.map((itemKategori, index) => (
-                <React.Fragment key={itemKategori?.id}>
+                <React.Fragment key={index}>
                     {itemKategori?.kategori}
                     {index !== list?.length - 1 && ','}{' '}
                 </React.Fragment>
