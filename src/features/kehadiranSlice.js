@@ -145,14 +145,29 @@ const kehadiranSlice = createSlice({
                     && item.is_valid_pulang === '1'
                 )
 
+                const listAbsenMasuk = action.payload.data.masuk.filter((item) =>
+                    item.isvld_wkt_masuk !== '1'
+                    || item.isvld_wkt_pulang !== '1'
+                    || item.is_valid_masuk !== '1'
+                    || item.is_valid_pulang !== '1'
+                )
+
+                const listAbsenPulang = action.payload.data.pulang.filter((item) =>
+                    item.isvld_wkt_masuk !== '1'
+                    || item.isvld_wkt_pulang !== '1'
+                    || item.is_valid_masuk !== '1'
+                    || item.is_valid_pulang !== '1'
+                )
+
                 state.kehadiranSukses = [
                     ...(listSuksesMasuk || []),
                     ...(listSuksesPulang || [])
                 ];
                 state.kehadiranAbsen = [
-                    ...(action.payload.data.masuk || []),
-                    ...(action.payload.data.pulang || [])
+                    ...(listAbsenMasuk || []),
+                    ...(listAbsenPulang || [])
                 ];
+                console.log();
             })
             .addCase(getKehadiran.rejected, (state, action) => {
                 state.loading = false;

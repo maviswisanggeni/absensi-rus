@@ -194,6 +194,7 @@
 .sidebar-right {
   border-left: 1px solid #ebf0fe;
   position: relative;
+  height: 100vh;
 }
 .sidebar-right .wrapper-calendar {
   margin-top: 1rem;
@@ -221,7 +222,7 @@
   margin-bottom: 1rem;
 }
 .sidebar-right .jadwal .card-jadwal h4 {
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 .sidebar-right .jadwal .card-jadwal p {

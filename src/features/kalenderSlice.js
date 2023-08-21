@@ -42,7 +42,16 @@ const initialState = {
     loadingSearch: false
 }
 
-export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan, { rejectWithValue }) => {
+export const getKalender = createAsyncThunk("kalender/getKalender", async ({ bulan, tahun }, { rejectWithValue }) => {
+    if (bulan > 12) {
+        bulan = bulan % 12;
+        if (bulan === 0) {
+            bulan = 12;
+        }
+    } else if (bulan < 1) {
+        bulan = 12 - (Math.abs(bulan) % 12);
+    }
+
     try {
         const response = await axios.get(
             getBaseUrl + '/api/kalender',
@@ -51,7 +60,8 @@ export const getKalender = createAsyncThunk("kalender/getKalender", async (bulan
                     Authorization: `Bearer ${token()}`,
                 },
                 params: {
-                    bulan: bulan
+                    bulan: bulan,
+                    tahun: tahun
                 },
                 timeout: 20000
             }

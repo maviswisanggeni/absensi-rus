@@ -176,7 +176,16 @@
   border-right: 1px solid $secondary-color;
   // width: 378px;
   width: 30%;
-  position: relative;
+  overflow: auto;
+}
+
+.sidebar-right::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.sidebar-right::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 .profile {

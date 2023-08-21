@@ -28,7 +28,7 @@ function Map({ latitude, longitude, loading }) {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     <Circle center={[latitudeSekolah, longitudeSekolah]} pathOptions={redOptions} radius={radius} />
-                    <Marker position={!loading ? [latitude, longitude] : [latitudeSekolah, longitudeSekolah]} icon={iconMarker}>
+                    <Marker position={[latitude, longitude]} icon={iconMarker}>
                     </Marker>
                 </MapContainer>
             )
