@@ -12,7 +12,7 @@ import InfoBox from '../InfoBox'
 import LoadingFullscreen from '../LoadingFullscreen'
 
 export default function CalendarHeader() {
-  const { monthIndex, setMonthIndex } = useContext(GlobalCalendar)
+  const { monthIndex, setMonthIndex, year, setYear } = useContext(GlobalCalendar)
   const { messageResApi, statusResApi, isDisplayMessage } = useSelector(state => state.kalender)
   const dispatch = useDispatch()
   const inputFileRef = useRef(null)
@@ -27,6 +27,10 @@ export default function CalendarHeader() {
   function handleNextMonth() {
     setMonthIndex(monthIndex + 1);
   }
+
+  useEffect(() => {
+    setYear(dayjs(new Date(dayjs().year(), monthIndex)).format('YYYY'))
+  }, [monthIndex])
 
   function handleReset() {
     setMonthIndex(
@@ -51,7 +55,10 @@ export default function CalendarHeader() {
         if (res.meta.requestStatus === "fulfilled") {
           setShowModal(false)
           inputFileRef.current.value = '';
-          dispatch(getKalender(monthIndex + 1))
+          dispatch(getKalender({
+            bulan: monthIndex + 1,
+            tahun: year
+          }))
           setLoading(false)
         }
       })

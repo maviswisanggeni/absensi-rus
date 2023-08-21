@@ -215,7 +215,16 @@
   border-left: 1px solid #ebf0fe;
   border-right: 1px solid #ebf0fe;
   width: 30%;
-  position: relative;
+  overflow: auto;
+}
+
+.sidebar-right::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.sidebar-right::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 .profile {

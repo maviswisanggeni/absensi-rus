@@ -12,20 +12,25 @@ import { useSearchParams } from 'react-router-dom';
 
 function Kalender() {
   const [currentMonth, setCurrentMonth] = useState(getMonth())
-  const { monthIndex, setMonthIndex } = useContext(GlobalCalendar)
+  const { monthIndex, year, setYear } = useContext(GlobalCalendar)
   const { statusResApi, messageResApi, isDisplayMessage, listEvent } = useSelector(state => state.kalender)
   const dispatch = useDispatch()
   const [params, setParams] = useSearchParams()
 
   useEffect(() => {
-    dispatch(getKalender(monthIndex + 1))
+    dispatch(getKalender({
+      bulan: monthIndex + 1,
+      tahun: year
+    }))
+
     setCurrentMonth(getMonth(monthIndex))
-    setParams({ month: monthIndex + 1 })
-  }, [monthIndex, dispatch])
+    setParams({ month: monthIndex + 1, year: year })
+  }, [monthIndex, year, dispatch])
 
   useEffect(() => {
     localStorage.setItem('selectedMonth', monthIndex);
-  }, [monthIndex]);
+    localStorage.setItem('selectedYear', year);
+  }, [monthIndex, year]);
 
   return (
     <div className='wrapper-kalender'>
@@ -34,13 +39,13 @@ function Kalender() {
         <CalendarHeader />
         <div className='sidebar-month'>
           <div className='container-days'>
-            <p className='day'>Sunday</p>
-            <p className='day'>Monday</p>
-            <p className='day'>Tuesday</p>
-            <p className='day'>Wednesday</p>
-            <p className='day'>Thursday</p>
-            <p className='day'>Friday</p>
-            <p className='day'>Saturday</p>
+            <p className='day'>Minggu</p>
+            <p className='day'>Senin</p>
+            <p className='day'>Selasa</p>
+            <p className='day'>Rabu</p>
+            <p className='day'>Kamis</p>
+            <p className='day'>Jumat</p>
+            <p className='day'>Sabtu</p>
           </div>
           <Month month={currentMonth} />
         </div>

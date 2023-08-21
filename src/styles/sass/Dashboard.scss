@@ -187,6 +187,7 @@
 .sidebar-right {
   border-left: 1px solid $secondary-color;
   position: relative;
+  height: 100vh;
 
   .wrapper-calendar {
     margin-top: 1rem;
@@ -217,7 +218,7 @@
       margin-bottom: 1rem;
 
       h4 {
-        font-weight: 600;
+        font-weight: 500;
         margin-bottom: 0.5rem;
       }
 
