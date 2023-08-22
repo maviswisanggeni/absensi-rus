@@ -132,6 +132,12 @@ const initialState = {
 
 export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kategori_id, search }, { rejectWithValue }) => {
     try {
+        const params = {};
+
+        if (kategori_id !== 'all') {
+            params.kategori_id = kategori_id;
+        }
+
         const response = await axios.get(
             getBaseUrl + '/api/karyawan',
             {
@@ -139,7 +145,7 @@ export const getKaryawan = createAsyncThunk("karyawan/getKaryawan", async ({ kat
                     Authorization: `Bearer ${token()}`,
                 },
                 params: {
-                    kategori_id,
+                    ...params,
                     search
                 },
                 timeout: 20000

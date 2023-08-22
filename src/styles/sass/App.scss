@@ -952,62 +952,6 @@
   cursor: not-allowed;
 }
 
-.jadwal-absensi {
-  margin-top: 2rem;
-
-  h1 {
-    font-size: 18px;
-    font-weight: 500;
-    color: black;
-    margin-bottom: 1rem;
-  }
-
-  .container-jadwal {
-    margin-bottom: 0.5rem;
-  }
-
-  .container-jadwal,
-  .container-time {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    p {
-      font-weight: 400;
-      font-size: 14px;
-      color: #5a6474;
-    }
-
-    .container-time {
-      width: 80%;
-    }
-
-    input {
-      width: 125px;
-      height: 35px;
-      border: 1px solid $grey;
-      border-radius: 7.5px;
-      padding-left: 1rem;
-      padding-right: 0.5rem;
-    }
-
-    input::-webkit-calendar-picker-indicator {
-      background: none;
-      background-image: url(../../assets/icons/arrow-down.svg);
-      background-repeat: no-repeat;
-      background-position: center;
-      cursor: pointer;
-    }
-
-    .line {
-      width: 8px;
-      height: 2px;
-      background: $grey;
-      border-radius: 10px;
-    }
-  }
-}
-
 .popUp {
   @include modal-styles.bg-modal;
 

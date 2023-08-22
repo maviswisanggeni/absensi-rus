@@ -29,7 +29,7 @@ function Karyawan() {
   useEffect(() => {
     dispatch(resetTable())
     dispatch(getKategori());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const currentPath = location.pathname;

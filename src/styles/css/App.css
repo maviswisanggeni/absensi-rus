@@ -1057,65 +1057,6 @@
   cursor: not-allowed;
 }
 
-.jadwal-absensi {
-  margin-top: 2rem;
-}
-.jadwal-absensi h1 {
-  font-size: 18px;
-  font-weight: 500;
-  color: black;
-  margin-bottom: 1rem;
-}
-.jadwal-absensi .container-jadwal {
-  margin-bottom: 0.5rem;
-}
-.jadwal-absensi .container-jadwal,
-.jadwal-absensi .container-time {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-.jadwal-absensi .container-jadwal p,
-.jadwal-absensi .container-time p {
-  font-weight: 400;
-  font-size: 14px;
-  color: #5a6474;
-}
-.jadwal-absensi .container-jadwal .container-time,
-.jadwal-absensi .container-time .container-time {
-  width: 80%;
-}
-.jadwal-absensi .container-jadwal input,
-.jadwal-absensi .container-time input {
-  width: 125px;
-  height: 35px;
-  border: 1px solid #9b9b9b;
-  border-radius: 7.5px;
-  padding-left: 1rem;
-  padding-right: 0.5rem;
-}
-.jadwal-absensi .container-jadwal input::-webkit-calendar-picker-indicator,
-.jadwal-absensi .container-time input::-webkit-calendar-picker-indicator {
-  background: none;
-  background-image: url(../../assets/icons/arrow-down.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-}
-.jadwal-absensi .container-jadwal .line,
-.jadwal-absensi .container-time .line {
-  width: 8px;
-  height: 2px;
-  background: #9b9b9b;
-  border-radius: 10px;
-}
-
 .popUp {
   width: 100vw;
   height: 100vh;

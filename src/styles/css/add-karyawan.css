@@ -85,6 +85,9 @@
   color: #5a6474;
   padding: 0 1rem;
 }
+.add-karyawan .form input:focus {
+  border: 2px solid #3661eb;
+}
 .add-karyawan .form input::-webkit-input-placeholder {
   color: #9b9b9b;
 }

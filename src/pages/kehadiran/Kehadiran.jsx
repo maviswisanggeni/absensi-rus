@@ -87,14 +87,14 @@ function Kehadiran() {
 
               <CircularStatistic
                 name="Absen"
-                firstValue={jmlKehadiran?.jumlah_kehadiran}
+                firstValue={jmlKehadiran?.jumlah_absen}
                 secondValue={jmlKehadiran?.jumlah_karyawan}
-                uiValue={`${jmlKehadiran?.jumlah_kehadiran} Orang`}
+                uiValue={`${jmlKehadiran?.jumlah_absen} Orang`}
                 imgSrc={absenIcon}
                 loading={jmlLoading}
               />
             </div>
-            
+
             <SearchAndCalendar />
             <TabbarAndFilter />
 
