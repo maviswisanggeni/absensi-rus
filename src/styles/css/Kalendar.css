@@ -15,15 +15,6 @@
 .kalender button {
   border: none;
 }
-.kalender .arrow {
-  margin-right: 0.25rem;
-  color: #4b5563;
-  cursor: pointer;
-}
-.kalender .arrow:last-child {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-}
 .kalender .header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -49,6 +40,29 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+.kalender .header .left-header .wrapper-arrow div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.kalender .header .left-header .wrapper-arrow div .arrow-down {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.kalender .header .left-header .wrapper-arrow div:hover {
+  background-color: rgba(75, 75, 75, 0.332);
 }
 .kalender .header .left-header h2 {
   font-size: 30px;

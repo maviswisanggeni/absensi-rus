@@ -68,8 +68,12 @@ export default function CalendarHeader() {
     <header className='header'>
       <div className='left-header'>
         <div className='wrapper-arrow'>
-          <img className='arrow' src={arrow} onClick={handlePrevMonth} />
-          <img className='arrow' src={arrow} onClick={handleNextMonth} />
+          <div onClick={handlePrevMonth}>
+            <img className='arrow' src={arrow} />
+          </div>
+          <div onClick={handleNextMonth}>
+            <img className='arrow arrow-down' src={arrow} />
+          </div>
         </div>
         <h2 className='h2'>
           {dayjs(new Date(dayjs().year(), monthIndex)).format('MMMM YYYY')}

@@ -78,7 +78,7 @@ function Detail() {
                                 latitude={detailData?.latitude_masuk}
                                 longitude={detailData?.longitude_masuk}
                                 is_valid={detailData?.is_valid_masuk}
-                                is_valid_wkt={detailData?.valid_masuk}
+                                is_valid_wkt={detailData?.isvld_wkt_masuk}
                                 loading={loading}
                                 popUp={popUpMasuk}
                                 setPopUp={setPopUpMasuk}
@@ -98,7 +98,7 @@ function Detail() {
                                 latitude={detailData?.latitude_pulang}
                                 longitude={detailData?.longitude_pulang}
                                 is_valid={detailData?.is_valid_pulang}
-                                is_valid_wkt={detailData?.valid_pulang}
+                                is_valid_wkt={detailData?.isvld_wkt_pulang}
                                 loading={loading}
                                 popUp={popUpKeluar}
                                 setPopUp={setPopUpKeluar}

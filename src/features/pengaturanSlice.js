@@ -157,6 +157,12 @@ export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", 
         url = '/api/karyawan'
     }
     try {
+        const params = {};
+
+        if (kategori_id !== 'all') {
+            params.kategori_id = kategori_id;
+        }
+
         const response = await axios.get(
             getBaseUrl + url,
             {
@@ -165,7 +171,7 @@ export const getKaryawanPengaturan = createAsyncThunk("pengaturan/getKaryawan", 
                 },
                 params: {
                     search,
-                    kategori_id
+                    ...params
                 },
                 timeout: 20000
             }
@@ -426,7 +432,10 @@ const pengaturanSlice = createSlice({
             })
             .addCase(getKategoriPengaturan.fulfilled, (state, action) => {
                 state.loadingKategori = false;
-                state.listKategori = action.payload.data;
+                let initialKategori = [
+                    { id: 'all', kategori: 'Semua Karyawan' },
+                ]
+                state.listKategori = [...initialKategori, ...action.payload.data];
             })
             .addCase(getKategoriPengaturan.rejected, (state, action) => {
                 state.loadingKategori = false;

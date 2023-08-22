@@ -12,16 +12,6 @@
     border: none;
   }
 
-  .arrow {
-    margin-right: 0.25rem;
-    color: #4b5563;
-    cursor: pointer;
-  }
-
-  .arrow:last-child {
-    transform: rotate(180deg);
-  }
-
   .header {
     display: flex;
     justify-content: space-between;
@@ -37,6 +27,24 @@
 
       .wrapper-arrow {
         display: flex;
+
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 35px;
+          height: 35px;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+
+          .arrow-down {
+            transform: rotate(180deg);
+          }
+        }
+
+        div:hover {
+          background-color: rgba(75, 75, 75, 0.332);
+        }
       }
 
       h2 {

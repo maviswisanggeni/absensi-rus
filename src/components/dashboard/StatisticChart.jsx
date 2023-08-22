@@ -15,7 +15,7 @@ function StatisticChart() {
   return (
     <div className='statistic-chart'>
       <div className='div-1'>
-        <p>Absensi {kategori === 'Minggu' ? '7 Hari Terakhir' : '1 tahun terakhir'}</p>
+        <p>Presensi {kategori === 'Minggu' ? '7 Hari Terakhir' : '1 tahun terakhir'}</p>
         <BtnDropDown />
       </div>
       <div className='div-2'>
