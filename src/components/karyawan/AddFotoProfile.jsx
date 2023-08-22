@@ -85,7 +85,7 @@ function FotoProfile({ callbackFile, callbackIsLoad }) {
 
     const handleTimeChange = (e, index, property) => {
         const { value } = e.target;
-        console.log(value);
+
         const updatedListJadwal = [...listJadwal];
 
         const updatedItem = { ...updatedListJadwal[index] };
