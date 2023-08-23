@@ -28,6 +28,9 @@ function ImportUser() {
     const inputRef = useRef()
     const location = useLocation()
     const navigate = useNavigate()
+    const kategoriAll = [
+        { id: 'all', kategori: 'Semua Karyawan' },
+    ]
 
     useEffect(() => {
         dispatch(getKategoriPengaturan())
@@ -135,7 +138,7 @@ function ImportUser() {
                 : (
                     <div className='wrapper-tabbar'>
                         <Tabbar
-                            options={listKategori}
+                            options={[...kategoriAll, ...listKategori]}
                             setKategoriId={setKategoriId}
                             setCurrentKategori={setCurrentKategori}
                             setKeterangan={updateStatePengaturan}

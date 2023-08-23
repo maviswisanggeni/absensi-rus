@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteKaryawan, getKaryawan, updateStateKaryawan } from '../../features/karyawanSlice';
 import { updateStatePengaturan } from '../../features/pengaturanSlice';
 import imgErrorValidation from '../../utils/imgErrorValidation';
+import DisplayKategoriList from '../DisplayKategoriList';
 
 let PageSize = 10;
 
@@ -74,12 +75,7 @@ function Table() {
                                                 {item?.nama}
                                             </td>
                                             <td>
-                                                {item.ktgkaryawan.map((itemKategori, index) => (
-                                                    <React.Fragment key={itemKategori.id}>
-                                                        {itemKategori.kategori}
-                                                        {index !== item.ktgkaryawan.length - 1 && ','}{' '}
-                                                    </React.Fragment>
-                                                ))}
+                                                <DisplayKategoriList list={item.ktgkaryawan} />
                                             </td>
                                             <td>{item?.no_hp}</td>
                                             <td>{item?.email}</td>

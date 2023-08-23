@@ -44,6 +44,8 @@ function BatasWaktu() {
     function handleBatal() {
         setIsEditing(false)
         dispatch(getBatasWaktu())
+        setShowAlertMasuk(false)
+        setShowAlertPulang(false)
     }
 
     function formatMinutesToHIS(minutes) {
