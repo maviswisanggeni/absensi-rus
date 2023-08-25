@@ -17,8 +17,20 @@ function AddKaryawan() {
     let navigate = useNavigate()
     const dispatch = useDispatch()
     const {
-        nama, niy, email, password, noHp, alamat, errors, listJadwal, listKtgkaryawan, loadingStore,
-        statusResApi, messageResApi, isDisplayMessage, isFormValid
+        nama,
+        niy,
+        email,
+        password,
+        noHp,
+        alamat,
+        errors,
+        listJadwal,
+        listKtgkaryawan,
+        loadingStore,
+        statusResApi,
+        messageResApi,
+        isDisplayMessage,
+        isFormValid
     } = useSelector((state) => state.karyawan)
     const [file, setFile] = useState({})
     const [isFileLoad, setIsFileLoad] = useState(false)

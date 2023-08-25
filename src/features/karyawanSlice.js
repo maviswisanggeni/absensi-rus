@@ -18,27 +18,27 @@ const validateForm = (state) => {
         return emailRegex.test(email);
     };
 
-    if (state.nama.trim() === '') {
+    if (state?.nama?.trim() === '') {
         errors.nama = 'Isi nama';
     }
 
-    if (state.niy.trim() === '' || state.niy.length < 8) {
+    if (state.niy?.trim() === '' || state.niy?.length < 8) {
         errors.niy = 'Isi NIY minimal 8 digit.';
     }
 
-    if (state.password.trim() === '' || state.password.length < 6) {
+    if (state.password?.trim() === '' || state.password?.length <= 6) {
         errors.password = 'Isi password minimal 6 karakter';
     }
 
-    if (state.noHp.trim() === '' || state.noHp.length < 10) {
+    if (state.noHp?.trim() === '' || state.noHp?.length < 10) {
         errors.noHp = 'Nomor tidak valid';
     }
 
-    if (state.alamat.trim() === '') {
+    if (state.alamat?.trim() === '') {
         errors.alamat = 'Isi Alamat';
     }
 
-    if (state.email.trim() === '') {
+    if (state.email?.trim() === '') {
         errors.email = 'Email is required.';
     } else if (!isValidEmail(state.email)) {
         errors.email = 'Email tidak valid';
@@ -388,8 +388,22 @@ const karyawanSlice = createSlice({
                 state.errors.niy = 'Isi NIY minimal 8 digit.';
             }
 
+            const validatePassword = (password) => {
+                const uppercaseRegex = /[A-Z]/;
+                const numberRegex = /[0-9]/;
+                const symbolRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\-\\/]/;
+
+                return (
+                    uppercaseRegex.test(password) &&
+                    numberRegex.test(password) &&
+                    symbolRegex.test(password)
+                );
+            };
+
             if ((state.password.trim() === '' || state.password.length < 6) && (action.payload === undefined || action.payload === 'password')) {
                 state.errors.password = 'Isi password minimal 6 karakter';
+            } else if (!validatePassword(state.password) && (action.payload === undefined || action.payload === 'password')) {
+                state.errors.password = 'Isi passwoed minimal ada huruf besar, angka dan simbol';
             }
 
             if ((state.noHp.trim() === '' || state.noHp.length < 10) && (action.payload === undefined || action.payload === 'noHp')) {

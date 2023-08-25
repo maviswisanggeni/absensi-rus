@@ -30,6 +30,11 @@ function PartisipasiEvent() {
   const handleAllKaryawanChange = () => {
     setIsAllKaryawanChecked(!isAllKaryawanChecked);
     setSelectedCategories([]);
+
+    if (!isAllKaryawanChecked) {
+      const allCategories = listKategori.map((item) => item.kategori);
+      setSelectedCategories(allCategories);
+    }
   };
 
   useEffect(() => {
@@ -57,6 +62,7 @@ function PartisipasiEvent() {
   function handleReset() {
     dispatch(resetePeserta())
     setSelectedCategories([])
+    setIsAllKaryawanChecked(false);
   }
 
   return (

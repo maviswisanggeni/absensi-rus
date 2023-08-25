@@ -432,10 +432,6 @@ const pengaturanSlice = createSlice({
             })
             .addCase(getKategoriPengaturan.fulfilled, (state, action) => {
                 state.loadingKategori = false;
-                let initialKategori = [
-                    { id: 'all', kategori: 'Semua Karyawan' },
-                ]
-                // state.listKategori = [...initialKategori, ...action.payload.data];
                 state.listKategori = action.payload.data;
             })
             .addCase(getKategoriPengaturan.rejected, (state, action) => {

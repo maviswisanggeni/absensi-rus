@@ -3,6 +3,7 @@ import LogoLogin from '../../components/login/LogoLogin'
 import Input from '../../components/login/Input'
 import ButtonSignIn from '../../components/login/ButtonSignIn'
 import emailIcon from "../../assets/icons/email-icon-blue.svg";
+import niyIcon from "../../assets/icons/niy-icon.svg";
 import passwordIcon from "../../assets/icons/password-icon-blue.svg";
 import "../../styles/css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -59,17 +60,14 @@ function Login() {
         <div className="login__container">
           <LogoLogin />
           <h1>Welcome Back</h1>
-          <p>Masukkan email dan password untuk mengakses</p>
+          <p>Masukkan NIY dan password untuk mengakses</p>
           <form onSubmit={loginHandler}>
-            <Input imgSrc={emailIcon} type="text" placeholder="Masukkan email" value={email} setFunction={setEmail} />
-            {validation === 'user not found' && <p className="login__validation">{'Email tidak ada'}</p>}
+            <Input imgSrc={niyIcon} type="text" placeholder="Masukkan NIY" value={email} setFunction={setEmail} />
+            {validation === 'user not found' && <p className="login__validation">{'NIY tidak ada'}</p>}
             <Input imgSrc={passwordIcon} type="password" placeholder="Masukkan password" value={password} setFunction={setPassword} />
             {validation === 'wrong pass' && <p className="login__validation">{'Password Salah'}</p>}
             <ButtonSignIn loading={loading} />
           </form>
-          <div className="login__forgotPassword">
-            <p>Lupa password? <Link to="/">Reset Password</Link></p>
-          </div>
         </div>
       </div>
     </>

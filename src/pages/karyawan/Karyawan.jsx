@@ -25,6 +25,9 @@ function Karyawan() {
   const navigate = useNavigate()
   const [isKategoriUpdated, setIsKategoriUpdated] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams()
+  let kategoriAll = [
+    { id: 'all', kategori: 'Semua Karyawan' },
+  ]
 
   useEffect(() => {
     dispatch(resetTable())
@@ -134,7 +137,7 @@ function Karyawan() {
         {!loadingKategori
           ? <div className='tabbar-filter'>
             <Tabbar
-              options={listKategori}
+              options={[...kategoriAll, ...listKategori]}
               setKategoriId={setKategoriId}
               setCurrentKategori={setCurrentKategori}
               searchParams={''}
@@ -161,16 +164,7 @@ function Karyawan() {
 
         {(loadingKategori || isLoading) ?
           <LoadingTable size={'large'} />
-          : <>
-            <Routes>
-              {listKategori.map((item, index) => {
-                return (
-                  <Route key={index} path={`/${item.kategori}`} element={<Table />}>
-                  </Route>
-                )
-              })}
-            </Routes>
-          </>
+          : <Table />
         }
       </div>
     </div >

@@ -79,7 +79,8 @@ const kategoriSlice = createSlice({
                 let initialKategori = [
                     { id: 'all', kategori: 'Semua Karyawan' },
                 ]
-                state.listKategori = [...initialKategori, ...action.payload.data];
+                // state.listKategori = [...initialKategori, ...action.payload.data];
+                state.listKategori = action.payload.data;
                 state.searchedKategori = action.payload.data;
             })
             .addCase(getKategori.rejected, (state, action) => {

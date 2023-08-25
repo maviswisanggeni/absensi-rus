@@ -905,14 +905,12 @@
   cursor: pointer;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox {
-  width: 90%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  width: 100%;
   gap: 0.5rem 0.25rem;
   margin: 0.5rem 0 1.5rem;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox .wrapper-checkbox-label {
   display: -webkit-box;
@@ -922,7 +920,6 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 0.5rem;
-  margin-right: 1rem;
 }
 .wrapper-kalender-add .wrapper-content .wrapper-partisipasi .wrapper-checkbox .wrapper-checkbox-label label {
   font-size: 12px;
