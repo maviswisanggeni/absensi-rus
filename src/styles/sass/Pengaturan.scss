@@ -112,6 +112,65 @@
         color: $white;
         cursor: pointer;
       }
+
+      .wrapper-preview {
+        display: grid;
+        place-items: center;
+
+        .modal {
+          width: 70%;
+          height: 80%;
+          background-color: white;
+          border-radius: 10px;
+
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          flex-direction: column;
+
+          div:first-child {
+            height: 90%;
+            width: 100%;
+            overflow: auto;
+            padding: 1rem;
+          }
+
+          div:first-child::-webkit-scrollbar {
+            height: unset;
+          }
+
+          .container-btn {
+            width: 100%;
+            margin-top: 1rem;
+            border-top: 1px solid $border-color;
+            padding: 0 1rem;
+
+            div {
+              display: flex;
+              width: auto;
+              gap: 1rem;
+              justify-content: flex-end;
+              overflow: hidden;
+            }
+
+            button {
+              width: 150px;
+              height: 45px;
+            }
+
+            .button-cancel {
+              background-color: $danger-color;
+            }
+          }
+        }
+      }
     }
 
     .wrapper-tabbar {

@@ -120,6 +120,68 @@
   color: #ffffff;
   cursor: pointer;
 }
+.pengaturan .import-user .top-table .wrapper-preview {
+  display: grid;
+  place-items: center;
+}
+.pengaturan .import-user .top-table .wrapper-preview .modal {
+  width: 70%;
+  height: 80%;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.pengaturan .import-user .top-table .wrapper-preview .modal div:first-child {
+  height: 90%;
+  width: 100%;
+  overflow: auto;
+  padding: 1rem;
+}
+.pengaturan .import-user .top-table .wrapper-preview .modal div:first-child::-webkit-scrollbar {
+  height: unset;
+}
+.pengaturan .import-user .top-table .wrapper-preview .modal .container-btn {
+  width: 100%;
+  margin-top: 1rem;
+  border-top: 1px solid #eceef2;
+  padding: 0 1rem;
+}
+.pengaturan .import-user .top-table .wrapper-preview .modal .container-btn div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
+  gap: 1rem;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  overflow: hidden;
+}
+.pengaturan .import-user .top-table .wrapper-preview .modal .container-btn button {
+  width: 150px;
+  height: 45px;
+}
+.pengaturan .import-user .top-table .wrapper-preview .modal .container-btn .button-cancel {
+  background-color: #ff4530;
+}
 .pengaturan .import-user .wrapper-tabbar {
   display: -webkit-box;
   display: -ms-flexbox;
