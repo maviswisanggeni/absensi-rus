@@ -10,6 +10,7 @@ import loginLogoGrey from '../../assets/icons/logout-icon-grey.svg'
 import axios from 'axios'
 import { useState } from 'react'
 import LoadingFullscreen from '../LoadingFullscreen'
+import apiUrl from '../../utils/apiUrl';
 
 function Sidebar() {
   let location = useLocation()
@@ -24,7 +25,8 @@ function Sidebar() {
   const logoutHanlder = async () => {
     setLoading(true)
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    const url = 'https://absensiguru.smkrus.com/api/logout'
+    // const url = 'https://absensiguru.smkrus.com/api/logout'
+    const url = apiUrl + '/api/logout';
     await axios.get(url)
       .then(() => {
         localStorage.removeItem("token");

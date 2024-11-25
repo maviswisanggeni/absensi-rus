@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react'
 import CardJadwal from './CardJadwal'
 import dayjs from 'dayjs';
 import Skeleton from 'react-loading-skeleton';
+import apiUrl from '../../utils/apiUrl';
 
 function Jadwal() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem("token");
+  const url = apiUrl + '/api/dashboard/jadwal'
   function getJadwal() {
     setLoading(false)
-    axios.get("https://absensiguru.smkrus.com/api/dashboard/jadwal", {
+    axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

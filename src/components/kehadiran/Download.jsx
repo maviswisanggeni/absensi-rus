@@ -2,6 +2,7 @@ import React from 'react'
 import donwload from '../../assets/icons/download-grey.svg'
 import { useTanggalKehadiran } from '../../contexts/app/ContextTanggalKehadiran'
 import { useSelector } from 'react-redux'
+import apiUrl from '../../utils/apiUrl';
 
 function Download() {
   const context = useTanggalKehadiran()
@@ -15,7 +16,8 @@ function Download() {
     }
   }
   function downloadExcel() {
-    window.location.replace(`https://absensiguru.smkrus.com/api/dashboard/donload?start_time=${startTime}${endTimeCondition()}`)
+    let url = apiUrl + `/api/dashboard/donload?start_time=${startTime}${endTimeCondition()}`
+    window.location.replace(`${url}`)
   }
   return (
     <div>
